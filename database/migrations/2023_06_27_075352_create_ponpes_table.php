@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('ponpes', function (Blueprint $table) {
             $table->increments('id'); // Primary key, auto-incrementing
-            $table->unsignedInteger('user_id'); // Foreign key to users table
-            $table->unsignedInteger('category_id'); // Foreign key to categories table
-            $table->unsignedInteger('learning_id'); // Foreign key to learning table
+            $table->unsignedInteger('user_id')->nullable(); // Foreign key to users table
             $table->integer('nspp')->unique(); // Unique NSPP (National School Principal Number)
             $table->string('name');
+            $table->string('category');
             $table->string('phone_number')->unique(); // Unique phone number
             $table->string('website')->nullable();
             $table->string('email')->unique(); // Unique email address
@@ -36,6 +35,10 @@ return new class extends Migration
             $table->decimal('longitude', 11, 8)->nullable();
             $table->enum('status',['active', 'non-active'])->default('active');
             $table->timestamps();
+
+
+            //relasi
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
         });
     }
 
@@ -46,6 +49,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('ponpes', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
         Schema::dropIfExists('ponpes');
     }
 };

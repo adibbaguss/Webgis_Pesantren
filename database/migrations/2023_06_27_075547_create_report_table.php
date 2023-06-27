@@ -23,6 +23,13 @@ return new class extends Migration
             $table->date('reporting_date');
             $table->enum('status',['baru', 'dalam proses', 'selesai', 'ditolak'])->default('baru'); 
             $table->timestamps();
+            
+
+            //relasi
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('category_id')->references('id')->on('category_report')->onDelete('cascade');
+            
         });
     }
 
@@ -33,6 +40,11 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('reports', function (Blueprint $table) {
+            $table->dropForeign(['ponpes_id']);
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['category_id']);
+        });
         Schema::dropIfExists('reports');
     }
 };

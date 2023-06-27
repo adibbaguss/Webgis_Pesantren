@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('expertise');
             $table->enum('status',['active','non-active'])->default('active');
             $table->timestamps();
+
+            //relasi
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');
         });
     }
 
@@ -32,6 +35,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('instructors', function (Blueprint $table) {
+            $table->dropForeign(['ponpes_id']);
+        });
         Schema::dropIfExists('instructors');
     }
 };

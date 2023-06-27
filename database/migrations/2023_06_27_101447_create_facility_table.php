@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->integer('count');
             $table->timestamps();
+
+            //relasi
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');
         });
     }
 
@@ -29,6 +32,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('facility', function (Blueprint $table) {
+            $table->dropForeign(['ponpes_id']);
+        });
         Schema::dropIfExists('facility');
     }
 };

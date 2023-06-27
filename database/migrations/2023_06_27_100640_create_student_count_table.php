@@ -22,6 +22,9 @@ return new class extends Migration
             $table->integer('male_non_resident_count');
             $table->integer('female_non_resident_count');
             $table->timestamps();
+
+            //relasi
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');
         });
     }
 
@@ -32,6 +35,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('student_count', function (Blueprint $table) {
+            $table->dropForeign(['ponpes_id']);
+        });
         Schema::dropIfExists('student_count');
     }
 };

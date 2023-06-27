@@ -18,6 +18,10 @@ return new class extends Migration
             $table->unsignedInteger('ponpes_id');
             $table->string('image')->nullable();
             $table->timestamps();
+
+
+            //relasi
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');
         });
     }
 
@@ -28,6 +32,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('images_ponpes', function (Blueprint $table) {
+            $table->dropForeign(['ponpes_id']);
+        });
         Schema::dropIfExists('images_ponpes');
     }
 };

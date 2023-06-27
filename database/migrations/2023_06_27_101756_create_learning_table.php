@@ -14,8 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('learning', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('ponpes_id');
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
+
+            //relasi
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');
         });
     }
 
@@ -26,6 +32,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('learning', function (Blueprint $table) {
+            $table->dropForeign(['ponpes_id']);
+        });
         Schema::dropIfExists('learning');
     }
 };
