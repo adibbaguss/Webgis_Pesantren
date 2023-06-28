@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('ponpes', function (Blueprint $table) {
             $table->increments('id'); // Primary key, auto-incrementing
             $table->unsignedInteger('user_id')->nullable(); // Foreign key to users table
-            $table->integer('nspp')->unique(); // Unique NSPP (National School Principal Number)
+            $table->integer('nspp');
             $table->string('name');
             $table->string('category');
             $table->string('phone_number')->unique(); // Unique phone number
