@@ -26,9 +26,25 @@ class UserSeeder extends Seeder
 
             ],
             [
-                'username' => 'updater',
+                'username' => 'updater11',
                 'password' => bcrypt('123456'),
-                'email' => 'updater@gmail.com',
+                'email' => 'updater1@gmail.com',
+                'name' => 'updater',
+                'user_role' => 'updater',
+
+            ],
+            [
+                'username' => 'updater22',
+                'password' => bcrypt('123456'),
+                'email' => 'updater2@gmail.com',
+                'name' => 'updater',
+                'user_role' => 'updater',
+
+            ],
+            [
+                'username' => 'updater33',
+                'password' => bcrypt('123456'),
+                'email' => 'updater3@gmail.com',
                 'name' => 'updater',
                 'user_role' => 'updater',
 
