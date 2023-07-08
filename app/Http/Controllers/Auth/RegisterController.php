@@ -3,71 +3,64 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'photo_profil' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255'],
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
     protected function create(array $data)
     {
+        $avatarPath = null;
+        if (isset($data['base64image']) && $data['base64image'] != '0') {
+            $folderPath = public_path('images/profile_photos');
+            $image_parts = explode(";base64,", $data['base64image']);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $filename = time() . '.' . $image_type;
+            $file = $folderPath . '/' . $filename;
+            file_put_contents($file, $image_base64);
+
+            $avatarPath = 'profile_photos/' . $filename;
+        }
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'photo_profil' => $avatarPath,
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'email' => $data['email'],
+            'name' => $data['name'],
+            'phone_number' => $data['phone_number'],
         ]);
+        return $user;
+
     }
+    protected function registered($request, $user)
+    {
+        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan masuk ke akun Anda.');
+    }
+
 }
