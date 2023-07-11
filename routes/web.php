@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,33 +25,31 @@ Route::get('/', function () {
 // Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Rute untuk login dengan multi-role
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rute untuk admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
-    // Tambahkan rute lain untuk admin di sini
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
-
 // // Rute untuk updater
 // Route::middleware(['auth', 'role:updater'])->group(function () {
-//     Route::get('/updater/dashboard', [App\Http\Controllers\UpdaterController::class, 'dashboard'])->name('updater.dashboard');
+//     Route::get('/updater/dashboard', [UpdaterController::class, 'dashboard'])->name('updater.dashboard');
 //     // Tambahkan rute lain untuk updater di sini
 // });
 
 // // Rute untuk viewer
 // Route::middleware(['auth', 'role:viewer'])->group(function () {
-//     Route::get('/viewer/dashboard', [App\Http\Controllers\ViewerController::class, 'dashboard'])->name('viewer.dashboard');
+//     Route::get('/viewer/dashboard', [ViewerController::class, 'dashboard'])->name('viewer.dashboard');
 //     // Tambahkan rute lain untuk viewer di sini
 // });
 
 // rute untuk register
-Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
 // Route::get('image-crop', [CropImageUploadController::class, 'index']);
 // Route::post('save-crop-image', [CropImageUploadController::class, 'store']);
 

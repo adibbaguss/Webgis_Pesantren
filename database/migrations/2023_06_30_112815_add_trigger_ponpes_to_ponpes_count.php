@@ -49,9 +49,8 @@ return new class extends Migration
 
 // Digunakan untuk menampilkan perkembangan ponpes setiap tahun
 // SELECT t1.year, (
-//     SELECT SUM(t2.count)
-//     FROM ponpes_count t2
-//     WHERE t2.year <= t1.year
+//     SELECT SUM(t2.count)FROM ponpes_count t2
+// WHERE t2.year <= t1.year
 //   ) AS total_count
 //   FROM ponpes_count t1
 //   GROUP BY t1.year

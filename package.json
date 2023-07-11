@@ -23,7 +23,9 @@
         "vite": "^4.3.9"
     },
     "dependencies": {
+        "chart.js": "^4.3.0",
         "cropperjs": "^1.5.13",
-        "croppie": "^2.6.5"
+        "croppie": "^2.6.5",
+        "leaflet": "^1.9.4"
     }
 }

@@ -1,2 +1,2 @@
 require("./bootstrap");
-import Croppie from "croppie";
+require("bootstrap");

@@ -31,11 +31,10 @@ return new class extends Migration
             $table->string('subdistrict');
             $table->integer('postal_code');
             $table->string('address');
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->nullable();
-            $table->enum('status',['active', 'non-active'])->default('active');
+            $table->float('latitude', 10, 8)->nullable();
+            $table->float('longitude', 11, 8)->nullable();
+            $table->enum('status', ['active', 'non-active'])->default('active');
             $table->timestamps();
-
 
             //relasi
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
