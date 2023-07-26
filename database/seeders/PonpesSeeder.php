@@ -23,7 +23,7 @@ class PonpesSeeder extends Seeder
         $ponpes = [
             [
                 'user_id' => 2,
-                'nspp' => $faker->phoneNumber(11),
+                'nspp' => $faker->numberBetween(10000000000, 99999999999),
                 'name' => 'Pondok Pesantren  Al Anwar',
                 'category' => $faker->randomElement($category),
                 'phone_number' => $faker->phoneNumber(12),
@@ -34,7 +34,7 @@ class PonpesSeeder extends Seeder
                 'surface_area' => $faker->randomNumber(4, true),
                 'building_area' => $faker->randomNumber(4, true),
                 'city' => 'Batang',
-                'subdistrict' => 'Wono Tunggal',
+                'subdistrict' => 'Wonotunggal',
                 'postal_code' => $faker->randomNumber(6, true),
                 'address' => $faker->address,
                 'latitude' => -7.045128617879581,
@@ -44,7 +44,7 @@ class PonpesSeeder extends Seeder
 
             [
                 'user_id' => 3,
-                'nspp' => $faker->phoneNumber(11),
+                'nspp' => $faker->numberBetween(10000000000, 99999999999),
                 'name' => 'Pondok Pesantren  Manbaul Athfal',
                 'category' => $faker->randomElement($category),
                 'phone_number' => $faker->phoneNumber(12),
@@ -65,7 +65,7 @@ class PonpesSeeder extends Seeder
 
             [
                 'user_id' => 4,
-                'nspp' => $faker->phoneNumber(11),
+                'nspp' => $faker->numberBetween(10000000000, 99999999999),
                 'name' => 'Pondok Pesantren Al Istiqomah',
                 'category' => $faker->randomElement($category),
                 'phone_number' => $faker->phoneNumber(12),
@@ -76,11 +76,11 @@ class PonpesSeeder extends Seeder
                 'surface_area' => $faker->randomNumber(4, true),
                 'building_area' => $faker->randomNumber(4, true),
                 'city' => 'Batang',
-                'subdistrict' => 'Banyuputh',
+                'subdistrict' => 'Banyuputih',
                 'postal_code' => $faker->randomNumber(6, true),
                 'address' => $faker->address,
-                'latitude' => -6.984224987661967,
-                'longitude' => 109.93296905452173,
+                'latitude' => -6.984362696532386,
+                'longitude' => 109.93297200254665,
                 'status' => 'active',
             ],
         ];

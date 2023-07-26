@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
-use App\Models\PonpesCount;
 use App\Models\Report;
 use App\Models\StudentCount;
 use Carbon\Carbon;
@@ -26,31 +25,31 @@ class DashboardController extends Controller
         $studentCount = $this->getStudentCount();
 
         // Mengirim data ke view
-        return view('admin.dashboard', compact('chartData', 'reports', 'ponpes', 'studentCount'));
+        return view('admin.dashboard', compact('chartData', 'reports', 'ponpes', 'studentCount', 'ponpes'));
     }
 
     private function getChartData()
-    {
-        $data1 = PonpesCount::select('year')
-            ->selectSub(function ($query) {
-                $query
-                    ->selectRaw('SUM(count)')
-                    ->from('ponpes_count AS t2')
-                    ->whereRaw('t2.year <= ponpes_count.year');
-            }, 'total_count')
-            ->groupBy('year')
-            ->orderBy('year')
-            ->get();
-
-        $data2 = PonpesCount::select('year')
-            ->selectRaw('SUM(count) as count')
-            ->groupBy('year')
+    {$chartData = Ponpes::selectRaw('t1.tahun, t1.jumlah, SUM(t2.jumlah) AS total_count')
+            ->from(function ($query) {
+                $query->selectRaw('YEAR(standing_date) as tahun, COUNT(*) as jumlah')
+                    ->from('ponpes')
+                    ->groupBy('tahun');
+            }, 't1')
+            ->joinSub(function ($query) {
+                $query->selectRaw('YEAR(standing_date) as tahun, COUNT(*) as jumlah')
+                    ->from('ponpes')
+                    ->groupBy('tahun');
+            }, 't2', function ($join) {
+                $join->on('t1.tahun', '>=', 't2.tahun');
+            })
+            ->groupBy('t1.tahun', 't1.jumlah')
+            ->orderBy('t1.tahun')
             ->get();
 
         $chartData = [
-            'labels' => $data1->pluck('year'),
-            'total_count' => $data1->pluck('total_count'),
-            'count' => $data2->pluck('count'),
+            'labels' => $chartData->pluck('tahun'),
+            'count' => $chartData->pluck('jumlah'),
+            'total_count' => $chartData->pluck('total_count'),
         ];
 
         return $chartData;

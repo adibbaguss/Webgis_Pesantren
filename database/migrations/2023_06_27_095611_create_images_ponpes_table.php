@@ -17,8 +17,9 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('ponpes_id');
             $table->string('image')->nullable();
+            $table->string('title')->nullable();
+            $table->enum('type', ['jumbotron', 'reguler'])->default('reguler');
             $table->timestamps();
-
 
             //relasi
             $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('ponpes', function (Blueprint $table) {
             $table->increments('id'); // Primary key, auto-incrementing
             $table->unsignedInteger('user_id')->nullable(); // Foreign key to users table
-            $table->integer('nspp');
+            $table->unsignedBigInteger('nspp')->unique();
             $table->string('name');
             $table->string('category');
             $table->string('phone_number')->unique(); // Unique phone number
@@ -31,8 +31,8 @@ return new class extends Migration
             $table->string('subdistrict');
             $table->integer('postal_code');
             $table->string('address');
-            $table->float('latitude', 10, 8)->nullable();
-            $table->float('longitude', 11, 8)->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->enum('status', ['active', 'non-active'])->default('active');
             $table->timestamps();
 

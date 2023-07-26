@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\CategoryReport;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategoryReportSeeder extends Seeder
 {
@@ -15,6 +14,26 @@ class CategoryReportSeeder extends Seeder
      */
     public function run()
     {
-        CategoryReport::factory()->count(5)->create();
+        $category = [
+            [
+                'name' => 'Kebutuhan Akademis',
+            ],
+            [
+                'name' => 'Kesahatan dan Sanitasi',
+            ],
+            [
+                'name' => 'Kebutuhan Sarana dan Prasarana',
+            ],
+            [
+                'name' => 'Keuangan dan Pengelolaan Dana',
+            ],
+            [
+                'name' => 'Kegiatan Keagamaan dan Kebudayaan',
+            ],
+
+        ];
+        foreach ($category as $key => $value) {
+            CategoryReport::create($value);
+        }
     }
 }

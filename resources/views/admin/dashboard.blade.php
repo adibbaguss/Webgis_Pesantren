@@ -2,12 +2,11 @@
 
 
 @section('content')
-    <div class="container">
+    <div class="container mt-5 pt-5">
 
         <!-- age Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="mb-0 text-secondary">Dashboard</h1>
-
+            <h4 class="mb-0 text-secondary">Dashboard</h4>
         </div>
 
         <div class="row">
@@ -200,7 +199,7 @@
                            @if (!$ponpe->photo_profil)
                                 <img class="w-100" src="{{ asset('/images/ponpes/profile/logo_ponpes_default.jpg') }}" alt="profil Default">
                            @else
-                                <img src="{{ asset('/images/ponpes/profile/') }}" alt="Profil Pesatren">
+                                <img src="{{ asset('/images/ponpes/profile/'.$ponpe->photo_profil) }}" alt="Profil Pesatren">
                            @endif
                         </div>
                         <div class="col-9 py-0 pe-0 my-auto">

@@ -9,7 +9,7 @@ class Learning extends Model
 {
     use HasFactory;
 
-    protected $table = 'Learning';
+    protected $table = 'learning';
 
     protected $fillabel = [
         'ponpes_id',

@@ -2,13 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Ponpes;
+use App\Helpers\RandomIdGenerator;
 use App\Models\Report;
 use Faker\Factory as faker;
-use Illuminate\Support\Str;
-use App\Models\CategoryReport;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ReportFactory extends Factory
 {
@@ -28,15 +26,12 @@ class ReportFactory extends Factory
     {
         $faker = faker::create();
         return [
-            'ponpes_id' => function () {
-                return Ponpes::factory()->create()->id;
-            },
-            'user_id' => function () {
-                return User::factory()->create()->id;
-            },
-            'category_id' => function () {
-                return CategoryReport::factory()->create()->id;
-            },
+            'ponpes_id' => $faker->numberBetween(1, 3),
+
+            'user_id' => $faker->numberBetween(1, 3),
+
+            'category_id' => $faker->numberBetween(1, 5),
+            'reporting_code' => RandomIdGenerator::generateUniqueId(),
             'title' => $faker->sentence(2),
             'description' => $faker->text(100),
             'reporting_date' => $faker->date(),

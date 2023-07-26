@@ -55,7 +55,7 @@ class LoginController extends Controller
         } elseif ($user->user_role === 'viewer') {
             return redirect()->route('viewer.dashboard');
         } else {
-            return redirect()->route('home');
+            return redirect()->route('login');
         }
     }
 
@@ -67,6 +67,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('login');
     }
 }

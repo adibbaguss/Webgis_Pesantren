@@ -13,12 +13,13 @@ class ImagePonpes extends Model
     protected $fillable = [
         'ponpes_id',
         'image',
+        'title',
+        'type',
     ];
 
     public function ponpes()
     {
         return $this->belongsTo(Ponpes::class);
     }
-        
-    
+
 }

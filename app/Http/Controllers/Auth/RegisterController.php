@@ -45,7 +45,7 @@ class RegisterController extends Controller
             $file = $folderPath . '/' . $filename;
             file_put_contents($file, $image_base64);
 
-            $avatarPath = 'profile_photos/' . $filename;
+            $avatarPath = $filename;
         }
         return User::create([
             'photo_profil' => $avatarPath,
@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
         ]);
-        return $user;
+        $user;
 
     }
     protected function registered($request, $user)

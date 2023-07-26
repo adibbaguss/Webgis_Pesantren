@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Report;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ReportSeeder extends Seeder
 {
@@ -15,6 +14,6 @@ class ReportSeeder extends Seeder
      */
     public function run()
     {
-        Report::factory()->count(3)->create();
+        Report::factory()->count(30)->create();
     }
 }
