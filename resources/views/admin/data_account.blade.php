@@ -29,7 +29,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/account_export" class="dropdown-item">
+                            <a href="/admin/account_export" class="dropdown-item">
                                 <i class="fas fa-print"></i>
                                 {{ 'Cetak' }}
                             </a>
@@ -135,7 +135,7 @@
                     <div class="modal-footer">
                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Batal</button>
 
-                        <form id="delete-form" action="{{ route('delete_account', ['id' => $item->id]) }}" method="POST">
+                        <form id="delete-form" action="{{ route('admin.account_delete', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Hapus</button>
@@ -160,7 +160,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ route('update_account', $item->id) }}">
+                        <form method="POST" action="{{ route('admin.account_update', $item->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -212,7 +212,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('create_account') }}">
+                    <form method="POST" action="{{ route('admin.account_create') }}">
                         @csrf
                         @method('POST')
                         <div class="mb-3">

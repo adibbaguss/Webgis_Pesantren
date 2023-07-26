@@ -18,7 +18,7 @@
         <h5 class="mb-0 text-secondary d-md-none d-block mb-5">{{ 'Daftar Pondok Pesantren di Kabupaten Batang' }}</h5>
         <div class="d-flex align-items-center justify-content-between mb-5">
             <h2 class="mb-0 text-secondary d-md-block d-none">{{ 'Daftar Pondok Pesantren di Kabupaten Batang' }}</h2>
-            <form class="d-flex me-2 ms-auto " role="search" action="{{ route('search') }}" method="GET">
+            <form class="d-flex me-2 ms-auto " role="search" action="{{ route('admin.ponpes_search') }}" method="GET">
                 @csrf
                 <input class="form-control me-2" type="search" placeholder="Search" name="query" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
@@ -31,7 +31,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/create_ponpes" class="dropdown-item">
+                        <a href="/admin/create_ponpes" class="dropdown-item">
                             <i class="fas fa-plus"></i>
                             {{ 'Tambah Data' }}
                         </a>
@@ -100,12 +100,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <a href="/ponpes-export" class="text-deocartion-none btn btn-outline-success p-3">
+                    <a href="/admin/ponpes_export_xlsx" class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-excel fs-1"></i>
                         {{ 'Cetak Excel' }}
                     </a>
 
-                    <a href="/ponpes-export-csv" class="text-deocartion-none btn btn-outline-success p-3">
+                    <a href="/admin/ponpes_export_csv" class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-csv fs-1"></i>
                         {{ 'Cetak CSV' }}
                     </a>

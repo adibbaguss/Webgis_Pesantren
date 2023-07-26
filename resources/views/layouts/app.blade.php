@@ -150,10 +150,17 @@
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in ms-auto"
                         aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{ route('profile', ['id' => Auth::user()->id]) }}">
+                        @if(Auth::User()->user_role == "admin")
+                        <a class="dropdown-item" href="{{ route('admin.profile', ['id' => Auth::user()->id]) }}">
                             <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                             {{ 'Profil' }}
                         </a>
+                        @elseif(Auth::User()->user_role == "updater")
+                        <a class="dropdown-item" href="{{ route('updater.profile', ['id' => Auth::user()->id]) }}">
+                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                            {{ 'Profil' }}
+                        </a>
+                        @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
@@ -204,6 +211,45 @@
 
                     </div>
                 </div>
+                @elseif(Auth::User()->user_role == "updater")
+                <div>
+                    <a href="{{ route('updater.dashboard') }}" class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
+                            <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
+                    </a>
+                    <div class="nav_list">
+                        <a href="{{ route('updater.dashboard') }}" class="nav_link text-decoration-none {{ request()->is('updater/dashboard*') ? 'active' : '' }}">
+                            <i class="bx bx-grid-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Dashboard' }}</span>
+                        </a>
+                        {{-- <a href="{{ route('admin.map_view') }}" class="nav_link text-decoration-none {{ request()->is('admin/map_view*') ? 'active' : '' }}">
+                            <i class="bx bx-map-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                        </a>
+
+                        <a href="{{ route('admin.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
+                            <i class="bx bx-buildings nav_icon"></i>
+                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                        </a>
+
+                        <a href="{{ route('admin.data_account') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_account*') ? 'active' : '' }}">
+                            <i class="bx bxs-user-account nav_icon"></i>
+                            <span class="nav_name">{{ 'Akun Pengguna' }}</span>
+                        </a>
+
+                        <a href="{{ route('admin.data_statistik') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_statistik*') ? 'active' : '' }}"">
+                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                        </a>
+
+                        <a href="{{ route('admin.data_report') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_report*') ? 'active' : '' }}"">
+                            <i class="bx bxs-report nav_icon"></i>
+                            <span class="nav_name">{{ 'Pelaporan' }}</span>
+                        </a> --}}
+
+                    </div>
+                </div>
+          
                 @endif
             </nav>
         </div>

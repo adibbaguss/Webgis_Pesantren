@@ -4,7 +4,7 @@
     <div class="container d-grid mt-5 pt-5 vh-100">
         <div class="content_register shadow bg-white mx-auto" style="max-width: 500px">
             <div class="px-5 pt-4" >
-                <form method="POST" action="{{ route('admin.update_profile', ['id'=>$user->id]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('updater.profile_update', ['id'=>$user->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     {{-- photo profile --}}
@@ -96,7 +96,7 @@
 
 
                         <div class="col-6 mb-4 me-0 ms-auto d-flex justify-content-between">
-                            <a href="{{ route('admin.profile', ['id'=>$user->id]) }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('updater.profile', ['id'=>$user->id]) }}" class="btn btn-outline-secondary">
                                 {{ __('Batal') }}
                             </a>                                    
                             <button type="submit" class="btn btn-success">

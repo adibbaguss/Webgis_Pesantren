@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Exports\PonpesExport;
 use App\Http\Controllers\Controller;
@@ -32,9 +32,9 @@ class DataPonpesController extends Controller
         return view('admin.data_ponpes', compact('ponpes'));
     }
 
-    public function export()
+    public function exportXLSX()
     {
-        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xslx');
+        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xlsx');
     }
 
     public function exportCSV()

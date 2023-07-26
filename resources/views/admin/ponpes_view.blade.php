@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('update_ponpes.edit', ['id' => $ponpes->id]) }}" class="dropdown-item">
+                            <a href="{{ route('admin.ponpes_edit', ['id' => $ponpes->id]) }}" class="dropdown-item">
                                 <i class="fas fa-edit"></i>
                                 Perbaharui
                             </a>
@@ -608,7 +608,7 @@
                     <div class="modal-footer">
                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
     
-                        <form id="delete-form" action="{{ route('delete_ponpes', ['id' => $ponpes->id]) }}" method="POST">
+                        <form id="delete-form" action="{{ route('admin.ponpes_delete', ['id' => $ponpes->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete Ponpes</button>

@@ -7,7 +7,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-10 bg-white shadow p-md-5">
                         <div class="px-5 pt-4">
-                            <form method="POST" action="{{ route('create-ponpes') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.create_ponpes') }}" enctype="multipart/form-data">
                                 @csrf
                                 {{-- photo profile --}}
                                 <div class="avatar-upload">

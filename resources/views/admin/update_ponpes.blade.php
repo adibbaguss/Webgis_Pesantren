@@ -8,7 +8,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10 bg-white shadow p-md-5">
                     <div class="px-5 pt-4">
-                        <form method="POST" action="{{ route('update_ponpes.update',  $ponpes->id) }}">
+                        <form method="POST" action="{{ route('admin.ponpes_update',  $ponpes->id) }}">
                             @csrf
                             @method('PUT')
                             
@@ -279,14 +279,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 mb-4">
+                                <div class="col-12 mb-4 ">
                                     <div id="map" style="height: 400px;"></div>
                                 </div>
 
 
-                                <div class="col-4 me-0 ms-auto mb-4">
-                                    <button type="submit" class="btn btn-success w-100">
-                                        {{ __('Update') }}
+                                <div class="col-6 me-0 ms-auto mb-4 d-flex justify-content-between">
+                                    <a href="{{ route('admin.ponpes_view', ['id'=>$ponpes->id]) }}" class="btn btn-outline-secondary">
+                                        {{ __('Batal') }}
+                                    </a>
+                                    <button type="submit" class="btn btn-success">
+                                        {{ __('Perbaharui') }}
                                     </button>
                                 </div>
 

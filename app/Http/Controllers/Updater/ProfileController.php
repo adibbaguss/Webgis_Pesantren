@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Updater;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -13,7 +13,7 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
 
         // Mengirim data ponpes ke halaman view_ponpes.blade.php
-        return view('admin.profile', compact('user'));
+        return view('updater.profile', compact('user'));
 
     }
 }

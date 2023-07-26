@@ -24,7 +24,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('admin.edit_profile', ['id' => $user->id]) }}">
+                                        <a class="dropdown-item" href="{{ route('updater.profile_edit', ['id' => $user->id]) }}">
                                             <i class="fas fa-edit"></i>
                                             {{ 'Perbaharui Profil' }}
                                         </a>
@@ -97,7 +97,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('admin.update_password', ['id' => $user->id]) }}">
+                    <form method="POST" action="{{ route('updater.password_update', ['id' => $user->id]) }}">
                         @csrf
                         @method('PUT')
                         <div class="row">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Updater;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -15,7 +15,7 @@ class UpdateProfileController extends Controller
         $user = User::findOrFail($id);
 
         // Mengirim data ponpes ke halaman view_ponpes.blade.php
-        return view('admin.update_profile', compact('user'));
+        return view('updater.update_profile', compact('user'));
     }
 
     // public function update(Request $request, $id)
@@ -112,7 +112,7 @@ class UpdateProfileController extends Controller
         $user->phone_number = $request->phone_number;
         $user->save();
 
-        return redirect()->route('profile', ['id' => $id])->with('success', 'Akun Berhasil Diperbaharui');
+        return redirect()->route('updater.profile', ['id' => $id])->with('success', 'Akun Berhasil Diperbaharui');
     }
 
     public function update_password(Request $request, $id)
@@ -124,7 +124,7 @@ class UpdateProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('profile', ['id' => $id])->with('success', 'Password Berhasil Diperbaharui');
+        return redirect()->route('updater.profile', ['id' => $id])->with('success', 'Password Berhasil Diperbaharui');
     }
 
 }

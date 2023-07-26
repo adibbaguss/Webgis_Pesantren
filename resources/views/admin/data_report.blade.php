@@ -23,7 +23,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/report-export" class="dropdown-item">
+                            <a href="/admin/report_export" class="dropdown-item">
                                 <i class="fas fa-print"></i>
                                 {{ 'Cetak' }}
                             </a>
@@ -193,7 +193,7 @@
                                 <p class="btn btn-secondary">{{ $item->status }}</p>
                             @endif
                         </div>
-                        <form method="POST" action="{{ route('update_status_report', $item->id) }}">
+                        <form method="POST" action="{{ route('admin.report_status_update', $item->id) }}">
                             @csrf
                             @method('PUT')
                             <label for="">Perbarui Status</label>
