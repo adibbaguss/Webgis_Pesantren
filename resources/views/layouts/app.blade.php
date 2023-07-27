@@ -222,12 +222,12 @@
                             <i class="bx bx-grid-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Dashboard' }}</span>
                         </a>
-                        {{-- <a href="{{ route('admin.map_view') }}" class="nav_link text-decoration-none {{ request()->is('admin/map_view*') ? 'active' : '' }}">
-                            <i class="bx bx-map-alt nav_icon"></i>
-                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                        <a href="{{ route('updater.ponpes_view',['id'=>Auth::User()->id]) }}" class="nav_link text-decoration-none {{ request()->is('updater/ponpes_view*') ? 'active' : '' }}">
+                            <i class="bx bx-buildings nav_icon"></i>
+                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
                         </a>
 
-                        <a href="{{ route('admin.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
+                        {{-- <a href="{{ route('admin.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
                             <span class="nav_name">{{ 'Data Pesantren' }}</span>
                         </a>

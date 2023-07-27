@@ -15,7 +15,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Updater\DashboardController as U_DashboardController;
+use App\Http\Controllers\Updater\PonpesViewController as U_PonpesViewController;
 use App\Http\Controllers\Updater\ProfileController as U_ProfileController;
+use App\Http\Controllers\Updater\UpdatePonpesController as U_UpdatePonpesController;
 use App\Http\Controllers\Updater\UpdateProfileController as U_UpdateProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -83,6 +85,9 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::get('/updater/edit_profile/{id}', [U_UpdateProfileController::class, 'index'])->name('updater.profile_edit');
     Route::put('/updater/update_profile/{id}', [U_UpdateProfileController::class, 'update'])->name('updater.profile_update');
     Route::put('/updater/update_password/{id}', [U_UpdateProfileController::class, 'update_password'])->name('updater.password_update');
+    Route::get('/updater/ponpes_view/user_updater={id}', [U_PonpesViewController::class, 'view'])->name('updater.ponpes_view');
+    Route::get('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'index'])->name('updater.ponpes_edit');
+    Route::put('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'update'])->name('updater.ponpes_update');
     // Tambahkan rute lain untuk updater di sini
 });
 

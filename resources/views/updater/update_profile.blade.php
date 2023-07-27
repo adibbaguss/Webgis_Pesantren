@@ -3,8 +3,9 @@
 @section('content')
     <div class="container d-grid mt-5 pt-5 vh-100">
         <div class="content_register shadow bg-white mx-auto" style="max-width: 500px">
-            <div class="px-5 pt-4" >
-                <form method="POST" action="{{ route('updater.profile_update', ['id'=>$user->id]) }}" enctype="multipart/form-data">
+            <div class="px-5 pt-4">
+                <form method="POST" action="{{ route('updater.profile_update', ['id' => $user->id]) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     {{-- photo profile --}}
@@ -12,20 +13,20 @@
                         <div class="avatar-edit">
                             <input type='file' id="photo_profil" accept=".png, .jpg, .jpeg" name="photo_profil"
                                 class="avatar" />
-                            <input type="hidden" name="base64image" name="base64image" id="base64image">
+                            <input type="hidden" name="base64image" id="base64image">
                             <label for="photo_profil"></label>
                         </div>
                         <div class="avatar-preview container2">
                             @php
-                            if ($user->photo_profil == null) {
-                                $imagePath = public_path('images/profile_photos/default.jpg');
-                                $imageUrl = asset('images/profile_photos/default.jpg');
-                            } else {
-                                $imagePath = public_path('images/profile_photos/' . $user->photo_profil);
-                                $imageUrl = asset('images/profile_photos/' . $user->photo_profil);
-                            }
-                            $imageStyle = "background-image: url('$imageUrl')";
-                        @endphp
+                                if ($user->photo_profil == null) {
+                                    $imagePath = public_path('images/profile_photos/default.jpg');
+                                    $imageUrl = asset('images/profile_photos/default.jpg');
+                                } else {
+                                    $imagePath = public_path('images/profile_photos/' . $user->photo_profil);
+                                    $imageUrl = asset('images/profile_photos/' . $user->photo_profil);
+                                }
+                                $imageStyle = "background-image: url('$imageUrl')";
+                            @endphp
 
                             <div id="imagePreview" style="{{ $imageStyle }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -39,9 +40,9 @@
 
                         <div class="col-12 mb-4">
                             <label for="">{{ 'Nama Lengkap' }}</label>
-                            <input id="name" type="text"
-                                class="form-control @error('name') is-invalid @enderror" name="name"
-                                value="{{ $user->name }}" required autocomplete="name" placeholder="Nama Lengkap">
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                name="name" value="{{ $user->name }}" required autocomplete="name"
+                                placeholder="Nama Lengkap">
 
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -54,8 +55,7 @@
                             <label for="">{{ 'Username' }}</label>
                             <input id="username" type="text"
                                 class="form-control @error('username') is-invalid @enderror" name="username"
-                                value="{{ $user->username }}" required autocomplete="username"
-                                placeholder="Username">
+                                value="{{ $user->username }}" required autocomplete="username" placeholder="Username">
 
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
@@ -80,9 +80,8 @@
 
                         <div class="col-12 mb-4">
                             <label for="">{{ 'Email' }}</label>
-                            <input id="email" type="email"
-                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                value="{{ $user->email }}" required autocomplete="email"
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ $user->email }}" required autocomplete="email"
                                 placeholder="Alamat Email">
 
                             @error('email')
@@ -96,9 +95,9 @@
 
 
                         <div class="col-6 mb-4 me-0 ms-auto d-flex justify-content-between">
-                            <a href="{{ route('updater.profile', ['id'=>$user->id]) }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('updater.profile', ['id' => $user->id]) }}" class="btn btn-outline-secondary">
                                 {{ __('Batal') }}
-                            </a>                                    
+                            </a>
                             <button type="submit" class="btn btn-success">
                                 {{ __('Perbaharui') }}
                             </button>
@@ -116,25 +115,25 @@
     <!-- Modal Crop -->
 
     <div class="modal fade imagecrop" id="model" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel"
-    aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog ">
-          <div class="modal-content crop-content border-0 shadow">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body crop-body">
-                <div class="image-canvas">
-                    <img id="image" src="" alt="">
+            <div class="modal-content crop-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body crop-body">
+                    <div class="image-canvas">
+                        <img id="image" src="" alt="">
+                    </div>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button type="button" style="width:100%" class="btn btn-outline-success crop"
+                        id="crop">Crop</button>
                 </div>
             </div>
-            <div class="modal-footer d-flex">
-                <button type="button" style="width:100%" class="btn btn-outline-success crop" id="crop">Crop</button>
-            </div>
-          </div>
         </div>
-      </div>
-
+    </div>
 @endsection
 
 
@@ -174,7 +173,7 @@
         });
         $modal.on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
-                aspectRatio: 1/1,
+                aspectRatio: 1 / 1,
                 dragMode: 'move',
                 cropBoxMovable: false,
                 cropBoxResizable: false,
