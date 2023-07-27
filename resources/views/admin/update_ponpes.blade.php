@@ -239,7 +239,7 @@
                                     <select class="form-select" aria-label="Default select example"
                                         name="status">
                                         <option value="active" >Active</option>
-                                        <option value="non-acitive" >Non-Active</option>
+                                        <option value="non-active" >Non-Active</option>
                                     </select>
 
                                     @error('status')
