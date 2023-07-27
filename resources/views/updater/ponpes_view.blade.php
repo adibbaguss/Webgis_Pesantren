@@ -63,8 +63,13 @@
                         <li>
                             <a href="{{ route('updater.ponpes_edit', ['id' => $ponpes->id]) }}" class="dropdown-item">
                                 <i class="fas fa-edit"></i>
-                                Perbaharui 
-                                {{ $ponpes->id }}
+                                Perbaharui Informasi
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('updater.ponpes_edit_etc', ['id' => $ponpes->id]) }}" class="dropdown-item">
+                                <i class="fas fa-edit"></i>
+                                Perbaharui Informasi Lain
                             </a>
                         </li>
                         {{-- <li>
