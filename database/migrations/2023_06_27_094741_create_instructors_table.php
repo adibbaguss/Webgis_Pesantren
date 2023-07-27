@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('instructors', function (Blueprint $table) {
             $table->increments('íd');
             $table->unsignedInteger('ponpes_id');
-            $table->integer('nik')->unique();
+            $table->bigInteger('nik')->unique();
             $table->string('name', 100);
             $table->char('gender', 10);
             $table->string('expertise');
-            $table->enum('status',['active','non-active'])->default('active');
+            $table->enum('status', ['active', 'non-active'])->default('active');
             $table->timestamps();
 
             //relasi
