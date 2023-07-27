@@ -90,8 +90,9 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::get('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'index'])->name('updater.ponpes_edit');
     Route::put('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'update'])->name('updater.ponpes_update');
     Route::get('/updater/ponpes_update_etc/ponpes={id}', [UpdatePonpesEtcController::class, 'index'])->name('updater.ponpes_edit_etc');
-    Route::post('/updater/ponpes_update_etc/create_instructors', [UpdatePonpesEtcController::class, 'createInstructors'])->name('updater.instructors_create');
-
+    Route::post('/updater/ponpes_update_etc/instructors/create', [UpdatePonpesEtcController::class, 'createInstructors'])->name('updater.instructors_create');
+    Route::delete('/updater/ponpes_update_etc/instructors/delete/{id}', [UpdatePonpesEtcController::class, 'destroyInstructors'])->name('updater.instructors_delete');
+    Route::put('/updater/ponpes_update_etc/instructors/update/{id}', [UpdatePonpesEtcController::class, 'updateInstructors'])->name('updater.instructors_update');
     //    Route::get('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'index'])->name('updater.ponpes_image_show');
     // Route::post('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
     // Tambahkan rute lain untuk updater di sini

@@ -18,7 +18,6 @@
         .img-overflow img:hover {
             transform: scale(1.5);
         }
-
     </style>
 @endsection
 
@@ -102,6 +101,7 @@
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th scope="col">{{ 'No' }}</th>
+                                                        <th scope="col">{{ 'NIK' }}</th>
                                                         <th scope="col">{{ 'Nama' }}</th>
                                                         <th scope="col">{{ 'Keahlian' }}</th>
                                                         <th scope="col">{{ 'Gender' }}</th>
@@ -116,10 +116,11 @@
                                                     @forelse ($instructors as $item)
                                                         <tr>
                                                             <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                            <td>{{ $item->nik }}</td>
                                                             <td>{{ $item->name }}</td>
                                                             <td>{{ $item->expertise }}</td>
                                                             <td>{{ $item->gender }}</td>
-                                                            @if ($item->status === 'Active')
+                                                            @if ($item->status === 'active')
                                                                 <td><span class="text-success">Aktif</span></td>
                                                             @else
                                                                 <td><span class="text-danger fw-bold">Tidak Aktif</span>
@@ -127,14 +128,19 @@
                                                             @endif
                                                             <td>
                                                                 <div class="d-flex justify-content-between">
-                                                                    <a class="btn btn-outline-secondary">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateInstructorModal{{ $item->id }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
-                                                                    <a class="btn btn-outline-danger">
-                                                                        <i class="fas fa-trash"></i>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteInstructorModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>
-                                                          
+
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -325,7 +331,121 @@
 
 
 
-        {{-- modal delete --}}
+        {{-- modal delete instructor --}}
+        @foreach ($instructors as $item)
+            <div class="modal fade" id="deleteInstructorModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Pengajar' }}</h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $item->name . ' ?' }}</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button"
+                                data-bs-dismiss="modal">Batal</button>
+
+                            <form id="delete-form"
+                                action="{{ route('updater.instructors_delete', ['id' => $item->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+        {{-- update instuctors/pengajar --}}
+        @foreach ($instructors as $item)
+            <div class="modal fade" id="updateInstructorModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                            </h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('updater.instructors_update', ['id'=>$item->id]) }}" method="post" class="w-100">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    {{-- hidden input --}}
+                                    <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Nomor Induk Keluarga (NIK)</label>
+                                        <input type="number" class="form-control @error('nik') is-invalid @enderror"
+                                            name="nik" value="{{ $item->nik }}">
+                                        @error('nik')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Nama Lengkap</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" value="{{ $item->name }}">
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Keahlian</label>
+                                        <input type="text"
+                                            class="form-control @error('expertise') is-invalid @enderror" name="expertise"
+                                            value="{{ $item->expertise }}">
+                                        <small class="text-secondary">Contoh : Tafsir Al-Quran, Hadis, Fiqih, Kaligrafi,
+                                            dll.</small>
+                                        @error('expertise')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Jenis Kelamin</label>
+                                        <select name="gender" id=""
+                                            class="form-control @error('gender') is-invalid @enderror">
+                                            <option value="Pria" @if (old('gender', $item->gender) === 'Pria') selected @endif>Pria
+                                            </option>
+                                            <option value="Wanita" @if (old('gender', $item->gender) === 'Wanita') selected @endif>Wanita
+                                            </option>
+                                        </select>
+                                        @error('gender')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Status</label>
+                                        <select name="status" id=""
+                                            class="form-control @error('status') is-invalid @enderror">
+                                            <option value="active" @if (old('status', $item->status) === 'active') selected @endif>active
+                                            </option>
+                                            <option value="non-active" @if (old('status', $item->status) === 'non-active') selected @endif>
+                                                non-active</option>
+                                        </select>
+                                        @error('status')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <button class="btn btn-outline-secondary me-2" type="button"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-success">Perbaharui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
         <div class="modal fade" id="InstructorsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -343,42 +463,65 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input type="text" name="ponpes_id" value="{{ $ponpes->id }}" hidden>
+                                <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nomor Induk Keluarga (NIK)</label>
-                                    <input type="text" class="form-control" name="nik">
+                                    <input type="number" class="form-control @error('nik') is-invalid @enderror"
+                                        name="nik" value="{{ old('nik') }}">
+                                    @error('nik')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="name">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="">Keahlian</label>
-                                    <input type="text" class="form-control" name="expertise">
+                                    <input type="text" class="form-control @error('expertise') is-invalid @enderror"
+                                        name="expertise" value="{{ old('expertise') }}">
+                                    <small class="text-secondary">Contoh : Tafsir Al-Quran, Hadis, Fiqih, Kaligrafi,
+                                        dll.</small>
+                                    @error('expertise')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-
                                 <div class="col-12 mb-3">
                                     <label for="">Jenis Kelamin</label>
-                                    <select name="gender" id="" class="form-control">
-                                        <option value="Pria">Pria</option>
-                                        <option value="Wanita">Wanita</option>
+                                    <select name="gender" id=""
+                                        class="form-control @error('gender') is-invalid @enderror">
+                                        <option value="Pria" @if (old('gender') === 'Pria') selected @endif>Pria
+                                        </option>
+                                        <option value="Wanita" @if (old('gender') === 'Wanita') selected @endif>Wanita
+                                        </option>
                                     </select>
+                                    @error('gender')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-
                                 <div class="col-12 mb-3">
                                     <label for="">Status</label>
-                                    <select name="status" id="" class="form-control">
-                                        <option value="active">active</option>
-                                        <option value="non-active">non-active</option>
+                                    <select name="status" id=""
+                                        class="form-control @error('status') is-invalid @enderror">
+                                        <option value="active" @if (old('status') === 'active') selected @endif>active
+                                        </option>
+                                        <option value="non-active" @if (old('status') === 'non-active') selected @endif>
+                                            non-active</option>
                                     </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-12 mb-3 d-flex justify-content-end">
                                     <button class="btn btn-outline-secondary me-2" type="button"
-                                        data-bs-dismiss="modal">Cancel</button>
+                                        data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn-success">Tambah</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
 
@@ -402,7 +545,7 @@
             // Inisialisasi DataTables
             $(document).ready(function() {
                 new DataTable('#table_instructors', {
-                   
+
                     scrollX: true
 
                 });
