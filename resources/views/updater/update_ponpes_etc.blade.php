@@ -246,33 +246,60 @@
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse  "
                                     aria-labelledby="panelsStayOpen-headingTwo">
                                     <div class="accordion-body pt-3 px-1 pb-1">
-                                        <table class="table table-bordered border-dark table-responsive">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">{{ 'No' }}</th>
-                                                    <th scope="col">{{ 'Aktivitas' }}</th>
-                                                    <th scope="col">{{ 'Deskripsi' }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-                                                @forelse ($activities as $item)
-                                                    <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td class="text-break">{{ $item->description }}</td>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
+                                                data-bs-target="#ActivitiesModal">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th scope="col">{{ 'No' }}</th>
+                                                        <th scope="col">{{ 'Aktivitas' }}</th>
+                                                        <th scope="col">{{ 'Deskripsi' }}</th>
+                                                        <th scope="col">{{ 'Opsi' }}</th>
                                                     </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
-                                                            {{ 'Belum diisi' }}
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+                                                    @forelse ($activities as $item)
+                                                        <tr>
+                                                            <th class="text-center" scope="row">{{ $no++ }}
+                                                            </th>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td class="text-break">{{ $item->description }}</td>
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateActivitiesModal{{ $item->id }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteActivitiesModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="4"
+                                                                class="text-center bg-secondary text-white">
+                                                                {{ 'Belum diisi' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +332,7 @@
                                                 @php
                                                     $no = 1;
                                                 @endphp
-                                                @forelse ($activities as $item)
+                                                @forelse ($learning as $item)
                                                     <tr>
                                                         <th class="text-center" scope="row">{{ $no++ }}</th>
                                                         <td>{{ $item->name }}</td>
@@ -596,29 +623,29 @@
         {{-- end modal facility --}}
 
 
-               {{-- update instuctors/pengajar --}}
-               @foreach ($facility as $item)
-               <div class="modal fade" id="updateFacilityModal{{ $item->id }}" tabindex="-1" role="dialog"
-                   aria-labelledby="exampleModalLabel" aria-hidden="true">
-                   <div class="modal-dialog" role="document">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <h5 class="modal-title" id="exampleModalLabel">
-                                   {{ 'Perbaharui Data (' . $item->name . ')' }}
-                               </h5>
-                               <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                   <i class="fas fa-times"></i>
-                               </button>
-                           </div>
-                           <div class="modal-body">
-                               <form action="{{ route('updater.facility_update', ['id' => $item->id]) }}" method="post"
-                                   class="w-100">
-                                   @csrf
-                                   @method('PUT')
-                                   <div class="row">
-                                       {{-- hidden input --}}
-                                       <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
-                                       <div class="col-12 mb-3">
+        {{-- update facility --}}
+        @foreach ($facility as $item)
+            <div class="modal fade" id="updateFacilityModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                            </h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('updater.facility_update', ['id' => $item->id]) }}" method="post"
+                                class="w-100">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    {{-- hidden input --}}
+                                    <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                    <div class="col-12 mb-3">
                                         <label for="">Nama Fasilitas</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             name="name" value="{{ $item->name }}">
@@ -630,25 +657,25 @@
                                         <label for="">Jumlah</label>
                                         <input type="number" class="form-control @error('count') is-invalid @enderror"
                                             name="count" value="{{ $item->count }}">
-    
+
                                         @error('count')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-    
-                                       <div class="col-12 mb-3 d-flex justify-content-end">
-                                           <button class="btn btn-outline-secondary me-2" type="button"
-                                               data-bs-dismiss="modal">Batal</button>
-                                           <button type="submit" class="btn btn-success">Perbaharui</button>
-                                       </div>
-                                   </div>
-                               </form>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           @endforeach
-           {{-- end  modal update instuctors --}}
+
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <button class="btn btn-outline-secondary me-2" type="button"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-success">Perbaharui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end  modal facility --}}
 
         {{-- create modal facility --}}
         <div class="modal fade" id="FacilityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -656,7 +683,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Pengajar</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Fasilitas</h5>
                         <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fas fa-times"></i>
                         </button>
@@ -700,6 +727,148 @@
             </div>
         </div>
         {{-- end modal facility --}}
+
+
+
+        {{-- modal delete activities --}}
+        @foreach ($activities as $item)
+            <div class="modal fade" id="deleteActivitiesModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Aktivitas' }}</h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $item->name . ' ?' }}</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button"
+                                data-bs-dismiss="modal">Batal</button>
+
+                            <form id="delete-form"
+                                action="{{ route('updater.activities_delete', ['id' => $item->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end modal activities --}}
+
+
+        {{-- update activities --}}
+        @foreach ($activities as $item)
+            <div class="modal fade" id="updateActivitiesModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                            </h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('updater.activities_update', ['id' => $item->id]) }}" method="post"
+                                class="w-100">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    {{-- hidden input --}}
+                                    <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Nama Fasilitas</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" value="{{ $item->name }}">
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="description">Deskripsi</label>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
+                                            maxlength="254" oninput="updateCharacterCountUpdate(this, {{ $item->id }})">{{ $item->description ?? old('description') }}</textarea>
+                                        <small>Karakter Tersisa: <span
+                                                id="characterCountUpdate_{{ $item->id }}">254</span></small>
+                                        @error('description')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <button class="btn btn-outline-secondary me-2" type="button"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-success">Perbaharui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end  modal activities --}}
+
+        {{-- create modal activities --}}
+        <div class="modal fade" id="ActivitiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Aktivitas</h5>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('updater.activities_create') }}" method="post" class="w-100">
+                            @csrf
+                            @method('POST')
+                            <div class="row">
+                                {{-- hidden input --}}
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
+                                <div class="col-12 mb-3">
+                                    <label for="">Nama Aktivitas</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="description">Deskripsi</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
+                                        maxlength="254" oninput="updateCharacterCount(this, {{ $item->id }})">{{ old('description') }}</textarea>
+                                    <small>Karakter Tesisa : </small><small id="characterCount">254</small>
+
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-12 mb-3 d-flex justify-content-end">
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- end modal activities --}}
     @endsection
 
 
@@ -765,4 +934,46 @@
 
             });
         </script>
+
+        <script>
+            function updateCharacterCount(textarea) {
+                const maxLength = parseInt(textarea.getAttribute('maxlength'));
+                const currentLength = textarea.value.length;
+                const remaining = maxLength - currentLength;
+
+                const characterCountElement = document.getElementById('characterCount');
+                characterCountElement.textContent = remaining;
+            }
+        </script>
+
+        <script>
+            function updateCharacterCountUpdate(textarea, id) {
+                const maxLength = 254;
+                const currentLength = textarea.value.length;
+                const remainingLength = maxLength - currentLength;
+                const characterCountElement = document.getElementById('characterCountUpdate_' + id);
+                characterCountElement.innerText = remainingLength;
+            }
+
+            // Trigger the function on input event for each textarea with name "description"
+            const textareas = document.querySelectorAll('textarea[name="description"]');
+            textareas.forEach(textarea => {
+                const id = textarea.dataset.id; // Add the data-id attribute to each textarea in the HTML
+                updateCharacterCountUpdate(textarea, id);
+                textarea.addEventListener('input', function() {
+                    updateCharacterCountUpdate(this, id);
+                });
+            });
+        </script>
+
+        {{-- <script>
+            function updateCharacterCountUpdate(textarea) {
+                const maxLength = parseInt(textarea.getAttribute('maxlength'));
+                const currentLength = textarea.value.length;
+                const remaining = maxLength - currentLength;
+
+                const characterCountElement = document.getElementById('characterCountUpdate');
+                characterCountElement.textContent = remaining;
+            }
+        </script> --}}
     @endpush
