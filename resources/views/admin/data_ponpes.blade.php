@@ -63,11 +63,11 @@
                                         src="{{ asset('/images/ponpes/profile/logo_ponpes_default.jpg') }}"
                                         class="card-img-top" alt="Image Pondok Pesantren Default">
                                 @endif
-                                <div class="card-body text-decoration-none">
+                                <div class="card-body bg-white text-decoration-none">
                                     <h class="card-title mb-0">{{ $item->name }}</h>
 
                                 </div>
-                                <div class="card-footer border-0">
+                                <div class="card-footer bg-white border-0">
                                     <p class="card-text mb-0">{{ $item->category }}</p>
                                     <small class="text-muted">{{ $item->subdistrict . ', ' . $item->city }}</small>
                                 </div>

@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('instructors', function (Blueprint $table) {
-            $table->increments('íd');
+            $table->increments('id');
             $table->unsignedInteger('ponpes_id');
-            $table->integer('nik')->unique();
+            $table->string('nik', 20)->unique();
             $table->string('name', 100);
             $table->char('gender', 10);
             $table->string('expertise');
-            $table->enum('status',['active','non-active'])->default('active');
+            $table->enum('status', ['active', 'non-active'])->default('active');
             $table->timestamps();
 
             //relasi

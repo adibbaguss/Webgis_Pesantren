@@ -11,7 +11,7 @@ class Learning extends Model
 
     protected $table = 'learning';
 
-    protected $fillabel = [
+    protected $fillable = [
         'ponpes_id',
         'name',
         'description',

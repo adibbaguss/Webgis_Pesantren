@@ -213,12 +213,12 @@
                 </div>
                 @elseif(Auth::User()->user_role == "updater")
                 <div>
-                    <a href="{{ route('updater.dashboard') }}" class="nav_logo text-decoration-none">
+                    <a href="{{ route('updater.dashboard', ['id' => Auth::User()->id]) }}" class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
                             <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
                     </a>
                     <div class="nav_list">
-                        <a href="{{ route('updater.dashboard') }}" class="nav_link text-decoration-none {{ request()->is('updater/dashboard*') ? 'active' : '' }}">
+                        <a href="{{ route('updater.dashboard', ['id' => Auth::User()->id]) }}" class="nav_link text-decoration-none {{ request()->is('updater/dashboard*') ? 'active' : '' }}">
                             <i class="bx bx-grid-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Dashboard' }}</span>
                         </a>

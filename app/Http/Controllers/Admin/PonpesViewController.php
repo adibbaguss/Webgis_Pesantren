@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
+use App\Models\User;
 
 class PonpesViewController extends Controller
 {
     public function view($id)
     {
         // Mengambil data ponpes berdasarkan ID
-        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount')
+        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount', )
             ->find($id);
+        $user = User::all();
 
         if ($ponpes) {
             $activities = $ponpes->activities;
@@ -19,10 +21,10 @@ class PonpesViewController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
-            $studentCount = $ponpes->studentCout;
+            $studentCount = $ponpes->studentCount;
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
-            return view('admin.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount'));
+            return view('admin.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'user'));
         } else {
             abort(404);
         }

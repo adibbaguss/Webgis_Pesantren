@@ -42,7 +42,7 @@ class UpdatePonpesController extends Controller
     {
 
         $request->validate([
-            'user_id' => ['required'],
+            'user_id' => ['required', 'unique:ponpes,user_id,' . $id],
             'nspp' => ['required', 'numeric', 'digits_between:10,20', 'unique:ponpes,nspp,' . $id],
             'name' => ['required', 'string'],
             'category' => ['required', 'string'],
