@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Ponpes;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class StudentCount extends Model
 {
@@ -21,8 +21,8 @@ class StudentCount extends Model
         'female_non_resident_count',
     ];
 
-
-    public function ponpes(){
+    public function ponpes()
+    {
         return $this->belongsTo(Ponpes::create());
     }
 }

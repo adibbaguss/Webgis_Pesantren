@@ -102,7 +102,8 @@
                 </div>
                 {{-- end slick js --}}
 
-                <div class="row d-md-block d-none">
+                   {{-- dropdown info --}}
+                   <div class="row d-md-block d-none">
 
                     <div class="col-12 mb-3">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -178,7 +179,7 @@
                                     aria-labelledby="panelsStayOpen-headingOne">
                                     <div class="accordion-body pt-3 px-1 pb-1">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered border-dark mb-0">
+                                            <table class="table table-bordered border-dark">
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th scope="col">{{ 'No' }}</th>
@@ -214,7 +215,7 @@
                     </div>
 
 
-                    <div class="col-12 mb-3">
+                    <div class="col-12 mb-3 ">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header " id="panelsStayOpen-headingTwo">
@@ -265,7 +266,7 @@
                     </div>
 
 
-                    <div class="col-12 mb-3">
+                    <div class="col-12 mb-3 ">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header " id="panelsStayOpen-headingFour">
@@ -315,7 +316,87 @@
                         </div>
                     </div>
 
+
+                    <div class="col-12 mb-3">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header " id="panelsStayOpen-headingFive">
+                                    <button class="accordion-button fw-bold bg-light" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive"
+                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                                        {{ 'Jumlah Santri' }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse  "
+                                    aria-labelledby="panelsStayOpen-headingFive">
+                                    <div class="accordion-body pt-3 px-1 pb-1">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'No' }}</th>
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'Tahun' }}</th>
+                                                        <th colspan="2" scope="col" class="align-middle">
+                                                            {{ 'Mukim' }}</th>
+                                                        <th colspan="2" scope="col" class="align-middle">
+                                                            {{ 'Tidak Mukim' }}</th>
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'Total' }}</th>
+    
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col" class="text-center">{{ 'Santri' }}</th>
+                                                        <th scope="col" class="text-center">{{ 'Santriwati' }}</th>
+                                                        <th scope="col" class="text-center">{{ 'Santri' }}</th>
+                                                        <th scope="col" class="text-center">{{ 'Santriwati' }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+                                                    @forelse ($studentCount as $item)
+                                                        <tr>
+                                                            <th class="text-center" scope="row" class="align-middle">
+                                                                {{ $no++ }}</th>
+                                                            <td class="text-center" class="align-middle">{{ $item->year }}
+                                                            </td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->male_resident_count }}</td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->female_resident_count }}</td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->male_non_resident_count }}</td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->female_non_resident_count }}</td>
+                                                                <td class="text-center align-middle">
+                                                                    {{ $item->male_resident_count + $item->female_resident_count + $item->male_non_resident_count + $item->female_non_resident_count }}
+                                                                </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="6" class="text-center bg-secondary text-white">
+                                                                {{ 'Belum diisi' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+    
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
+                {{-- end dropdown info --}}
 
             </div>
 
@@ -415,8 +496,9 @@
 
             {{-- drop down info  --}}
 
-            <div class="row d-md-none d-block">
-                <hr>
+             {{-- dropdown info --}}
+             <div class="row d-md-none d-block">
+
                 <div class="col-12 mb-3">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
@@ -456,7 +538,8 @@
                                                         @if ($item->status === 'active')
                                                             <td><span class=" btn btn-success w-100">Aktif</span></td>
                                                         @else
-                                                            <td><span class="btn btn-danger w-100">Tidak Aktif</span></td>
+                                                            <td><span class="btn btn-danger w-100">Tidak Aktif</span>
+                                                            </td>
                                                         @endif
                                                     </tr>
                                                 @empty
@@ -490,7 +573,7 @@
                                 aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body pt-3 px-1 pb-1">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered border-dark mb-0">
+                                        <table class="table table-bordered border-dark">
                                             <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">{{ 'No' }}</th>
@@ -504,13 +587,15 @@
                                                 @endphp
                                                 @forelse ($facility as $item)
                                                     <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                        <th class="text-center" scope="row">{{ $no++ }}
+                                                        </th>
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-center">{{ $item->count }}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
+                                                        <td colspan="3"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}</td>
                                                     </tr>
                                                 @endforelse
@@ -524,7 +609,7 @@
                 </div>
 
 
-                <div class="col-12 mb-3">
+                <div class="col-12 mb-3 ">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header " id="panelsStayOpen-headingTwo">
@@ -552,13 +637,15 @@
                                                 @endphp
                                                 @forelse ($activities as $item)
                                                     <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                        <th class="text-center" scope="row">{{ $no++ }}
+                                                        </th>
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-break">{{ $item->description }}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
+                                                        <td colspan="3"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}
                                                         </td>
                                                     </tr>
@@ -573,7 +660,7 @@
                 </div>
 
 
-                <div class="col-12 mb-3">
+                <div class="col-12 mb-3 ">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header " id="panelsStayOpen-headingFour">
@@ -601,13 +688,15 @@
                                                 @endphp
                                                 @forelse ($activities as $item)
                                                     <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                        <th class="text-center" scope="row">{{ $no++ }}
+                                                        </th>
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-break">{{ $item->description }}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
+                                                        <td colspan="3"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}
                                                         </td>
                                                     </tr>
@@ -621,7 +710,87 @@
                     </div>
                 </div>
 
+
+                <div class="col-12 mb-3">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header " id="panelsStayOpen-headingFive">
+                                <button class="accordion-button fw-bold bg-light" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive"
+                                    aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                                    {{ 'Jumlah Santri' }}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse  "
+                                aria-labelledby="panelsStayOpen-headingFive">
+                                <div class="accordion-body pt-3 px-1 pb-1">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered border-dark">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th rowspan="2" scope="col" class="align-middle">
+                                                        {{ 'No' }}</th>
+                                                    <th rowspan="2" scope="col" class="align-middle">
+                                                        {{ 'Tahun' }}</th>
+                                                    <th colspan="2" scope="col" class="align-middle">
+                                                        {{ 'Mukim' }}</th>
+                                                    <th colspan="2" scope="col" class="align-middle">
+                                                        {{ 'Tidak Mukim' }}</th>
+                                                    <th rowspan="2" scope="col" class="align-middle">
+                                                        {{ 'Total' }}</th>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" class="text-center">{{ 'Santri' }}</th>
+                                                    <th scope="col" class="text-center">{{ 'Santriwati' }}</th>
+                                                    <th scope="col" class="text-center">{{ 'Santri' }}</th>
+                                                    <th scope="col" class="text-center">{{ 'Santriwati' }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $no = 1;
+                                                @endphp
+                                                @forelse ($studentCount as $item)
+                                                    <tr>
+                                                        <th class="text-center" scope="row" class="align-middle">
+                                                            {{ $no++ }}</th>
+                                                        <td class="text-center" class="align-middle">{{ $item->year }}
+                                                        </td>
+                                                        <td class="text-center" class="align-middle">
+                                                            {{ $item->male_resident_count }}</td>
+                                                        <td class="text-center" class="align-middle">
+                                                            {{ $item->female_resident_count }}</td>
+                                                        <td class="text-center" class="align-middle">
+                                                            {{ $item->male_non_resident_count }}</td>
+                                                        <td class="text-center" class="align-middle">
+                                                            {{ $item->female_non_resident_count }}</td>
+                                                            <td class="text-center align-middle">
+                                                                {{ $item->male_resident_count + $item->female_resident_count + $item->male_non_resident_count + $item->female_non_resident_count }}
+                                                            </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="6" class="text-center bg-secondary text-white">
+                                                            {{ 'Belum diisi' }}
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
+            {{-- end dropdown info --}}
 
         </div>
 

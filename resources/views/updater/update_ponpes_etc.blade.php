@@ -74,7 +74,7 @@
                 </div>
                 {{-- end slick js --}}
 
-                <div class="row ">
+                <div class="row mb-4">
 
                     <div class="col-md-12 mb-3">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -380,11 +380,122 @@
                         </div>
                     </div>
 
+
+
+                    <div class="col-12 mb-3">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header " id="panelsStayOpen-headingFive">
+                                    <button class="accordion-button fw-bold bg-light" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive"
+                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseFive">
+                                        {{ 'Jumlah Santri' }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse  "
+                                    aria-labelledby="panelsStayOpen-headingFive">
+                                    <div class="accordion-body pt-3 px-1 pb-1">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
+                                                data-bs-target="#StudentCountModal">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'No' }}</th>
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'Tahun' }}</th>
+                                                        <th colspan="2" scope="col" class="align-middle">
+                                                            {{ 'Mukim' }}</th>
+                                                        <th colspan="2" scope="col" class="align-middle">
+                                                            {{ 'Tidak Mukim' }}</th>
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'Total' }}</th>
+                                                        <th rowspan="2" scope="col" class="align-middle">
+                                                            {{ 'Opsi' }}</th>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col" class="text-center">{{ 'Santri' }}</th>
+                                                        <th scope="col" class="text-center">{{ 'Santriwati' }}</th>
+                                                        <th scope="col" class="text-center">{{ 'Santri' }}</th>
+                                                        <th scope="col" class="text-center">{{ 'Santriwati' }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+                                                    @forelse ($studentCount as $item)
+                                                        <tr>
+                                                            <th class="text-center" scope="row" class="align-middle">
+                                                                {{ $no++ }}</th>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->year }}
+                                                            </td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->male_resident_count }}</td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->female_resident_count }}</td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->male_non_resident_count }}</td>
+                                                            <td class="text-center" class="align-middle">
+                                                                {{ $item->female_non_resident_count }}</td>
+                                                            <td class="text-center align-middle">
+                                                                {{ $item->male_resident_count + $item->female_resident_count + $item->male_non_resident_count + $item->female_non_resident_count }}
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateStudentCountModal{{ $item->id }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteStudentCountModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="6"
+                                                                class="text-center bg-secondary text-white">
+                                                                {{ 'Belum diisi' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
+               
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ route('updater.ponpes_view', ['id'=>$ponpes->user_id]) }}" class="btn btn-success">Selesai</a>
+                    </div>
+                 
 
             </div>
 
-            {{-- drop down info  --}}
+
+         
 
         </div>
 
@@ -722,8 +833,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
-                                    hidden>
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Fasilitas</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -1038,6 +1149,234 @@
             </div>
         </div>
         {{-- end modal learning --}}
+
+
+        {{-- modal delete StudentCount --}}
+        @foreach ($studentCount as $item)
+            <div class="modal fade" id="deleteStudentCountModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Pembelajaran' }}</h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $item->name . ' ?' }}</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button"
+                                data-bs-dismiss="modal">Batal</button>
+
+                            <form id="delete-form"
+                                action="{{ route('updater.studentcount_delete', ['id' => $item->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end modal StudentCount --}}
+
+
+        {{-- update StudentCount --}}
+        @foreach ($studentCount as $item)
+            <div class="modal fade" id="updateStudentCountModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                            </h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('updater.studentcount_update', ['id' => $item->id]) }}"
+                                method="post" class="w-100">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    {{-- hidden input --}}
+                                    <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+
+
+
+                                    <div class="col-12 mb-3">
+                                        <label for="year">Tahun</label>
+                                        <input type="number" name="year"
+                                            class="form-control @error('year') is-invalid @enderror"
+                                            value="{{ $item->year }}" id="year">
+                                        @error('year')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="male_resident_count">Santri Mukim</label>
+                                        <input type="number" name="male_resident_count"
+                                            class="form-control @error('male_resident_count') is-invalid @enderror"
+                                            value="{{ $item->male_resident_count }}" id="male_resident_count">
+                                        @error('male_resident_count')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="female_resident_count">Santriwati Mukim</label>
+                                        <input type="number" name="female_resident_count"
+                                            class="form-control @error('female_resident_count') is-invalid @enderror"
+                                            value="{{ $item->female_resident_count }}" id="female_resident_count">
+                                        @error('female_resident_count')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="male_non_resident_count">Santri Tidak Mukim</label>
+                                        <input type="number" name="male_non_resident_count"
+                                            class="form-control @error('male_non_resident_count') is-invalid @enderror"
+                                            value="{{ $item->male_non_resident_count }}" id="male_non_resident_count">
+                                        @error('male_non_resident_count')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="female_non_resident_count">Santriwati Tidak Mukim</label>
+                                        <input type="number" name="female_non_resident_count"
+                                            class="form-control @error('female_non_resident_count') is-invalid @enderror"
+                                            value="{{ $item->female_non_resident_count }}"
+                                            id="female_non_resident_count">
+                                        @error('female_non_resident_count')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="col-12 mb-2">
+                                        <ul>
+                                            <li><small>Mukim : Santri/Santriwati yang menetap di pondok
+                                                    pesantren</small></li>
+                                            <li><small>Tidak Mukim : Santri/Santriwati yang tidak menetap di pondok
+                                                    pesantren atau berasal dari desa sekitar</small></li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <button class="btn btn-outline-secondary me-2" type="button"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-success">Perbaharui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end  modal StudentCount --}}
+
+        {{-- create modal StudentCount --}}
+        <div class="modal fade" id="StudentCountModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Jumlah Santri</h5>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('updater.studentcount_create') }}" method="post" class="w-100">
+                            @csrf
+                            @method('POST')
+                            <div class="row">
+                                {{-- hidden input --}}
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
+
+                                <div class="col-12 mb-3">
+                                    <label for="year">Tahun</label>
+                                    <input type="number" name="year"
+                                        class="form-control @error('year') is-invalid @enderror"
+                                        value="{{ old('year') }}" id="year">
+                                    @error('year')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="male_resident_count">Santri Mukim</label>
+                                    <input type="number" name="male_resident_count"
+                                        class="form-control @error('male_resident_count') is-invalid @enderror"
+                                        value="{{ old('male_resident_count') }}" id="male_resident_count">
+                                    @error('male_resident_count')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="female_resident_count">Santriwati Mukim</label>
+                                    <input type="number" name="female_resident_count"
+                                        class="form-control @error('female_resident_count') is-invalid @enderror"
+                                        value="{{ old('female_resident_count') }}" id="female_resident_count">
+                                    @error('female_resident_count')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="male_non_resident_count">Santri Tidak Mukim</label>
+                                    <input type="number" name="male_non_resident_count"
+                                        class="form-control @error('male_non_resident_count') is-invalid @enderror"
+                                        value="{{ old('male_non_resident_count') }}" id="male_non_resident_count">
+                                    @error('male_non_resident_count')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="female_non_resident_count">Santriwati Tidak Mukim</label>
+                                    <input type="number" name="female_non_resident_count"
+                                        class="form-control @error('female_non_resident_count') is-invalid @enderror"
+                                        value="{{ old('female_non_resident_count') }}" id="female_non_resident_count">
+                                    @error('female_non_resident_count')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-12 mb-2">
+                                    <ul>
+                                        <li><small>Mukim : Santri/Santriwati yang menetap di pondok pesantren</small></li>
+                                        <li><small>Tidak Mukim : Santri/Santriwati yang tidak menetap di pondok pesantren
+                                                atau berasal dari desa sekitar</small></li>
+                                    </ul>
+                                </div>
+
+
+
+                                <div class="col-12 mb-3 d-flex justify-content-end">
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- end modal StudentCount --}}
     @endsection
 
 
@@ -1116,17 +1455,17 @@
             }
         </script>
 
-{{-- create form learning --}}
-<script>
-    function updateCharacterCount_2(textarea) {
-        const maxLength = parseInt(textarea.getAttribute('maxlength'));
-        const currentLength = textarea.value.length;
-        const remaining = maxLength - currentLength;
+        {{-- create form learning --}}
+        <script>
+            function updateCharacterCount_2(textarea) {
+                const maxLength = parseInt(textarea.getAttribute('maxlength'));
+                const currentLength = textarea.value.length;
+                const remaining = maxLength - currentLength;
 
-        const characterCountElement = document.getElementById('characterCount_2');
-        characterCountElement.textContent = remaining;
-    }
-</script>
+                const characterCountElement = document.getElementById('characterCount_2');
+                characterCountElement.textContent = remaining;
+            }
+        </script>
 
 
 

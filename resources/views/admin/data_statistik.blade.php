@@ -171,28 +171,28 @@
             labels: chartData.labels,
             datasets: [
                 {
-                    label: 'Santri (LK) Mukim',
+                    label: 'Santri Mukim',
                     data: chartData.male_resident_count,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)', 
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Santri (PR) Mukim',
+                    label: 'Santriwati Mukim',
                     data: chartData.female_resident_count,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)', 
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Santri (LK) Tidak Mukim',
+                    label: 'Santri Tidak Mukim',
                     data: chartData.male_non_resident_count,
                     backgroundColor: 'rgba(255, 205, 86, 0.2)',
                     borderColor: 'rgba(255, 205, 86, 1)',  
                     borderWidth: 1
                 },
                 {
-                    label: 'Santri (LK) Tidak Mukim',
+                    label: 'Santriwati Tidak Mukim',
                     data: chartData.female_non_resident_count,
                     backgroundColor: 'rgba(48, 255, 145, 0.2)', 
                     borderColor: 'rgba(48, 255, 145, 1)',

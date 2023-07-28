@@ -18,7 +18,7 @@ class PonpesViewController extends Controller
         // dd($updater_id);
 
         // Fetch the ponpes data based on the user_id column
-        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount')
+        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'studentCount', 'instructors', 'images')
             ->where('user_id', $updater_id)
             ->first(); // Use first() instead of find()
 
@@ -28,9 +28,10 @@ class PonpesViewController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
-            $studentCount = $ponpes->studentCout;
+            $studentCount = $ponpes->studentCount;
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
+            // dd($studentCount);
             return view('updater.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount'));
         } else {
             abort(404);
