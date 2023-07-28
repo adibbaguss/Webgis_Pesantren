@@ -145,7 +145,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="6" class="text-center bg-secondary text-white">
+                                                            <td colspan="7" class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>
@@ -173,32 +173,59 @@
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse "
                                     aria-labelledby="panelsStayOpen-headingOne">
                                     <div class="accordion-body pt-3 px-1 pb-1">
-                                        <table class="table table-bordered border-dark table-responsive mb-0">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">{{ 'No' }}</th>
-                                                    <th scope="col">{{ 'Fasilitas' }}</th>
-                                                    <th scope="col">{{ 'Jumlah' }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-                                                @forelse ($facility as $item)
-                                                    <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td class="text-center">{{ $item->count }}</td>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
+                                                data-bs-target="#FacilityModal">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark mb-0">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th scope="col">{{ 'No' }}</th>
+                                                        <th scope="col">{{ 'Fasilitas' }}</th>
+                                                        <th scope="col">{{ 'Jumlah' }}</th>
+                                                        <th scope="col">{{ 'Opsi' }}</th>
                                                     </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
-                                                            {{ 'Belum diisi' }}</td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+                                                    @forelse ($facility as $item)
+                                                        <tr>
+                                                            <th class="text-center" scope="row">{{ $no++ }}
+                                                            </th>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td class="text-center">{{ $item->count }}</td>
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateFacilityModal{{ $item->id }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteFacilityModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="4"
+                                                                class="text-center bg-secondary text-white">
+                                                                {{ 'Belum diisi' }}</td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -359,6 +386,7 @@
                 </div>
             </div>
         @endforeach
+        {{-- end modal instuctor --}}
 
         {{-- update instuctors/pengajar --}}
         @foreach ($instructors as $item)
@@ -375,7 +403,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('updater.instructors_update', ['id'=>$item->id]) }}" method="post" class="w-100">
+                            <form action="{{ route('updater.instructors_update', ['id' => $item->id]) }}" method="post"
+                                class="w-100">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -446,7 +475,9 @@
                 </div>
             </div>
         @endforeach
+        {{-- end  modal update instuctors --}}
 
+        {{--  modal create instuctor --}}
         <div class="modal fade" id="InstructorsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -463,7 +494,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
+                                    hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nomor Induk Keluarga (NIK)</label>
                                     <input type="number" class="form-control @error('nik') is-invalid @enderror"
@@ -528,6 +560,146 @@
                 </div>
             </div>
         </div>
+        {{-- end modal create instructor --}}
+
+
+
+
+        {{-- modal delete facility --}}
+        @foreach ($facility as $item)
+            <div class="modal fade" id="deleteFacilityModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Fasilitas' }}</h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $item->name . ' ?' }}</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button"
+                                data-bs-dismiss="modal">Batal</button>
+
+                            <form id="delete-form" action="{{ route('updater.facility_delete', ['id' => $item->id]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end modal facility --}}
+
+
+               {{-- update instuctors/pengajar --}}
+               @foreach ($facility as $item)
+               <div class="modal fade" id="updateFacilityModal{{ $item->id }}" tabindex="-1" role="dialog"
+                   aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog" role="document">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <h5 class="modal-title" id="exampleModalLabel">
+                                   {{ 'Perbaharui Data (' . $item->name . ')' }}
+                               </h5>
+                               <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                   <i class="fas fa-times"></i>
+                               </button>
+                           </div>
+                           <div class="modal-body">
+                               <form action="{{ route('updater.facility_update', ['id' => $item->id]) }}" method="post"
+                                   class="w-100">
+                                   @csrf
+                                   @method('PUT')
+                                   <div class="row">
+                                       {{-- hidden input --}}
+                                       <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                       <div class="col-12 mb-3">
+                                        <label for="">Nama Fasilitas</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" value="{{ $item->name }}">
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Jumlah</label>
+                                        <input type="number" class="form-control @error('count') is-invalid @enderror"
+                                            name="count" value="{{ $item->count }}">
+    
+                                        @error('count')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+    
+                                       <div class="col-12 mb-3 d-flex justify-content-end">
+                                           <button class="btn btn-outline-secondary me-2" type="button"
+                                               data-bs-dismiss="modal">Batal</button>
+                                           <button type="submit" class="btn btn-success">Perbaharui</button>
+                                       </div>
+                                   </div>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           @endforeach
+           {{-- end  modal update instuctors --}}
+
+        {{-- create modal facility --}}
+        <div class="modal fade" id="FacilityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Pengajar</h5>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('updater.facility_create') }}" method="post" class="w-100">
+                            @csrf
+                            @method('POST')
+                            <div class="row">
+                                {{-- hidden input --}}
+                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
+                                    hidden>
+                                <div class="col-12 mb-3">
+                                    <label for="">Nama Fasilitas</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="">Jumlah</label>
+                                    <input type="number" class="form-control @error('count') is-invalid @enderror"
+                                        name="count" value="{{ old('count') }}">
+
+                                    @error('count')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 mb-3 d-flex justify-content-end">
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- end modal facility --}}
     @endsection
 
 

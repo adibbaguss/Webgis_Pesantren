@@ -12,7 +12,7 @@ class Facility extends Model
 
     protected $table = 'facility';
 
-    protected $fillabel = [
+    protected $fillable = [
         'ponpes_id',
         'name',
         'count',
