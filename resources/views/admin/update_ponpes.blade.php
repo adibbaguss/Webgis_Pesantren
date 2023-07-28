@@ -16,19 +16,25 @@
                                 <div class="row ">
 
                                     <div class="col-12 mb-4">
-                                        <label for=""
-                                            class="small ms-2">{{ 'Updater/Operator : ' . $ponpes->user_id }}</label>
-                                        <select class="form-select" aria-label="Default select example" name="user_id">
+                                        <label for="" class="small ms-2">{{ 'Updater/Operator : ' . $ponpes->user_id }}</label>
+                                        <select class="form-select @error('user_id') is-invalid @enderror" aria-label="Default select example"
+                                            name="user_id">
                                             @foreach ($user as $item)
                                                 @if ($item->user_role == 'updater')
-                                                <option value="{{ $item->id }}" @if(old('user_id', $ponpes->user_id) == $item->id) selected @endif>
-                                                    {{ $item->id . ' - ' . $item->name . ' (' . $item->username . ')' }}
-                                                </option>
+                                                    <option value="{{ $item->id }}" @if(old('user_id', $ponpes->user_id) == $item->id) selected @endif>
+                                                        {{ $item->id . ' - ' . $item->name . ' (' . $item->username . ')' }}
+                                                    </option>
                                                 @endif
                                             @endforeach
-
                                         </select>
+                                    
+                                        @error('user_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+                                    
 
                                     <div class="col-12 mb-4">
                                         <label for=""
