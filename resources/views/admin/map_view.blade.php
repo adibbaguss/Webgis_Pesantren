@@ -279,10 +279,6 @@
             @endforeach
         };
 
-        L.control.layers(baseLayers, overlayLayers).addTo(map);
-
-
-
         // maps ke-dua
     </script>
 @endpush

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UpdatePonpesController;
 use App\Http\Controllers\Admin\UpdateProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Updater\DashboardController as U_DashboardController;
 use App\Http\Controllers\Updater\PonpesViewController as U_PonpesViewController;
@@ -46,6 +47,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Rute untuk login dengan multi-role
 Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+// Rute untuk reset password
+Route::get('password/reset', [ResetPasswordController::class, 'reset_pass'])->name('reset');
 
 // Rute untuk admin
 Route::middleware(['auth', 'role:admin'])->group(function () {

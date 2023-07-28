@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/style.css', 'resources/css/slick.css','resources/css/slick-theme.css','resources/js/slick.min.js', 'resources/js/slick.js' ])
+    @vite(['resources/js/leaflet-search.js', 'resources/css/leaflet-search.css', 'resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/style.css', 'resources/css/slick.css','resources/css/slick-theme.css','resources/js/slick.min.js', 'resources/js/slick.js' ])
 
 
 
