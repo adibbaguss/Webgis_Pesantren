@@ -81,7 +81,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 // // Rute untuk updater
 Route::middleware(['auth', 'role:updater'])->group(function () {
-    Route::get('/updater/dashboard', [U_DashboardController::class, 'index'])->name('updater.dashboard');
+    Route::get('/updater/dashboard/{id}', [U_DashboardController::class, 'index'])->name('updater.dashboard');
     Route::get('/updater/profile/{id}', [U_ProfileController::class, 'index'])->name('updater.profile');
     Route::get('/updater/edit_profile/{id}', [U_UpdateProfileController::class, 'index'])->name('updater.profile_edit');
     Route::put('/updater/update_profile/{id}', [U_UpdateProfileController::class, 'update'])->name('updater.profile_update');

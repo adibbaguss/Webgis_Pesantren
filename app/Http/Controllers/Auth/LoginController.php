@@ -51,9 +51,9 @@ class LoginController extends Controller
         if ($user->user_role === 'admin') {
             return redirect()->route('admin.dashboard');
         } elseif ($user->user_role === 'updater') {
-            return redirect()->route('updater.dashboard');
+            return redirect()->route('updater.dashboard', ['id' => $user->id]);
         } elseif ($user->user_role === 'viewer') {
-            return redirect()->route('viewer.dashboard');
+            return redirect()->route('viewer.dashboard', ['id' => $user->id]);
         } else {
             return redirect()->route('login');
         }
