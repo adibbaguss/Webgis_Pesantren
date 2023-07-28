@@ -160,7 +160,7 @@
                     </div>
 
 
-                    <div class="col-12 mb-3 d-grid">
+                    <div class="col-12 mb-3">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -233,7 +233,7 @@
                     </div>
 
 
-                    <div class="col-12 mb-3 d-grid">
+                    <div class="col-12 mb-3">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header " id="panelsStayOpen-headingTwo">
@@ -307,7 +307,7 @@
                     </div>
 
 
-                    <div class="col-12 mb-3 d-grid">
+                    <div class="col-12 mb-3">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header " id="panelsStayOpen-headingFour">
@@ -320,33 +320,60 @@
                                 <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse  "
                                     aria-labelledby="panelsStayOpen-headingFour">
                                     <div class="accordion-body pt-3 px-1 pb-1">
-                                        <table class="table table-bordered border-dark table-responsive">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th scope="col">{{ 'No' }}</th>
-                                                    <th scope="col">{{ 'Pembelajaran' }}</th>
-                                                    <th scope="col">{{ 'Deskripsi' }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-                                                @forelse ($learning as $item)
-                                                    <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td class="text-break">{{ $item->description }}</td>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
+                                                data-bs-target="#LearningModal">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th scope="col">{{ 'No' }}</th>
+                                                        <th scope="col">{{ 'Pembelajaran' }}</th>
+                                                        <th scope="col">{{ 'Deskripsi' }}</th>
+                                                        <th scope="col">{{ 'Opsi' }}</th>
                                                     </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
-                                                            {{ 'Belum diisi' }}
-                                                        </td>
-                                                    </tr>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+                                                    @forelse ($learning as $item)
+                                                        <tr>
+                                                            <th class="text-center" scope="row">{{ $no++ }}
+                                                            </th>
+                                                            <td>{{ $item->name }}</td>
+                                                            <td class="text-break">{{ $item->description }}</td>
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateLearningModal{{ $item->id }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteLearningModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="4"
+                                                                class="text-center bg-secondary text-white">
+                                                                {{ 'Belum diisi' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -381,6 +408,7 @@
                 </div>
             </div>
         @endfor
+        {{-- end modal image preview --}}
 
 
 
@@ -784,7 +812,7 @@
                                     {{-- hidden input --}}
                                     <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
                                     <div class="col-12 mb-3">
-                                        <label for="">Nama Fasilitas</label>
+                                        <label for="">Nama Aktivitas</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             name="name" value="{{ $item->name }}">
                                         @error('name')
@@ -796,7 +824,7 @@
                                         <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
                                             maxlength="254" oninput="updateCharacterCountUpdate(this, {{ $item->id }})">{{ $item->description ?? old('description') }}</textarea>
                                         <small>Karakter Tersisa: <span
-                                                id="characterCountUpdate_{{ $item->id }}">254</span></small>
+                                                id="characterCountUpdate_{{ $item->id }}">-</span></small>
                                         @error('description')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -847,7 +875,7 @@
                                 <div class="col-12 mb-3">
                                     <label for="description">Deskripsi</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
-                                        maxlength="254" oninput="updateCharacterCount(this, {{ $item->id }})">{{ old('description') }}</textarea>
+                                        maxlength="254" oninput="updateCharacterCount(this)">{{ old('description') }}</textarea>
                                     <small>Karakter Tesisa : </small><small id="characterCount">254</small>
 
                                     @error('description')
@@ -869,6 +897,147 @@
             </div>
         </div>
         {{-- end modal activities --}}
+
+
+        {{-- modal delete learning --}}
+        @foreach ($learning as $item)
+            <div class="modal fade" id="deleteLearningModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Pembelajaran' }}</h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $item->name . ' ?' }}</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button"
+                                data-bs-dismiss="modal">Batal</button>
+
+                            <form id="delete-form" action="{{ route('updater.learning_delete', ['id' => $item->id]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end modal learning --}}
+
+
+        {{-- update learning --}}
+        @foreach ($learning as $item)
+            <div class="modal fade" id="updateLearningModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                            </h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('updater.learning_update', ['id' => $item->id]) }}" method="post"
+                                class="w-100">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    {{-- hidden input --}}
+                                    <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                    <div class="col-12 mb-3">
+                                        <label for="">Nama Pembelajaran</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" value="{{ $item->name }}">
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="description">Deskripsi</label>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
+                                            maxlength="254" oninput="updateCharacterCountUpdate(this, {{ $item->id }})">{{ $item->description ?? old('description') }}</textarea>
+                                        <small>Karakter Tersisa: <span
+                                                id="characterCountUpdate_{{ $item->id }}">-</span></small>
+                                        @error('description')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <button class="btn btn-outline-secondary me-2" type="button"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-success">Perbaharui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end  modal learning --}}
+
+        {{-- create modal learning --}}
+        <div class="modal fade" id="LearningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Pembelajaran</h5>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('updater.learning_create') }}" method="post" class="w-100">
+                            @csrf
+                            @method('POST')
+                            <div class="row">
+                                {{-- hidden input --}}
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
+                                <div class="col-12 mb-3">
+                                    <label for="">Nama Pembelajaran</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="description">Deskripsi</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
+                                        maxlength="254" oninput="updateCharacterCount_2(this)">{{ old('description') }}</textarea>
+                                    <small>Karakter Tesisa : </small><small id="characterCount_2">254</small>
+
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-12 mb-3 d-flex justify-content-end">
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{-- end modal learning --}}
     @endsection
 
 
@@ -935,6 +1104,7 @@
             });
         </script>
 
+        {{-- create form activity --}}
         <script>
             function updateCharacterCount(textarea) {
                 const maxLength = parseInt(textarea.getAttribute('maxlength'));
@@ -946,6 +1116,22 @@
             }
         </script>
 
+{{-- create form learning --}}
+<script>
+    function updateCharacterCount_2(textarea) {
+        const maxLength = parseInt(textarea.getAttribute('maxlength'));
+        const currentLength = textarea.value.length;
+        const remaining = maxLength - currentLength;
+
+        const characterCountElement = document.getElementById('characterCount_2');
+        characterCountElement.textContent = remaining;
+    }
+</script>
+
+
+
+
+        {{-- updaate form --}}
         <script>
             function updateCharacterCountUpdate(textarea, id) {
                 const maxLength = 254;
