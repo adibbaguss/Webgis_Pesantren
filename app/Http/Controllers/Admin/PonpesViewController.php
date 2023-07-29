@@ -21,7 +21,7 @@ class PonpesViewController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
-            $studentCount = $ponpes->studentCount;
+            $studentCount = $ponpes->studentCount->sortBy('year');
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
             return view('admin.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'user'));

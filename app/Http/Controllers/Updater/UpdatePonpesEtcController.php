@@ -25,7 +25,7 @@ class UpdatePonpesEtcController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
-            $studentCount = $ponpes->studentCount; // Typo fixed here
+            $studentCount = $ponpes->studentCount->sortBy('year');
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
             return view('updater.update_ponpes_etc', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount'));
