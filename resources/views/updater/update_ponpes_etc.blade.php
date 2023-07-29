@@ -533,7 +533,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="6"
+                                                            <td colspan="8"
                                                                 class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
