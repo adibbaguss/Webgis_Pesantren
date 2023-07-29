@@ -161,8 +161,9 @@
 
 
 @push('javascript')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.9/leaflet-search.src.js"></script>
     <script>
-        const map = L.map('map').setView([-6.993808128800089, 109.83246433526726], 10);
+        var map = new L.map('map').setView([-6.993808128800089, 109.83246433526726], 10);
         map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')); //base
         const baseLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 20,
@@ -201,6 +202,41 @@
             iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_3.png') }}',
         });
 
+
+        var markersLayer = new L.LayerGroup();	
+        map.addLayer(markersLayer);
+
+        var controlSearch = new L.Control.Search({
+            position:'topleft',
+            layer: markersLayer,
+            initial: false,
+            zoom: 20,
+            markerLocation: true
+        })
+
+        map.addControl( controlSearch );
+
+        // Buat array untuk simpan data pencarian
+        @php
+            $data_pencarian = [];
+        @endphp
+
+        // Buat asosiatif array dan masukkan ke array sebelumnya
+        @foreach ($ponpes as $ponpe)
+            @php
+                $db_data = [
+                    'loc' => [$ponpe->latitude, $ponpe->longitude],
+                    'title' => $ponpe->name,
+                ];
+
+                $data_pencarian[] = $db_data;
+            @endphp
+        @endforeach
+
+        // insialisasi variable data (convert variable php ke js)
+        var data = @json($data_pencarian);
+        var i = 0
+
         @foreach ($ponpes as $ponpe)
             @php
                 $subdistrict = $ponpe->subdistrict;
@@ -219,11 +255,13 @@
             if (!subdistrictLayers['{{ $subdistrict }}']) {
                 subdistrictLayers['{{ $subdistrict }}'] = L.layerGroup().addTo(map);
             }
-
-            L.marker([{{ $ponpe->latitude ?? 0 }}, {{ $ponpe->longitude ?? 0 }}], {
+            var title = data[i].title,	//data yang dicari, nama variable harus 'title'
+                loc = data[i].loc,		//untuk naruh posisi marker
+                marker = new L.Marker(new L.latLng(loc), {
+                    title: title, 
                     icon: {{ $markerIcon }}
-                })
-                .bindPopup(`
+                } );
+            marker.bindPopup(`
                 <div class="row custom-popup ">
                     <div class="col-3 p-0 my-auto">
                         @if (!$ponpe->photo_profil)
@@ -246,7 +284,9 @@
                     </div>
                 </div>
             `)
-                .addTo(subdistrictLayers['{{ $subdistrict }}']);
+                .addTo(subdistrictLayers['{{ $subdistrict }}']); 
+            markersLayer.addLayer(marker);
+            i += 1
         @endforeach
 
 
@@ -279,6 +319,12 @@
             @endforeach
         };
 
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+
+        $('#textsearch').on('keyup', function(e) {
+            controlSearch.searchText( e.target.value );
+        })
+
         // maps ke-dua
     </script>
 @endpush
@@ -286,7 +332,7 @@
 
 
 
-@push('javascript')
+<!-- @push('javascript')
     <script>
         // const map2 = L.map('map_2').setView([-6.993808128800089, 109.83246433526726], 10);
 
@@ -387,9 +433,9 @@
         //         L.geoJSON(data).addTo(map2);
         //     });
     </script>
-@endpush
+@endpush -->
 
-@push('javascript')
+<!-- @push('javascript')
     <script>
         // Inisialisasi peta
         var map = L.map('map').setView([-7.797068, 110.370529], 10);
@@ -465,4 +511,4 @@
             geojsonLayer.resetStyle(e.target);
         }
     </script>
-@endpush
+@endpush -->
