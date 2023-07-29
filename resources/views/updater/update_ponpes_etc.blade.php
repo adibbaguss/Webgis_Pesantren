@@ -52,30 +52,94 @@
 
             <div class="col-md-7 bg-white py-5 rounded ">
 
-                {{-- jumbotron --}}
-                <div class="jumbotron" style="user-select: none;">
-                    <img src="{{ asset('images/ponpes/default-image.png') }}" class="card-img border" alt="..."
-                        style="max-height:300px">
-                </div>
-                {{-- end jumbotron --}}
-
-
-                {{-- slick-js --}}
-                <div class=" slick-responsive">
-
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="img-overflow border">
-                            <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $i }}"
-                                src="{{ asset('images/ponpes/default-image-1.png') }}" alt="">
-                        </div>
-                    @endfor
-
-
-                </div>
-                {{-- end slick js --}}
-
                 <div class="row mb-4">
 
+                    {{-- image  --}}
+                    <div class="col-md-12 mb-3">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header " id="panelsStayOpen-headingZero">
+                                    <button class="accordion-button fw-bold bg-light" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZero"
+                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseZero">
+                                        {{ 'Gambar Pondok Pesantren' }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseZero" class="accordion-collapse collapse"
+                                    aria-labelledby="panelsStayOpen-headingZero">
+                                    <div class="accordion-body pt-3 px-1 pb-1">
+                                        @if(empty($image->id))
+                                        <div class="d-flex justify-content-end">
+                                            <a  href="{{ route('updater.ponpes_image_create_view', ['id'=>$ponpes->id]) }}" class="btn btn-outline-success mb-2" >
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        @else
+                                        <span class="small text-danger">Tidak Bisa Menambah Gambar Lagi</span>
+                                        @endif
+
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                       
+                                                        <th scope="col" class="align-middle">{{ 'Jumbotron' }}</th>
+                                                        <th scope="col" class="align-middle">{{ 'Gambar 1' }}</th>
+                                                        <th scope="col" class="align-middle">{{ 'Gambar 2' }}</th>
+                                                        <th scope="col" class="align-middle">{{ 'Gambar 3' }}</th>
+                                                        <th scope="col" class="align-middle">{{ 'Gambar 4' }} </th>
+                                                        <th scope="col" class="align-middle">{{ 'Gambar 5' }} </th>
+                                                        <th scope="col" class="align-middle">{{ 'Gambar 6' }} </th>
+                                                        <th scope="col" class="align-middle">{{ 'Opsi' }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse ($image as $item)
+                                                        <tr>
+            
+                                                            <td>{{ $item->Jumbotron }}</td>
+                                                            <td>{{ $item->reguler1 }}</td>
+                                                            <td>{{ $item->reguler2 }}</td>
+                                                            <td>{{ $item->reguler3 }}</td>
+                                                            <td>{{ $item->reguler4 }}</td>
+                                                            <td>{{ $item->reguler5 }}</td>
+                                                            <td>{{ $item->reguler6 }}</td>
+ 
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateImagesModal{{ $item->id }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteImagesModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="8" class="text-center bg-secondary text-white">
+                                                                {{ 'Belum diisi' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- end image --}}
+
+                    {{-- pengajar --}}
                     <div class="col-md-12 mb-3">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
@@ -158,6 +222,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- end pengajar --}}
 
 
                     <div class="col-12 mb-3">
@@ -494,26 +559,46 @@
 
             </div>
 
-
-         
-
         </div>
+
+
+
+        {{-- modal jumbotron --}}
+        <div class="modal fade imagecrop"id="cropJumbotronModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content crop-content border-0 shadow">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body crop-body">
+                        <div class="image-canvas">
+                            <img id="uploadedJumbotron" src="" alt="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end modal jumbotron --}}
 
 
 
         {{-- modal image preview --}}
         @for ($i = 0; $i < 6; $i++)
-            <div class="modal fade" id="imageModal.{{ $i }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="imageModal.{{ $i }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog px-0">
                     <div class="modal-content bg-none">
                         <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{ asset('images/ponpes/default-image.png') }}" alt=""
-                                style="width: 100%">
+                            <img src="{{ asset('images/ponpes/default-image.png') }}" alt="" style="width: 100%">
                         </div>
                     </div>
                 </div>
@@ -833,8 +918,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id"
-                                    value="{{ $ponpes->id }}" hidden>
+                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
+                                    hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Fasilitas</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -886,8 +971,8 @@
                             <button class="btn btn-outline-secondary" type="button"
                                 data-bs-dismiss="modal">Batal</button>
 
-                            <form id="delete-form"
-                                action="{{ route('updater.activities_delete', ['id' => $item->id]) }}" method="POST">
+                            <form id="delete-form" action="{{ route('updater.activities_delete', ['id' => $item->id]) }}"
+                                method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -973,8 +1058,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id"
-                                    value="{{ $ponpes->id }}" hidden>
+                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
+                                    hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Aktivitas</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -1114,8 +1199,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id"
-                                    value="{{ $ponpes->id }}" hidden>
+                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
+                                    hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Pembelajaran</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -1390,6 +1475,83 @@
         <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
+        
+        
+        {{-- jumbotron create --}}
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                var avatar = document.getElementById('jumbotron-img');
+                var image = document.getElementById('uploadedJumbotron');
+                var input = document.getElementById('file-input');
+                var cropBtn = document.getElementById('crop');
+    
+                var $modal = $('#cropJumbotronModal');
+                var cropper;
+    
+                $('[data-bs-toggle="tooltip"]').tooltip();
+    
+                input.addEventListener('change', function(e) {
+                    var files = e.target.files;
+                    var done = function(url) {
+                        // input.value = '';
+                        console.log(input.value)
+                        image.src = url;
+                        $modal.modal('show');
+                    };
+                    // var reader;
+                    // var file;
+                    // var url;
+    
+                    if (files && files.length > 0) {
+                        let file = files[0];
+    
+                        // done(URL.createObjectURL(file));
+                        // if (URL) {
+                        // } 
+    
+                        // else if (FileReader) {
+                        reader = new FileReader();
+                        reader.onload = function(e) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(file);
+                        // }
+                    }
+                });
+    
+    
+    
+    
+                $modal.on('shown.bs.modal', function() {
+                    cropper = new Cropper(image, {
+                        aspectRatio: 16 / 9,
+                        viewMode: 1,
+                    });
+                }).on('hidden.bs.modal', function() {
+                    cropper.destroy();
+                    cropper = null;
+                });
+    
+                cropBtn.addEventListener('click', function() {
+                    // var initialAvatarURL;
+                    var canvas;
+    
+                    $modal.modal('hide');
+    
+                    if (cropper) {
+                        canvas = cropper.getCroppedCanvas({
+                            width: 780,
+                            height: 440,
+                        });
+                        // initialAvatarURL = avatar.src;
+                        avatar.src = canvas.toDataURL();
+                        document.getElementById('cropped-image').value = canvas.toDataURL('image/jpeg');
+                    }
+                });
+    
+            });
+        </script>
+        {{-- end jumbotron create --}}
         <script>
             // Inisialisasi DataTables
             $(document).ready(function() {
