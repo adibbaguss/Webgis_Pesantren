@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Updater\DashboardController as U_DashboardController;
+use App\Http\Controllers\Updater\PonpesImageCreateController;
 use App\Http\Controllers\Updater\PonpesViewController as U_PonpesViewController;
 use App\Http\Controllers\Updater\ProfileController as U_ProfileController;
 use App\Http\Controllers\Updater\UpdatePonpesController as U_UpdatePonpesController;
@@ -114,6 +115,9 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::post('/updater/ponpes_update_etc/studentcount/create', [UpdatePonpesEtcController::class, 'createStudentCount'])->name('updater.studentcount_create');
     Route::delete('/updater/ponpes_update_etc/studentcount/delete/{id}', [UpdatePonpesEtcController::class, 'destroyStudentCount'])->name('updater.studentcount_delete');
     Route::put('/updater/ponpes_update_etc/studentcount/update/{id}', [UpdatePonpesEtcController::class, 'updateStudentCount'])->name('updater.studentcount_update');
+
+    Route::get('/updater/ponpes_update_etc/image_ponpes/create/{id}', [PonpesImageCreateController::class, 'index'])->name('updater.ponpes_image_create_view');
+    Route::post('/updater/ponpes_update_etc/image_ponpes/create', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
     //    Route::get('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'index'])->name('updater.ponpes_image_show');
     // Route::post('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
     // Tambahkan rute lain untuk updater di sini

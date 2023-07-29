@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('images_ponpes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('ponpes_id');
-            $table->string('image')->nullable();
-            $table->string('title')->nullable();
-            $table->enum('type', ['jumbotron', 'reguler'])->default('reguler');
+            $table->unsignedInteger('ponpes_id')->unique();
+            $table->string('jumbotron')->nullable();
+            $table->string('reguler_1')->nullable();
+            $table->string('reguler_2')->nullable();
+            $table->string('reguler_3')->nullable();
+            $table->string('reguler_4')->nullable();
+            $table->string('reguler_5')->nullable();
+            $table->string('reguler_6')->nullable();
             $table->timestamps();
 
             //relasi
