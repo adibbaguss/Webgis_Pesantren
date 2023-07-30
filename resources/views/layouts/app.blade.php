@@ -117,17 +117,19 @@
                 <i class="bx bx-menu" id="header-toggle"></i>
             </div>
             @guest
-                @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                @endif
-
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @endif
+                  
+                        @if (Route::has('login'))
+                        <div class="me-2 ms-auto ">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </div>
+                    @endif
+    
+                    @if (Route::has('register'))
+                        <div class="me-0 ms-0">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </div>
+                    @endif
+                   
             @else
                 <span class="me-2 d-none d-lg-inline text-secondary text-decoration-none ms-auto text-capitalize">
                     {{ Auth::user()->name }}
@@ -176,7 +178,32 @@
 
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                @if(Auth::User()->user_role == "admin")
+                @if(!Auth::User())
+                <div>
+                    <a href="" class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
+                            <span class="nav_logo-name text-capitalize">Guest</span>
+                    </a>
+                    <div class="nav_list">
+                        <a href="{{ route('guest.map_view') }}" class="nav_link text-decoration-none {{ request()->is('guest/map_view*') ? 'active' : '' }}">
+                            <i class="bx bx-map-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                        </a>
+
+                        <a href="{{ route('guest.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('guest/data_ponpes*') ? 'active' : '' }}">
+                            <i class="bx bx-buildings nav_icon"></i>
+                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                        </a>
+
+
+                        <a href="{{ route('guest.data_statistik') }}" class="nav_link text-decoration-none {{ request()->is('guest/data_statistik*') ? 'active' : '' }}"">
+                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                        </a>
+
+                    </div>
+                </div>
+                @elseif(Auth::User()->user_role == "admin")
                 <div>
                     <a href="{{ route('admin.dashboard') }}" class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
@@ -249,6 +276,41 @@
                             <i class="bx bxs-report nav_icon"></i>
                             <span class="nav_name">{{ 'Pelaporan' }}</span>
                         </a> --}}
+
+                    </div>
+                </div>
+
+                @elseif(!Auth::User())
+                <div>
+                    <a href="" class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
+                            <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
+                    </a>
+                    <div class="nav_list">
+                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/map_view*') ? 'active' : '' }}">
+                            <i class="bx bx-map-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                        </a>
+
+                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
+                            <i class="bx bx-buildings nav_icon"></i>
+                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                        </a>
+
+                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_account*') ? 'active' : '' }}">
+                            <i class="bx bxs-user-account nav_icon"></i>
+                            <span class="nav_name">{{ 'Akun Pengguna' }}</span>
+                        </a>
+
+                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_statistik*') ? 'active' : '' }}"">
+                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                        </a>
+
+                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_report*') ? 'active' : '' }}"">
+                            <i class="bx bxs-report nav_icon"></i>
+                            <span class="nav_name">{{ 'Pelaporan' }}</span>
+                        </a>
 
                     </div>
                 </div>

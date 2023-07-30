@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UpdatePonpesController;
 use App\Http\Controllers\Admin\UpdateProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Updater\DashboardController as U_DashboardController;
 use App\Http\Controllers\Updater\PonpesImageCreateController;
@@ -35,15 +36,27 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::redirect('/', '/login');
-// Auth::routes();
+// Route::redirect('/', '/home');
+// // Auth::routes();
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::redirect('/guest', '/guest/map_view');
+Route::get('/guest/map_view', [GuestController::class, 'index'])->name('guest.map_view');
+Route::get('/guest/data_ponpes', [GuestController::class, 'dataPonpes'])->name('guest.data_ponpes');
+Route::get('/guest/data_ponpes/search', [GuestController::class, 'ponpesSearch'])->name('guest.ponpes_search');
+Route::get('/guest/ponpes_view/{id}', [GuestController::class, 'ponpesView'])->name('guest.ponpes_view');
+Route::get('/guest/data_statistik', [GuestController::class, 'ponpesStatistik'])->name('guest.data_statistik');
+Route::get('/guest/ponpes_report', function () {
+    return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
+});
+// Route::get('/admin/data_ponpes', [DataPonpesController::class, 'index'])->name('guest.data_ponpes');
+// Route::get('/admin/ponpes_view/{id}', [PonpesViewController::class, 'view'])->name('guest.ponpes_view');
+// Route::get('/admin/ponpes/search', [DataPonpesController::class, 'search'])->name('guest.ponpes_search');
 
 // Rute untuk login dengan multi-role
 Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -62,7 +75,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/ponpes/{id}', [PonpesViewController::class, 'destroy'])->name('admin.ponpes_delete');
     Route::get('/admin/ponpes_export_xlsx', [DataPonpesController::class, 'exportXLSX']);
     Route::get('/admin/ponpes_export_csv', [DataPonpesController::class, 'exportCSV']);
-    Route::get('/admin/ponpes/search', [DataPonpesController::class, 'search'])->name('admin.ponpes_search');
+    Route::get('/admin/data_ponpes/search', [DataPonpesController::class, 'search'])->name('admin.ponpes_search');
     Route::get('/admin/create_ponpes', [CreatePonpesController::class, 'index']);
     Route::post('/admin/create_ponpes', [CreatePonpesController::class, 'create'])->name('admin.create_ponpes');
     Route::get('/admin/data_account', [DataAccountController::class, 'index'])->name('admin.data_account');
