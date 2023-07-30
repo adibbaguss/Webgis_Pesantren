@@ -87,8 +87,10 @@
 
     const LeafIcon = L.Icon.extend({
         options: {
-            iconSize: [20, 30],
-        }
+                iconSize: [30, 36],
+                iconAnchor: [15, 36],
+                popupAnchor: [0, -36]
+            }
     });
 
     const ponpesIcon1 = new LeafIcon({
