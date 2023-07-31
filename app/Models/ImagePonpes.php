@@ -12,8 +12,7 @@ class ImagePonpes extends Model
 
     protected $fillable = [
         'ponpes_id',
-        'image',
-        'title',
+        'image_name',
         'type',
     ];
 

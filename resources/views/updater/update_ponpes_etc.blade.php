@@ -68,43 +68,58 @@
                                 <div id="panelsStayOpen-collapseZero" class="accordion-collapse collapse"
                                     aria-labelledby="panelsStayOpen-headingZero">
                                     <div class="accordion-body pt-3 px-1 pb-1">
-                                        @if(empty($image->id))
-                                        <div class="d-flex justify-content-end">
-                                            <a  href="{{ route('updater.ponpes_image_create_view', ['id'=>$ponpes->id]) }}" class="btn btn-outline-success mb-2" >
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
+                                        {{-- @php
+                                         $cek_image = $image->type == "jumbotron";
+                                        @endphp
+                                        @if (empty($cek_image))
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{ route('updater.ponpes_image_create_view', ['id' => $ponpes->id]) }}"
+                                                    class="btn btn-outline-success mb-2">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            </div>
                                         @else
-                                        <span class="small text-danger">Tidak Bisa Menambah Gambar Lagi</span>
-                                        @endif
+                                            <span class="small text-danger">Tidak Bisa Menambah Gambar Lagi</span>
+                                        @endif --}}
 
                                         <div class="table-responsive">
                                             <table class="table table-bordered border-dark">
-                                                <thead>
-                                                    <tr class="text-center">
-                                                       
-                                                        <th scope="col" class="align-middle">{{ 'Jumbotron' }}</th>
-                                                        <th scope="col" class="align-middle">{{ 'Gambar 1' }}</th>
-                                                        <th scope="col" class="align-middle">{{ 'Gambar 2' }}</th>
-                                                        <th scope="col" class="align-middle">{{ 'Gambar 3' }}</th>
-                                                        <th scope="col" class="align-middle">{{ 'Gambar 4' }} </th>
-                                                        <th scope="col" class="align-middle">{{ 'Gambar 5' }} </th>
-                                                        <th scope="col" class="align-middle">{{ 'Gambar 6' }} </th>
-                                                        <th scope="col" class="align-middle">{{ 'Opsi' }}</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse ($image as $item)
+                                                @foreach ($image as $item)
+                                                    @if ($item->type === 'jumbotron')
                                                         <tr>
-            
-                                                            <td>{{ $item->Jumbotron }}</td>
-                                                            <td>{{ $item->reguler1 }}</td>
-                                                            <td>{{ $item->reguler2 }}</td>
-                                                            <td>{{ $item->reguler3 }}</td>
-                                                            <td>{{ $item->reguler4 }}</td>
-                                                            <td>{{ $item->reguler5 }}</td>
-                                                            <td>{{ $item->reguler6 }}</td>
- 
+                                                            @if (empty($item->type === 'jumbotron'))
+                                                                <td colspan="3" class="text-center">
+                                                                    <small class="text-danger">Tidak Bisa Menambah Gambar
+                                                                        Jumbotron. Max 1 Gambar</small>
+                                                                    </th>
+                                                                @else
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <a href="{{ route('updater.ponpes_image_create_view', ['id' => $ponpes->id]) }}"
+                                                                            class="btn btn-outline-success mb-2">
+                                                                            <i class="fas fa-plus"></i> Tambah Jumbotron
+                                                                        </a>
+                                                                    </div>
+                                                            @endif
+                                                        </tr>
+                                                        <tr class="text-center align-middle">
+                                                            <th scope="col">
+                                                                Jumbotron
+                                                            </th>
+                                                            <th scope="col">
+                                                                Nama File
+                                                            </th>
+                                                            <th scope="col">
+                                                                Opsi
+                                                            </th>
+                                                        </tr>
+                                                        <tr class="text-center align-middle">
+                                                            <td>
+                                                                <img src="{{ asset('images/ponpes/image/' . $item->image_name) }}"
+                                                                    alt="" style="height:100px" class="bg-dark">
+                                                            </td>
+                                                            <td>
+                                                                {{ $item->image_name }}
+                                                            </td>
                                                             <td>
                                                                 <div class="d-flex justify-content-between">
                                                                     <a class="me-1 text-secondary" type="button"
@@ -122,14 +137,66 @@
 
                                                             </td>
                                                         </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="8" class="text-center bg-secondary text-white">
-                                                                {{ 'Belum diisi' }}
+                                                    @endif
+                                                @endforeach
+                                            </table>
+
+                                            <table class="table table-bordered border-dark">
+                                                <tr>
+                                                    @if (empty($item->type === 'reguler'))
+                                                        <td colspan="3" class="text-center">
+                                                            <small class="text-danger">Tidak Bisa Menambah Gambar
+                                                                Gambar. Max 6 Gambar</small>
+                                                            </th>
+                                                        @else
+                                                            <div class="d-flex justify-content-end">
+                                                                <a href="{{ route('updater.ponpes_image_create_view', ['id' => $ponpes->id]) }}"
+                                                                    class="btn btn-outline-success mb-2">
+                                                                    <i class="fas fa-plus"></i> Tambah Gambar
+                                                                </a>
+                                                            </div>
+                                                    @endif
+                                                </tr>
+                                                @foreach ($image as $item)
+                                                    @if ($item->type === 'reguler')
+                                                        <tr class="text-center align-middle">
+                                                            <th scope="col">
+                                                                Reguler
+                                                            </th>
+                                                            <th scope="col">
+                                                                Nama File
+                                                            </th>
+                                                            <th scope="col">
+                                                                Opsi
+                                                            </th>
+                                                        </tr>
+                                                        <tr class="text-center align-middle">
+                                                            <td>
+                                                                <img src="{{ asset('images/ponpes/image/' . $item->image_name) }}"
+                                                                    alt="" style="height:100px" class="bg-dark">
+                                                            </td>
+                                                            <td>
+                                                                {{ $item->image_name }}
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <a class="me-1 text-secondary" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#updateImagesModal{{ $item->id }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+
+                                                                    <a class="ms-1 text-danger" type="button"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteImagesModal{{ $item->id }}">
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </a>
+                                                                </div>
+
                                                             </td>
                                                         </tr>
-                                                    @endforelse
-                                                </tbody>
+                                                    @endif
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -179,7 +246,8 @@
                                                     @endphp
                                                     @forelse ($instructors as $item)
                                                         <tr>
-                                                            <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                            <th class="text-center" scope="row">{{ $no++ }}
+                                                            </th>
                                                             <td>{{ $item->nik }}</td>
                                                             <td>{{ $item->name }}</td>
                                                             <td>{{ $item->expertise }}</td>
@@ -209,7 +277,8 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="7" class="text-center bg-secondary text-white">
+                                                            <td colspan="7"
+                                                                class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>
@@ -551,11 +620,12 @@
 
                 </div>
 
-               
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ route('updater.ponpes_view', ['id'=>$ponpes->user_id]) }}" class="btn btn-success">Selesai</a>
-                    </div>
-                 
+
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('updater.ponpes_view', ['id' => $ponpes->user_id]) }}"
+                        class="btn btn-success">Selesai</a>
+                </div>
+
 
             </div>
 
@@ -590,15 +660,17 @@
 
         {{-- modal image preview --}}
         @for ($i = 0; $i < 6; $i++)
-            <div class="modal fade" id="imageModal.{{ $i }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="imageModal.{{ $i }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog px-0">
                     <div class="modal-content bg-none">
                         <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{ asset('images/ponpes/default-image.png') }}" alt="" style="width: 100%">
+                            <img src="{{ asset('images/ponpes/default-image.png') }}" alt=""
+                                style="width: 100%">
                         </div>
                     </div>
                 </div>
@@ -705,7 +777,8 @@
                                         <label for="">Status</label>
                                         <select name="status" id=""
                                             class="form-control @error('status') is-invalid @enderror">
-                                            <option value="active" @if (old('status', $item->status) === 'active') selected @endif>active
+                                            <option value="active" @if (old('status', $item->status) === 'active') selected @endif>
+                                                active
                                             </option>
                                             <option value="non-active" @if (old('status', $item->status) === 'non-active') selected @endif>
                                                 non-active</option>
@@ -745,8 +818,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
-                                    hidden>
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nomor Induk Keluarga (NIK)</label>
                                     <input type="number" class="form-control @error('nik') is-invalid @enderror"
@@ -918,8 +991,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
-                                    hidden>
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Fasilitas</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -971,8 +1044,8 @@
                             <button class="btn btn-outline-secondary" type="button"
                                 data-bs-dismiss="modal">Batal</button>
 
-                            <form id="delete-form" action="{{ route('updater.activities_delete', ['id' => $item->id]) }}"
-                                method="POST">
+                            <form id="delete-form"
+                                action="{{ route('updater.activities_delete', ['id' => $item->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -1058,8 +1131,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
-                                    hidden>
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Aktivitas</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -1199,8 +1272,8 @@
                             @method('POST')
                             <div class="row">
                                 {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id" value="{{ $ponpes->id }}"
-                                    hidden>
+                                <input class="form-control" type="text" name="ponpes_id"
+                                    value="{{ $ponpes->id }}" hidden>
                                 <div class="col-12 mb-3">
                                     <label for="">Nama Pembelajaran</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -1475,8 +1548,8 @@
         <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
-        
-        
+
+
         {{-- jumbotron create --}}
         <script>
             window.addEventListener('DOMContentLoaded', function() {
@@ -1484,12 +1557,12 @@
                 var image = document.getElementById('uploadedJumbotron');
                 var input = document.getElementById('file-input');
                 var cropBtn = document.getElementById('crop');
-    
+
                 var $modal = $('#cropJumbotronModal');
                 var cropper;
-    
+
                 $('[data-bs-toggle="tooltip"]').tooltip();
-    
+
                 input.addEventListener('change', function(e) {
                     var files = e.target.files;
                     var done = function(url) {
@@ -1501,14 +1574,14 @@
                     // var reader;
                     // var file;
                     // var url;
-    
+
                     if (files && files.length > 0) {
                         let file = files[0];
-    
+
                         // done(URL.createObjectURL(file));
                         // if (URL) {
                         // } 
-    
+
                         // else if (FileReader) {
                         reader = new FileReader();
                         reader.onload = function(e) {
@@ -1518,10 +1591,10 @@
                         // }
                     }
                 });
-    
-    
-    
-    
+
+
+
+
                 $modal.on('shown.bs.modal', function() {
                     cropper = new Cropper(image, {
                         aspectRatio: 16 / 9,
@@ -1531,13 +1604,13 @@
                     cropper.destroy();
                     cropper = null;
                 });
-    
+
                 cropBtn.addEventListener('click', function() {
                     // var initialAvatarURL;
                     var canvas;
-    
+
                     $modal.modal('hide');
-    
+
                     if (cropper) {
                         canvas = cropper.getCroppedCanvas({
                             width: 780,
@@ -1548,7 +1621,7 @@
                         document.getElementById('cropped-image').value = canvas.toDataURL('image/jpeg');
                     }
                 });
-    
+
             });
         </script>
         {{-- end jumbotron create --}}
