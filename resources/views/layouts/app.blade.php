@@ -165,6 +165,11 @@
                             <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                             {{ 'Profil' }}
                         </a>
+                        @elseif(Auth::User()->user_role == "viewer")
+                        <a class="dropdown-item" href="{{ route('viewer.profile', ['id' => Auth::user()->id]) }}">
+                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                            {{ 'Profil' }}
+                        </a>
                         @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal">
@@ -280,36 +285,27 @@
                     </div>
                 </div>
 
-                @elseif(!Auth::User())
+                @elseif(Auth::User()->user_role == "viewer")
                 <div>
                     <a href="" class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
-                            <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
+                            <span class="nav_logo-name text-capitalize">viewer</span>
                     </a>
                     <div class="nav_list">
-                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/map_view*') ? 'active' : '' }}">
+                        <a href="{{ route('viewer.map_view') }}" class="nav_link text-decoration-none {{ request()->is('viewer/map_view*') ? 'active' : '' }}">
                             <i class="bx bx-map-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                         </a>
 
-                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
+                        <a href="{{ route('viewer.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('viewer/data_ponpes*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
                             <span class="nav_name">{{ 'Data Pesantren' }}</span>
                         </a>
 
-                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_account*') ? 'active' : '' }}">
-                            <i class="bx bxs-user-account nav_icon"></i>
-                            <span class="nav_name">{{ 'Akun Pengguna' }}</span>
-                        </a>
 
-                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_statistik*') ? 'active' : '' }}"">
+                        <a href="{{ route('viewer.data_statistik') }}" class="nav_link text-decoration-none {{ request()->is('viewer/data_statistik*') ? 'active' : '' }}"">
                             <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
                             <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
-                        </a>
-
-                        <a href="" class="nav_link text-decoration-none {{ request()->is('admin/data_report*') ? 'active' : '' }}"">
-                            <i class="bx bxs-report nav_icon"></i>
-                            <span class="nav_name">{{ 'Pelaporan' }}</span>
                         </a>
 
                     </div>
