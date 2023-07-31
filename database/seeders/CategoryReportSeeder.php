@@ -30,6 +30,9 @@ class CategoryReportSeeder extends Seeder
             [
                 'name' => 'Kegiatan Keagamaan dan Kebudayaan',
             ],
+            [
+                'name' => 'Lainnya',
+            ],
 
         ];
         foreach ($category as $key => $value) {

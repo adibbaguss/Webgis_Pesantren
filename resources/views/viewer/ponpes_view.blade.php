@@ -791,11 +791,34 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Pondok Pesantren</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                       <form action="" method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <small class="fw-bold">Pelapor</small><br>
+                                <span>{{ $user->name }}</span>    
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <small class="fw-bold">Nama Pesantren</small><br>
+                                <span>{{ $ponpes->name }}</span>  
+                                <input type="text"  name="ponpes_id" value="{{ $ponpes->id }}" hidden>  
+                                <input type="text"  name="user_id" value="{{ $ponpes->user_id }}" hidden>  
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <select class="form-control" name="category_id" id="category_id">
+                                    @foreach ($category_report as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                          
+                        </div>
+                       </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
