@@ -28,6 +28,7 @@ use App\Http\Controllers\Viewer\MapViewController as V_MapViewController;
 use App\Http\Controllers\Viewer\PonpesViewController as V_PonpesViewController;
 use App\Http\Controllers\Viewer\ProfileController as V_ProfileController;
 use App\Http\Controllers\Viewer\UpdateProfileController as V_UpdateProfileController;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -119,6 +120,8 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::get('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'index'])->name('updater.ponpes_edit');
     Route::put('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'update'])->name('updater.ponpes_update');
     Route::get('/updater/ponpes_update_etc/ponpes={id}', [UpdatePonpesEtcController::class, 'index'])->name('updater.ponpes_edit_etc');
+
+    Route::delete('/updater/ponpes_update_etc/image/delete/{id}', [UpdatePonpesEtcController::class, 'hapusGambar'])->name('updater.image_delete');
 
     Route::post('/updater/ponpes_update_etc/instructors/create', [UpdatePonpesEtcController::class, 'createInstructors'])->name('updater.instructors_create');
     Route::delete('/updater/ponpes_update_etc/instructors/delete/{id}', [UpdatePonpesEtcController::class, 'destroyInstructors'])->name('updater.instructors_delete');

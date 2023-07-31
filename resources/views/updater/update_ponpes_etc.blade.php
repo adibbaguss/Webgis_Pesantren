@@ -122,15 +122,10 @@
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex justify-content-between">
-                                                                    <a class="me-1 text-secondary" type="button"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#updateImagesModal{{ $item->id }}">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </a>
-
+                                                                
                                                                     <a class="ms-1 text-danger" type="button"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteImagesModal{{ $item->id }}">
+                                                                        data-bs-target="#deleteImageModal{{ $item->id }}">
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>
@@ -143,19 +138,12 @@
 
                                             <table class="table table-bordered border-dark">
                                                 <tr>
-                                                    @if (empty($item->type === 'reguler'))
-                                                        <td colspan="3" class="text-center">
-                                                            <small class="text-danger">Tidak Bisa Menambah Gambar
-                                                                Gambar. Max 6 Gambar</small>
-                                                            </th>
-                                                        @else
-                                                            <div class="d-flex justify-content-end">
-                                                                <a href="{{ route('updater.ponpes_image_create_view', ['id' => $ponpes->id]) }}"
-                                                                    class="btn btn-outline-success mb-2">
-                                                                    <i class="fas fa-plus"></i> Tambah Gambar
-                                                                </a>
-                                                            </div>
-                                                    @endif
+                                                    <div class="d-flex justify-content-end">
+                                                        <a href="{{ route('updater.ponpes_image_create_view', ['id' => $ponpes->id]) }}"
+                                                            class="btn btn-outline-success mb-2">
+                                                            <i class="fas fa-plus"></i> Tambah Gambar
+                                                        </a>
+                                                    </div>
                                                 </tr>
                                                 @foreach ($image as $item)
                                                     @if ($item->type === 'reguler')
@@ -180,15 +168,10 @@
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex justify-content-between">
-                                                                    <a class="me-1 text-secondary" type="button"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#updateImagesModal{{ $item->id }}">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </a>
-
+                                                                    
                                                                     <a class="ms-1 text-danger" type="button"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteImagesModal{{ $item->id }}">
+                                                                        data-bs-target="#deleteImageModal{{ $item->id }}">
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </a>
                                                                 </div>
@@ -679,6 +662,35 @@
         {{-- end modal image preview --}}
 
 
+        {{-- modal delete gambar --}}
+        @foreach ($image as $item)
+            <div class="modal fade" id="deleteImageModal{{ $item->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Gambar' }}</h5>
+                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">{{ 'Anda Yakin Menghapus Gambar ' . $item->image_name . ' ?' }}</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button"
+                                data-bs-dismiss="modal">Batal</button>
+
+                            <form id="delete-form"
+                                action="{{ route('updater.image_delete', ['id' => $item->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        {{-- end modal instuctor --}}
 
 
         {{-- modal delete instructor --}}

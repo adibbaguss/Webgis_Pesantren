@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\Instructor;
 use App\Models\Learning;
 use App\Models\Ponpes;
+use App\Models\ImagePonpes;
 use App\Models\StudentCount;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,24 @@ class UpdatePonpesEtcController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    // Fungsi hapus Gambar
+
+    public function hapusGambar($id){
+        $gambar = ImagePonpes::findOrFail($id);
+        // hapus data + gambar jumbroton lama
+        if ($gambar) {
+            if (file_exists(public_path('images/ponpes/image/' . $gambar->image_name))) {
+                unlink(public_path('images/ponpes/image/' . $gambar->image_name));
+            }
+            $gambar->delete();
+        }
+        else{
+            return redirect()->back()->with('error', 'Gambar Tidak Ditemukan.');
+        }
+
+        return redirect()->back()->with('success', 'Gambar ' . $gambar->name . ' Berhasil Dihapus');
     }
 
     public function createInstructors(Request $request)
