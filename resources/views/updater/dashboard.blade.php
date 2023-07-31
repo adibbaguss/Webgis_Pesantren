@@ -87,8 +87,10 @@
 
     const LeafIcon = L.Icon.extend({
         options: {
-            iconSize: [20, 30],
-        }
+                iconSize: [30, 36],
+                iconAnchor: [15, 36],
+                popupAnchor: [0, -36]
+            }
     });
 
     const ponpesIcon1 = new LeafIcon({
@@ -118,7 +120,7 @@
                @if (!$ponpes->photo_profil)
                     <img class="w-100" src="{{ asset('/images/ponpes/profile/logo_ponpes_default.jpg') }}" alt="profil Default">
                @else
-                    <img src="{{ asset('/images/ponpes/profile/') }}" alt="Profil Pesatren">
+                    <img src="{{ asset('/images/ponpes/profile/'.$ponpes->photo_profil) }}" alt="Profil Pesatren">
                @endif
             </div>
             <div class="col-9 py-0 pe-0 my-auto">

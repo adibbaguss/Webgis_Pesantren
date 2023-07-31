@@ -8,7 +8,7 @@
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren</h2>
         </div>
         <div class="map-view mb-5 bg-white p-2 rounded-3 shadow">
-            <div id="map" class="rounded-3" style="min-height:400px;max-height:700px"></div>
+            <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
         </div>
         <table class="table table-responsive table-bordered table-hover text-center shadow">
             <thead>
@@ -92,18 +92,18 @@
         });
 
 
-        var markersLayer = new L.LayerGroup();	
+        var markersLayer = new L.LayerGroup();
         map.addLayer(markersLayer);
 
         var controlSearch = new L.Control.Search({
-            position:'topleft',
+            position: 'topleft',
             layer: markersLayer,
             initial: false,
-            zoom: 20,
+            zoom: 18,
             markerLocation: true
         })
 
-        map.addControl( controlSearch );
+        map.addControl(controlSearch);
 
         // Buat array untuk simpan data pencarian
         @php
@@ -117,6 +117,7 @@
                     'loc' => [$ponpe->latitude, $ponpe->longitude],
                     'title' => $ponpe->name,
                 ];
+                
                 $data_pencarian[] = $db_data;
             @endphp
         @endforeach
@@ -143,12 +144,12 @@
             if (!subdistrictLayers['{{ $subdistrict }}']) {
                 subdistrictLayers['{{ $subdistrict }}'] = L.layerGroup().addTo(map);
             }
-            var title = data[i].title,	//data yang dicari, nama variable harus 'title'
-                loc = data[i].loc,		//untuk naruh posisi marker
+            var title = data[i].title, //data yang dicari, nama variable harus 'title'
+                loc = data[i].loc, //untuk naruh posisi marker
                 marker = new L.Marker(new L.latLng(loc), {
-                    title: title, 
+                    title: title,
                     icon: {{ $markerIcon }}
-                } );
+                });
             marker.bindPopup(`
                 <div class="row custom-popup ">
                     <div class="col-3 p-0 my-auto">
@@ -160,7 +161,7 @@
                     </div>
                     <div class="col-9 py-0 pe-0 my-auto">
                         <div class="title-map m-0">
-                            <a href="{{ route('admin.ponpes_view', ['id' => $ponpe->id]) }}">
+                            <a href="{{ route('guest.ponpes_view', ['id' => $ponpe->id]) }}">
                                 <span class="fw-bold">{{ $ponpe->name }}</span>    
                             </a>
                         </div>
@@ -172,7 +173,7 @@
                     </div>
                 </div>
             `)
-                .addTo(subdistrictLayers['{{ $subdistrict }}']); 
+                .addTo(subdistrictLayers['{{ $subdistrict }}']);
             markersLayer.addLayer(marker);
             i += 1
         @endforeach
@@ -210,7 +211,7 @@
         L.control.layers(baseLayers, overlayLayers).addTo(map);
 
         $('#textsearch').on('keyup', function(e) {
-            controlSearch.searchText( e.target.value );
+            controlSearch.searchText(e.target.value);
         })
 
         // maps ke-dua
@@ -220,183 +221,3 @@
 
 
 
-<!-- @push('javascript')
-    <script>
-        // const map2 = L.map('map_2').setView([-6.993808128800089, 109.83246433526726], 10);
-
-        // const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     maxZoom: 19,
-        //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        // }).addTo(map2);
-
-        // @foreach ($ponpes2 as $polygon)
-        //     fetch('{{ asset('/geojson/' . $polygon->subdistrict . '.geojson') }}')
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             L.geoJSON(data).addTo(map2);
-        //         });
-        // @endforeach
-
-        // fetch('{{ asset('/geojson/Banyuputih.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Batang.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Bawang.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Blado.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Gringsing.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Kandeman.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Limpung.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Pecalungan.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Reban.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Subah.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Tersono.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Tulis.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Warungasem.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-
-        //     fetch('{{ asset('/geojson/Wonotunggal.geojson') }}')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         L.geoJSON(data).addTo(map2);
-        //     });
-    </script>
-@endpush -->
-
-<!-- @push('javascript')
-    <script>
-        // Inisialisasi peta
-        var map = L.map('map').setView([-7.797068, 110.370529], 10);
-
-        // Tambahkan lapisan peta dasar
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            maxZoom: 18,
-        }).addTo(map);
-
-        // Tambahkan data kecamatan dari GeoJSON
-        var geojsonLayer = L.geoJSON(null, {
-            style: function(feature) {
-                var count = feature.properties.count;
-                return {
-                    fillColor: getColor(count),
-                    weight: 1,
-                    opacity: 1,
-                    color: 'white',
-                    fillOpacity: 0.7
-                };
-            },
-            onEachFeature: function(feature, layer) {
-                layer.on({
-                    mouseover: highlightFeature,
-                    mouseout: resetHighlight
-                });
-
-                var count = feature.properties.count;
-                layer.bindPopup('Subdistrict: ' + feature.properties.subdistrict + '<br>Total Ponpes: ' +
-                    count);
-            }
-        }).addTo(map);
-
-        // Ambil data GeoJSON dari file
-        var geojsonUrl = '/geojson/your_geojson_file.geojson';
-        fetch(geojsonUrl)
-            .then(response => response.json())
-            .then(data => {
-                geojsonLayer.addData(data);
-            });
-
-        // Fungsi untuk menentukan warna berdasarkan jumlah Ponpes
-        function getColor(count) {
-            // Ubah rentang dan skala warna sesuai kebutuhan
-            if (count < 10) {
-                return 'green';
-            } else if (count < 20) {
-                return 'yellow';
-            } else {
-                return 'red';
-            }
-        }
-
-        // Fungsi untuk menyoroti kecamatan saat mouseover
-        function highlightFeature(e) {
-            var layer = e.target;
-
-            layer.setStyle({
-                weight: 2,
-                color: '#666',
-                dashArray: '',
-                fillOpacity: 0.9
-            });
-
-            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                layer.bringToFront();
-            }
-        }
-
-        // Fungsi untuk mengembalikan kecamatan ke tampilan awal saat mouseout
-        function resetHighlight(e) {
-            geojsonLayer.resetStyle(e.target);
-        }
-    </script>
-@endpush -->

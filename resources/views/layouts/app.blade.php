@@ -9,6 +9,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('images/asset/logo_kemenag.png') }}" type="image/x-icon">
+
+
+    
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -36,7 +40,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/style.css', 'resources/css/slick.css','resources/css/slick-theme.css','resources/js/slick.min.js', 'resources/js/slick.js', 'resources/css/leaflet-search.css' ])
-
 
 
     {{-- link asset --}}
@@ -115,17 +118,19 @@
                 <i class="bx bx-menu" id="header-toggle"></i>
             </div>
             @guest
-                @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                @endif
-
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @endif
+                  
+                        @if (Route::has('login'))
+                        <div class="me-2 ms-auto ">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </div>
+                    @endif
+    
+                    @if (Route::has('register'))
+                        <div class="me-0 ms-0">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </div>
+                    @endif
+                   
             @else
                 <span class="me-2 d-none d-lg-inline text-secondary text-decoration-none ms-auto text-capitalize">
                     {{ Auth::user()->name }}
@@ -161,6 +166,11 @@
                             <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                             {{ 'Profil' }}
                         </a>
+                        @elseif(Auth::User()->user_role == "viewer")
+                        <a class="dropdown-item" href="{{ route('viewer.profile', ['id' => Auth::user()->id]) }}">
+                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                            {{ 'Profil' }}
+                        </a>
                         @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal">
@@ -174,7 +184,32 @@
 
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
-                @if(Auth::User()->user_role == "admin")
+                @if(!Auth::User())
+                <div>
+                    <a href="" class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
+                            <span class="nav_logo-name text-capitalize">Guest</span>
+                    </a>
+                    <div class="nav_list">
+                        <a href="{{ route('guest.map_view') }}" class="nav_link text-decoration-none {{ request()->is('guest/map_view*') ? 'active' : '' }}">
+                            <i class="bx bx-map-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                        </a>
+
+                        <a href="{{ route('guest.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('guest/data_ponpes*') ? 'active' : '' }}">
+                            <i class="bx bx-buildings nav_icon"></i>
+                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                        </a>
+
+
+                        <a href="{{ route('guest.data_statistik') }}" class="nav_link text-decoration-none {{ request()->is('guest/data_statistik*') ? 'active' : '' }}"">
+                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                        </a>
+
+                    </div>
+                </div>
+                @elseif(Auth::User()->user_role == "admin")
                 <div>
                     <a href="{{ route('admin.dashboard') }}" class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
@@ -247,6 +282,32 @@
                             <i class="bx bxs-report nav_icon"></i>
                             <span class="nav_name">{{ 'Pelaporan' }}</span>
                         </a> --}}
+
+                    </div>
+                </div>
+
+                @elseif(Auth::User()->user_role == "viewer")
+                <div>
+                    <a href="" class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px" >
+                            <span class="nav_logo-name text-capitalize">viewer</span>
+                    </a>
+                    <div class="nav_list">
+                        <a href="{{ route('viewer.map_view') }}" class="nav_link text-decoration-none {{ request()->is('viewer/map_view*') ? 'active' : '' }}">
+                            <i class="bx bx-map-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                        </a>
+
+                        <a href="{{ route('viewer.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('viewer/data_ponpes*') ? 'active' : '' }}">
+                            <i class="bx bx-buildings nav_icon"></i>
+                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                        </a>
+
+
+                        <a href="{{ route('viewer.data_statistik') }}" class="nav_link text-decoration-none {{ request()->is('viewer/data_statistik*') ? 'active' : '' }}"">
+                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                        </a>
 
                     </div>
                 </div>

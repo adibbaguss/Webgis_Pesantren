@@ -377,7 +377,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="6" class="text-center bg-secondary text-white">
+                                                            <td colspan="7" class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>

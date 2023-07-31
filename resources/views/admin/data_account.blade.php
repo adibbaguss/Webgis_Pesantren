@@ -51,9 +51,9 @@
                         <th scope="col">OPSI</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     @foreach ($account as $item)
-                        <tr>
+                        <tr class="align-middle">
                             <th scope="row">{{ $loop->iteration }}</th>
                             @if ($item->user_role == 'admin')
                                 <td class="text-center">
@@ -76,13 +76,13 @@
                             @endif
 
                             @if (empty($item->photo_profil))
-                                <td class="d-flex justify-content-center">
-                                    <img class="rounded-circle mx-auto opacity-75" style="max-width: 30px"
+                                <td>
+                                    <img class="rounded-circle mx-auto opacity-" style="max-width: 30px"
                                         src="{{ asset('images/profile_photos/default.jpg') }}" alt="">
                                 </td>
                             @else
-                                <td class="d-flex justify-content-center">
-                                    <img class="rounded-circle mx-auto" style="max-width: 30px"
+                                <td>
+                                    <img class="rounded-circle mx-auto " style="max-width: 30px"
                                         src="{{ asset('images/profile_photos/' . $item->photo_profil) }}" alt="">
                                 </td>
                             @endif

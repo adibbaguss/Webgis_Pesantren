@@ -22,6 +22,12 @@ use App\Http\Controllers\Updater\ProfileController as U_ProfileController;
 use App\Http\Controllers\Updater\UpdatePonpesController as U_UpdatePonpesController;
 use App\Http\Controllers\Updater\UpdatePonpesEtcController;
 use App\Http\Controllers\Updater\UpdateProfileController as U_UpdateProfileController;
+use App\Http\Controllers\Viewer\DataPonpesController as V_DataPonpesController;
+use App\Http\Controllers\Viewer\DataStatistikController as V_DataStatistikController;
+use App\Http\Controllers\Viewer\MapViewController as V_MapViewController;
+use App\Http\Controllers\Viewer\PonpesViewController as V_PonpesViewController;
+use App\Http\Controllers\Viewer\ProfileController as V_ProfileController;
+use App\Http\Controllers\Viewer\UpdateProfileController as V_UpdateProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,11 +46,23 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::redirect('/', '/login');
-// Auth::routes();
+// // Auth::routes();
 Auth::routes(['verify' => true]);
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::redirect('/', '/guest');
+Route::redirect('/home', '/guest');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::redirect('/guest', '/guest/map_view');
+Route::get('/guest/map_view', [GuestController::class, 'index'])->name('guest.map_view');
+Route::get('/guest/data_ponpes', [GuestController::class, 'dataPonpes'])->name('guest.data_ponpes');
+Route::get('/guest/data_ponpes/search', [GuestController::class, 'ponpesSearch'])->name('guest.ponpes_search');
+Route::get('/guest/ponpes_view/{id}', [GuestController::class, 'ponpesView'])->name('guest.ponpes_view');
+Route::get('/guest/data_statistik', [GuestController::class, 'ponpesStatistik'])->name('guest.data_statistik');
+Route::get('/guest/ponpes_report', function () {
+    return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
+});
+// Route::get('/admin/data_ponpes', [DataPonpesController::class, 'index'])->name('guest.data_ponpes');
+// Route::get('/admin/ponpes_view/{id}', [PonpesViewController::class, 'view'])->name('guest.ponpes_view');
+// Route::get('/admin/ponpes/search', [DataPonpesController::class, 'search'])->name('guest.ponpes_search');
 
 // Rute untuk login dengan multi-role
 Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -55,6 +73,10 @@ Route::get('password/reset', [ResetPasswordController::class, 'reset_pass'])->na
 
 // Rute untuk admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::redirect('/home', '/admin');
+
+    Route::redirect('/admin', '/admin/dashboard/');
     Route::get('/admin/profile/{id}', [ProfileController::class, 'index'])->name('admin.profile');
     Route::get('/admin/edit_profile/{id}', [UpdateProfileController::class, 'index'])->name('admin.edit_profile');
     Route::put('/admin/update_profile/{id}', [UpdateProfileController::class, 'update'])->name('admin.update_profile');
@@ -66,7 +88,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/ponpes/{id}', [PonpesViewController::class, 'destroy'])->name('admin.ponpes_delete');
     Route::get('/admin/ponpes_export_xlsx', [DataPonpesController::class, 'exportXLSX']);
     Route::get('/admin/ponpes_export_csv', [DataPonpesController::class, 'exportCSV']);
-    Route::get('/admin/ponpes/search', [DataPonpesController::class, 'search'])->name('admin.ponpes_search');
+    Route::get('/admin/data_ponpes/search', [DataPonpesController::class, 'search'])->name('admin.ponpes_search');
     Route::get('/admin/create_ponpes', [CreatePonpesController::class, 'index']);
     Route::post('/admin/create_ponpes', [CreatePonpesController::class, 'create'])->name('admin.create_ponpes');
     Route::get('/admin/data_account', [DataAccountController::class, 'index'])->name('admin.data_account');
@@ -86,6 +108,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 // // Rute untuk updater
 Route::middleware(['auth', 'role:updater'])->group(function () {
+
+    Route::redirect('/updater', '/updater/dashboard/');
     Route::get('/updater/dashboard/{id}', [U_DashboardController::class, 'index'])->name('updater.dashboard');
     Route::get('/updater/profile/{id}', [U_ProfileController::class, 'index'])->name('updater.profile');
     Route::get('/updater/edit_profile/{id}', [U_UpdateProfileController::class, 'index'])->name('updater.profile_edit');
@@ -120,14 +144,24 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::post('/updater/ponpes_update_etc/image_ponpes/create', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
     //    Route::get('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'index'])->name('updater.ponpes_image_show');
     // Route::post('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
-    // Tambahkan rute lain untuk updater di sini
+
 });
 
 // // Rute untuk viewer
-// Route::middleware(['auth', 'role:viewer'])->group(function () {
-//     Route::get('/viewer/dashboard', [ViewerController::class, 'dashboard'])->name('viewer.dashboard');
-//     // Tambahkan rute lain untuk viewer di sini
-// });
+Route::middleware(['auth', 'role:viewer'])->group(function () {
+    //Route::get('/viewer/dashboard', [ViewerController::class, 'dashboard'])->name('viewer.dashboard');
+    Route::redirect('/viewer', '/viewer/map_view');
+    Route::get('/viewer/map_view', [V_MapViewController::class, 'index'])->name('viewer.map_view');
+    Route::get('/viewer/data_ponpes', [V_DataPonpesController::class, 'index'])->name('viewer.data_ponpes');
+    Route::get('/viewer/data_ponpes/search', [V_DataPonpesController::class, 'ponpesSearch'])->name('viewer.ponpes_search');
+    Route::get('/viewer/ponpes_view/{id}', [V_PonpesViewController::class, 'index'])->name('viewer.ponpes_view');
+    Route::get('/viewer/data_statistik', [V_DataStatistikController::class, 'index'])->name('viewer.data_statistik');
+
+    Route::get('/viewer/profile/{id}', [V_ProfileController::class, 'index'])->name('viewer.profile');
+    Route::get('/viewer/edit_profile/{id}', [V_UpdateProfileController::class, 'index'])->name('viewer.profile_edit');
+    Route::put('/viewer/update_profile/{id}', [V_UpdateProfileController::class, 'update'])->name('viewer.profile_update');
+    Route::put('/viewer/update_password/{id}', [V_UpdateProfileController::class, 'update_password'])->name('viewer.password_update');
+});
 
 // rute untuk register
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');

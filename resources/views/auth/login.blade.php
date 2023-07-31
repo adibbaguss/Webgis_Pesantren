@@ -2,7 +2,21 @@
 
 @section('content')
 
+@if (session('success'))
+<div class="alert alert-success mt-5 mb-0">
+    {{ session('success') }}
+</div>
+@endif
+
+@if (session('error'))
+<div class="alert alert-danger mt-5 mb-0">
+    {{ session('error') }}
+</div>
+@endif
+
     <div class="container vh-100 d-grid">
+        
+
         <div class="content_login shadow  my-auto mx-3 bg-white">
             <div class="row">
                 <div class="col-md-6 d-lg-block d-none">
@@ -22,8 +36,10 @@
 
                             <div class="row">
                                 <div class="col-12 mb-5 d-grid justify-content-center">
-                                    <img class="mx-auto mb-1" style="width:40px;" src="{{ asset('images/asset/logo_kemenag.png') }}" alt="">
-                                    <span class="fw-bold text-secondary" style="font-size: 10px">{{ 'Kementrian Agama Kabupaten Batang' }}</span>
+                                    <img class="mx-auto mb-1" style="width:40px;"
+                                        src="{{ asset('images/asset/logo_kemenag.png') }}" alt="">
+                                    <span class="fw-bold text-secondary"
+                                        style="font-size: 10px">{{ 'Kementrian Agama Kabupaten Batang' }}</span>
                                 </div>
                                 <div class="col-12 mb-4">
                                     <h2 class="fw-bold">{{ 'Selamat Datang!' }}</h2>
@@ -46,10 +62,10 @@
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         placeholder="{{ 'Password' }}" required autocomplete="current-password">
-                                        <span class="input-group-text" onclick="new_password_show_hide();">
-                                            <i class="fas fa-eye" id="show_eye_1"></i>
-                                            <i class="fas fa-eye-slash d-none" id="hide_eye_1"></i>
-                                          </span>
+                                    <span class="input-group-text" onclick="new_password_show_hide();">
+                                        <i class="fas fa-eye" id="show_eye_1"></i>
+                                        <i class="fas fa-eye-slash d-none" id="hide_eye_1"></i>
+                                    </span>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,15 +81,17 @@
 
                                 <div class="col-12 mb-4 d-flex justify-content-end">
                                     @if (Route::has('password.request'))
-                                        <a class="btn btn-link text-decoration-none" style="font-size: 11px" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link text-decoration-none" style="font-size: 11px"
+                                            href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     @endif
                                 </div>
 
-                                <div class="col-12 text-center" style="font-size: 12px" >
+                                <div class="col-12 text-center" style="font-size: 12px">
                                     <span class="text-secondary">Belum Punya Akun?</span>
-                                    <a class="fw-bold text-decoration-none text-dark " href="{{ route('register') }}">Sign In</a>
+                                    <a class="fw-bold text-decoration-none text-dark " href="{{ route('register') }}">Sign
+                                        In</a>
                                 </div>
                             </div>
 

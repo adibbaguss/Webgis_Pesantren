@@ -28,7 +28,7 @@ class PonpesViewController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
-            $studentCount = $ponpes->studentCount;
+            $studentCount = $ponpes->studentCount->sortBy('year');
 
             $jumbotronImage = $image->where('type', 'jumbotron')->first();
             $regulerImages = $image->where('type', 'reguler');

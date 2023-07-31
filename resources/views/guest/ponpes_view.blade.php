@@ -61,23 +61,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('updater.ponpes_edit', ['id' => $ponpes->id]) }}" class="dropdown-item">
-                                <i class="fas fa-edit"></i>
-                                Perbaharui Utama
+                            <a href="/guest/ponpes_report"
+                                class="dropdown-item">
+                                <i class="fas fa-exclamation-circle"></i>
+                                Laporkan
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('updater.ponpes_edit_etc', ['id' => $ponpes->id]) }}" class="dropdown-item">
-                                <i class="fas fa-edit"></i>
-                                Perbaharui Lanjutan
-                            </a>
-                        </li>
-                        {{-- <li>
-                            <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <i class="fas fa-trash-alt"></i>
-                                Hapus
-                            </a>
-                        </li> --}}
+   
                     </ul>
                 </div>
 
@@ -88,36 +78,24 @@
 
                 {{-- jumbotron --}}
                 <div class="jumbotron" style="user-select: none;">
-                    @if($jumbotronImage)
-                    <img src="{{ asset('images/ponpes/image/' . $jumbotronImage->image_name) }}" class="card-img border" alt="..."
-                style="max-height:300px">
-                    @else
                     <img src="{{ asset('images/ponpes/default-image.png') }}" class="card-img border" alt="..."
                         style="max-height:300px">
-                    @endif
                 </div>
                 {{-- end jumbotron --}}
 
 
                 {{-- slick-js --}}
-                <div class="slick-responsive">
-                    @if($regulerImages->isEmpty())
-                        @for ($i = 0; $i < 6; $i++)
-                            <div class="img-overflow border">
-                                <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $i }}"
-                                    src="{{ asset('images/ponpes/default-image-1.png') }}" alt="">
-                            </div>
-                        @endfor
-                    @else
-                        @foreach($regulerImages as $regulerImage)
-                            <div class="img-overflow border">
-                                <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $regulerImage->id }}"
-                                    src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}" alt="">
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
+                <div class=" slick-responsive">
 
+                    @for ($i = 0; $i < 6; $i++)
+                        <div class="img-overflow border">
+                            <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $i }}"
+                                src="{{ asset('images/ponpes/default-image-1.png') }}" alt="">
+                        </div>
+                    @endfor
+
+
+                </div>
                 {{-- end slick js --}}
 
                 {{-- dropdown info --}}
@@ -168,7 +146,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="5" class="text-center bg-secondary text-white">
+                                                            <td colspan="6" class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>
@@ -395,7 +373,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="6" class="text-center bg-secondary text-white">
+                                                            <td colspan="7" class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>
@@ -804,30 +782,7 @@
 
 
 
-        {{-- modal delete --}}
 
-        {{-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Pondok</h5>
-                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">{{ 'Anda Yakin Menghapus Data'.$ponpes->name .' ?'}}</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-    
-                        <form id="delete-form" action="{{ route('updater.ponpes_delete', ['id' => $ponpes->id]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete Ponpes</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
     @endsection
 
 
