@@ -88,24 +88,36 @@
 
                 {{-- jumbotron --}}
                 <div class="jumbotron" style="user-select: none;">
+                    @if($jumbotronImage)
+                    <img src="{{ asset('images/ponpes/image/' . $jumbotronImage->image_name) }}" class="card-img border" alt="..."
+                style="max-height:300px">
+                    @else
                     <img src="{{ asset('images/ponpes/default-image.png') }}" class="card-img border" alt="..."
                         style="max-height:300px">
+                    @endif
                 </div>
                 {{-- end jumbotron --}}
 
 
                 {{-- slick-js --}}
-                <div class=" slick-responsive">
-
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="img-overflow border">
-                            <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $i }}"
-                                src="{{ asset('images/ponpes/default-image-1.png') }}" alt="">
-                        </div>
-                    @endfor
-
-
+                <div class="slick-responsive">
+                    @if($regulerImages->isEmpty())
+                        @for ($i = 0; $i < 6; $i++)
+                            <div class="img-overflow border">
+                                <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $i }}"
+                                    src="{{ asset('images/ponpes/default-image-1.png') }}" alt="">
+                            </div>
+                        @endfor
+                    @else
+                        @foreach($regulerImages as $regulerImage)
+                            <div class="img-overflow border">
+                                <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $regulerImage->id }}"
+                                    src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}" alt="">
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
+
                 {{-- end slick js --}}
 
                 {{-- dropdown info --}}
