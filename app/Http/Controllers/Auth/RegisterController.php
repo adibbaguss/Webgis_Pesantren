@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +12,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     public function __construct()
     {
@@ -55,8 +54,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
         ]);
-        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan masuk ke akun Anda.');
+        $user;
 
+    }
+    protected function registered($request, $user)
+    {
+        return redirect()->route('viewer.map_view')->with('success', 'Registrasi Berhasil dan Selamat Datang');
     }
 
 }
