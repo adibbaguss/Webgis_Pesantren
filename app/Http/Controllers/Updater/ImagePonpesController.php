@@ -4,19 +4,11 @@ namespace App\Http\Controllers\Updater;
 
 use App\Http\Controllers\Controller;
 use App\Models\ImagePonpes;
-use App\Models\Ponpes;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class PonpesImageCreateController extends Controller
+class ImagePonpesController extends Controller
 {
-    protected function index($id)
-    {
-        $ponpes = Ponpes::findOrFail($id);
-
-        return view('updater.ponpes_image_create', compact('id', 'ponpes'));
-    }
-
     public function create(Request $request)
     {
         $request->validate([
@@ -40,7 +32,7 @@ class PonpesImageCreateController extends Controller
                 }
             }
             // tambah data jumbroton baru
-            $this->compressGambar($jumbotron, '\images\ponpes\image', $imageName);
+            $this->compressImage($jumbotron, '\images\ponpes\image', $imageName);
             ImagePonpes::create([
                 'ponpes_id' => $request->input('ponpes_id'),
                 'image_name' => $imageName,
@@ -54,7 +46,7 @@ class PonpesImageCreateController extends Controller
 
             foreach ($gambarReguler as $reguler) {
                 $imageName = uniqid() . '.' . $reguler->getClientOriginalExtension();
-                $this->compressGambar($reguler, '\images\ponpes\image', $imageName);
+                $this->compressImage($reguler, '\images\ponpes\image', $imageName);
                 $arrGambarReguler[] = $imageName;
 
                 ImagePonpes::create([
@@ -68,11 +60,28 @@ class PonpesImageCreateController extends Controller
         return redirect()->back()->with('success', 'Images uploaded successfully.');
     }
 
-    private function compressGambar($image, $imagePath, $imageName)
+    private function compressImage($image, $imagePath, $imageName)
     {
         $terkompresi = Image::make($image)
             ->encode('jpg', 75) // dikompres ke bentuk jpg, total diambil 75% dari gambar asli
             ->save(public_path($imagePath . '/' . $imageName));
     }
 
+    // Fungsi hapus Gambar
+
+    public function deleteImage($id)
+    {
+        $gambar = ImagePonpes::findOrFail($id);
+        // hapus data + gambar jumbroton lama
+        if ($gambar) {
+            if (file_exists(public_path('images/ponpes/image/' . $gambar->image_name))) {
+                unlink(public_path('images/ponpes/image/' . $gambar->image_name));
+            }
+            $gambar->delete();
+        } else {
+            return redirect()->back()->with('error', 'Gambar Tidak Ditemukan.');
+        }
+
+        return redirect()->back()->with('success', 'Gambar ' . $gambar->name . ' Berhasil Dihapus');
+    }
 }

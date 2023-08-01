@@ -23,8 +23,13 @@ class PonpesViewController extends Controller
             $image = $ponpes->images;
             $studentCount = $ponpes->studentCount->sortBy('year');
 
+            $jumbotronImage = $image->where('type', 'jumbotron')->first();
+            $regulerImages = $image->where('type', 'reguler');
+
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
-            return view('admin.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'user'));
+            // dd($studentCount);
+            return view('admin.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages'));
+
         } else {
             abort(404);
         }

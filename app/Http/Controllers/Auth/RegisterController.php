@@ -55,12 +55,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
         ]);
-        $user;
-
-    }
-    protected function registered($request, $user)
-    {
         return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan masuk ke akun Anda.');
+
     }
 
 }

@@ -75,27 +75,40 @@
 
             <div class="col-md-7">
 
-                {{-- jumbotron --}}
-                <div class="jumbotron" style="user-select: none;">
+            {{-- jumbotron --}}
+            <div class="jumbotron" style="user-select: none;">
+                @if ($jumbotronImage)
+                    <img src="{{ asset('images/ponpes/image/' . $jumbotronImage->image_name) }}" class="card-img border"
+                        alt="..." style="max-height:300px">
+                @else
                     <img src="{{ asset('images/ponpes/default-image.png') }}" class="card-img border" alt="..."
                         style="max-height:300px">
-                </div>
-                {{-- end jumbotron --}}
+                @endif
+            </div>
+            {{-- end jumbotron --}}
 
 
-                {{-- slick-js --}}
-                <div class=" slick-responsive">
-
+            {{-- slick-js --}}
+            <div class="slick-responsive">
+                @if ($regulerImages->isEmpty())
                     @for ($i = 0; $i < 6; $i++)
                         <div class="img-overflow border">
                             <img type="button" data-bs-toggle="modal" data-bs-target="#imageModal.{{ $i }}"
                                 src="{{ asset('images/ponpes/default-image-1.png') }}" alt="">
                         </div>
                     @endfor
+                @else
+                    @foreach ($regulerImages as $regulerImage)
+                        <div class="img-overflow border">
+                            <img type="button" data-bs-toggle="modal"
+                                data-bs-target="#imageModal.{{ $regulerImage->id }}"
+                                src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}" alt="">
+                        </div>
+                    @endforeach
+                @endif
+            </div>
 
-
-                </div>
-                {{-- end slick js --}}
+            {{-- end slick js --}}
 
                 {{-- dropdown info --}}
                 <div class="row d-md-block d-none">
@@ -563,7 +576,8 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
+                                                        <td colspan="3"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}</td>
                                                     </tr>
                                                 @endforelse
@@ -605,13 +619,15 @@
                                                 @endphp
                                                 @forelse ($activities as $item)
                                                     <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                        <th class="text-center" scope="row">{{ $no++ }}
+                                                        </th>
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-break">{{ $item->description }}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
+                                                        <td colspan="3"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}
                                                         </td>
                                                     </tr>
@@ -654,13 +670,15 @@
                                                 @endphp
                                                 @forelse ($activities as $item)
                                                     <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}</th>
+                                                        <th class="text-center" scope="row">{{ $no++ }}
+                                                        </th>
                                                         <td>{{ $item->name }}</td>
                                                         <td class="text-break">{{ $item->description }}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="3" class="text-center bg-secondary text-white">
+                                                        <td colspan="3"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}
                                                         </td>
                                                     </tr>
@@ -719,7 +737,8 @@
                                                     <tr>
                                                         <th class="text-center" scope="row" class="align-middle">
                                                             {{ $no++ }}</th>
-                                                        <td class="text-center" class="align-middle">{{ $item->year }}
+                                                        <td class="text-center" class="align-middle">
+                                                            {{ $item->year }}
                                                         </td>
                                                         <td class="text-center" class="align-middle">
                                                             {{ $item->male_resident_count }}</td>
@@ -735,7 +754,8 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="7" class="text-center bg-secondary text-white">
+                                                        <td colspan="7"
+                                                            class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}
                                                         </td>
                                                     </tr>
@@ -761,24 +781,25 @@
 
 
 
-        {{-- modal image preview --}}
-        @for ($i = 0; $i < 6; $i++)
-            <div class="modal fade" id="imageModal.{{ $i }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog px-0">
-                    <div class="modal-content bg-none">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('images/ponpes/default-image.png') }}" alt=""
-                                style="width: 100%">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endfor
+      {{-- modal image preview --}}
+      @foreach ($regulerImages as $regulerImage)
+      <div class="modal fade" id="imageModal.{{ $regulerImage->id }}" tabindex="-1"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog px-0">
+              <div class="modal-content bg-none">
+                  <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                          aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      {{-- <img src="{{ asset('images/ponpes/default-image.png') }}" alt=""
+                          style="width: 100%"> --}}
+                      <img src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}" alt="Image Ponpes" style="width: 100%">
+                  </div>
+              </div>
+          </div>
+      </div>
+  @endforeach
 
 {{-- konfirmasi report --}}
 <div class="modal fade" id="KonfirmasiReportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

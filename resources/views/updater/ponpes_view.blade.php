@@ -169,7 +169,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="5" class="text-center bg-secondary text-white">
+                                                            <td colspan="6" class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>
@@ -397,7 +397,7 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="6"
+                                                            <td colspan="7"
                                                                 class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
@@ -759,7 +759,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="6" class="text-center bg-secondary text-white">
+                                                        <td colspan="7" class="text-center bg-secondary text-white">
                                                             {{ 'Belum diisi' }}
                                                         </td>
                                                     </tr>
@@ -808,30 +808,6 @@
 
 
 
-        {{-- modal delete --}}
-
-        {{-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Pondok</h5>
-                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">{{ 'Anda Yakin Menghapus Data'.$ponpes->name .' ?'}}</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-    
-                        <form id="delete-form" action="{{ route('updater.ponpes_delete', ['id' => $ponpes->id]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete Ponpes</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
     @endsection
 
 

@@ -14,10 +14,16 @@ use App\Http\Controllers\Admin\UpdateProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Updater\ActivityController;
 use App\Http\Controllers\Updater\DashboardController as U_DashboardController;
-use App\Http\Controllers\Updater\PonpesImageCreateController;
+use App\Http\Controllers\Updater\FacilityController;
+use App\Http\Controllers\Updater\ImagePonpesController;
+use App\Http\Controllers\Updater\InstructorsController;
+use App\Http\Controllers\Updater\LearningController;
 use App\Http\Controllers\Updater\PonpesViewController as U_PonpesViewController;
 use App\Http\Controllers\Updater\ProfileController as U_ProfileController;
+use App\Http\Controllers\Updater\StudentCountController;
 use App\Http\Controllers\Updater\UpdatePonpesController as U_UpdatePonpesController;
 use App\Http\Controllers\Updater\UpdatePonpesEtcController;
 use App\Http\Controllers\Updater\UpdateProfileController as U_UpdateProfileController;
@@ -50,8 +56,8 @@ use Illuminate\Support\Facades\Route;
 // // Auth::routes();
 Auth::routes(['verify' => true]);
 Route::redirect('/', '/guest');
-Route::redirect('/home', '/guest');
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::redirect('/home', '/guest');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::redirect('/guest', '/guest/map_view');
 Route::get('/guest/map_view', [GuestController::class, 'index'])->name('guest.map_view');
 Route::get('/guest/data_ponpes', [GuestController::class, 'dataPonpes'])->name('guest.data_ponpes');
@@ -106,8 +112,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 // // Rute untuk updater
 Route::middleware(['auth', 'role:updater'])->group(function () {
-
-    Route::redirect('/updater', '/updater/dashboard/');
     Route::get('/updater/dashboard/{id}', [U_DashboardController::class, 'index'])->name('updater.dashboard');
     Route::get('/updater/profile/{id}', [U_ProfileController::class, 'index'])->name('updater.profile');
     Route::get('/updater/edit_profile/{id}', [U_UpdateProfileController::class, 'index'])->name('updater.profile_edit');
@@ -118,30 +122,29 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::put('/updater/update_ponpes/ponpes={id}', [U_UpdatePonpesController::class, 'update'])->name('updater.ponpes_update');
     Route::get('/updater/ponpes_update_etc/ponpes={id}', [UpdatePonpesEtcController::class, 'index'])->name('updater.ponpes_edit_etc');
 
-    Route::post('/updater/ponpes_update_etc/instructors/create', [UpdatePonpesEtcController::class, 'createInstructors'])->name('updater.instructors_create');
-    Route::delete('/updater/ponpes_update_etc/instructors/delete/{id}', [UpdatePonpesEtcController::class, 'destroyInstructors'])->name('updater.instructors_delete');
-    Route::put('/updater/ponpes_update_etc/instructors/update/{id}', [UpdatePonpesEtcController::class, 'updateInstructors'])->name('updater.instructors_update');
+    Route::post('/updater/ponpes_update_etc/instructors/create', [InstructorsController::class, 'createInstructors'])->name('updater.instructors_create');
+    Route::delete('/updater/ponpes_update_etc/instructors/delete/{id}', [InstructorsController::class, 'destroyInstructors'])->name('updater.instructors_delete');
+    Route::put('/updater/ponpes_update_etc/instructors/update/{id}', [InstructorsController::class, 'updateInstructors'])->name('updater.instructors_update');
 
-    Route::post('/updater/ponpes_update_etc/facility/create', [UpdatePonpesEtcController::class, 'createFacility'])->name('updater.facility_create');
-    Route::delete('/updater/ponpes_update_etc/facility/delete/{id}', [UpdatePonpesEtcController::class, 'destroyFacility'])->name('updater.facility_delete');
-    Route::put('/updater/ponpes_update_etc/facility/update/{id}', [UpdatePonpesEtcController::class, 'updateFacility'])->name('updater.facility_update');
+    Route::post('/updater/ponpes_update_etc/facility/create', [FacilityController::class, 'createFacility'])->name('updater.facility_create');
+    Route::delete('/updater/ponpes_update_etc/facility/delete/{id}', [FacilityController::class, 'destroyFacility'])->name('updater.facility_delete');
+    Route::put('/updater/ponpes_update_etc/facility/update/{id}', [FacilityController::class, 'updateFacility'])->name('updater.facility_update');
 
-    Route::post('/updater/ponpes_update_etc/activities/create', [UpdatePonpesEtcController::class, 'createActivities'])->name('updater.activities_create');
-    Route::delete('/updater/ponpes_update_etc/activities/delete/{id}', [UpdatePonpesEtcController::class, 'destroyActivities'])->name('updater.activities_delete');
-    Route::put('/updater/ponpes_update_etc/activities/update/{id}', [UpdatePonpesEtcController::class, 'updateActivities'])->name('updater.activities_update');
+    Route::post('/updater/ponpes_update_etc/activities/create', [ActivityController::class, 'createActivities'])->name('updater.activities_create');
+    Route::delete('/updater/ponpes_update_etc/activities/delete/{id}', [ActivityController::class, 'destroyActivities'])->name('updater.activities_delete');
+    Route::put('/updater/ponpes_update_etc/activities/update/{id}', [ActivityController::class, 'updateActivities'])->name('updater.activities_update');
 
-    Route::post('/updater/ponpes_update_etc/learning/create', [UpdatePonpesEtcController::class, 'createLearning'])->name('updater.learning_create');
-    Route::delete('/updater/ponpes_update_etc/learning/delete/{id}', [UpdatePonpesEtcController::class, 'destroyLearning'])->name('updater.learning_delete');
-    Route::put('/updater/ponpes_update_etc/learning/update/{id}', [UpdatePonpesEtcController::class, 'updateLearning'])->name('updater.learning_update');
+    Route::post('/updater/ponpes_update_etc/learning/create', [LearningController::class, 'createLearning'])->name('updater.learning_create');
+    Route::delete('/updater/ponpes_update_etc/learning/delete/{id}', [LearningController::class, 'destroyLearning'])->name('updater.learning_delete');
+    Route::put('/updater/ponpes_update_etc/learning/update/{id}', [LearningController::class, 'updateLearning'])->name('updater.learning_update');
 
-    Route::post('/updater/ponpes_update_etc/studentcount/create', [UpdatePonpesEtcController::class, 'createStudentCount'])->name('updater.studentcount_create');
-    Route::delete('/updater/ponpes_update_etc/studentcount/delete/{id}', [UpdatePonpesEtcController::class, 'destroyStudentCount'])->name('updater.studentcount_delete');
-    Route::put('/updater/ponpes_update_etc/studentcount/update/{id}', [UpdatePonpesEtcController::class, 'updateStudentCount'])->name('updater.studentcount_update');
+    Route::post('/updater/ponpes_update_etc/studentcount/create', [StudentCountController::class, 'createStudentCount'])->name('updater.studentcount_create');
+    Route::delete('/updater/ponpes_update_etc/studentcount/delete/{id}', [StudentCountController::class, 'destroyStudentCount'])->name('updater.studentcount_delete');
+    Route::put('/updater/ponpes_update_etc/studentcount/update/{id}', [StudentCountController::class, 'updateStudentCount'])->name('updater.studentcount_update');
 
-    Route::get('/updater/ponpes_update_etc/image_ponpes/create/{id}', [PonpesImageCreateController::class, 'index'])->name('updater.ponpes_image_create_view');
-    Route::post('/updater/ponpes_update_etc/image_ponpes/create', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
-    //    Route::get('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'index'])->name('updater.ponpes_image_show');
-    // Route::post('/updater/create_image_ponpes/ponpes={id}', [PonpesImageCreateController::class, 'create'])->name('updater.ponpes_image_create');
+    Route::get('/updater/ponpes_update_etc/image_ponpes/create/{id}', [ImagePonpesController::class, 'index'])->name('updater.ponpes_image_create_view');
+    Route::post('/updater/ponpes_update_etc/image_ponpes/create', [ImagePonpesController::class, 'create'])->name('updater.ponpes_image_create');
+    Route::delete('/updater/ponpes_update_etc/image/delete/{id}', [ImagePonpesController::class, 'deleteImage'])->name('updater.image_delete');
 
 });
 

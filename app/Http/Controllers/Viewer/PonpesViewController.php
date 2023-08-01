@@ -30,7 +30,13 @@ class PonpesViewController extends Controller
             $viewer = Auth::User();
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
-            return view('viewer.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'category_report', 'viewer'));
+            $jumbotronImage = $image->where('type', 'jumbotron')->first();
+            $regulerImages = $image->where('type', 'reguler');
+
+            // Mengirim data ponpes ke halaman view_ponpes.blade.php
+            // dd($studentCount);
+            return view('viewer.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages', 'viewer', 'category_report'));
+
         } else {
             abort(404);
         }
