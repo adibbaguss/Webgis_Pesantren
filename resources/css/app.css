@@ -272,8 +272,6 @@ a {
 }
 .content_register {
     border-radius: 15px;
-    max-height: 750px;
-    overflow: hidden;
 }
 
 .image-login {

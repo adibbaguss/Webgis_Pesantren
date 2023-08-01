@@ -61,8 +61,7 @@
                             </a>
                         </li>
                         <li>
-                            <a type="button"  data-bs-toggle="modal" data-bs-target="#reportModal"
-                                class="dropdown-item">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#KonfirmasiReportModal" class="dropdown-item">
                                 <i class="fas fa-exclamation-circle"></i>
                                 Laporkan
                             </a>
@@ -781,49 +780,88 @@
             </div>
         @endfor
 
-
+{{-- konfirmasi report --}}
+<div class="modal fade" id="KonfirmasiReportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Pondok Pesantren</h1>
+             
+            </div>
+            <div class="modal-body">
+                <span>Apakah Anda Yakin Melaporkan  </span>
+                <span class="fw-bold">{{ $ponpes->name }}</span> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary"
+                data-bs-dismiss="modal">Tidak</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal" >Ya, Saya Yakin</button>
+            </div>
+        </div>
+    </div>
+</div>
 
         {{-- modal report --}}
 
         <!-- Modal -->
-        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Pondok Pesantren</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
                     </div>
-                    <div class="modal-body">
-                       <form action="" method="POST">
+                    <form action="{{ route('viewer.ponpes_report', ['id' => $ponpes->id]) }}" method="POST">
                         @csrf
                         @method('POST')
-                        <div class="row">
-                            <div class="col-md-12 mb-2">
-                                <small class="fw-bold">Pelapor</small><br>
-                                <span>{{ $user->name }}</span>    
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Pelapor</small><br>
+                                    <span>{{ $viewer->name }}</span>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Nama Pesantren</small><br>
+                                    <span>{{ $ponpes->name }}</span>
+                                    <input type="text" name="ponpes_id" value="{{ $ponpes->id }}" hidden>
+                                    <input type="text" name="user_id" value="{{ $viewer->id }}" hidden>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Kategori Laporan</small>
+                                    <select class="form-control" name="category_id" id="category_id">
+                                        @foreach ($category_report as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Judul Laporan</small>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <small class="fw-bold">Deskripsi</small>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
+                                        maxlength="254" oninput="updateCharacterCount(this)">{{ old('description') }}</textarea>
+                                    <small>Karakter Tesisa : </small><small id="characterCount">254</small>
+
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <small class="fw-bold">Nama Pesantren</small><br>
-                                <span>{{ $ponpes->name }}</span>  
-                                <input type="text"  name="ponpes_id" value="{{ $ponpes->id }}" hidden>  
-                                <input type="text"  name="user_id" value="{{ $ponpes->user_id }}" hidden>  
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <select class="form-control" name="category_id" id="category_id">
-                                    @foreach ($category_report as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                          
+
                         </div>
-                       </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Kirim</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -872,5 +910,21 @@
                 });
 
             });
+        </script>
+
+
+
+
+        {{-- textarea for report form --}}
+
+        <script>
+            function updateCharacterCount(textarea) {
+                const maxLength = parseInt(textarea.getAttribute('maxlength'));
+                const currentLength = textarea.value.length;
+                const remaining = maxLength - currentLength;
+
+                const characterCountElement = document.getElementById('characterCount');
+                characterCountElement.textContent = remaining;
+            }
         </script>
     @endpush

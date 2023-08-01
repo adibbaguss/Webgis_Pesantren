@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container mx-0 mt-5 pt-5">
+    <div class="container mx-0 mt-5 pt-5 vh-100">
         {{-- notif delete --}}
         @if (session('success'))
             <div class="alert alert-success">

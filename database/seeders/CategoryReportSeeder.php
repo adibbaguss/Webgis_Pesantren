@@ -19,7 +19,7 @@ class CategoryReportSeeder extends Seeder
                 'name' => 'Kebutuhan Akademis',
             ],
             [
-                'name' => 'Kesahatan dan Sanitasi',
+                'name' => 'Kesehatan dan Sanitasi',
             ],
             [
                 'name' => 'Kebutuhan Sarana dan Prasarana',

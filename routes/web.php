@@ -22,8 +22,10 @@ use App\Http\Controllers\Updater\UpdatePonpesController as U_UpdatePonpesControl
 use App\Http\Controllers\Updater\UpdatePonpesEtcController;
 use App\Http\Controllers\Updater\UpdateProfileController as U_UpdateProfileController;
 use App\Http\Controllers\Viewer\DataPonpesController as V_DataPonpesController;
+use App\Http\Controllers\Viewer\DataReportController;
 use App\Http\Controllers\Viewer\DataStatistikController as V_DataStatistikController;
 use App\Http\Controllers\Viewer\MapViewController as V_MapViewController;
+use App\Http\Controllers\Viewer\PonpesReportController;
 use App\Http\Controllers\Viewer\PonpesViewController as V_PonpesViewController;
 use App\Http\Controllers\Viewer\ProfileController as V_ProfileController;
 use App\Http\Controllers\Viewer\UpdateProfileController as V_UpdateProfileController;
@@ -157,6 +159,12 @@ Route::middleware(['auth', 'role:viewer'])->group(function () {
     Route::get('/viewer/edit_profile/{id}', [V_UpdateProfileController::class, 'index'])->name('viewer.profile_edit');
     Route::put('/viewer/update_profile/{id}', [V_UpdateProfileController::class, 'update'])->name('viewer.profile_update');
     Route::put('/viewer/update_password/{id}', [V_UpdateProfileController::class, 'update_password'])->name('viewer.password_update');
+
+    Route::post('/viewer/ponpes_view/report/{id}', [PonpesReportController::class, 'report'])->name('viewer.ponpes_report');
+
+    Route::get('/viewer/data_report/{id}', [DataReportController::class, 'index'])->name('viewer.data_report');
+    Route::delete('/viewer/data_report/delete/{id}', [DataReportController::class, 'delete'])->name('viewer.report_delete');
+
 });
 
 // rute untuk register

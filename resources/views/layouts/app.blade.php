@@ -120,13 +120,13 @@
                   
                         @if (Route::has('login'))
                         <div class="me-2 ms-auto ">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Masuk') }}</a>
                         </div>
                     @endif
     
                     @if (Route::has('register'))
                         <div class="me-0 ms-0">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Daftar') }}</a>
                         </div>
                     @endif
                    
@@ -262,26 +262,6 @@
                             <span class="nav_name">{{ 'Data Pesantren' }}</span>
                         </a>
 
-                        {{-- <a href="{{ route('admin.data_ponpes') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
-                            <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.data_account') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_account*') ? 'active' : '' }}">
-                            <i class="bx bxs-user-account nav_icon"></i>
-                            <span class="nav_name">{{ 'Akun Pengguna' }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.data_statistik') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_statistik*') ? 'active' : '' }}"">
-                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.data_report') }}" class="nav_link text-decoration-none {{ request()->is('admin/data_report*') ? 'active' : '' }}"">
-                            <i class="bx bxs-report nav_icon"></i>
-                            <span class="nav_name">{{ 'Pelaporan' }}</span>
-                        </a> --}}
-
                     </div>
                 </div>
 
@@ -307,6 +287,12 @@
                             <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
                             <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
                         </a>
+
+                        <a href="{{ route('viewer.data_report', ['id'=>Auth::User()->id]) }}" class="nav_link text-decoration-none {{ request()->is('viewer/data_report*') ? 'active' : '' }}"">
+                            <i class="bx bxs-report nav_icon"></i>
+                            <span class="nav_name">{{ 'Riwayat Laporan' }}</span>
+                        </a>
+
 
                     </div>
                 </div>

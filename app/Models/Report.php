@@ -13,6 +13,7 @@ class Report extends Model
         'ponpes_id',
         'user_id',
         'category_id',
+        'reporting_code',
         'title',
         'description',
         'reporting_date',

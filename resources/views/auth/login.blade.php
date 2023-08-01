@@ -90,8 +90,7 @@
 
                                 <div class="col-12 text-center" style="font-size: 12px">
                                     <span class="text-secondary">Belum Punya Akun?</span>
-                                    <a class="fw-bold text-decoration-none text-dark " href="{{ route('register') }}">Sign
-                                        In</a>
+                                    <a class="fw-bold text-decoration-none text-dark " href="{{ route('register') }}">Daftar</a>
                                 </div>
                             </div>
 
@@ -110,6 +109,7 @@
                 </div>
             </div>
         </div>
+        <a href="/" class="mx-auto small">&larr; Kembali</a>
     </div>
 @endsection
 

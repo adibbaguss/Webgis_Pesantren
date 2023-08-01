@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-grid mb-5">
-        <div class="content_register shadow bg-white">
+    <div class="container d-grid mt-5 mb-5 vh-100">
+        <div class="content_register shadow bg-white mb-3">
             <div class="row">
                 <div class="col-md-6 d-lg-block d-none">
                     <div class="image-login h-100">
@@ -139,7 +139,7 @@
                                 <div class="col-12 text-center mb-3" style="font-size: 12px">
                                     <span class="text-secondary">Sudah Punya Akun?</span>
                                     <a class="fw-bold text-decoration-none text-dark " href="{{ route('login') }}">
-                                        Log In
+                                        Masuk
                                     </a>
                                 </div>
                             </div>
@@ -149,6 +149,8 @@
                 </div>
             </div>
         </div>
+
+        <a href="/" class="mx-auto small">&larr; Kembali</a>
     </div>
 
 
