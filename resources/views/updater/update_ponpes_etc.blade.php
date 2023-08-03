@@ -69,27 +69,29 @@
                                     <div class="accordion-body pt-3 px-1 pb-1">
 
                                         <div class="d-flex justify-content-end mb-3">
-                                            <a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#jumbotronModal">
+                                            <a type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#jumbotronModal">
                                                 <i class="fas fa-plus"></i> Gambar Jumbotron
                                             </a>
                                         </div>
-                                       
+
                                         <div class="table-responsive">
                                             @php
                                                 $no = 1;
                                             @endphp
-                                            {{-- table khusus jumbotron --}}            
-                                            @foreach ($image as $item)
-                                                @if ($item->type == 'jumbotron')
-                                                    <table class="table table-bordered border-dark text-center">
-                                                        <tr>
-                                                            <th colspan="3">Gambar Jumbotron</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>File</th>
-                                                            <th>Hapus</th>
-                                                        </tr>
+                                            {{-- table khusus jumbotron --}}
+
+                                            <table class="table table-bordered border-dark text-center">
+                                                <tr>
+                                                    <th colspan="3">Gambar Jumbotron</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>File</th>
+                                                    <th>Hapus</th>
+                                                </tr>
+                                                @foreach ($image as $item)
+                                                    @if ($item->type == 'jumbotron')
                                                         <tr>
                                                             <td>{{ $no++ }}</td>
                                                             <td><a type="button" data-bs-toggle="modal"
@@ -102,23 +104,25 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                    </table>
-                                                @endif
-                                            @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </table>
+
                                         </div>
 
 
                                         <div class="d-flex justify-content-end mb-3">
-                                            <a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#regulerModal">
+                                            <a type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#regulerModal">
                                                 <i class="fas fa-plus"></i> Gambar Reguler
                                             </a>
                                         </div>
-                                       
+
                                         <div class="table-responsive">
                                             @php
                                                 $no = 1;
                                             @endphp
-                                            {{-- table khusus jumbotron --}}  
+                                            {{-- table khusus jumbotron --}}
                                             <table class="table table-bordered border-dark text-center">
                                                 <tr>
                                                     <th colspan="3">Gambar Reguler</th>
@@ -127,10 +131,9 @@
                                                     <th>No</th>
                                                     <th>File</th>
                                                     <th>Hapus</th>
-                                                </tr>          
-                                            @foreach ($image as $item)
-                                                @if ($item->type == 'reguler')
-                                    
+                                                </tr>
+                                                @foreach ($image as $item)
+                                                    @if ($item->type == 'reguler')
                                                         <tr>
                                                             <td>{{ $no++ }}</td>
                                                             <td><a type="button" data-bs-toggle="modal"
@@ -142,11 +145,13 @@
                                                                     <i class="fas fa-trash"></i>
                                                                 </a>
                                                             </td>
-                                                    
-                                                @endif
-                                            @endforeach
-                                        </tr>
-                                    </table>
+                                                        </tr>
+                                                        
+                                                    @endif
+                                          
+                                                @endforeach
+                                               
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +231,8 @@
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="7" class="text-center bg-secondary text-white">
+                                                            <td colspan="7"
+                                                                class="text-center bg-secondary text-white">
                                                                 {{ 'Belum diisi' }}
                                                             </td>
                                                         </tr>
@@ -585,24 +591,26 @@
 
 
         {{-- create image jumbotron --}}
-        <div class="modal fade" id="jumbotronModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="jumbotronModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Unggah Gambar</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('updater.ponpes_image_create') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('POST')
-                    <div class="modal-body">
-                    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Unggah Gambar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('updater.ponpes_image_create') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        <div class="modal-body">
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="text" name="ponpes_id" value="{{ $ponpes->id }}" hidden>
                                     <br>
                                 </div>
-        
+
                                 <div class="col-md-12 mb-4">
                                     <label for="jumbotron">Jumbotron Image:</label>
                                     <input type="file" class="form-control" name="jumbotron">
@@ -610,7 +618,7 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-        
+
                                 <div class="col-md-12">
                                     <ul class="small text-danger">
                                         <li>Maksimal 1 gambar yang diunggah</li>
@@ -619,32 +627,34 @@
                                         <li>Format Gambar : jpeg,png,jpg,gif</li>
                                     </ul>
                                 </div>
-                            </div>  
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Unggah</button>
-                    </div>
-            </form>
-              </div>
-            </div>
-          </div>
-          {{-- end create image jumbotron --}}
-
-
-              {{-- create image reguler --}}
-        <div class="modal fade" id="regulerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Unggah Gambar</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('updater.ponpes_image_create') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('POST')
-                    <div class="modal-body">
-                    
+            </div>
+        </div>
+        {{-- end create image jumbotron --}}
+
+
+        {{-- create image reguler --}}
+        <div class="modal fade" id="regulerModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Unggah Gambar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('updater.ponpes_image_create') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        <div class="modal-body">
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="text" name="ponpes_id" value="{{ $ponpes->id }}" hidden>
@@ -665,26 +675,26 @@
                                         <li>Format Gambar : jpeg,png,jpg,gif</li>
                                     </ul>
                                 </div>
-                            </div>  
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Unggah</button>
-                    </div>
-            </form>
-              </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Unggah</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </div>
-          {{-- end create image reguler --}}
+        </div>
+        {{-- end create image reguler --}}
 
 
 
-        
-        
-        
-          {{-- modal image preview --}}
-        
-        
+
+
+
+        {{-- modal image preview --}}
+
+
         @foreach ($image as $item)
             <div class="modal fade" id="previewModal{{ $item->id }}" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1384,7 +1394,8 @@
                                 data-bs-dismiss="modal">Batal</button>
 
                             <form id="delete-form"
-                                action="{{ route('updater.studentcount_delete', ['id' => $item->id]) }}" method="POST">
+                                action="{{ route('updater.studentcount_delete', ['id' => $item->id]) }}"
+                                method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>

@@ -203,7 +203,7 @@
 
             L.popup()
                 .setLatLng(e.latlng)
-                .setContent(`Anda Klik Latitude: (${lat.toFixed(6)}, Lotitude: ${lng.toFixed(6)})`)
+                .setContent(`Posisi Klik <br>Latitude: ${lat.toFixed(6)}<br> Longitude: ${lng.toFixed(6)}`)
                 .openOn(map);
         }
 
