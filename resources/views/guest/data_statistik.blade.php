@@ -17,6 +17,9 @@
                         <canvas class="w-100 h-100 mx-auto" id="chartPonpes"></canvas>
                     </div>
                 </div>
+                <div class="card-footer bg-light">
+                    <small class="text-secondary">Diagram jumlah penambahan Pondok Pesantren 10 tahun terakhir berdasarkan tahun berdiri Pondok Pesantren</small>
+                </div>
             </div>
         </div>
 
@@ -24,13 +27,16 @@
             <div class="card shadow mb-4"  style="user-select: none;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 fw-bold text-success">{{ 'Jumlah Pesantren' }}</h6>
+                    <h6 class="m-0 fw-bold text-success">{{ 'Jumlah Pondok Pesantren' }}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area  py-3">
                         <canvas class="w-100 h-100 mx-auto" id="chartJumlahPonpes"></canvas>
                     </div>
+                </div>
+                <div class="card-footer bg-light">
+                    <small class="text-secondary">Diagram jumlah kategori/jenis Pondok Pesantren berdasarkan kecamatan</small>
                 </div>
             </div>
         </div>
@@ -48,6 +54,9 @@
                     <div class="chart-area  py-3">
                         <canvas class="w-100 h-100 mx-auto" id="chartStudent"></canvas>
                     </div>
+                </div>
+                <div class="card-footer bg-light">
+                    <small class="text-secondary">Diagram jumlah santri di Kabupaten Batang 10 tahun terakhir berdasarkan data inputan dari  Pondok Pesantren</small>
                 </div>
             </div>
         </div>
