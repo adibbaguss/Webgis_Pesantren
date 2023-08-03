@@ -131,7 +131,7 @@
 
                                 <div class="col-12 mb-4">
                                     <button type="submit" class="btn btn-success w-100">
-                                        {{ __('Register') }}
+                                        {{ __('Daftar') }}
                                     </button>
                                 </div>
 
@@ -160,17 +160,15 @@
     aria-hidden="true">
         <div class="modal-dialog ">
           <div class="modal-content crop-content border-0 shadow">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+      
             <div class="modal-body crop-body">
                 <div class="image-canvas">
                     <img id="image" src="" alt="">
                 </div>
             </div>
             <div class="modal-footer d-flex">
-                <button type="button" style="width:100%" class="btn btn-outline-success crop" id="crop">Crop</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                <button type="button" class="btn btn-outline-success crop" id="crop">Potong</button>
             </div>
           </div>
         </div>

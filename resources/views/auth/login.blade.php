@@ -48,7 +48,7 @@
                                 <div class="col-12 mb-4">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        placeholder="{{ 'Email Address' }}" value="{{ old('email') }}" required
+                                        placeholder="{{ 'Alamat Email' }}" value="{{ old('email') }}" required
                                         autocomplete="email" autofocus>
 
                                     @error('email')
@@ -61,7 +61,7 @@
                                 <div class="col-12 mb-4 d-flex">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        placeholder="{{ 'Password' }}" required autocomplete="current-password">
+                                        placeholder="{{ 'Kata Sandi' }}" required autocomplete="current-password">
                                     <span class="input-group-text" onclick="new_password_show_hide();">
                                         <i class="fas fa-eye" id="show_eye_1"></i>
                                         <i class="fas fa-eye-slash d-none" id="hide_eye_1"></i>
@@ -75,7 +75,7 @@
 
                                 <div class="col-12 mb-1">
                                     <button type="submit" class="btn btn-success w-100">
-                                        {{ __('Login') }}
+                                        {{ __('Masuk') }}
                                     </button>
                                 </div>
 
@@ -83,7 +83,7 @@
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link text-decoration-none" style="font-size: 11px"
                                             href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('Lupa Kata Sandi ?') }}
                                         </a>
                                     @endif
                                 </div>

@@ -3,6 +3,15 @@
 
 @section('content')
     <div class="container mt-5 pt-5">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <!-- age Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
