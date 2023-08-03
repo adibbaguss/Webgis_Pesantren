@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\CategoryReportSeeder;
-use Database\Seeders\PonpesSeeder;
-use Database\Seeders\ReportSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -19,9 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            PonpesSeeder::class,
+            // PonpesSeeder::class,
             CategoryReportSeeder::class,
-            ReportSeeder::class,
+            // ReportSeeder::class,
             // ActivitySeeder::class,
             // InstructorSeeder::class,
             // ImagePonpesSeeder::class,

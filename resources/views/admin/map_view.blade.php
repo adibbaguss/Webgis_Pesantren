@@ -10,10 +10,10 @@
         <div class="map-view mb-5 bg-white p-2 rounded-3 shadow">
             <div id="map" class="rounded-3" style="min-height:400px;max-height:700px"></div>
         </div>
-        <table class="table table-responsive table-bordered table-hover text-center shadow">
+        <table class="table table-responsive table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th colspan="6">DATA JENIS PESANTREN</th>
+                    <th colspan="6" class="text-center">DATA JENIS PESANTREN</th>
                 </tr>
                 <tr>
                     <th scope="col">NO</th>
@@ -49,6 +49,22 @@
 
 @push('javascript')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.9/leaflet-search.src.js"></script>
+    <!-- Script DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        // Inisialisasi DataTables
+        $(document).ready(function() {
+            new DataTable('#example', {
+                scrollCollapse: true,
+                scrollX: true
+
+            });
+
+        });
+    </script>
     <script>
         var map = new L.map('map').setView([-6.993808128800089, 109.83246433526726], 10);
         map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')); //base
