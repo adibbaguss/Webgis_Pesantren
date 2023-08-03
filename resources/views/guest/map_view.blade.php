@@ -13,15 +13,15 @@
         <table class="table table-responsive table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th colspan="6" class="text-center">DATA JENIS PESANTREN</th>
+                    <th colspan="6"class="text-center" >DATA JENIS PESANTREN</th>
                 </tr>
-                <tr>
-                    <th scope="col">NO</th>
-                    <th scope="col">KECAMATAN</th>
-                    <th scope="col">SALAFIYAH</th>
-                    <th scope="col">KHALAFIYAH</th>
-                    <th scope="col">KOMBINASI</th>
-                    <th scope="col">TOTAL</th>
+                <tr >
+                    <th scope="col" class="text-center">NO</th>
+                    <th scope="col" class="text-center">KECAMATAN</th>
+                    <th scope="col" class="text-center">SALAFIYAH</th>
+                    <th scope="col" class="text-center">KHALAFIYAH</th>
+                    <th scope="col" class="text-center">KOMBINASI</th>
+                    <th scope="col" class="text-center">TOTAL</th>
                 </tr>
             </thead>
             <tbody>
