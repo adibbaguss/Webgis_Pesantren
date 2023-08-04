@@ -339,7 +339,7 @@
   <!-- Footer -->
   <footer class="footer border-top border-secondary mt-5 py-3">
     <div class="container text-center">
-      <span>&copy; 2023 Nama Perusahaan. All rights reserved.</span>
+      <span>&copy; 2023 Kementrian Agama Kabupaten Batang</span>
     </div>
   </footer>
   <!-- End Footer -->
