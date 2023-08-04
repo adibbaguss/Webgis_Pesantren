@@ -140,7 +140,8 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    <p>Apakah anda yakin untuk menghapus kategori "{{ $item->name }}" ?</p>
+                    <p>Apakah anda yakin untuk menghapus kategori "{{ $item->name }}" ? <br>
+                    kategori yang dihapus akan menghapus laporan dengan kategori ini</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
