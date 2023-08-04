@@ -26,7 +26,7 @@
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
-        @elseif(session('errorss'))
+        @elseif(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
@@ -599,7 +599,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Unggah Gambar</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('updater.ponpes_image_create') }}" method="POST"
+                    <form action="{{ route('updater.ponpes_image_create_jumbotron') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -613,14 +613,14 @@
 
                                 <div class="col-md-12 mb-4">
                                     <label for="jumbotron">Jumbotron Image:</label>
-                                    <input type="file" class="form-control" name="jumbotron">
+                                    <input type="file" class="form-control @error('jumbotron') is-invalid @enderror" name="jumbotron">
                                     @error('jumbotron')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-12">
-                                    <ul class="small text-danger">
+                                    <ul class="small text-secondary">
                                         <li>Maksimal 1 gambar yang diunggah</li>
                                         <li>Ukuran file maksimal 2 Mb</li>
                                         <li>Saran skala gambar yang diunggah adalah 16:9</li>
@@ -649,7 +649,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Unggah Gambar</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('updater.ponpes_image_create') }}" method="POST"
+                    <form action="{{ route('updater.ponpes_image_create_reguler') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -661,14 +661,13 @@
                                     <br>
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="reguler[]">Regular Image :</label>
-                                    <input type="file" class="form-control" name="reguler[]" multiple>
+                                    <input type="file" class="form-control @error('reguler') is-invalid @enderror" name="reguler[]" multiple>
                                     @error('reguler')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
-                                    <ul class="small text-danger">
+                                    <ul class="small text-secondary">
                                         <li>Maksimal 6 gambar yang diunggah</li>
                                         <li>Ukuran file maksimal 1 Mb</li>
                                         <li>Saran skala gambar yang diunggah adalah 5:4</li>

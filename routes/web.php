@@ -143,7 +143,8 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::put('/updater/ponpes_update_etc/studentcount/update/{id}', [StudentCountController::class, 'updateStudentCount'])->name('updater.studentcount_update');
 
     Route::get('/updater/ponpes_update_etc/image_ponpes/create/{id}', [ImagePonpesController::class, 'index'])->name('updater.ponpes_image_create_view');
-    Route::post('/updater/ponpes_update_etc/image_ponpes/create', [ImagePonpesController::class, 'create'])->name('updater.ponpes_image_create');
+    Route::post('/updater/ponpes_update_etc/image_ponpes/create/jumbotron', [ImagePonpesController::class, 'create_jumbotron'])->name('updater.ponpes_image_create_jumbotron');
+    Route::post('/updater/ponpes_update_etc/image_ponpes/create/reguler', [ImagePonpesController::class, 'create_reguler'])->name('updater.ponpes_image_create_reguler');
     Route::delete('/updater/ponpes_update_etc/image/delete/{id}', [ImagePonpesController::class, 'deleteImage'])->name('updater.image_delete');
 
 });
@@ -188,5 +189,3 @@ Route::post('register', [RegisterController::class, 'register']);
 // Route::post('/email/verification-notification', [VerificationController::class, 'resend'])
 //     ->middleware(['auth', 'throttle:6,1'])
 //     ->name('verification.resend');
-
-
