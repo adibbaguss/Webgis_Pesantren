@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PonpesSeeder::class,
             CategoryReportSeeder::class,
-            // ReportSeeder::class,
+            ReportSeeder::class,
             // ActivitySeeder::class,
             // InstructorSeeder::class,
             // ImagePonpesSeeder::class,

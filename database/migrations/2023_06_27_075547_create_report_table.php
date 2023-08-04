@@ -26,8 +26,8 @@ return new class extends Migration
             $table->timestamps();
 
             //relasi
-            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('restrict');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('ponpes_id')->references('id')->on('ponpes')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('category_report')->onDelete('cascade');
 
         });
