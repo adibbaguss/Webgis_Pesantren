@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Updater;
 use App\Http\Controllers\Controller;
 use App\Models\Learning;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LearningController extends Controller
 {
@@ -12,14 +13,23 @@ class LearningController extends Controller
 
     public function createLearning(Request $request)
     {
-        // Validate the form data
+
         // dd($request);
 
-        $request->validate([
+        // Validate the form data
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:254',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi menambah data pembelajaran. Periksa kembali isian Anda.');
+        }
 
         // Create a new Instructor instance
         $learning = new Learning([
@@ -55,12 +65,20 @@ class LearningController extends Controller
     {
         // Validate the form data
 
-        $request->validate([
+        // Validate the form data
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:254',
         ]);
 
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi memperbaharui data pembelajaran. Periksa kembali isian Anda.');
+        }
         // Find the learning by ID
         $learning = Learning::find($id);
 

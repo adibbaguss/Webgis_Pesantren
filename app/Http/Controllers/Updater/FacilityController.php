@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Updater;
 use App\Http\Controllers\Controller;
 use App\Models\Facility;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FacilityController extends Controller
 {
@@ -14,12 +15,20 @@ class FacilityController extends Controller
     {
         // Validate the form data
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'name' => 'required|string|max:100',
             'count' => 'required|integer',
         ]);
 
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi menambah data fasilitas. Periksa kembali isian Anda.');
+
+        }
         // Create a new Instructor instance
         $facility = new Facility([
             'ponpes_id' => $request->input('ponpes_id'),
@@ -52,12 +61,20 @@ class FacilityController extends Controller
 
     public function updateFacility(Request $request, $id)
     {
-        // Validate the form data
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'name' => 'required|string|max:100',
             'count' => 'required|integer',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi memperbaharui data fasilitas. Periksa kembali isian Anda.');
+        }
 
         // Find the facility by ID
         $facility = Facility::find($id);

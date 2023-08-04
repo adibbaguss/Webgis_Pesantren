@@ -27,7 +27,7 @@ class InstructorsController extends Controller
             return redirect()->back()
                 ->withErrors($validator) // Send the validation errors to the view
                 ->withInput() // Keep the input values in the form
-                ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
+                ->with('error', 'Terjadi kesalahan validasi menambah data pengajar. Periksa kembali isian Anda.');
             // You can also use ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
         }
         // Create a new Instructor instance
@@ -80,7 +80,7 @@ class InstructorsController extends Controller
             return redirect()->back()
                 ->withErrors($validator) // Send the validation errors to the view
                 ->withInput() // Keep the input values in the form
-                ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
+                ->with('error', 'Terjadi kesalahan validasi memperbaharui data pengajar. Periksa kembali isian Anda.');
             // You can also use ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
         }
 

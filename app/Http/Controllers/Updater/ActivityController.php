@@ -5,18 +5,27 @@ namespace App\Http\Controllers\Updater;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ActivityController extends Controller
 {
     public function createActivities(Request $request)
     {
-        // Validate the form data
 
-        $request->validate([
+        // Validate the form data
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:254',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi menambah data aktivitas. Periksa kembali isian Anda.');
+        }
 
         // Create a new Instructor instance
         $activities = new Activity([
@@ -51,11 +60,19 @@ class ActivityController extends Controller
     public function updateActivities(Request $request, $id)
     {
         // Validate the form data
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'name' => 'required|string|max:100',
             'description' => 'required|string|max:254',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi memperbaharui data aktivitas. Periksa kembali isian Anda.');
+        }
 
         // Find the activities by ID
         $activities = Activity::find($id);

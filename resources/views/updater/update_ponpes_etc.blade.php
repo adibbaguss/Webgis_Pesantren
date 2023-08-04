@@ -1415,7 +1415,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">
-                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                                {{ 'Perbaharui Data (Tahun ' . $item->year . ')' }}
                             </h5>
                             <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fas fa-times"></i>

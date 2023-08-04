@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Updater;
 use App\Http\Controllers\Controller;
 use App\Models\StudentCount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StudentCountController extends Controller
 {
@@ -15,7 +16,8 @@ class StudentCountController extends Controller
         // Validate the form data
         // dd($request);
 
-        $request->validate([
+        // Validate the form data
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'year' => 'required|integer|min:1900|max:3000',
             'male_resident_count' => 'required|integer|min:0',
@@ -23,6 +25,14 @@ class StudentCountController extends Controller
             'male_non_resident_count' => 'required|integer|min:0',
             'female_non_resident_count' => 'required|integer|min:0',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi menambah data jumlah santri. Periksa kembali isian Anda.');
+        }
 
         // Create a new Instructor instance
         $studentCount = new StudentCount([
@@ -38,7 +48,7 @@ class StudentCountController extends Controller
         // Save the instructor data to the database
         $studentCount->save();
 
-        return redirect()->back()->with('success', 'Student Count Tahun' . $studentCount->year . ' Berhasil Dibuat');
+        return redirect()->back()->with('success', 'Student Count Tahun ' . $studentCount->year . ' Berhasil Dibuat');
 
     }
 
@@ -59,9 +69,9 @@ class StudentCountController extends Controller
 
     public function updateStudentCount(Request $request, $id)
     {
-        // Validate the form data
 
-        $request->validate([
+        // Validate the form data
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
             'year' => 'required|integer|min:1900|max:3000',
             'male_resident_count' => 'required|integer|min:0',
@@ -69,6 +79,14 @@ class StudentCountController extends Controller
             'male_non_resident_count' => 'required|integer|min:0',
             'female_non_resident_count' => 'required|integer|min:0',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi memperbaharui data jumlah santri. Periksa kembali isian Anda.');
+        }
 
         // Find the StudentCount by ID
         $studentCount = StudentCount::find($id);
@@ -90,6 +108,6 @@ class StudentCountController extends Controller
         // Save the updated StudentCount data to the database
         $studentCount->save();
 
-        return redirect()->back()->with('success', 'StudentCount Tahun ' . $studentCount->year . ' Berhasil Diperbaharui');
+        return redirect()->back()->with('success', 'Student Count Tahun ' . $studentCount->year . ' Berhasil Diperbaharui');
     }
 }
