@@ -29,21 +29,26 @@ class DashboardController extends Controller
     }
 
     private function getChartData()
-    {$chartData = Ponpes::selectRaw('t1.tahun, t1.jumlah, SUM(t2.jumlah) AS total_count')
+    {
+        $chartData = Ponpes::selectRaw('t1.tahun, t1.jumlah, SUM(t2.jumlah) AS total_count')
             ->from(function ($query) {
                 $query->selectRaw('YEAR(standing_date) as tahun, COUNT(*) as jumlah')
                     ->from('ponpes')
-                    ->groupBy('tahun');
+                    ->groupBy('tahun')
+                    ->orderBy('tahun', 'desc')
+                    ->limit(10);
             }, 't1')
             ->joinSub(function ($query) {
                 $query->selectRaw('YEAR(standing_date) as tahun, COUNT(*) as jumlah')
                     ->from('ponpes')
-                    ->groupBy('tahun');
+                    ->groupBy('tahun')
+                    ->orderBy('tahun', 'desc') // Order by descending year
+                    ->limit(10); // Limit to the last 10 years
             }, 't2', function ($join) {
                 $join->on('t1.tahun', '>=', 't2.tahun');
             })
             ->groupBy('t1.tahun', 't1.jumlah')
-            ->orderBy('t1.tahun')
+            ->orderBy('t1.tahun', 'asc') // Order by descending year
             ->get();
 
         $chartData = [

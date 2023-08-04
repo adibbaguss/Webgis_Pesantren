@@ -8,13 +8,14 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DataAccountController extends Controller
 {
     public function index()
     {
-        $account = User::all();
+        $account = User::with('ponpes')->get();
 
         return view('admin.data_account', compact('account'));
     }
@@ -43,18 +44,27 @@ class DataAccountController extends Controller
     public function update(Request $request, $id)
     {
         // Lakukan validasi data yang diupdate, misalnya:
-        $request->validate([
-            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $id],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $id],
-            'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['nullable', 'string', 'max:255'],
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email,' . $id,
+            'username' => 'required|string|max:255|unique:users,username,' . $id,
+            'user_role' => 'required|string|in:updater,viewer',
+            'phone_number' => 'nullable|string|min:11|max:15',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi mengubah akun. Periksa kembali isian Anda.');
+        }
 
         // Lakukan proses update data berdasarkan ID yang diterima
         // Misalnya, jika menggunakan model Eloquent:
         $account = User::find($id);
         $account->name = $request->name;
         $account->email = $request->email;
+        $account->user_role = $request->user_role;
         $account->username = $request->username;
         $account->phone_number = $request->phone_number;
         $account->save();
@@ -71,14 +81,23 @@ class DataAccountController extends Controller
 
     public function create(Request $request)
     {
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'username' => 'required|string|max:255|unique:users,username',
-            'phone_number' => 'nullable|string|max:255',
-            'user_role' => 'required|string|in:admin,updater,viewer',
+            'phone_number' => 'nullable|string|min:11|max:15',
+            'user_role' => 'required|string|in:updater,viewer',
             'password' => 'required|string|min:8',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi menambah akun. Periksa kembali isian Anda.');
+        }
 
         $user = User::create([
             'name' => $request->name,

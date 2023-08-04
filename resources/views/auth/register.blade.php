@@ -57,7 +57,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-12 mb-4 d-flex">
+                                <div class="col-12 mb-4">
                                     <input id="username" type="text"
                                         class="form-control @error('username') is-invalid @enderror" name="username"
                                         value="{{ old('username') }}" required autocomplete="username"
@@ -70,7 +70,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-12 mb-4 d-flex">
+                                <div class="col-12 mb-4">
                                     <input id="phone_number" type="tel"
                                         class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
                                         value="{{ old('phone_number') }}" placeholder="Nomor Handphone" required

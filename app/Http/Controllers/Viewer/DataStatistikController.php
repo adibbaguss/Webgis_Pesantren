@@ -25,17 +25,21 @@ class DataStatistikController extends Controller
             ->from(function ($query) {
                 $query->selectRaw('YEAR(standing_date) as tahun, COUNT(*) as jumlah')
                     ->from('ponpes')
-                    ->groupBy('tahun');
+                    ->groupBy('tahun')
+                    ->orderBy('tahun', 'desc')
+                    ->limit(10);
             }, 't1')
             ->joinSub(function ($query) {
                 $query->selectRaw('YEAR(standing_date) as tahun, COUNT(*) as jumlah')
                     ->from('ponpes')
-                    ->groupBy('tahun');
+                    ->groupBy('tahun')
+                    ->orderBy('tahun', 'desc') // Order by descending year
+                    ->limit(10); // Limit to the last 10 years
             }, 't2', function ($join) {
                 $join->on('t1.tahun', '>=', 't2.tahun');
             })
             ->groupBy('t1.tahun', 't1.jumlah')
-            ->orderBy('t1.tahun')
+            ->orderBy('t1.tahun', 'asc') // Order by descending year
             ->get();
 
         $ChartDataPonpes = [
@@ -77,6 +81,8 @@ class DataStatistikController extends Controller
             ->selectRaw('SUM(female_non_resident_count) AS female_non_resident_count')
             ->selectRaw('SUM(male_resident_count + male_non_resident_count + female_resident_count + female_non_resident_count) as total')
             ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->limit(10)
             ->get();
 
         $chartDataStudent = [

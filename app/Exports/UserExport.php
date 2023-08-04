@@ -14,7 +14,7 @@ class UserExport implements FromCollection, WithHeadings, WithMapping
      */
     public function collection()
     {
-        return User::all();
+        return User::with('ponpes')->get();
     }
     public function headings(): array
     {
@@ -25,6 +25,7 @@ class UserExport implements FromCollection, WithHeadings, WithMapping
             'Username',
             'Alamat Email',
             'Nomor Telepon',
+            'Pesantren',
             'Dibuat',
         ];
     }
@@ -40,6 +41,7 @@ class UserExport implements FromCollection, WithHeadings, WithMapping
             $account->username,
             $account->email,
             $account->phone_number,
+            $account->ponpes ? $account->ponpes->name : 'null',
             $account->created_at,
 
         ];
