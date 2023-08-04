@@ -66,7 +66,7 @@
 
                         <div class="col-12 mb-4">
                             <label for="">{{ 'Nomor Telepon' }}</label>
-                            <input id="phone_number" type="tel"
+                            <input id="phone_number" type="text"
                                 class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
                                 value="{{ $user->phone_number }}" placeholder="Nomor Handphone" required
                                 autocomplete="phone_number">

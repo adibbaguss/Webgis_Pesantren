@@ -59,7 +59,7 @@
 
 @push('javascript')
     <script>
-        const map = L.map('map').setView([-6.993808128800089, 109.83246433526726], 10);
+        const map = L.map('map').setView([{{ $ponpes->latitude ?? 0 }}, {{ $ponpes->longitude ?? 0 }}], 15);
 
         const baseLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 20,

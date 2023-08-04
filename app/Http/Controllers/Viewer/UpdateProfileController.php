@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UpdateProfileController extends Controller
 {
@@ -71,9 +72,18 @@ class UpdateProfileController extends Controller
 
     public function update_password(Request $request, $id)
     {
-        $request->validate([
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string|min:8|confirmed',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan validasi mengubah password. Periksa kembali isian Anda.');
+        }
+
         $user = User::find($id);
         $user->password = Hash::make($request->password);
         $user->save();

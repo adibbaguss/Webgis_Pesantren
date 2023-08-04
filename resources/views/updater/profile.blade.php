@@ -24,7 +24,8 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('updater.profile_edit', ['id' => $user->id]) }}">
+                                        <a class="dropdown-item"
+                                            href="{{ route('updater.profile_edit', ['id' => $user->id]) }}">
                                             <i class="fas fa-edit"></i>
                                             {{ 'Perbaharui Profil' }}
                                         </a>
@@ -119,7 +120,6 @@
                             </div>
 
 
-
                             <div class="col-12 mb-4 d-flex">
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" required autocomplete="new-password"
@@ -140,8 +140,9 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
                 </div>
-                </form>
+
             </div>
         </div>
     </div>
