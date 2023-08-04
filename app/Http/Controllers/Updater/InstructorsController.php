@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Updater;
 use App\Http\Controllers\Controller;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InstructorsController extends Controller
 {
@@ -12,16 +13,25 @@ class InstructorsController extends Controller
     {
         // Validate the form data
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
-            'nik' => 'required|unique:instructors,nik',
+            'nik' => 'required|string|max:20|unique:instructors,nik',
             'name' => 'required|string|max:100',
             'gender' => 'required|string',
             'expertise' => 'required|string',
             'status' => 'required|string',
         ]);
 
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator) // Send the validation errors to the view
+                ->withInput() // Keep the input values in the form
+                ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
+            // You can also use ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
+        }
         // Create a new Instructor instance
+
         $instructor = new Instructor([
             'ponpes_id' => $request->input('ponpes_id'),
             'nik' => $request->input('nik'),
@@ -56,14 +66,23 @@ class InstructorsController extends Controller
     public function updateInstructors(Request $request, $id)
     {
         // Validate the form data
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
-            'nik' => 'required|unique:instructors,nik,' . $id,
+            'nik' => 'required|string|max:20|unique:instructors,nik,' . $id,
             'name' => 'required|string|max:100',
             'gender' => 'required|string',
             'expertise' => 'required|string',
             'status' => 'required|string',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator) // Send the validation errors to the view
+                ->withInput() // Keep the input values in the form
+                ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
+            // You can also use ->with('error', 'Terjadi kesalahan validasi. Periksa kembali isian Anda.');
+        }
 
         // Find the instructor by ID
         $instructor = Instructor::find($id);
