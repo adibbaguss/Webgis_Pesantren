@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryReportController;
 use App\Http\Controllers\Admin\CreatePonpesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataAccountController;
@@ -106,6 +107,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/data_report', [ReportController::class, 'index'])->name('admin.data_report');
     Route::put('/admin/status/{id}', [ReportController::class, 'update'])->name('admin.report_status_update');
     Route::get('/admin/report_export', [ReportController::class, 'export']);
+
+    Route::get('/admin/category_report', [CategoryReportController::class, 'index'])->name('admin.category_report');
+    Route::post('/admin/category_report/create', [CategoryReportController::class, 'create'])->name('admin.category_report_create');
+    Route::put('/admin/category_report/update/{id}', [CategoryReportController::class, 'update'])->name('admin.category_report_update');
+    Route::delete('/admin/category_report/delete/{id}', [CategoryReportController::class, 'delete'])->name('admin.category_report_delete');
     // Route::get('/create_ponpes_2/{id}', [CreatePonpesController::class, 'ShowStepTwo'])->name('create_ponpes_2');
     // Route::post('/create_ponpes_langkah_2', [CreatePonpesController::class, 'stepTwo'])->name('create-ponpes-2');
 

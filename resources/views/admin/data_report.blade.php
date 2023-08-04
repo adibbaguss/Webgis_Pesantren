@@ -28,6 +28,12 @@
                                 {{ 'Cetak' }}
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.category_report') }}" class="dropdown-item">
+                                <i class="fas fa-edit"></i>
+                                {{ 'Edit Kategori Laporan' }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -8,7 +8,7 @@
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren</h2>
         </div>
         <div class="map-view mb-5 bg-white p-2 rounded-3 shadow">
-            <div id="map" class="rounded-3" style="min-height:400px;max-height:700px"></div>
+            <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
         </div>
         <table class="table table-responsive table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
             <thead>
