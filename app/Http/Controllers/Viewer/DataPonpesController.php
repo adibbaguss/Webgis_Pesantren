@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Viewer;
 
+use App\Exports\PonpesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataPonpesController extends Controller
 {
@@ -27,5 +30,15 @@ class DataPonpesController extends Controller
             ->get();
 
         return view('viewer.data_ponpes', compact('ponpes'));
+    }
+
+    public function exportXLSX()
+    {
+        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xlsx');
+    }
+
+    public function exportCSV()
+    {
+        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.csv');
     }
 }

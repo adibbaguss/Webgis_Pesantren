@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PonpesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
 use App\Models\StudentCount;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuestController extends Controller
 {
@@ -73,6 +76,16 @@ class GuestController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    public function exportXLSX()
+    {
+        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xlsx');
+    }
+
+    public function exportCSV()
+    {
+        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.csv');
     }
 
     // statitik data

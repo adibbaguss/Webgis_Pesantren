@@ -63,6 +63,9 @@ Route::redirect('/guest', '/guest/map_view');
 Route::get('/guest/map_view', [GuestController::class, 'index'])->name('guest.map_view');
 Route::get('/guest/data_ponpes', [GuestController::class, 'dataPonpes'])->name('guest.data_ponpes');
 Route::get('/guest/data_ponpes/search', [GuestController::class, 'ponpesSearch'])->name('guest.ponpes_search');
+Route::get('/guest/ponpes_export_xlsx', [GuestController::class, 'exportXLSX']);
+Route::get('/guest/ponpes_export_csv', [GuestController::class, 'exportCSV']);
+
 Route::get('/guest/ponpes_view/{id}', [GuestController::class, 'ponpesView'])->name('guest.ponpes_view');
 Route::get('/guest/data_statistik', [GuestController::class, 'ponpesStatistik'])->name('guest.data_statistik');
 Route::get('/guest/ponpes_report', function () {
@@ -173,6 +176,9 @@ Route::middleware(['auth', 'role:viewer'])->group(function () {
     Route::get('/viewer/map_view', [V_MapViewController::class, 'index'])->name('viewer.map_view');
     Route::get('/viewer/data_ponpes', [V_DataPonpesController::class, 'index'])->name('viewer.data_ponpes');
     Route::get('/viewer/data_ponpes/search', [V_DataPonpesController::class, 'ponpesSearch'])->name('viewer.ponpes_search');
+    Route::get('/viewer/ponpes_export_xlsx', [V_DataPonpesController::class, 'exportXLSX']);
+    Route::get('/viewer/ponpes_export_csv', [V_DataPonpesController::class, 'exportCSV']);
+
     Route::get('/viewer/ponpes_view/{id}', [V_PonpesViewController::class, 'index'])->name('viewer.ponpes_view');
     Route::get('/viewer/data_statistik', [V_DataStatistikController::class, 'index'])->name('viewer.data_statistik');
 

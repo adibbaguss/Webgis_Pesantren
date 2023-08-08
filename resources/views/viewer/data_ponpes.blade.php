@@ -24,18 +24,12 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 
-            {{-- <div class="dropdown">
+            <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <i class="fas fa-sliders-h"></i>
                 </button>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="/admin/create_ponpes" class="dropdown-item">
-                            <i class="fas fa-plus"></i>
-                            {{ 'Tambah Data' }}
-                        </a>
-                    </li>
                     <li>
                         <a href="" class="dropdown-item" type="button" class="btn btn-primary"
                             data-bs-toggle="modal" data-bs-target="#printModal">
@@ -44,7 +38,7 @@
                         </a>
                     </li>
                 </ul>
-            </div> --}}
+            </div>
         </div>
 
 
@@ -92,7 +86,7 @@
 
 
     <!-- Modal -->
-    {{-- <div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
+    <div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -100,12 +94,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <a href="/admin/ponpes_export_xlsx" class="text-deocartion-none btn btn-outline-success p-3">
+                    <a href="/viewer/ponpes_export_xlsx" class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-excel fs-1"></i>
                         {{ 'Cetak Excel' }}
                     </a>
 
-                    <a href="/admin/ponpes_export_csv" class="text-deocartion-none btn btn-outline-success p-3">
+                    <a href="/viewer/ponpes_export_csv" class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-csv fs-1"></i>
                         {{ 'Cetak CSV' }}
                     </a>
@@ -115,5 +109,5 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
