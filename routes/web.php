@@ -68,6 +68,10 @@ Route::get('/guest/data_statistik', [GuestController::class, 'ponpesStatistik'])
 Route::get('/guest/ponpes_report', function () {
     return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
 });
+
+Route::get('/guest/panduan', function () {
+    return view('guest.tutorial_view');
+});
 // Route::get('/admin/data_ponpes', [DataPonpesController::class, 'index'])->name('guest.data_ponpes');
 // Route::get('/admin/ponpes_view/{id}', [PonpesViewController::class, 'view'])->name('guest.ponpes_view');
 // Route::get('/admin/ponpes/search', [DataPonpesController::class, 'search'])->name('guest.ponpes_search');
@@ -112,6 +116,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/category_report/create', [CategoryReportController::class, 'create'])->name('admin.category_report_create');
     Route::put('/admin/category_report/update/{id}', [CategoryReportController::class, 'update'])->name('admin.category_report_update');
     Route::delete('/admin/category_report/delete/{id}', [CategoryReportController::class, 'delete'])->name('admin.category_report_delete');
+
+    Route::get('/admin/panduan', function () {
+        return view('admin.tutorial_view');
+    });
     // Route::get('/create_ponpes_2/{id}', [CreatePonpesController::class, 'ShowStepTwo'])->name('create_ponpes_2');
     // Route::post('/create_ponpes_langkah_2', [CreatePonpesController::class, 'stepTwo'])->name('create-ponpes-2');
 
@@ -153,6 +161,9 @@ Route::middleware(['auth', 'role:updater'])->group(function () {
     Route::post('/updater/ponpes_update_etc/image_ponpes/create/reguler', [ImagePonpesController::class, 'create_reguler'])->name('updater.ponpes_image_create_reguler');
     Route::delete('/updater/ponpes_update_etc/image/delete/{id}', [ImagePonpesController::class, 'deleteImage'])->name('updater.image_delete');
 
+    Route::get('/updater/panduan', function () {
+        return view('updater.tutorial_view');
+    });
 });
 
 // // Rute untuk viewer
@@ -175,6 +186,9 @@ Route::middleware(['auth', 'role:viewer'])->group(function () {
     Route::get('/viewer/data_report/{id}', [DataReportController::class, 'index'])->name('viewer.data_report');
     Route::delete('/viewer/data_report/delete/{id}', [DataReportController::class, 'delete'])->name('viewer.report_delete');
 
+    Route::get('/viewer/panduan', function () {
+        return view('viewer.tutorial_view');
+    });
 });
 
 // rute untuk register

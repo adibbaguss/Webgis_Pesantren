@@ -843,15 +843,15 @@
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <div class="modal-body">{{ 'Anda Yakin Menghapus Data' . $ponpes->name . ' ?' }}</div>
+                    <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $ponpes->name . ' ?' }}</div>
                     <div class="modal-footer">
-                        <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Batal</button>
 
                         <form id="delete-form" action="{{ route('admin.ponpes_delete', ['id' => $ponpes->id]) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete Ponpes</button>
+                            <button type="submit" class="btn btn-danger">Hapus Ponpes</button>
                         </form>
                     </div>
                 </div>

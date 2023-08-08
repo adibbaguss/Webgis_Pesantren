@@ -206,6 +206,12 @@
                             <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
                         </a>
 
+                        <a href="/guest/panduan" class="nav_link text-decoration-none {{ request()->is('guest/panduan*') ? 'active' : '' }}"">
+                            <i class='bx bx-info-circle nav_icon'></i>
+                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
+                        </a>
+
+
                     </div>
                 </div>
                 @elseif(Auth::User()->user_role == "admin")
@@ -244,6 +250,11 @@
                             <span class="nav_name">{{ 'Pelaporan' }}</span>
                         </a>
 
+                        <a href="/admin/panduan" class="nav_link text-decoration-none {{ request()->is('admin/panduan*') ? 'active' : '' }}"">
+                            <i class='bx bx-info-circle nav_icon'></i>
+                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
+                        </a>
+
                     </div>
                 </div>
                 @elseif(Auth::User()->user_role == "updater")
@@ -260,6 +271,11 @@
                         <a href="{{ route('updater.ponpes_view',['id'=>Auth::User()->id]) }}" class="nav_link text-decoration-none {{ request()->is('updater/ponpes_view*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
                             <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                        </a>
+
+                        <a href="/updater/panduan" class="nav_link text-decoration-none {{ request()->is('updater/panduan*') ? 'active' : '' }}"">
+                            <i class='bx bx-info-circle nav_icon'></i>
+                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                         </a>
 
                     </div>
@@ -291,6 +307,11 @@
                         <a href="{{ route('viewer.data_report', ['id'=>Auth::User()->id]) }}" class="nav_link text-decoration-none {{ request()->is('viewer/data_report*') ? 'active' : '' }}"">
                             <i class="bx bxs-report nav_icon"></i>
                             <span class="nav_name">{{ 'Riwayat Laporan' }}</span>
+                        </a>
+
+                        <a href="/viewer/panduan" class="nav_link text-decoration-none {{ request()->is('viewer/panduan*') ? 'active' : '' }}"">
+                            <i class='bx bx-info-circle nav_icon'></i>
+                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                         </a>
 
 

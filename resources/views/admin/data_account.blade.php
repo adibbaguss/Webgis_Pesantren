@@ -311,7 +311,7 @@
                             <div class="me-0 ms-auto">
                                 <button class="btn btn-outline-secondary" type="button"
                                     data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-success">Create</button>
+                                <button type="submit" class="btn btn-success">Tambah</button>
                             </div>
                         </div>
                     </form>

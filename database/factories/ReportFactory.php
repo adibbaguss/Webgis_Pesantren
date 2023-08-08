@@ -28,7 +28,7 @@ class ReportFactory extends Factory
         return [
             'ponpes_id' => $faker->numberBetween(1, 3),
 
-            'user_id' => $faker->numberBetween(1, 5),
+            'user_id' => 5,
 
             'category_id' => $faker->numberBetween(1, 5),
             'reporting_code' => RandomIdGenerator::generateUniqueId(),
