@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="conteiner mt-5 pt-5">
+    <div class="container-fluid  mt-5 pt-5">
         {{-- notif penambahan data --}}
         @if(session('success'))
         <div class="alert alert-success">
@@ -46,7 +46,7 @@
 
             @if (count($ponpes) > 0)
                 @foreach ($ponpes as $item)
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-5">
                         <a href="{{ route('guest.ponpes_view', ['id' => $item->id]) }}">
                             <div class="card border-0 shadow h-100">
                                 @if ($item->photo_profil != null)

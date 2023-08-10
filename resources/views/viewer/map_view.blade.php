@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="container mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5">
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -19,18 +19,18 @@
         <div class="map-view mb-5 bg-white p-2 rounded-3 shadow">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
         </div>
-        <table class="table table-responsive table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
+        <table class="table table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th colspan="6"class="text-center" >DATA JENIS PESANTREN</th>
                 </tr>
                 <tr >
-                    <th scope="col" class="text-center">NO</th>
-                    <th scope="col" class="text-center">KECAMATAN</th>
-                    <th scope="col" class="text-center">SALAFIYAH</th>
-                    <th scope="col" class="text-center">KHALAFIYAH</th>
-                    <th scope="col" class="text-center">KOMBINASI</th>
-                    <th scope="col" class="text-center">TOTAL</th>
+                    <th scope="col">NO</th>
+                    <th scope="col">KECAMATAN</th>
+                    <th scope="col">SALAFIYAH</th>
+                    <th scope="col">KHALAFIYAH</th>
+                    <th scope="col">KOMBINASI</th>
+                    <th scope="col">TOTAL</th>
                 </tr>
             </thead>
             <tbody>

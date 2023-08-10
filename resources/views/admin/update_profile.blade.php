@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-grid mt-5 pt-5 vh-100">
+    <div class="container-fluid d-grid mt-5 pt-5 vh-100">
         <div class="content_register shadow bg-white mx-auto" style="max-width: 500px">
             <div class="px-5 pt-4" >
                 <form method="POST" action="{{ route('admin.update_profile', ['id'=>$user->id]) }}" enctype="multipart/form-data">

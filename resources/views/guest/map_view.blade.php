@@ -3,14 +3,14 @@
 
 
 @section('content')
-    <div class="container mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren</h2>
         </div>
         <div class="map-view mb-5 bg-white p-2 rounded-3 shadow">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
         </div>
-        <table class="table table-responsive table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
+        <table class="table table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th colspan="6"class="text-center" >DATA JENIS PESANTREN</th>

@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-    <div class="container mt-5 pt-5 h-100">
+    <div class="container-fluid mt-5 pt-5">
         <div class="mb-3">
             <h2 class="mb-3 text-secondary ">{{ 'Panduan Penggunaan' }}</h2>
             <small class="text-justify">Gambar dan informasi yang terdapat dalam aset panduan bukanlah representasi yang

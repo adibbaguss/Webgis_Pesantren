@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5 pt-5 vh-100">
+    <div class="container-fluid mt-5 pt-5 vh-100">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

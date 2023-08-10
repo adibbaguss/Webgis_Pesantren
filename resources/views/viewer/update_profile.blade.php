@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container d-grid mt-5 pt-5 vh-100">
+    <div class="container-fluid mt-5 pt-5">
         <div class="content_register shadow bg-white mx-auto" style="max-width: 500px">
             <div class="px-5 pt-4">
                 <form method="POST" action="{{ route('viewer.profile_update', ['id' => $user->id]) }}"
@@ -94,11 +94,11 @@
 
 
 
-                        <div class="col-6 mb-4 me-0 ms-auto d-flex justify-content-between">
-                            <a href="{{ route('viewer.profile', ['id' => $user->id]) }}" class="btn btn-outline-secondary">
+                        <div class="col-6 mb-4 me-0 ms-auto d-flex justify-content-end">
+                            <a href="{{ route('viewer.profile', ['id' => $user->id]) }}" class="btn btn-outline-secondary me-1">
                                 {{ __('Batal') }}
                             </a>
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-success ">
                                 {{ __('Perbaharui') }}
                             </button>
 

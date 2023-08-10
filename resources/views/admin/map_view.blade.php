@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="container mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren</h2>
         </div>

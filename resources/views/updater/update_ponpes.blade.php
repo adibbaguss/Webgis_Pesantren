@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-5 mt-5">
+    <div class="container-fluid pt-5 mt-5">
         <h2 class="mb-0 text-secondary  mb-5">{{ 'Perbaharui Data ' . $ponpes->name }}</h2>
         <div class="container d-grid mb-5 mt-5">
             <div class="mx-md-5 px-md-5">

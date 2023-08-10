@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="containter mt-5 pt-5">
+<div class="containter-fluid mt-5 pt-5">
     <h2 class="mb-4 text-secondary ">{{ 'Data Statistik Pondok Pesantren' }}</h2>
 
     <div class="row">

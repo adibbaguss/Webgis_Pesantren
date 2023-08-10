@@ -14,23 +14,18 @@
 </div>
 @endif
 
-    <div class="container vh-100 d-grid">
+    <div class="container-fluid mt-5 pt-5">
         
 
-        <div class="content_login shadow  my-auto mx-3 bg-white">
+        <div class="content_login shadow  my-auto bg-white">
             <div class="row">
                 <div class="col-md-6 d-lg-block d-none">
-                    <div class="image-login h-100">
+                    <div class="image-login">
                         <img src="{{ asset('images/asset/login-asset.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 px-lg-4 px-md-0">
                     <div class="p-5 my-0">
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
@@ -109,7 +104,8 @@
                 </div>
             </div>
         </div>
-        <a href="/" class="mx-auto small">&larr; Kembali</a>
+
+     
     </div>
 @endsection
 

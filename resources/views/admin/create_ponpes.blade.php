@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-5 mt-5">
+    <div class="container-fluid pt-5 mt-5">
         <div class="container d-grid mb-5 mt-5">
             <div class="mx-md-5 px-md-5">
                 <div class="row d-flex justify-content-center">

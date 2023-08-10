@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="conteiner mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5">
         {{-- notif penambahan data --}}
         @if(session('success'))
         <div class="alert alert-success">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container mx-0 mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5">
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -24,7 +24,6 @@
                         <th scope="col">TANGGAL MASUK</th>
                         <th scope="col">KATEGORI</th>
                         <th scope="col">PESANTREN</th>
-
                         <th scope="col">STATUS</th>
                         <th scope="col">OPSI</th>
                     </tr>

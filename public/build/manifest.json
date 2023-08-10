@@ -1,8 +1,51 @@
 {
+  "resources/css/app.css": {
+    "file": "assets/app-bc4cfe49.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/css/leaflet-search.css": {
+    "file": "assets/leaflet-search-84f5978b.css",
+    "isEntry": true,
+    "src": "resources/css/leaflet-search.css"
+  },
+  "resources/css/slick-theme.css": {
+    "file": "assets/slick-theme-ef7f2472.css",
+    "isEntry": true,
+    "src": "resources/css/slick-theme.css"
+  },
+  "resources/css/slick.css": {
+    "file": "assets/slick-03acccf5.css",
+    "isEntry": true,
+    "src": "resources/css/slick.css"
+  },
+  "resources/css/style.css": {
+    "file": "assets/style-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/css/style.css"
+  },
+  "resources/images/loader.gif": {
+    "file": "assets/loader-ebeab4d4.gif",
+    "src": "resources/images/loader.gif"
+  },
+  "resources/images/search-icon.png": {
+    "file": "assets/search-icon-52aceec6.png",
+    "src": "resources/images/search-icon.png"
+  },
   "resources/js/app.js": {
     "file": "assets/app-f3a74b98.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/slick.js": {
+    "file": "assets/slick-7e5f2fe2.js",
+    "isEntry": true,
+    "src": "resources/js/slick.js"
+  },
+  "resources/js/slick.min.js": {
+    "file": "assets/slick.min-5123236f.js",
+    "isEntry": true,
+    "src": "resources/js/slick.min.js"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-7435f0ed.css",

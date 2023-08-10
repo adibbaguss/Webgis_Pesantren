@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="container mt-5 pt-5">
+    <div class="container-fluid mt-5 pt-5">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
