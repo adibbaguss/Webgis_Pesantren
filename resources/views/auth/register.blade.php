@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid mt-5 pt-5 mb-5">
+    <div class="container-fluid mt-5 pt-5 mb-5 vh-100">
         <div class="content_register shadow bg-white mb-3">
             <div class="row">
                 <div class="col-md-6 d-lg-block d-none">
@@ -9,8 +9,8 @@
                         <img src="{{ asset('images/asset/login-asset.jpg') }}" alt="">
                     </div>
                 </div>
-                <div class="col-lg-6 px-lg-4 px-md-0 py-0">
-                    <div class="px-5 pt-4">
+                <div class="col-lg-6">
+                    <div class="px-sm-5 px-3 py-4">
                         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
                             {{-- photo profile --}}

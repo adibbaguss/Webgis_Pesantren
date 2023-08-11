@@ -14,7 +14,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area  py-3">
-                        <canvas class="w-100 h-100 mx-auto" id="chartPonpes"></canvas>
+                        <canvas class="w-100" id="chartPonpes"></canvas>
                     </div>
                 </div>
                 <div class="card-footer bg-light">
@@ -32,7 +32,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area  py-3">
-                        <canvas class="w-100 h-100 mx-auto" id="chartJumlahPonpes"></canvas>
+                        <canvas class="w-100" id="chartJumlahPonpes"></canvas>
                     </div>
                 </div>
                 <div class="card-footer bg-light">
@@ -52,7 +52,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area  py-3">
-                        <canvas class="w-100 h-100 mx-auto" id="chartStudent"></canvas>
+                        <canvas class="w-100" id="chartStudent"></canvas>
                     </div>
                 </div>
                 <div class="card-footer bg-light">

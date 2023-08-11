@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid d-grid mt-5 pt-5 vh-100">
-        <div class="content_register shadow bg-white mx-auto" style="max-width: 500px">
-            <div class="px-5 pt-4" >
+    <div class="container-fluid mt-5 pt-5">
+        <div class="content_register shadow bg-white mx-auto" style="max-width: 600px">
+            <div class="px-2 px-sm-5 pt-4" >
                 <form method="POST" action="{{ route('admin.update_profile', ['id'=>$user->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     {{-- photo profile --}}
-                    <div class="avatar-upload">
+                    <div class="avatar-upload mx-auto">
                         <div class="avatar-edit">
                             <input type='file' id="photo_profil" accept=".png, .jpg, .jpeg" name="photo_profil"
                                 class="avatar" />
@@ -95,11 +95,11 @@
 
 
 
-                        <div class="col-6 mb-4 me-0 ms-auto d-flex justify-content-between">
-                            <a href="{{ route('admin.profile', ['id'=>$user->id]) }}" class="btn btn-outline-secondary">
+                        <div class="col-6 mb-4 me-0 ms-auto d-flex justify-content-end">
+                            <a href="{{ route('admin.profile', ['id' => $user->id]) }}" class="btn btn-outline-secondary me-1">
                                 {{ __('Batal') }}
-                            </a>                                    
-                            <button type="submit" class="btn btn-success">
+                            </a>
+                            <button type="submit" class="btn btn-success ">
                                 {{ __('Perbaharui') }}
                             </button>
 
@@ -120,7 +120,7 @@
         <div class="modal-dialog ">
           <div class="modal-content crop-content border-0 shadow">
             <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+              <h5 class="modal-title">Crop Image</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body crop-body">

@@ -6,15 +6,15 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card shadow mb-4"  style="user-select: none;">
+            <div class="card shadow-sm mb-4"  style="user-select: none;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
                     <h6 class="m-0 fw-bold text-success">{{ 'Pertumbuhan Pondok Pesantren' }}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area  py-3">
-                        <canvas class="w-100 h-100 mx-auto" id="chartPonpes"></canvas>
+                    <div class="chart-area">
+                        <canvas class="w-100" id="chartPonpes"></canvas>
                     </div>
                 </div>
                 <div class="card-footer bg-light">
@@ -23,16 +23,29 @@
             </div>
         </div>
 
+        <div class="card shadow mb-4 " style="user-select: none;">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3">
+                <h6 class="m-0 fw-bold text-success">{{ 'Pemetaan Pondok Pesantren' }}</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area ">
+                    <div class="border-3" id="map"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-6">
-            <div class="card shadow mb-4"  style="user-select: none;">
+            <div class="card shadow-sm mb-4"  style="user-select: none;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
                     <h6 class="m-0 fw-bold text-success">{{ 'Jumlah Pondok Pesantren' }}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area  py-3">
-                        <canvas class="w-100 h-100 mx-auto" id="chartJumlahPonpes"></canvas>
+                    <div class="chart-area">
+                        <canvas class="w-100" id="chartJumlahPonpes"></canvas>
                     </div>
                 </div>
                 <div class="card-footer bg-light">
@@ -44,15 +57,15 @@
 
 
         <div class="col-md-6">
-            <div class="card shadow mb-4"  style="user-select: none;">
+            <div class="card shadow-sm mb-4"  style="user-select: none;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
                     <h6 class="m-0 fw-bold text-success">{{ 'Jumlah Santri di Kabupaten Batang' }}</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area  py-3">
-                        <canvas class="w-100 h-100 mx-auto" id="chartStudent"></canvas>
+                    <div class="chart-area">
+                        <canvas class="w-100" id="chartStudent"></canvas>
                     </div>
                 </div>
                 <div class="card-footer bg-light">

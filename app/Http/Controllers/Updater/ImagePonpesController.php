@@ -32,7 +32,7 @@ class ImagePonpesController extends Controller
                     }
                 }
                 // tambah data jumbroton baru
-                $this->compressImage($jumbotron, '\images\ponpes\image', $imageName);
+                $this->compressImage($jumbotron, '/images/ponpes/image', $imageName);
                 ImagePonpes::create([
                     'ponpes_id' => $request->input('ponpes_id'),
                     'image_name' => $imageName,

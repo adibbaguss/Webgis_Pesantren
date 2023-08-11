@@ -3,331 +3,327 @@
 @section('content')
     <div class="container-fluid pt-5 mt-5">
         <h2 class="mb-0 text-secondary  mb-5">{{ 'Perbaharui Data ' . $ponpes->name }}</h2>
-        <div class="container d-grid mb-5 mt-5">
-            <div class="mx-md-5 px-md-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10 bg-white shadow p-md-5">
-                        <div class="px-5 pt-4">
-                            <form method="POST" action="{{ route('updater.ponpes_update', $ponpes->id) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
+        <div class="d-flex justify-content-center">
+            <div class="bg-white shadow rounded " style="max-width:700px">
+                <div class="px-sm-5 px-3 pt-4">
+                    <form method="POST" action="{{ route('updater.ponpes_update', $ponpes->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
 
-                                <div class="row ">
-                                    {{-- <div class="col-12 mb-4">
-                                    <label for=""
-                                        class="small ms-2">{{ 'Updater/Operator : ' . $ponpes->user_id }}</label>
-                                    <select class="form-select" aria-label="Default select example" name="user_id">
-                                        @foreach ($user as $item)
-                                            @if ($item->user_role == 'updater')
-                                                <option value="{{ $item->id }}">
-                                                    {{ $item->id . ' - ' . $item->name . ' (' . $item->username . ')' }}</option>
-                                            @endif
-                                        @endforeach
+                        <div class="row ">
+                            {{-- <div class="col-12 mb-4">
+                            <label for=""
+                                class="small ms-2">{{ 'Updater/Operator : ' . $ponpes->user_id }}</label>
+                            <select class="form-select" aria-label="Default select example" name="user_id">
+                                @foreach ($user as $item)
+                                    @if ($item->user_role == 'updater')
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->id . ' - ' . $item->name . ' (' . $item->username . ')' }}</option>
+                                    @endif
+                                @endforeach
 
-                                    </select>
-                                </div> --}}
+                            </select>
+                        </div> --}}
 
-                                    <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type='file' id="photo_profil" accept=".png, .jpg, .jpeg"
-                                                name="photo_profil" class="avatar" />
-                                            <input type="hidden" name="base64image" name="base64image" id="base64image">
-                                            <label for="photo_profil"></label>
-                                        </div>
-                                        <div class="avatar-preview container2">
-                                            @php
-                                                if ($ponpes->photo_profil == null) {
-                                                    $imagePath = public_path('images/ponpes/profile/logo_ponpes_default.jpg');
-                                                    $imageUrl = asset('images/ponpes/profile/logo_ponpes_default.jpg');
-                                                } else {
-                                                    $imagePath = public_path('images/f' . $ponpes->photo_profil);
-                                                    $imageUrl = asset('images/ponpes/profile/' . $ponpes->photo_profil);
-                                                }
-                                                $imageStyle = "background-image: url('$imageUrl')";
-                                            @endphp
-
-
-                                            <div id="imagePreview" style="{{ $imageStyle }}">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                {{-- <input style="margin-top: 60px;" type="submit" class="btn btn-danger"> --}}
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 mb-4">
-                                        <label for=""
-                                            class="small ms-2">{{ 'Nomor Statistik Pondok Pesantren' }}</label>
-                                        <input id="nspp" type="number"
-                                            class="form-control @error('nspp') is-invalid @enderror" name="nspp"
-                                            value="{{ $ponpes->nspp }}" required autocomplete="nspp">
-
-                                        @error('nspp')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                            <div class="avatar-upload">
+                                <div class="avatar-edit">
+                                    <input type='file' id="photo_profil" accept=".png, .jpg, .jpeg"
+                                        name="photo_profil" class="avatar" />
+                                    <input type="hidden" name="base64image" name="base64image" id="base64image">
+                                    <label for="photo_profil"></label>
+                                </div>
+                                <div class="avatar-preview container2">
+                                    @php
+                                        if ($ponpes->photo_profil == null) {
+                                            $imagePath = public_path('images/ponpes/profile/logo_ponpes_default.jpg');
+                                            $imageUrl = asset('images/ponpes/profile/logo_ponpes_default.jpg');
+                                        } else {
+                                            $imagePath = public_path('images/f' . $ponpes->photo_profil);
+                                            $imageUrl = asset('images/ponpes/profile/' . $ponpes->photo_profil);
+                                        }
+                                        $imageStyle = "background-image: url('$imageUrl')";
+                                    @endphp
 
 
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Nama Pesantren' }}</label>
-                                        <input id="name" type="text"
-                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                            value="{{ $ponpes->name }}" required autocomplete="name">
-
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Kategori Pesantren' }}</label>
-                                        <select class="form-select" aria-label="Default select example" name="category">
-                                            <option value="{{ $ponpes->category }}">{{ $ponpes->category }}</option>
-                                            <option value="{{ 'Pesantren Salafiyah' }}">{{ 'Pesantren Salafiyah' }}
-                                            </option>
-                                            <option value="{{ 'Pesantren Khalafiyah' }}">{{ 'Pesantren Khalafiyah' }}
-                                            </option>
-                                            <option value="{{ 'Pesantren Kombinasi' }}">{{ 'Pesantren Kombinasi' }}
-                                            </option>
-                                        </select>
-
-                                        @error('category')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Nomor Telepon' }}</label>
-                                        <input id="phone_number" type="tel"
-                                            class="form-control @error('phone_number') is-invalid @enderror"
-                                            name="phone_number" value="{{ $ponpes->phone_number }}" required
-                                            autocomplete="phone_number">
-
-                                        @error('phone_number')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Link Website' }}</label>
-                                        <input id="website" type="text"
-                                            class="form-control @error('website') is-invalid @enderror" name="website"
-                                            value="{{ $ponpes->website }}" required autocomplete="website">
-
-                                        @error('website')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Alamat Email' }}</label>
-                                        <input id="email" type="tel"
-                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ $ponpes->email }}" required autocomplete="email">
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Tanggal Berdiri' }}</label>
-                                        <input id="standing_date" type="date"
-                                            class="form-control @error('standing_date') is-invalid @enderror"
-                                            name="standing_date" value="{{ $ponpes->standing_date }}" required
-                                            autocomplete="standing_date">
-
-                                        @error('standing_date')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for=""
-                                            class="small ms-2">{{ 'Pimpinan/Pengasuh Pesantren' }}</label>
-                                        <input id="pimpinan" type="text"
-                                            class="form-control @error('pimpinan') is-invalid @enderror" name="pimpinan"
-                                            value="{{ $ponpes->pimpinan }}" required autocomplete="pimpinan">
-
-                                        @error('pimpinan')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-4 d-flex">
-                                        <div class="inputan me-1 w-100">
-                                            <label for=""
-                                                class="small ms-2">{{ 'Luas Wilayah M' }}<sup>2</sup></label>
-                                            <input id="surface_area" type="number"
-                                                class="form-control @error('surface_area') is-invalid @enderror"
-                                                name="surface_area" value="{{ $ponpes->surface_area }}" required
-                                                autocomplete="surface_area">
-
-                                            @error('surface_area')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="inputan ms-1 w-100">
-                                            <label for=""
-                                                class="small ms-2">{{ 'Luas Bangunan M' }}<sup>2</sup></label>
-                                            <input id="building_area" type="number"
-                                                class="form-control @error('building_area') is-invalid @enderror"
-                                                name="building_area" value="{{ $ponpes->building_area }}" required
-                                                autocomplete="building_area">
-
-                                            @error('building_area')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Kota/Kabupaten' }}</label>
-                                        <input id="city" type="text" class="form-control"
-                                            value="{{ $ponpes->city }}" name="city" readonly>
-                                    </div>
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Kecamatan' }}</label>
-                                        <select class="form-select" aria-label="Default select example"
-                                            name="subdistrict">
-                                            <option value="{{ $ponpes->subdistrict }}">{{ $ponpes->subdistrict }}
-                                            </option>
-                                            @foreach ($kecamatanOptions as $kecamatan)
-                                                <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        @error('status')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Kode Pos' }}</label>
-                                        <input id="postal_code" type="number"
-                                            class="form-control @error('postal_code') is-invalid @enderror"
-                                            name="postal_code" value="{{ $ponpes->postal_code }}" required
-                                            autocomplete="postal_code">
-
-                                        @error('postal_code')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Alamat' }}</label>
-                                        <input id="address" type="text"
-                                            class="form-control @error('address') is-invalid @enderror" name="address"
-                                            value="{{ $ponpes->address }}" required autocomplete="address">
-
-                                        @error('address')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-4">
-                                        <label for=""
-                                            class="small ms-2">{{ 'Status : (' . $ponpes->status . ')' }}</label>
-                                        <select class="form-select" aria-label="Default select example" name="status">
-                                            <option value="active">Active</option>
-                                            <option value="non-acitive">Non-Active</option>
-                                        </select>
-
-                                        @error('status')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-4 d-flex">
-                                        <div class="inputan me-1 w-100">
-                                            <label for="" class="small ms-2">{{ 'Latitude' }}</label>
-                                            <input id="latitude" type="text"
-                                                class="form-control @error('latitude') is-invalid @enderror"
-                                                name="latitude" value="{{ $ponpes->latitude }}" required
-                                                autocomplete="latitude">
-
-                                            @error('latitude')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="inputan ms-1 w-100">
-                                            <label for="" class="small ms-2">{{ 'Longitude' }}</label>
-                                            <input id="longitude" type="text"
-                                                class="form-control @error('longitude') is-invalid @enderror"
-                                                name="longitude" value="{{ $ponpes->longitude }}" required
-                                                autocomplete="longitude">
-
-                                            @error('longitude')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 mb-4 ">
-                                        <div id="map" style="height: 400px;"></div>
-                                    </div>
-
-
-                                    <div class="col-6 me-0 ms-auto mb-4 d-flex justify-content-end">
-                                        <a href="{{ route('updater.ponpes_view', ['id' => $ponpes->id]) }}"
-                                            class="btn btn-outline-secondary">
-                                            {{ __('Batal') }}
-                                        </a>
-                                        <button type="submit" class="btn btn-success ms-2">
-                                            {{ __('Perbaharui') }}
-                                        </button>
+                                    <div id="imagePreview" style="{{ $imageStyle }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        {{-- <input style="margin-top: 60px;" type="submit" class="btn btn-danger"> --}}
                                     </div>
 
                                 </div>
+                            </div>
 
-                            </form>
+                            <div class="col-12 mb-4">
+                                <label for=""
+                                    class="small ms-2">{{ 'Nomor Statistik Pondok Pesantren' }}</label>
+                                <input id="nspp" type="number"
+                                    class="form-control @error('nspp') is-invalid @enderror" name="nspp"
+                                    value="{{ $ponpes->nspp }}" required autocomplete="nspp">
+
+                                @error('nspp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Nama Pesantren' }}</label>
+                                <input id="name" type="text"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ $ponpes->name }}" required autocomplete="name">
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Kategori Pesantren' }}</label>
+                                <select class="form-select" aria-label="Default select example" name="category">
+                                    <option value="{{ $ponpes->category }}">{{ $ponpes->category }}</option>
+                                    <option value="{{ 'Pesantren Salafiyah' }}">{{ 'Pesantren Salafiyah' }}
+                                    </option>
+                                    <option value="{{ 'Pesantren Khalafiyah' }}">{{ 'Pesantren Khalafiyah' }}
+                                    </option>
+                                    <option value="{{ 'Pesantren Kombinasi' }}">{{ 'Pesantren Kombinasi' }}
+                                    </option>
+                                </select>
+
+                                @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Nomor Telepon' }}</label>
+                                <input id="phone_number" type="tel"
+                                    class="form-control @error('phone_number') is-invalid @enderror"
+                                    name="phone_number" value="{{ $ponpes->phone_number }}" required
+                                    autocomplete="phone_number">
+
+                                @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Link Website' }}</label>
+                                <input id="website" type="text"
+                                    class="form-control @error('website') is-invalid @enderror" name="website"
+                                    value="{{ $ponpes->website }}" required autocomplete="website">
+
+                                @error('website')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Alamat Email' }}</label>
+                                <input id="email" type="tel"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ $ponpes->email }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Tanggal Berdiri' }}</label>
+                                <input id="standing_date" type="date"
+                                    class="form-control @error('standing_date') is-invalid @enderror"
+                                    name="standing_date" value="{{ $ponpes->standing_date }}" required
+                                    autocomplete="standing_date">
+
+                                @error('standing_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-12 mb-4">
+                                <label for=""
+                                    class="small ms-2">{{ 'Pimpinan/Pengasuh Pesantren' }}</label>
+                                <input id="pimpinan" type="text"
+                                    class="form-control @error('pimpinan') is-invalid @enderror" name="pimpinan"
+                                    value="{{ $ponpes->pimpinan }}" required autocomplete="pimpinan">
+
+                                @error('pimpinan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-4 d-flex">
+                                <div class="inputan me-1 w-100">
+                                    <label for=""
+                                        class="small ms-2">{{ 'Luas Wilayah M' }}<sup>2</sup></label>
+                                    <input id="surface_area" type="number"
+                                        class="form-control @error('surface_area') is-invalid @enderror"
+                                        name="surface_area" value="{{ $ponpes->surface_area }}" required
+                                        autocomplete="surface_area">
+
+                                    @error('surface_area')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="inputan ms-1 w-100">
+                                    <label for=""
+                                        class="small ms-2">{{ 'Luas Bangunan M' }}<sup>2</sup></label>
+                                    <input id="building_area" type="number"
+                                        class="form-control @error('building_area') is-invalid @enderror"
+                                        name="building_area" value="{{ $ponpes->building_area }}" required
+                                        autocomplete="building_area">
+
+                                    @error('building_area')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Kota/Kabupaten' }}</label>
+                                <input id="city" type="text" class="form-control"
+                                    value="{{ $ponpes->city }}" name="city" readonly>
+                            </div>
+
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Kecamatan' }}</label>
+                                <select class="form-select" aria-label="Default select example"
+                                    name="subdistrict">
+                                    <option value="{{ $ponpes->subdistrict }}">{{ $ponpes->subdistrict }}
+                                    </option>
+                                    @foreach ($kecamatanOptions as $kecamatan)
+                                        <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Kode Pos' }}</label>
+                                <input id="postal_code" type="number"
+                                    class="form-control @error('postal_code') is-invalid @enderror"
+                                    name="postal_code" value="{{ $ponpes->postal_code }}" required
+                                    autocomplete="postal_code">
+
+                                @error('postal_code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Alamat' }}</label>
+                                <input id="address" type="text"
+                                    class="form-control @error('address') is-invalid @enderror" name="address"
+                                    value="{{ $ponpes->address }}" required autocomplete="address">
+
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label for=""
+                                    class="small ms-2">{{ 'Status : (' . $ponpes->status . ')' }}</label>
+                                <select class="form-select" aria-label="Default select example" name="status">
+                                    <option value="active">Active</option>
+                                    <option value="non-acitive">Non-Active</option>
+                                </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 mb-4 d-flex">
+                                <div class="inputan me-1 w-100">
+                                    <label for="" class="small ms-2">{{ 'Latitude' }}</label>
+                                    <input id="latitude" type="text"
+                                        class="form-control @error('latitude') is-invalid @enderror"
+                                        name="latitude" value="{{ $ponpes->latitude }}" required
+                                        autocomplete="latitude">
+
+                                    @error('latitude')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="inputan ms-1 w-100">
+                                    <label for="" class="small ms-2">{{ 'Longitude' }}</label>
+                                    <input id="longitude" type="text"
+                                        class="form-control @error('longitude') is-invalid @enderror"
+                                        name="longitude" value="{{ $ponpes->longitude }}" required
+                                        autocomplete="longitude">
+
+                                    @error('longitude')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-4 ">
+                                <div id="map" style="height: 400px;"></div>
+                            </div>
+
+
+                            <div class="col-6 me-0 ms-auto mb-4 d-flex justify-content-end">
+                                <a href="{{ route('updater.ponpes_view', ['id' => $ponpes->id]) }}"
+                                    class="btn btn-outline-secondary">
+                                    {{ __('Batal') }}
+                                </a>
+                                <button type="submit" class="btn btn-success ms-2">
+                                    {{ __('Perbaharui') }}
+                                </button>
+                            </div>
+
                         </div>
-                    </div>
+
+                    </form>
                 </div>
             </div>
         </div>

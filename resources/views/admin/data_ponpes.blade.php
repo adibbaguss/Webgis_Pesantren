@@ -52,9 +52,9 @@
 
             @if (count($ponpes) > 0)
                 @foreach ($ponpes as $item)
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-3 mx-0">
                         <a href="{{ route('admin.ponpes_view', ['id' => $item->id]) }}">
-                            <div class="card border-0 shadow h-100">
+                            <div class="card border-0 shadow-sm">
                                 @if ($item->photo_profil != null)
                                     <img src="{{ asset('/images/ponpes/profile/' . $item->photo_profil) }}"
                                         class="card-img-top" alt="Image Pondok Pesantren">
@@ -68,7 +68,7 @@
 
                                 </div>
                                 <div class="card-footer bg-white border-0">
-                                    <p class="card-text mb-0">{{ $item->category }}</p>
+                                    <p class="card-text small fw-bold mb-0">{{ $item->category }}</p>
                                     <small class="text-muted">{{ $item->subdistrict . ', ' . $item->city }}</small>
                                 </div>
                             </div>
