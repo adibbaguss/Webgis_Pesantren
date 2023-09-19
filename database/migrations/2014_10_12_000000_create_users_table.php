@@ -21,7 +21,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('photo_profil')->nullable();
             $table->string('phone_number')->nullable();
-            $table->enum('user_role', ['viewer', 'updater', 'admin'])->default('viewer');
+            $table->enum('user_role', ['pelapor', 'admin pesantren', 'admin kemenag'])->default('pelapor');
+            $table->string('foto_ktp')->nullable();
+            $table->string('selfie_ktp')->nullable();
+            $table->enum('status', ['not confirmed', 'active', 'blocked'])->default('not confirmed');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

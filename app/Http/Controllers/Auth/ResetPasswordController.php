@@ -32,14 +32,14 @@ class ResetPasswordController extends Controller
         $user = Auth::User();
 
         // Mengarahkan redirect berdasarkan role pengguna
-        if ($user->user_role === 'admin') {
-            return route('admin.dashboard');
-        } elseif ($user->user_role === 'updater') {
-            return route('updater.dashboard', ['id' => $user->id]);
-        } elseif ($user->user_role === 'viewer') {
-            return route('viewer.map_view');
+        if ($user->user_role === 'admin_kemenag') {
+            return route('admin_kemenag.dashboard');
+        } elseif ($user->user_role === 'admin_pesantren') {
+            return route('admin_pesantren.dashboard', ['id' => $user->id]);
+        } elseif ($user->user_role === 'pelapor') {
+            return route('pelapor.map_view');
         } else {
-            return route('guest.map_view');
+            return route('pengunjung.map_view');
         }
     }
 }

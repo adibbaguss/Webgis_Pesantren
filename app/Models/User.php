@@ -23,6 +23,9 @@ class User extends Authenticatable
         'photo_profil',
         'phone_number',
         'user_role',
+        'foto_ktp',
+        'selfie_ktp',
+        'status',
     ];
 
     /**

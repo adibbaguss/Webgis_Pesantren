@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('reporting_code')->unique;
             $table->string('title');
             $table->text('description');
-            $table->date('reporting_date');
-            $table->enum('status', ['baru', 'dalam proses', 'selesai', 'ditolak'])->default('baru');
             $table->timestamps();
 
             //relasi

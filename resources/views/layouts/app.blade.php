@@ -93,18 +93,18 @@
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in ms-auto"
                         aria-labelledby="userDropdown">
-                        @if (Auth::User()->user_role == 'admin')
-                            <a class="dropdown-item" href="{{ route('admin.profile', ['id' => Auth::user()->id]) }}">
+                        @if (Auth::User()->user_role == 'admin kemenag')
+                            <a class="dropdown-item" href="{{ route('admin_kemenag.profile', ['id' => Auth::user()->id]) }}">
                                 <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                                 {{ 'Profil' }}
                             </a>
-                        @elseif(Auth::User()->user_role == 'updater')
-                            <a class="dropdown-item" href="{{ route('updater.profile', ['id' => Auth::user()->id]) }}">
+                        @elseif(Auth::User()->user_role == 'admin pesantren')
+                            <a class="dropdown-item" href="{{ route('admin_pesantren.profile', ['id' => Auth::user()->id]) }}">
                                 <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                                 {{ 'Profil' }}
                             </a>
-                        @elseif(Auth::User()->user_role == 'viewer')
-                            <a class="dropdown-item" href="{{ route('viewer.profile', ['id' => Auth::user()->id]) }}">
+                        @elseif(Auth::User()->user_role == 'pelapor')
+                            <a class="dropdown-item" href="{{ route('pelapor.profile', ['id' => Auth::user()->id]) }}">
                                 <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                                 {{ 'Profil' }}
                             </a>
@@ -129,27 +129,27 @@
                             <span class="nav_logo-name text-capitalize">Guest</span>
                         </a>
                         <div class="nav_list">
-                            <a href="{{ route('guest.map_view') }}"
-                                class="nav_link text-decoration-none {{ request()->is('guest/map_view*') ? 'active' : '' }}">
+                            <a href="{{ route('pengunjung.map_view') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pengunjung/map_view*') ? 'active' : '' }}">
                                 <i class="bx bx-map-alt nav_icon"></i>
                                 <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                             </a>
 
-                            <a href="{{ route('guest.data_ponpes') }}"
-                                class="nav_link text-decoration-none {{ request()->is('guest/data_ponpes*') ? 'active' : '' }}">
+                            <a href="{{ route('pengunjung.data_ponpes') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pengunjung/data_ponpes*') ? 'active' : '' }}">
                                 <i class="bx bx-buildings nav_icon"></i>
                                 <span class="nav_name">{{ 'Data Pesantren' }}</span>
                             </a>
 
 
-                            <a href="{{ route('guest.data_statistik') }}"
-                                class="nav_link text-decoration-none {{ request()->is('guest/data_statistik*') ? 'active' : '' }}"">
+                            <a href="{{ route('pengunjung.data_statistik') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pengunjung/data_statistik*') ? 'active' : '' }}">
                                 <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
                                 <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
                             </a>
 
-                            <a href="/guest/panduan"
-                                class="nav_link text-decoration-none {{ request()->is('guest/panduan*') ? 'active' : '' }}"">
+                            <a href="/pengunjung/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('pengunjung/panduan*') ? 'active' : '' }}">
                                 <i class='bx bx-info-circle nav_icon'></i>
                                 <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                             </a>
@@ -157,120 +157,126 @@
 
                         </div>
                     </div>
-                @elseif(Auth::User()->user_role == 'admin')
+                @elseif(Auth::User()->user_role == 'admin kemenag')
                     <div>
-                        <a href="{{ route('admin.dashboard') }}" class="nav_logo text-decoration-none">
+                        <a href="{{ route('admin_kemenag.dashboard') }}" class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
                                 style="width: 25px">
                             <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
                         </a>
                         <div class="nav_list">
-                            <a href="{{ route('admin.dashboard') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
+                            <a href="{{ route('admin_kemenag.dashboard') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/dashboard*') ? 'active' : '' }}">
                                 <i class="bx bx-grid-alt nav_icon"></i>
                                 <span class="nav_name">{{ 'Dashboard' }}</span>
                             </a>
-                            <a href="{{ route('admin.map_view') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin/map_view*') ? 'active' : '' }}">
+                            <a href="{{ route('admin_kemenag.map_view') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/map_view*') ? 'active' : '' }}">
                                 <i class="bx bx-map-alt nav_icon"></i>
                                 <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                             </a>
 
-                            <a href="{{ route('admin.data_ponpes') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin/data_ponpes*') ? 'active' : '' }}">
+                            <a href="{{ route('admin_kemenag.data_ponpes') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_ponpes*') ? 'active' : '' }}">
                                 <i class="bx bx-buildings nav_icon"></i>
                                 <span class="nav_name">{{ 'Data Pesantren' }}</span>
                             </a>
 
-                            <a href="{{ route('admin.data_account') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin/data_account*') ? 'active' : '' }}">
+                            <a href="{{ route('admin_kemenag.data_admin_pesantren') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_admin_pesantren*') ? 'active' : '' }}">
                                 <i class="bx bxs-user-account nav_icon"></i>
-                                <span class="nav_name">{{ 'Akun Pengguna' }}</span>
+                                <span class="nav_name">{{ 'Akun Admin Ponpes' }}</span>
                             </a>
 
-                            <a href="{{ route('admin.data_statistik') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin/data_statistik*') ? 'active' : '' }}"">
+                            <a href="{{ route('admin_kemenag.data_pelapor') }}"
+                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_pelapor*') ? 'active' : '' }}">
+                            <i class="bx bxs-user-account nav_icon"></i>
+                            <span class="nav_name">{{ 'Akun Pelapor' }}</span>
+                        </a>
+
+                            <a href="{{ route('admin_kemenag.data_statistik') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_statistik*') ? 'active' : '' }}">
                                 <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
                                 <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
                             </a>
 
-                            <a href="{{ route('admin.data_report') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin/data_report*') ? 'active' : '' }}"">
+                            <a href="{{ route('admin_kemenag.data_report') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_report*') ? 'active' : '' }}">
                                 <i class="bx bxs-report nav_icon"></i>
                                 <span class="nav_name">{{ 'Pelaporan' }}</span>
                             </a>
 
-                            <a href="/admin/panduan"
-                                class="nav_link text-decoration-none {{ request()->is('admin/panduan*') ? 'active' : '' }}"">
+                            <a href="/admin kemenag/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/panduan*') ? 'active' : '' }}">
                                 <i class='bx bx-info-circle nav_icon'></i>
                                 <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                             </a>
 
                         </div>
                     </div>
-                @elseif(Auth::User()->user_role == 'updater')
+                @elseif(Auth::User()->user_role == 'admin pesantren')
                     <div>
-                        <a href="{{ route('updater.dashboard', ['id' => Auth::User()->id]) }}"
+                        <a href="{{ route('admin_pesantren.dashboard', ['id' => Auth::User()->id]) }}"
                             class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
                                 style="width: 25px">
                             <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
                         </a>
                         <div class="nav_list">
-                            <a href="{{ route('updater.dashboard', ['id' => Auth::User()->id]) }}"
-                                class="nav_link text-decoration-none {{ request()->is('updater/dashboard*') ? 'active' : '' }}">
+                            <a href="{{ route('admin_pesantren.dashboard', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin pesantren/dashboard*') ? 'active' : '' }}">
                                 <i class="bx bx-grid-alt nav_icon"></i>
                                 <span class="nav_name">{{ 'Dashboard' }}</span>
                             </a>
-                            <a href="{{ route('updater.ponpes_view', ['id' => Auth::User()->id]) }}"
-                                class="nav_link text-decoration-none {{ request()->is('updater/ponpes_view*') ? 'active' : '' }}">
+                            <a href="{{ route('admin_pesantren.ponpes_view', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin pesantren/ponpes_view*') ? 'active' : '' }}">
                                 <i class="bx bx-buildings nav_icon"></i>
                                 <span class="nav_name">{{ 'Data Pesantren' }}</span>
                             </a>
 
-                            <a href="/updater/panduan"
-                                class="nav_link text-decoration-none {{ request()->is('updater/panduan*') ? 'active' : '' }}"">
+                            <a href="/admin pesantren/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('admin pesantren/panduan*') ? 'active' : '' }}">
                                 <i class='bx bx-info-circle nav_icon'></i>
                                 <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                             </a>
 
                         </div>
                     </div>
-                @elseif(Auth::User()->user_role == 'viewer')
+                @elseif(Auth::User()->user_role == 'pelapor')
                     <div>
                         <a href="" class="nav_logo text-decoration-none">
                             <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
                                 style="width: 25px">
-                            <span class="nav_logo-name text-capitalize">viewer</span>
+                            <span class="nav_logo-name text-capitalize">pelapor</span>
                         </a>
                         <div class="nav_list">
-                            <a href="{{ route('viewer.map_view') }}"
-                                class="nav_link text-decoration-none {{ request()->is('viewer/map_view*') ? 'active' : '' }}">
+                            <a href="{{ route('pelapor.map_view') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/map_view*') ? 'active' : '' }}">
                                 <i class="bx bx-map-alt nav_icon"></i>
                                 <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                             </a>
 
-                            <a href="{{ route('viewer.data_ponpes') }}"
-                                class="nav_link text-decoration-none {{ request()->is('viewer/data_ponpes*') ? 'active' : '' }}">
+                            <a href="{{ route('pelapor.data_ponpes') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/data_ponpes*') ? 'active' : '' }}">
                                 <i class="bx bx-buildings nav_icon"></i>
                                 <span class="nav_name">{{ 'Data Pesantren' }}</span>
                             </a>
 
 
-                            <a href="{{ route('viewer.data_statistik') }}"
-                                class="nav_link text-decoration-none {{ request()->is('viewer/data_statistik*') ? 'active' : '' }}"">
+                            <a href="{{ route('pelapor.data_statistik') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/data_statistik*') ? 'active' : '' }}"">
                                 <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
                                 <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
                             </a>
 
-                            <a href="{{ route('viewer.data_report', ['id' => Auth::User()->id]) }}"
-                                class="nav_link text-decoration-none {{ request()->is('viewer/data_report*') ? 'active' : '' }}"">
+                            <a href="{{ route('pelapor.data_report', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/data_report*') ? 'active' : '' }}"">
                                 <i class="bx bxs-report nav_icon"></i>
                                 <span class="nav_name">{{ 'Riwayat Laporan' }}</span>
                             </a>
 
-                            <a href="/viewer/panduan"
-                                class="nav_link text-decoration-none {{ request()->is('viewer/panduan*') ? 'active' : '' }}"">
+                            <a href="/pelapor/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/panduan*') ? 'active' : '' }}"">
                                 <i class='bx bx-info-circle nav_icon'></i>
                                 <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                             </a>
@@ -319,6 +325,13 @@
     </div>
 
 
+    {{-- button back top --}}
+
+    <button class="btn btn-sm btn-secondary opacity-75 rounded-circle position-fixed bottom-0 end-0 translate-middle d-none" onclick="scrollToTop()" id="back-to-up">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+      </button>
+      {{-- end button back top --}}
+
     <!-- Footer -->
     <footer class="footer border-top border-secondary mt-5 py-3">
         <div class="container text-center">
@@ -327,6 +340,7 @@
     </footer>
 
     <!-- End Footer -->
+
 
 </body>
 
@@ -381,6 +395,25 @@
 
         // Your code to run since DOM is loaded and ready
     });
+</script>
+
+
+<script>
+    window.onscroll = () => {
+  toggleTopButton();
+}
+function scrollToTop(){
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function toggleTopButton() {
+  if (document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20) {
+    document.getElementById('back-to-up').classList.remove('d-none');
+  } else {
+    document.getElementById('back-to-up').classList.add('d-none');
+  }
+}
 </script>
 @stack('javascript')
 

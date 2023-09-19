@@ -2,20 +2,20 @@
 
 @section('content')
 
-@if (session('success'))
-<div class="alert alert-success mt-5 mb-0">
-    {{ session('success') }}
-</div>
-@endif
 
-@if (session('error'))
-<div class="alert alert-danger mt-5 mb-0">
-    {{ session('error') }}
-</div>
-@endif
 
-    <div class="container-fluid mt-5 pt-5 vh-100">
-        
+    <div class="container-fluid mt-5 pt-5">
+        @if (session('success'))
+        <div class="alert alert-success mt-5 mb-4">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="alert alert-danger mt-5 mb-4">
+            {{ session('error') }}
+        </div>
+        @endif
 
         <div class="content_login shadow  my-auto bg-white">
             <div class="row">
@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="col-12 text-center" style="font-size: 12px">
-                                <span class="text-secondary">Belum Punya Akun?</span>
+                                <span class="text-secondary">Belum Punya Akun Pelapor?</span>
                                 <a class="fw-bold text-decoration-none text-dark " href="{{ route('register') }}">Daftar</a>
                             </div>
                         </div>

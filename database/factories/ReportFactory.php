@@ -27,15 +27,11 @@ class ReportFactory extends Factory
         $faker = faker::create();
         return [
             'ponpes_id' => $faker->numberBetween(1, 3),
-
-            'user_id' => 5,
-
+            'user_id' => 3,
             'category_id' => $faker->numberBetween(1, 5),
             'reporting_code' => RandomIdGenerator::generateUniqueId(),
             'title' => $faker->sentence(2),
             'description' => $faker->text(100),
-            'reporting_date' => $faker->date(),
-            'status' => $faker->randomElement(['baru', 'dalam proses', 'selesai', 'ditolak']),
         ];
     }
 }

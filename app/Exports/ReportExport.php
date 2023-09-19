@@ -6,50 +6,87 @@ use App\Models\Report;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ReportExport implements FromCollection, WithHeadings, WithMapping
+class ReportExport implements FromCollection, WithHeadings, WithMapping, WithStyles
 {
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Report::select('reports.id', 'reports.reporting_code', 'reports.reporting_date', 'reports.title', 'reports.description', 'reports.status', 'category_report.name as category_name', 'ponpes.name as ponpes_name', 'users.name as user_name')
+        return Report::select(
+            'rh.date as tanggal',
+            'reports.reporting_code as kode',
+            'users.name as pelapor',
+            'ponpes.name as pesantren',
+            'category_report.name as kategori',
+            'reports.title as judul',
+            'reports.description as deskripsi',
+
+            'rh.status as status',
+            'rh.information as keterangan'
+        )
             ->join('category_report', 'reports.category_id', '=', 'category_report.id')
             ->join('ponpes', 'reports.ponpes_id', '=', 'ponpes.id')
             ->join('users', 'reports.user_id', '=', 'users.id')
-            ->get();
+            ->leftJoin('report_histories as rh', 'reports.id', '=', 'rh.report_id')
+            ->get()
+            ->sortBy('tanggal');
     }
+
     public function headings(): array
     {
         return [
             'No',
-            'Kode Pelaporan',
-            'Tanggal Masuk',
-            'Palapor',
+            'Tanggal Diubah',
+            'Kode',
+            'Nama Pelapor',
             'Pesantren',
             'Kategori',
             'Judul',
             'Deskripsi',
-            'Status',
+            'Status Terakhir',
+            'Keterangan',
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        // Define the border style for the headings
+        $styleArray = [
+            'borders' => [
+                'outline' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ];
+
+        // Apply the style to the entire heading row (row 1)
+        $sheet->getStyle('A1:I1')->applyFromArray($styleArray);
+
+        return [
+            1 => ['font' => ['bold' => true]], // Make the heading row bold
         ];
     }
 
     public function map($report): array
     {
-        // Kustomisasi urutan data di sini
         static $i = 1;
         return [
             $i++,
-            $report->reporting_code,
-            $report->reporting_date,
-            $report->user_name,
-            $report->ponpes_name,
-            $report->category_name,
-            $report->title,
-            $report->description,
+            $report->tanggal,
+            $report->kode,
+            $report->pelapor,
+            $report->pesantren,
+            $report->kategori,
+            $report->judul,
+            $report->deskripsi,
             $report->status,
-
+            $report->keterangan,
         ];
     }
+
 }

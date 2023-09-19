@@ -43,20 +43,32 @@ class LoginController extends Controller
 
     public function attemptLogin(Request $request)
     {
-        return Auth::attempt($request->only('email', 'password', 'user_role'));
+        return Auth::attempt($request->only('email', 'password', 'user_role', 'status'));
     }
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->user_role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->user_role === 'updater') {
-            return redirect()->route('updater.dashboard', ['id' => $user->id]);
-        } elseif ($user->user_role === 'viewer') {
-            return redirect()->route('viewer.map_view', ['id' => $user->id]);
+
+        if ($user->status === 'not confirmed') {
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Akun anda belum aktif, harap tunggu konfirmasi dari Admin');
+        } elseif ($user->status === 'blocked') {
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Akun anda diblokir');
+        } elseif ($user->status === 'active') {
+            if ($user->user_role === 'admin kemenag') {
+                return redirect()->route('admin_kemenag.dashboard')->with('success', 'Selamat anda berhasil login');
+            } elseif ($user->user_role === 'admin pesantren') {
+                return redirect()->route('admin_pesantren.dashboard', ['id' => $user->id])->with('success', 'Selamat anda berhasil login');
+            } elseif ($user->user_role === 'pelapor') {
+                return redirect()->route('pelapor.map_view', ['id' => $user->id])->with('success', 'Selamat anda berhasil login');
+            } else {
+                return redirect()->route('login')->with('error', 'Gagal masuk, ada kesalahan');
+            }
         } else {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('error', 'Gagal masuk, ada kesalahan');
         }
+
     }
 
 // logout

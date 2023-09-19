@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\CategoryReport;
+use App\Models\Ponpes;
+use App\Models\ReportHistory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,5 +40,10 @@ class Report extends Model
     public function category()
     {
         return $this->belongsTo(CategoryReport::class, 'category_id');
+    }
+
+    public function reportHistories()
+    {
+        return $this->hasMany(ReportHistory::class, 'report_id');
     }
 }
