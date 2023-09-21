@@ -111,7 +111,7 @@
             {{-- end slick js --}}
 
                 {{-- dropdown info --}}
-                <div class="col-12 d-md-none d-block ">
+                <div class="col-12 d-md-block d- ">
                     <div class="row">
                         <div class="col-12 mb-3">
                             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -190,29 +190,82 @@
                                                 <table class="table table-bordered border-dark">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <th scope="col">{{ 'No' }}</th>
                                                             <th scope="col">{{ 'Fasilitas' }}</th>
                                                             <th scope="col">{{ 'Jumlah' }}</th>
                                                         </tr>
                                                     </thead>
+                                                    @foreach ($facility as $item)
                                                     <tbody>
-                                                        @php
-                                                            $no = 1;
-                                                        @endphp
-                                                        @forelse ($facility as $item)
-                                                            <tr>
-                                                                <th class="text-center" scope="row">{{ $no++ }}
-                                                                </th>
-                                                                <td>{{ $item->name }}</td>
-                                                                <td class="text-center">{{ $item->count }}</td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="3" class="text-center bg-secondary text-white">
-                                                                    {{ 'Belum diisi' }}</td>
-                                                            </tr>
-                                                        @endforelse
+                                                        <tr>
+                                                            <td>Asrama Laki-laki</td>
+                                                            <td class="text-center">{{ $item->asrama_lk }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Asrama Perempuan</td>
+                                                            <td class="text-center">{{ $item->asrama_pr }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Masjid</td>
+                                                            <td class="text-center">{{ $item->masjid }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Aula Kegiatan</td>
+                                                            <td class="text-center">{{ $item->aula_kegiatan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ruang Pembelajaran</td>
+                                                            <td class="text-center">{{ $item->ruang_pembelajaran }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Perpustakaan</td>
+                                                            <td class="text-center">{{ $item->perpustakaan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kantor Pengajar</td>
+                                                            <td class="text-center">{{ $item->kantor_pengajar }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Dapur</td>
+                                                            <td class="text-center">{{ $item->dapur }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kantin</td>
+                                                            <td class="text-center">{{ $item->kantin }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tempat Olahraga</td>
+                                                            <td class="text-center">{{ $item->tempat_olahraga }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kamar Mandi</td>
+                                                            <td class="text-center">{{ $item->kamar_mandi }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ruang Kesehatan</td>
+                                                            <td class="text-center">{{ $item->ruang_kesehatan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kamar Pengajar</td>
+                                                            <td class="text-center">{{ $item->kamar_pengajar }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lab Komputer</td>
+                                                            <td class="text-center">{{ $item->lab_komputer }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lapangan Pertanian</td>
+                                                            <td class="text-center">{{ $item->lapangan_pertanian }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lapangan Pertenakan</td>
+                                                            <td class="text-center">{{ $item->lapangan_pertenakan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Laundry</td>
+                                                            <td class="text-center">{{ $item->laundry }}</td>
+                                                        </tr>
                                                     </tbody>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                         </div>
@@ -552,30 +605,82 @@
                                         <table class="table table-bordered border-dark">
                                             <thead>
                                                 <tr class="text-center">
-                                                    <th scope="col">{{ 'No' }}</th>
                                                     <th scope="col">{{ 'Fasilitas' }}</th>
                                                     <th scope="col">{{ 'Jumlah' }}</th>
                                                 </tr>
                                             </thead>
+                                            @foreach ($facility as $item)
                                             <tbody>
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-                                                @forelse ($facility as $item)
-                                                    <tr>
-                                                        <th class="text-center" scope="row">{{ $no++ }}
-                                                        </th>
-                                                        <td>{{ $item->name }}</td>
-                                                        <td class="text-center">{{ $item->count }}</td>
-                                                    </tr>
-                                                @empty
-                                                    <tr>
-                                                        <td colspan="3"
-                                                            class="text-center bg-secondary text-white">
-                                                            {{ 'Belum diisi' }}</td>
-                                                    </tr>
-                                                @endforelse
+                                                <tr>
+                                                    <td>Asrama Laki-laki</td>
+                                                    <td class="text-center">{{ $item->asrama_lk }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Asrama Perempuan</td>
+                                                    <td class="text-center">{{ $item->asrama_pr }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Masjid</td>
+                                                    <td class="text-center">{{ $item->masjid }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Aula Kegiatan</td>
+                                                    <td class="text-center">{{ $item->aula_kegiatan }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ruang Pembelajaran</td>
+                                                    <td class="text-center">{{ $item->ruang_pembelajaran }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Perpustakaan</td>
+                                                    <td class="text-center">{{ $item->perpustakaan }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kantor Pengajar</td>
+                                                    <td class="text-center">{{ $item->kantor_pengajar }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dapur</td>
+                                                    <td class="text-center">{{ $item->dapur }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kantin</td>
+                                                    <td class="text-center">{{ $item->kantin }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tempat Olahraga</td>
+                                                    <td class="text-center">{{ $item->tempat_olahraga }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kamar Mandi</td>
+                                                    <td class="text-center">{{ $item->kamar_mandi }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ruang Kesehatan</td>
+                                                    <td class="text-center">{{ $item->ruang_kesehatan }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kamar Pengajar</td>
+                                                    <td class="text-center">{{ $item->kamar_pengajar }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lab Komputer</td>
+                                                    <td class="text-center">{{ $item->lab_komputer }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lapangan Pertanian</td>
+                                                    <td class="text-center">{{ $item->lapangan_pertanian }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lapangan Pertenakan</td>
+                                                    <td class="text-center">{{ $item->lapangan_pertenakan }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Laundry</td>
+                                                    <td class="text-center">{{ $item->laundry }}</td>
+                                                </tr>
                                             </tbody>
+                                            @endforeach
                                         </table>
                                     </div>
                                 </div>
@@ -834,13 +939,13 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <small class="fw-bold">Pelapor</small><br>
-                                    <span>{{ $viewer->name }}</span>
+                                    <span>{{ $pelapor->name }}</span>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <small class="fw-bold">Nama Pesantren</small><br>
                                     <span>{{ $ponpes->name }}</span>
                                     <input type="text" name="ponpes_id" value="{{ $ponpes->id }}" hidden>
-                                    <input type="text" name="user_id" value="{{ $viewer->id }}" hidden>
+                                    <input type="text" name="user_id" value="{{ $pelapor->id }}" hidden>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <small class="fw-bold">Kategori Laporan</small>

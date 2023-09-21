@@ -94,12 +94,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <a href="/viewer/ponpes_export_xlsx" class="text-deocartion-none btn btn-outline-success p-3">
+                    <a href="/pelapor/ponpes_export_xlsx" class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-excel fs-1"></i>
                         {{ 'Cetak Excel' }}
                     </a>
 
-                    <a href="/viewer/ponpes_export_csv" class="text-deocartion-none btn btn-outline-success p-3">
+                    <a href="/pelapor/ponpes_export_csv" class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-csv fs-1"></i>
                         {{ 'Cetak CSV' }}
                     </a>

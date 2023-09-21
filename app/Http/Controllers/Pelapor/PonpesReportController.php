@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Pelapor;
 use App\Helpers\RandomIdGenerator;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
+use App\Models\ReportHistory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PonpesReportController extends Controller
 {
@@ -19,27 +21,43 @@ class PonpesReportController extends Controller
             'category_id' => 'required|max:20|',
             'title' => 'required|string',
             'description' => 'required|string|max:254',
-
         ]);
 
-        // input
+        try {
+            // Generate a reporting code
+            $reporting_code = RandomIdGenerator::generateUniqueId();
 
-        $reporting_code = RandomIdGenerator::generateUniqueId();
-        $report = new Report([
-            'ponpes_id' => $request->input('ponpes_id'),
-            'user_id' => $request->input('user_id'),
-            'category_id' => $request->input('category_id'),
-            'reporting_code' => $reporting_code,
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'reporting_date' => Carbon::now(),
-        ]);
+            // Create a new report record
+            $report = new Report([
+                'ponpes_id' => $request->input('ponpes_id'),
+                'user_id' => $request->input('user_id'),
+                'category_id' => $request->input('category_id'),
+                'reporting_code' => $reporting_code,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+            ]);
 
-        // Save
-        $report->save();
-        // dd($report);
+            // Save the report
+            $report->save();
 
-        return redirect()->back()->with('success', 'Berhasil Melakukan Laporan');
+            // Create a new report history entry
+            $reportHistory = new ReportHistory([
+                'report_id' => $report->id,
+                'date' => Carbon::now(),
+                'information' => 'Laporan baru dibuat',
+
+            ]);
+
+            // Save the report history
+            $reportHistory->save();
+
+            // Redirect with a success message
+            return redirect()->back()->with('success', 'Berhasil Melakukan Laporan');
+        } catch (\Exception $e) {
+            // Handle any exceptions here
+            Session::flash('error', 'Gagal Melakukan Laporan: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Gagal Melakukan Laporan: ' . $e->getMessage()]);
+        }
+
     }
-
 }

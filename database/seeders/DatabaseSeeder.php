@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\CategoryReportSeeder;
+use Database\Seeders\FacilitySeeder;
 use Database\Seeders\PonpesSeeder;
 use Database\Seeders\ReportHistorySeeder;
 use Database\Seeders\ReportSeeder;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CategoryReportSeeder::class,
             ReportSeeder::class,
             ReportHistorySeeder::class,
+            FacilitySeeder::class,
             // ActivitySeeder::class,
             // InstructorSeeder::class,
             // ImagePonpesSeeder::class,

@@ -262,56 +262,91 @@
                                     aria-labelledby="panelsStayOpen-headingOne">
                                     <div class="accordion-body pt-3 px-1 pb-1">
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
-                                                data-bs-target="#FacilityModal">
-                                                <i class="fas fa-plus"></i>
+                                            <button class="btn btn-outline-secondary mb-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateFacilityModal">
+                                                <i class="fas fa-edit"></i>
                                             </button>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="table table-bordered border-dark mb-0">
+                                            <table class="table table-bordered border-dark">
                                                 <thead>
                                                     <tr class="text-center">
-                                                        <th scope="col">{{ 'No' }}</th>
                                                         <th scope="col">{{ 'Fasilitas' }}</th>
                                                         <th scope="col">{{ 'Jumlah' }}</th>
-                                                        <th scope="col">{{ 'Opsi' }}</th>
                                                     </tr>
                                                 </thead>
+                                                @foreach ($facility as $item)
                                                 <tbody>
-                                                    @php
-                                                        $no = 1;
-                                                    @endphp
-                                                    @forelse ($facility as $item)
-                                                        <tr>
-                                                            <th class="text-center" scope="row">{{ $no++ }}
-                                                            </th>
-                                                            <td>{{ $item->name }}</td>
-                                                            <td class="text-center">{{ $item->count }}</td>
-                                                            <td>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <a class="me-1 text-secondary" type="button"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#updateFacilityModal{{ $item->id }}">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </a>
-
-                                                                    <a class="ms-1 text-danger" type="button"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteFacilityModal{{ $item->id }}">
-                                                                        <i class="fas fa-trash-alt"></i>
-                                                                    </a>
-                                                                </div>
-
-                                                            </td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="4"
-                                                                class="text-center bg-secondary text-white">
-                                                                {{ 'Belum diisi' }}</td>
-                                                        </tr>
-                                                    @endforelse
+                                                    <tr>
+                                                        <td>Asrama Laki-laki</td>
+                                                        <td class="text-center">{{ $item->asrama_lk }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Asrama Perempuan</td>
+                                                        <td class="text-center">{{ $item->asrama_pr }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Masjid</td>
+                                                        <td class="text-center">{{ $item->masjid }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Aula Kegiatan</td>
+                                                        <td class="text-center">{{ $item->aula_kegiatan }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ruang Pembelajaran</td>
+                                                        <td class="text-center">{{ $item->ruang_pembelajaran }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Perpustakaan</td>
+                                                        <td class="text-center">{{ $item->perpustakaan }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kantor Pengajar</td>
+                                                        <td class="text-center">{{ $item->kantor_pengajar }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dapur</td>
+                                                        <td class="text-center">{{ $item->dapur }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kantin</td>
+                                                        <td class="text-center">{{ $item->kantin }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tempat Olahraga</td>
+                                                        <td class="text-center">{{ $item->tempat_olahraga }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kamar Mandi</td>
+                                                        <td class="text-center">{{ $item->kamar_mandi }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ruang Kesehatan</td>
+                                                        <td class="text-center">{{ $item->ruang_kesehatan }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kamar Pengajar</td>
+                                                        <td class="text-center">{{ $item->kamar_pengajar }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lab Komputer</td>
+                                                        <td class="text-center">{{ $item->lab_komputer }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lapangan Pertanian</td>
+                                                        <td class="text-center">{{ $item->lapangan_pertanian }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lapangan Pertenakan</td>
+                                                        <td class="text-center">{{ $item->lapangan_pertenakan }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Laundry</td>
+                                                        <td class="text-center">{{ $item->laundry }}</td>
+                                                    </tr>
                                                 </tbody>
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -955,141 +990,148 @@
 
 
 
-        {{-- modal delete facility --}}
-        @foreach ($facility as $item)
-            <div class="modal fade" id="deleteFacilityModal{{ $item->id }}" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Hapus Fasilitas' }}</h5>
-                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">{{ 'Anda Yakin Menghapus Data ' . $item->name . ' ?' }}</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-outline-secondary" type="button"
-                                data-bs-dismiss="modal">Batal</button>
-
-                            <form id="delete-form" action="{{ route('admin_pesantren.facility_delete', ['id' => $item->id]) }}"
-                                method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        {{-- end modal facility --}}
-
 
         {{-- update facility --}}
-        @foreach ($facility as $item)
-            <div class="modal fade" id="updateFacilityModal{{ $item->id }}" tabindex="-1" role="dialog"
+            <div class="modal fade" id="updateFacilityModal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">
-                                {{ 'Perbaharui Data (' . $item->name . ')' }}
+                                {{ 'Perbaharui Data Fasilitas'}}
                             </h5>
                             <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('admin_pesantren.facility_update', ['id' => $item->id]) }}" method="post"
-                                class="w-100">
+                            <form action="{{ route('admin_pesantren.facility_update', ['id' => $item->id]) }}" method="post" class="w-100">
                                 @csrf
                                 @method('PUT')
-                                <div class="row">
-                                    {{-- hidden input --}}
-                                    <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
-                                    <div class="col-12 mb-3">
-                                        <label for="">Nama Fasilitas</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            name="name" value="{{ $item->name }}">
-                                        @error('name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="">Jumlah</label>
-                                        <input type="number" class="form-control @error('count') is-invalid @enderror"
-                                            name="count" value="{{ $item->count }}">
-
-                                        @error('count')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12 mb-3 d-flex justify-content-end">
-                                        <button class="btn btn-outline-secondary me-2" type="button"
-                                            data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-success">Perbaharui</button>
-                                    </div>
-                                </div>
+                                <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                                <table class="table table-bordered border-dark">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">{{ 'Fasilitas' }}</th>
+                                            <th scope="col" class="w-25">{{ 'Jumlah' }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Asrama Laki-laki</td>
+                                            <td class="text-center">
+                                                <input type="number" name="asrama_lk" class="form-control" value="{{ $item->asrama_lk }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Asrama Perempuan</td>
+                                            <td class="text-center">
+                                                <input type="number" name="asrama_pr" class="form-control" value="{{ $item->asrama_pr }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Masjid</td>
+                                            <td class="text-center">
+                                                <input type="number" name="masjid" class="form-control" value="{{ $item->masjid }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aula Kegiatan</td>
+                                            <td class="text-center">
+                                                <input type="number" name="aula_kegiatan" class="form-control" value="{{ $item->aula_kegiatan }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ruang Pembelajaran</td>
+                                            <td class="text-center">
+                                                <input type="number" name="ruang_pembelajaran" class="form-control" value="{{ $item->ruang_pembelajaran }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Perpustakaan</td>
+                                            <td class="text-center">
+                                                <input type="number" name="perpustakaan" class="form-control" value="{{ $item->perpustakaan }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kantor Pengajar</td>
+                                            <td class="text-center">
+                                                <input type="number" name="kantor_pengajar" class="form-control" value="{{ $item->kantor_pengajar }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dapur</td>
+                                            <td class="text-center">
+                                                <input type="number" name="dapur" class="form-control" value="{{ $item->dapur }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kantin</td>
+                                            <td class="text-center">
+                                                <input type="number" name="kantin" class="form-control" value="{{ $item->kantin }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tempat Olahraga</td>
+                                            <td class="text-center">
+                                                <input type="number" name="tempat_olahraga" class="form-control" value="{{ $item->tempat_olahraga }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kamar Mandi</td>
+                                            <td class="text-center">
+                                                <input type="number" name="kamar_mandi" class="form-control" value="{{ $item->kamar_mandi }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ruang Kesehatan</td>
+                                            <td class="text-center">
+                                                <input type="number" name="ruang_kesehatan" class="form-control" value="{{ $item->ruang_kesehatan }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kamar Pengajar</td>
+                                            <td class="text-center">
+                                                <input type="number" name="kamar_pengajar" class="form-control" value="{{ $item->kamar_pengajar }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lab Komputer</td>
+                                            <td class="text-center">
+                                                <input type="number" name="lab_komputer" class="form-control" value="{{ $item->lab_komputer }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lapangan Pertanian</td>
+                                            <td class="text-center">
+                                                <input type="number" name="lapangan_pertanian" class="form-control" value="{{ $item->lapangan_pertanian }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lapangan Pertenakan</td>
+                                            <td class="text-center">
+                                                <input type="number" name="lapangan_pertenakan" class="form-control" value="{{ $item->lapangan_pertenakan }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Laundry</td>
+                                            <td class="text-center">
+                                                <input type="number" name="laundry" class="form-control" value="{{ $item->laundry }}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            
+                                <button type="submit" class="btn btn-success float-end">Perbaharui</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
         {{-- end  modal facility --}}
 
-        {{-- create modal facility --}}
-        <div class="modal fade" id="FacilityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Menambah Data Fasilitas</h5>
-                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('admin_pesantren.facility_create') }}" method="post" class="w-100">
-                            @csrf
-                            @method('POST')
-                            <div class="row">
-                                {{-- hidden input --}}
-                                <input class="form-control" type="text" name="ponpes_id"
-                                    value="{{ $ponpes->id }}" hidden>
-                                <div class="col-12 mb-3">
-                                    <label for="">Nama Fasilitas</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}">
-                                    @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="">Jumlah</label>
-                                    <input type="number" class="form-control @error('count') is-invalid @enderror"
-                                        name="count" value="{{ old('count') }}">
 
-                                    @error('count')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-12 mb-3 d-flex justify-content-end">
-                                    <button class="btn btn-outline-secondary me-2" type="button"
-                                        data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-success">Tambah</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        {{-- end modal facility --}}
 
 
 

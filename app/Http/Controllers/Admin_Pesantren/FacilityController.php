@@ -11,61 +11,28 @@ class FacilityController extends Controller
 {
     // facility
 
-    public function createFacility(Request $request)
-    {
-        // Validate the form data
-
-        $validator = Validator::make($request->all(), [
-            'ponpes_id' => 'required|max:20|exists:ponpes,id',
-            'name' => 'required|string|max:100',
-            'count' => 'required|integer',
-        ]);
-
-        // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'Terjadi kesalahan validasi menambah data fasilitas. Periksa kembali isian Anda.');
-
-        }
-        // Create a new Instructor instance
-        $facility = new Facility([
-            'ponpes_id' => $request->input('ponpes_id'),
-            'name' => $request->input('name'),
-            'count' => $request->input('count'),
-
-        ]);
-
-        // Save the instructor data to the database
-        $facility->save();
-
-        return redirect()->back()->with('success', 'facility ' . $facility->name . ' Berhasil Dibuat');
-
-    }
-
-    public function destroyFacility($id)
-    {
-
-        $facility = Facility::findOrFail($id);
-
-        if (!$facility) {
-
-            return redirect()->back()->with('error', 'Data Tidak Ditemukan.');
-        }
-
-        $facility->delete();
-
-        return redirect()->back()->with('success', 'Data ' . $facility->name . ' Berhasil Dihapus');
-    }
-
     public function updateFacility(Request $request, $id)
     {
 
         $validator = Validator::make($request->all(), [
             'ponpes_id' => 'required|max:20|exists:ponpes,id',
-            'name' => 'required|string|max:100',
-            'count' => 'required|integer',
+            'asrama_lk' => 'required|integer',
+            'asrama_pr' => 'required|integer',
+            'masjid' => 'required|integer',
+            'aula_kegiatan' => 'required|integer',
+            'ruang_pembelajaran' => 'required|integer',
+            'perpustakaan' => 'required|integer',
+            'kantor_pengajar' => 'required|integer',
+            'dapur' => 'required|integer',
+            'kantin' => 'required|integer',
+            'tempat_olahraga' => 'required|integer',
+            'kamar_mandi' => 'required|integer',
+            'ruang_kesehatan' => 'required|integer',
+            'kamar_pengajar' => 'required|integer',
+            'lab_komputer' => 'required|integer',
+            'lapangan_pertanian' => 'required|integer',
+            'lapangan_pertenakan' => 'required|integer',
+            'laundry' => 'required|integer',
         ]);
 
         // Check if validation fails
@@ -85,14 +52,25 @@ class FacilityController extends Controller
         }
 
         // Update the facility data
-
-        $facility->ponpes_id = $request->input('ponpes_id');
-        $facility->name = $request->input('name');
-        $facility->count = $request->input('count');
-
-        // Save the updated facility data to the database
-        $facility->save();
-
+        $facility->update([
+            'asrama_lk' => $request->input('asrama_lk'),
+            'asrama_pr' => $request->input('asrama_pr'),
+            'masjid' => $request->input('masjid'),
+            'aula_kegiatan' => $request->input('aula_kegiatan'),
+            'ruang_pembelajaran' => $request->input('ruang_pembelajaran'),
+            'perpustakaan' => $request->input('perpustakaan'),
+            'kantor_pengajar' => $request->input('kantor_pengajar'),
+            'dapur' => $request->input('dapur'),
+            'kantin' => $request->input('kantin'),
+            'tempat_olahraga' => $request->input('tempat_olahraga'),
+            'kamar_mandi' => $request->input('kamar_mandi'),
+            'ruang_kesehatan' => $request->input('ruang_kesehatan'),
+            'kamar_pengajar' => $request->input('kamar_pengajar'),
+            'lab_komputer' => $request->input('lab_komputer'),
+            'lapangan_pertanian' => $request->input('lapangan_pertanian'),
+            'lapangan_pertenakan' => $request->input('lapangan_pertenakan'),
+            'laundry' => $request->input('laundry'),
+        ]);
         return redirect()->back()->with('success', 'facility ' . $facility->name . ' Berhasil Diperbaharui');
     }
 }

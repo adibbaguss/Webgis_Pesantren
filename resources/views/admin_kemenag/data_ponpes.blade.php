@@ -31,7 +31,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/admin/create_ponpes" class="dropdown-item">
+                        <a href="/admin kemenag/create_ponpes" class="dropdown-item">
                             <i class="fas fa-plus"></i>
                             {{ 'Tambah Data' }}
                         </a>

@@ -43,6 +43,7 @@ class UserSeeder extends Seeder
                 'email' => 'pelapor@gmail.com',
                 'name' => 'pelapor',
                 'user_role' => 'pelapor',
+                'status' => 'active',
 
             ],
 

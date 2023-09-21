@@ -28,7 +28,7 @@ class ReportHistoryFactory extends Factory
             'report_id' => self::$reportId++,
             'date' => $faker->date(),
             'status' => 'baru',
-            'information' => 'Laporan Masuk',
+            'information' => 'Laporan baru dibuat',
         ];
     }
 }

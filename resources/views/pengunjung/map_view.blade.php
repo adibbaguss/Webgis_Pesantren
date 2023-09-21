@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('content')
     <div class="container-fluid mt-5 pt-5">
         @if(session('success'))

@@ -88,7 +88,6 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
 
     Route::redirect('/home', '/admin');
-
     Route::redirect('/admin', '/admin kemenag/dashboard/');
     Route::get('/admin kemenag/profile/{id}', [ProfileController::class, 'index'])->name('admin_kemenag.profile');
     Route::get('/admin kemenag/edit_profile/{id}', [UpdateProfileController::class, 'index'])->name('admin_kemenag.edit_profile');
@@ -150,8 +149,8 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
     Route::delete('/admin pesantren/ponpes_update_etc/instructors/delete/{id}', [InstructorsController::class, 'destroyInstructors'])->name('admin_pesantren.instructors_delete');
     Route::put('/admin pesantren/ponpes_update_etc/instructors/update/{id}', [InstructorsController::class, 'updateInstructors'])->name('admin_pesantren.instructors_update');
 
-    Route::post('/admin pesantren/ponpes_update_etc/facility/create', [FacilityController::class, 'createFacility'])->name('admin_pesantren.facility_create');
-    Route::delete('/admin pesantren/ponpes_update_etc/facility/delete/{id}', [FacilityController::class, 'destroyFacility'])->name('admin_pesantren.facility_delete');
+    // Route::post('/admin pesantren/ponpes_update_etc/facility/create', [FacilityController::class, 'createFacility'])->name('admin_pesantren.facility_create');
+    // Route::delete('/admin pesantren/ponpes_update_etc/facility/delete/{id}', [FacilityController::class, 'destroyFacility'])->name('admin_pesantren.facility_delete');
     Route::put('/admin pesantren/ponpes_update_etc/facility/update/{id}', [FacilityController::class, 'updateFacility'])->name('admin_pesantren.facility_update');
 
     Route::post('/admin pesantren/ponpes_update_etc/activities/create', [ActivityController::class, 'createActivities'])->name('admin_pesantren.activities_create');

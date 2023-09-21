@@ -5,7 +5,7 @@
         <h2 class="mb-0 text-secondary  mb-5">{{ 'Perbaharui Data ' . $ponpes->name }}</h2>
         <div class="d-flex justify-content-center">
             <div class="bg-white shadow rounded " style="max-width:700px">
-                <div class="px-sm-5 px-3 pt-4">
+                <div class="px-sm-5 px-2 pt-4">
                     <form method="POST" action="{{ route('admin_pesantren.ponpes_update', $ponpes->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -312,7 +312,7 @@
 
 
                             <div class="col-6 me-0 ms-auto mb-4 d-flex justify-content-end">
-                                <a href="{{ route('admin_pesantren.ponpes_view', ['id' => $ponpes->id]) }}"
+                                <a href="{{ route('admin_pesantren.ponpes_view', ['id' => $ponpes->user_id]) }}"
                                     class="btn btn-outline-secondary">
                                     {{ __('Batal') }}
                                 </a>

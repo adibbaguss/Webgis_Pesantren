@@ -11,10 +11,11 @@ class DataReportController extends Controller
 {
     public function index($id)
     {
-        $reports = Report::select('reports.id', 'reports.reporting_code', 'reports.reporting_date', 'reports.title', 'reports.description', 'reports.status', 'category_report.name as category_name', 'ponpes.name as ponpes_name', 'users.name as user_name')
+        $reports = Report::select('reports.id', 'reports.reporting_code', 'reports.title', 'reports.description', 'category_report.name as category_name', 'ponpes.name as ponpes_name', 'users.name as user_name')
             ->join('category_report', 'reports.category_id', '=', 'category_report.id')
             ->join('ponpes', 'reports.ponpes_id', '=', 'ponpes.id')
             ->join('users', 'reports.user_id', '=', 'users.id')
+            ->with('reportHistories')
             ->where('reports.user_id', '=', $id)
             ->get();
 

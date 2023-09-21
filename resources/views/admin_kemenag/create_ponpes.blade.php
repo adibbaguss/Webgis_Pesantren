@@ -6,7 +6,7 @@
             <div class="mx-md-5 px-md-5">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-10 bg-white shadow p-md-5">
-                        <div class="px-5 pt-4">
+                        <div class=" pt-4">
                             <form method="POST" action="{{ route('admin_kemenag.create_ponpes') }}" enctype="multipart/form-data">
                                 @csrf
                                 {{-- photo profile --}}
