@@ -20,6 +20,119 @@
 
         <div class="row">
 
+            <!--Jumlah Pengajar-->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card ps-1 bg-success my-2  border-0 shadow" style="user-select: none;">
+                    <div class="card-body bg-light">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
+                                    {{ 'Jumlah Pengajar' }}
+                                </div>
+                            </div>
+                            <div class="col me-2">
+                                <div class="fs-4 me-auto fw-bold text-success ">
+                                    {{ $ponpes->instructors->count() }}
+                                </div>
+                            </div>
+                            <div class="col-auto my-auto">
+                                {{-- <i class="fas fa-building fs-1 text-success "></i> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Jumlah aktifitas-->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card ps-1 bg-success my-2  border-0 shadow" style="user-select: none;">
+                    <div class="card-body bg-light">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
+                                    {{ 'Jumlah Aktivitas' }}
+                                </div>
+                            </div>
+                            <div class="col me-2">
+                                <div class="fs-4 me-auto fw-bold text-success ">
+                                    {{ $ponpes->activities->count() }}
+                                </div>
+                            </div>
+                            <div class="col-auto my-auto">
+                                {{-- <i class="fas fa-building fs-1 text-success "></i> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Jumlah pembelajaran-->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card ps-1 bg-success my-2  border-0 shadow" style="user-select: none;">
+                    <div class="card-body bg-light">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
+                                    {{ 'Jumlah pembelajaran' }}
+                                </div>
+                            </div>
+                            <div class="col me-2">
+                                <div class="fs-4 me-auto fw-bold text-success ">
+                                    {{ $ponpes->learning->count() }}
+                                </div>
+                            </div>
+                            <div class="col-auto my-auto">
+                                {{-- <i class="fas fa-building fs-1 text-success "></i> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Jumlah aktifitas-->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card ps-1 bg-success my-2  border-0 shadow" style="user-select: none;">
+                    <div class="card-body bg-light">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
+                                    {{ 'Jumlah Santri & Santriwati Saat ini' }}
+                                </div>
+                            </div>
+                            <div class="col me-2">
+                                <div class="fs-4 me-auto fw-bold text-success ">
+                                    @php
+                                        $jumlah = 0; // Inisialisasi variabel jumlah
+                                    @endphp
+
+                                    @foreach ($ponpes->studentCount as $item)
+                                        @if ($item->year == date('Y'))
+                                            @php
+                                                // Tambahkan setiap nilai ke variabel jumlah
+                                                $jumlah += $item->male_resident_count;
+                                                $jumlah += $item->female_resident_count;
+                                                $jumlah += $item->male_non_resident_count;
+                                                $jumlah += $item->female_non_resident_count;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+
+                                    {{ $jumlah }}
+                                </div>
+                            </div>
+
+                            <div class="col-auto my-auto">
+                                {{-- <i class="fas fa-building fs-1 text-success "></i> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
             <div class="col-xl-7 col-lg-6 mb-4">
                 <div class="card shadow mb-4 " style="user-select: none;">
                     <!-- Card Header - Dropdown -->

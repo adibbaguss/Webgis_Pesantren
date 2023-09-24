@@ -5,13 +5,14 @@ namespace App\Exports;
 use App\Exports\PonpesExport;
 use App\Models\Ponpes;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PonpesExport implements FromCollection, WithHeadings, WithMapping, WithStyles
+class PonpesExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithColumnFormatting
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -62,6 +63,14 @@ class PonpesExport implements FromCollection, WithHeadings, WithMapping, WithSty
 
         return [
             1 => ['font' => ['bold' => true]], // Make the heading row bold
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'B' => '0', // Format column B (NSPP) as a number
+            // Add more columns as needed, following the same pattern
         ];
     }
 

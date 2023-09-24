@@ -2,28 +2,55 @@
 
 @section('content')
     <div class="container-fluid mt-5 pt-5">
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @elseif(session('errorss'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
         @endif
-        
+
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren di Kabupaten Batang</h2>
         </div>
-        <div class="map-view mb-5 bg-white p-2 rounded-3 shadow">
+        <div class="map-view mb-3 bg-white p-2 rounded-3 shadow-sm">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
         </div>
-        <table class="table table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
+        <table class="table table-bordered table-hover text-center shadow-sm ms-auto me-0 mb-5" style="max-width: 400px">
             <thead>
                 <tr>
-                    <th colspan="6"class="text-center" >DATA JENIS PESANTREN</th>
+                    <th colspan="2">PENJELASAN</th>
                 </tr>
-                <tr >
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_1.png') }}" alt=""
+                            style="max-width: 30px"></td>
+                    <td class="text-start">Pesantren Salafiyah (Tradisional)</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_2.png') }}" alt=""
+                            style="max-width: 30px"></td>
+                    <td class="text-start">Pesantren Khalafiyah (Modern)</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_3.png') }}" alt=""
+                            style="max-width: 30px"></td>
+                    <td class="text-start">Pesantren Kombinasi</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <table class="table table-bordered table-hover text-center shadow" id="example" class="display"
+            style="width:100%">
+            <thead>
+                <tr>
+                    <th colspan="6"class="text-center">DATA JENIS PESANTREN</th>
+                </tr>
+                <tr>
                     <th scope="col" class="text-center">NO</th>
                     <th scope="col" class="text-center">KECAMATAN</th>
                     <th scope="col" class="text-center">SALAFIYAH (TRADISIONAL)</th>
@@ -57,22 +84,22 @@
 
 @push('javascript')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.9/leaflet-search.src.js"></script>
-       <!-- Script DataTables -->
-       <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-       <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-       <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
-   
-       <script>
-           // Inisialisasi DataTables
-           $(document).ready(function() {
-               new DataTable('#example', {
-                   scrollCollapse: true,
-                   scrollX: true
-   
-               });
-   
-           });
-       </script>
+    <!-- Script DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        // Inisialisasi DataTables
+        $(document).ready(function() {
+            new DataTable('#example', {
+                scrollCollapse: true,
+                scrollX: true
+
+            });
+
+        });
+    </script>
     <script>
         var map = new L.map('map').setView([-6.993808128800089, 109.83246433526726], 10);
         map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')); //base
@@ -241,7 +268,3 @@
         // maps ke-dua
     </script>
 @endpush
-
-
-
-

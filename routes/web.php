@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin_Kemenag\DataAdminPesantrenController;
 use App\Http\Controllers\Admin_Kemenag\DataPelaporController;
 use App\Http\Controllers\Admin_Kemenag\DataPonpesController;
 use App\Http\Controllers\Admin_Kemenag\DataStatistikController;
+use App\Http\Controllers\Admin_Kemenag\MapsFacilityController;
 use App\Http\Controllers\Admin_Kemenag\MapViewController;
 use App\Http\Controllers\Admin_Kemenag\PonpesViewController;
 use App\Http\Controllers\Admin_Kemenag\ProfileController;
@@ -73,6 +74,10 @@ Route::get('/pengunjung/ponpes_report', function () {
     return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
 });
 
+// percobaan maps
+// Route::get('/pengunjung/maps_facility', [MapsFacilityController::class, 'index'])->name('maps.facility');
+// Route::get('/pengunjung/maps_facility/search', [MapsFacilityController::class, 'search'])->name('search.facility');
+
 Route::get('/pengunjung/panduan', function () {
     return view('pengunjung.tutorial_view');
 });
@@ -125,6 +130,11 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::post('/admin kemenag/category_report/create', [CategoryReportController::class, 'create'])->name('admin_kemenag.category_report_create');
     Route::put('/admin kemenag/category_report/update/{id}', [CategoryReportController::class, 'update'])->name('admin_kemenag.category_report_update');
     Route::delete('/admin kemenag/category_report/delete/{id}', [CategoryReportController::class, 'delete'])->name('admin_kemenag.category_report_delete');
+
+    Route::get('/admin kemenag/maps_facility', [MapsFacilityController::class, 'index'])->name('admin_kemenag.maps_facility');
+    Route::get('/admin kemenag/maps_facility/search', [MapsFacilityController::class, 'search'])->name('admin_kemenag.search_facility');
+    Route::get('/admin kemenag/fasilitas_ponpes_export_xlsx', [MapsFacilityController::class, 'exportXLSX']);
+    Route::get('/admin kemenag/fasilitas_ponpes_export_csv', [MapsFacilityController::class, 'exportCSV']);
 
     Route::get('/admin kemenag/panduan', function () {
         return view('admin_kemenag.tutorial_view');
