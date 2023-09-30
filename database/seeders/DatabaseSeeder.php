@@ -7,6 +7,7 @@ use Database\Seeders\FacilitySeeder;
 use Database\Seeders\PonpesSeeder;
 use Database\Seeders\ReportHistorySeeder;
 use Database\Seeders\ReportSeeder;
+use Database\Seeders\SchoolSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ReportSeeder::class,
             ReportHistorySeeder::class,
             FacilitySeeder::class,
+            SchoolSeeder::class,
             // ActivitySeeder::class,
             // InstructorSeeder::class,
             // ImagePonpesSeeder::class,

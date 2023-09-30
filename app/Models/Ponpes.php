@@ -7,6 +7,7 @@ use App\Models\Facility;
 use App\Models\ImagePonpes;
 use App\Models\Instructor;
 use App\Models\Learning;
+use App\Models\School;
 use App\Models\StudentCount;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -75,4 +76,9 @@ class Ponpes extends Model
     {
         return $this->hasMany(StudentCount::class);
     }
+    public function school()
+    {
+        return $this->hasOne(School::class); // Assuming it's a one-to-one relationship
+    }
+
 }

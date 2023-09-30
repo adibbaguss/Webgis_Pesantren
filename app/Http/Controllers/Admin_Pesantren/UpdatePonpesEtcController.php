@@ -10,10 +10,26 @@ use App\Models\StudentCount;
 
 class UpdatePonpesEtcController extends Controller
 {
+
+    private $attributeNames = [
+        'sd' => 'SD/MI',
+        'smp' => 'SMP/MTs',
+        'sma' => 'SMA/MA',
+        'smk' => 'SMK',
+        'pt' => 'Perguruan Tinggi',
+    ];
+
+    private $attributeTable = [
+        'sd', 'smp', 'sma', 'smk', 'pt',
+    ];
+
     public function index($id)
     {
+
+        $attributeNames = $this->attributeNames;
+        $attributeTable = $this->attributeTable;
         // Fetch the ponpes data based on the user_id column
-        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount')
+        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount', 'school')
             ->find($id);
 
         if ($ponpes) {
@@ -23,9 +39,10 @@ class UpdatePonpesEtcController extends Controller
             $instructors = $ponpes->instructors;
             $image = $ponpes->images->sortBy('type');
             $studentCount = $ponpes->studentCount->sortBy('year');
+            $school = $ponpes->school;
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
-            return view('admin_pesantren.update_ponpes_etc', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount'));
+            return view('admin_pesantren.update_ponpes_etc', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'school', 'attributeTable', 'attributeNames'));
         } else {
             abort(404);
         }

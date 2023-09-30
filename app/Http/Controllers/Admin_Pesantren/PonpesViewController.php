@@ -8,9 +8,23 @@ use App\Models\User;
 
 class PonpesViewController extends Controller
 {
+
+    private $attributeNames = [
+        'sd' => 'SD/MI',
+        'smp' => 'SMP/MTs',
+        'sma' => 'SMA/MA',
+        'smk' => 'SMK',
+        'pt' => 'Perguruan Tinggi',
+    ];
+
+    private $attributeTable = [
+        'sd', 'smp', 'sma', 'smk', 'pt',
+    ];
+
     public function view($id)
     {
-
+        $attributeNames = $this->attributeNames;
+        $attributeTable = $this->attributeTable;
         $admin_pesantren = User::findOrFail($id);
 
         // Get the user's ID
@@ -18,7 +32,7 @@ class PonpesViewController extends Controller
         // dd($admin_pesantren_id);
 
         // Fetch the ponpes data based on the user_id column
-        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'studentCount', 'instructors', 'images')
+        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'studentCount', 'instructors', 'images', 'school')
             ->where('user_id', $admin_pesantren_id)
             ->first(); // Use first() instead of find()
 
@@ -28,14 +42,16 @@ class PonpesViewController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
-            $studentCount = $ponpes->studentCount;
+            $school = $ponpes->school;
+            $studentCount = $ponpes->studentCount->sortBy('year');
 
             $jumbotronImage = $image->where('type', 'jumbotron')->first();
             $regulerImages = $image->where('type', 'reguler');
 
+            // dd($school);
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
             // dd($studentCount);
-            return view('admin_pesantren.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages'));
+            return view('admin_pesantren.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages', 'school', 'attributeTable', 'attributeNames'));
         } else {
             abort(404);
         }

@@ -146,11 +146,9 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                        
                                                     @endif
-                                          
                                                 @endforeach
-                                               
+
                                             </table>
                                         </div>
                                     </div>
@@ -276,76 +274,76 @@
                                                     </tr>
                                                 </thead>
                                                 @foreach ($facility as $item)
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Asrama Laki-laki</td>
-                                                        <td class="text-center">{{ $item->asrama_lk }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Asrama Perempuan</td>
-                                                        <td class="text-center">{{ $item->asrama_pr }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Masjid</td>
-                                                        <td class="text-center">{{ $item->masjid }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Aula Kegiatan</td>
-                                                        <td class="text-center">{{ $item->aula_kegiatan }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ruang Pembelajaran</td>
-                                                        <td class="text-center">{{ $item->ruang_pembelajaran }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Perpustakaan</td>
-                                                        <td class="text-center">{{ $item->perpustakaan }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Kantor Pengajar</td>
-                                                        <td class="text-center">{{ $item->kantor_pengajar }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dapur</td>
-                                                        <td class="text-center">{{ $item->dapur }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Kantin</td>
-                                                        <td class="text-center">{{ $item->kantin }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tempat Olahraga</td>
-                                                        <td class="text-center">{{ $item->tempat_olahraga }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Kamar Mandi</td>
-                                                        <td class="text-center">{{ $item->kamar_mandi }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ruang Kesehatan</td>
-                                                        <td class="text-center">{{ $item->ruang_kesehatan }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Kamar Pengajar</td>
-                                                        <td class="text-center">{{ $item->kamar_pengajar }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lab Komputer</td>
-                                                        <td class="text-center">{{ $item->lab_komputer }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lapangan Pertanian</td>
-                                                        <td class="text-center">{{ $item->lapangan_pertanian }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Lapangan Pertenakan</td>
-                                                        <td class="text-center">{{ $item->lapangan_pertenakan }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Laundry</td>
-                                                        <td class="text-center">{{ $item->laundry }}</td>
-                                                    </tr>
-                                                </tbody>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Asrama Laki-laki</td>
+                                                            <td class="text-center">{{ $item->asrama_lk }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Asrama Perempuan</td>
+                                                            <td class="text-center">{{ $item->asrama_pr }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Masjid</td>
+                                                            <td class="text-center">{{ $item->masjid }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Aula Kegiatan</td>
+                                                            <td class="text-center">{{ $item->aula_kegiatan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ruang Pembelajaran</td>
+                                                            <td class="text-center">{{ $item->ruang_pembelajaran }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Perpustakaan</td>
+                                                            <td class="text-center">{{ $item->perpustakaan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kantor Pengajar</td>
+                                                            <td class="text-center">{{ $item->kantor_pengajar }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Dapur</td>
+                                                            <td class="text-center">{{ $item->dapur }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kantin</td>
+                                                            <td class="text-center">{{ $item->kantin }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tempat Olahraga</td>
+                                                            <td class="text-center">{{ $item->tempat_olahraga }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kamar Mandi</td>
+                                                            <td class="text-center">{{ $item->kamar_mandi }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ruang Kesehatan</td>
+                                                            <td class="text-center">{{ $item->ruang_kesehatan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Kamar Pengajar</td>
+                                                            <td class="text-center">{{ $item->kamar_pengajar }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lab Komputer</td>
+                                                            <td class="text-center">{{ $item->lab_komputer }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lapangan Pertanian</td>
+                                                            <td class="text-center">{{ $item->lapangan_pertanian }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lapangan Pertenakan</td>
+                                                            <td class="text-center">{{ $item->lapangan_pertenakan }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Laundry</td>
+                                                            <td class="text-center">{{ $item->laundry }}</td>
+                                                        </tr>
+                                                    </tbody>
                                                 @endforeach
                                             </table>
                                         </div>
@@ -610,6 +608,61 @@
                     </div>
                     {{-- end jumlah santri --}}
 
+
+                    {{-- sekolah --}}
+                    <div class="col-12 mb-3">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header " id="panelsStayOpen-headingSix">
+                                    <button class="accordion-button fw-bold bg-light" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix"
+                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseSix">
+                                        {{ 'Sekolah Yang Dimiliki/Berelasi' }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse  "
+                                    aria-labelledby="panelsStayOpen-headingSix">
+                                    <div class="accordion-body pt-3 px-1 pb-1">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateSchoolModal{{ $ponpes->id }}">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered border-dark">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th scope="col" colspan="2"
+                                                            class="align-middle text-center">
+                                                            {{ 'Sekolah Yang Dimiliki/Berelasi' }}
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($attributeTable as $table)
+                                                        <tr>
+                                                            <th scope="row" class="align-middle">
+                                                                {{ $attributeNames[$table] ?? '-' }}</th>
+                                                            <td class="align-middle">
+                                                                {{ $school->$table ?? '-' }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- end sekolah --}}
+
                 </div>
 
 
@@ -648,7 +701,8 @@
 
                                 <div class="col-md-12 mb-4">
                                     <label for="jumbotron">Jumbotron Image:</label>
-                                    <input type="file" class="form-control @error('jumbotron') is-invalid @enderror" name="jumbotron">
+                                    <input type="file" class="form-control @error('jumbotron') is-invalid @enderror"
+                                        name="jumbotron">
                                     @error('jumbotron')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -696,7 +750,8 @@
                                     <br>
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <input type="file" class="form-control @error('reguler') is-invalid @enderror" name="reguler[]" multiple>
+                                    <input type="file" class="form-control @error('reguler') is-invalid @enderror"
+                                        name="reguler[]" multiple>
                                     @error('reguler')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -768,7 +823,8 @@
                             <button class="btn btn-outline-secondary" type="button"
                                 data-bs-dismiss="modal">Batal</button>
 
-                            <form id="delete-form" action="{{ route('admin_pesantren.image_delete', ['id' => $item->id]) }}"
+                            <form id="delete-form"
+                                action="{{ route('admin_pesantren.image_delete', ['id' => $item->id]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -800,7 +856,8 @@
                                 data-bs-dismiss="modal">Batal</button>
 
                             <form id="delete-form"
-                                action="{{ route('admin_pesantren.instructors_delete', ['id' => $item->id]) }}" method="POST">
+                                action="{{ route('admin_pesantren.instructors_delete', ['id' => $item->id]) }}"
+                                method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -827,8 +884,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('admin_pesantren.instructors_update', ['id' => $item->id]) }}" method="post"
-                                class="w-100">
+                            <form action="{{ route('admin_pesantren.instructors_update', ['id' => $item->id]) }}"
+                                method="post" class="w-100">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -865,9 +922,11 @@
                                         <label for="">Jenis Kelamin</label>
                                         <select name="gender" id=""
                                             class="form-control @error('gender') is-invalid @enderror">
-                                            <option value="Pria" @if (old('gender', $item->gender) === 'Pria') selected @endif>Pria
+                                            <option value="Laki-laki" @if (old('gender', $item->gender) === 'Laki-Laki') selected @endif>
+                                                Laki-Laki
                                             </option>
-                                            <option value="Wanita" @if (old('gender', $item->gender) === 'Wanita') selected @endif>Wanita
+                                            <option value="Perempuan" @if (old('gender', $item->gender) === 'Perempuan') selected @endif>
+                                                Perempuan
                                             </option>
                                         </select>
                                         @error('gender')
@@ -879,10 +938,10 @@
                                         <select name="status" id=""
                                             class="form-control @error('status') is-invalid @enderror">
                                             <option value="active" @if (old('status', $item->status) === 'active') selected @endif>
-                                                active
+                                                Aktif
                                             </option>
                                             <option value="non-active" @if (old('status', $item->status) === 'non-active') selected @endif>
-                                                non-active</option>
+                                                Tidak Aktif</option>
                                         </select>
                                         @error('status')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -951,9 +1010,11 @@
                                     <label for="">Jenis Kelamin</label>
                                     <select name="gender" id=""
                                         class="form-control @error('gender') is-invalid @enderror">
-                                        <option value="Pria" @if (old('gender') === 'Pria') selected @endif>Pria
+                                        <option value="Laki-laki" @if (old('gender') === 'Laki-laki') selected @endif>
+                                            Laki-laki
                                         </option>
-                                        <option value="Wanita" @if (old('gender') === 'Wanita') selected @endif>Wanita
+                                        <option value="Perempuan" @if (old('gender') === 'Perempuan') selected @endif>
+                                            Perempuan
                                         </option>
                                     </select>
                                     @error('gender')
@@ -964,10 +1025,10 @@
                                     <label for="">Status</label>
                                     <select name="status" id=""
                                         class="form-control @error('status') is-invalid @enderror">
-                                        <option value="active" @if (old('status') === 'active') selected @endif>active
+                                        <option value="active" @if (old('status') === 'active') selected @endif>Aktif
                                         </option>
                                         <option value="non-active" @if (old('status') === 'non-active') selected @endif>
-                                            non-active</option>
+                                            Tidak Aktif</option>
                                     </select>
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -992,146 +1053,162 @@
 
 
         {{-- update facility --}}
-            <div class="modal fade" id="updateFacilityModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                                {{ 'Perbaharui Data Fasilitas'}}
-                            </h5>
-                            <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('admin_pesantren.facility_update', ['id' => $item->id]) }}" method="post" class="w-100">
-                                @csrf
-                                @method('PUT')
-                                <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
-                                <table class="table table-bordered border-dark">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th scope="col">{{ 'Fasilitas' }}</th>
-                                            <th scope="col" class="w-25">{{ 'Jumlah' }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Asrama Laki-laki</td>
-                                            <td class="text-center">
-                                                <input type="number" name="asrama_lk" class="form-control" value="{{ $item->asrama_lk }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Asrama Perempuan</td>
-                                            <td class="text-center">
-                                                <input type="number" name="asrama_pr" class="form-control" value="{{ $item->asrama_pr }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Masjid</td>
-                                            <td class="text-center">
-                                                <input type="number" name="masjid" class="form-control" value="{{ $item->masjid }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Aula Kegiatan</td>
-                                            <td class="text-center">
-                                                <input type="number" name="aula_kegiatan" class="form-control" value="{{ $item->aula_kegiatan }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ruang Pembelajaran</td>
-                                            <td class="text-center">
-                                                <input type="number" name="ruang_pembelajaran" class="form-control" value="{{ $item->ruang_pembelajaran }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Perpustakaan</td>
-                                            <td class="text-center">
-                                                <input type="number" name="perpustakaan" class="form-control" value="{{ $item->perpustakaan }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kantor Pengajar</td>
-                                            <td class="text-center">
-                                                <input type="number" name="kantor_pengajar" class="form-control" value="{{ $item->kantor_pengajar }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dapur</td>
-                                            <td class="text-center">
-                                                <input type="number" name="dapur" class="form-control" value="{{ $item->dapur }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kantin</td>
-                                            <td class="text-center">
-                                                <input type="number" name="kantin" class="form-control" value="{{ $item->kantin }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tempat Olahraga</td>
-                                            <td class="text-center">
-                                                <input type="number" name="tempat_olahraga" class="form-control" value="{{ $item->tempat_olahraga }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kamar Mandi</td>
-                                            <td class="text-center">
-                                                <input type="number" name="kamar_mandi" class="form-control" value="{{ $item->kamar_mandi }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ruang Kesehatan</td>
-                                            <td class="text-center">
-                                                <input type="number" name="ruang_kesehatan" class="form-control" value="{{ $item->ruang_kesehatan }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kamar Pengajar</td>
-                                            <td class="text-center">
-                                                <input type="number" name="kamar_pengajar" class="form-control" value="{{ $item->kamar_pengajar }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lab Komputer</td>
-                                            <td class="text-center">
-                                                <input type="number" name="lab_komputer" class="form-control" value="{{ $item->lab_komputer }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lapangan Pertanian</td>
-                                            <td class="text-center">
-                                                <input type="number" name="lapangan_pertanian" class="form-control" value="{{ $item->lapangan_pertanian }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lapangan Pertenakan</td>
-                                            <td class="text-center">
-                                                <input type="number" name="lapangan_pertenakan" class="form-control" value="{{ $item->lapangan_pertenakan }}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Laundry</td>
-                                            <td class="text-center">
-                                                <input type="number" name="laundry" class="form-control" value="{{ $item->laundry }}">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            
-                                <button type="submit" class="btn btn-success float-end">Perbaharui</button>
-                            </form>
-                            
-                        </div>
+        <div class="modal fade" id="updateFacilityModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            {{ 'Perbaharui Data Fasilitas' }}
+                        </h5>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('admin_pesantren.facility_update', ['id' => $item->id]) }}"
+                            method="post" class="w-100">
+                            @csrf
+                            @method('PUT')
+                            <input type="text" name="ponpes_id" value="{{ $item->ponpes_id }}" hidden>
+                            <table class="table table-bordered border-dark">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">{{ 'Fasilitas' }}</th>
+                                        <th scope="col" class="w-25">{{ 'Jumlah' }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Asrama Laki-laki</td>
+                                        <td class="text-center">
+                                            <input type="number" name="asrama_lk" class="form-control"
+                                                value="{{ $item->asrama_lk }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asrama Perempuan</td>
+                                        <td class="text-center">
+                                            <input type="number" name="asrama_pr" class="form-control"
+                                                value="{{ $item->asrama_pr }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Masjid</td>
+                                        <td class="text-center">
+                                            <input type="number" name="masjid" class="form-control"
+                                                value="{{ $item->masjid }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aula Kegiatan</td>
+                                        <td class="text-center">
+                                            <input type="number" name="aula_kegiatan" class="form-control"
+                                                value="{{ $item->aula_kegiatan }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ruang Pembelajaran</td>
+                                        <td class="text-center">
+                                            <input type="number" name="ruang_pembelajaran" class="form-control"
+                                                value="{{ $item->ruang_pembelajaran }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Perpustakaan</td>
+                                        <td class="text-center">
+                                            <input type="number" name="perpustakaan" class="form-control"
+                                                value="{{ $item->perpustakaan }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kantor Pengajar</td>
+                                        <td class="text-center">
+                                            <input type="number" name="kantor_pengajar" class="form-control"
+                                                value="{{ $item->kantor_pengajar }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dapur</td>
+                                        <td class="text-center">
+                                            <input type="number" name="dapur" class="form-control"
+                                                value="{{ $item->dapur }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kantin</td>
+                                        <td class="text-center">
+                                            <input type="number" name="kantin" class="form-control"
+                                                value="{{ $item->kantin }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tempat Olahraga</td>
+                                        <td class="text-center">
+                                            <input type="number" name="tempat_olahraga" class="form-control"
+                                                value="{{ $item->tempat_olahraga }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kamar Mandi</td>
+                                        <td class="text-center">
+                                            <input type="number" name="kamar_mandi" class="form-control"
+                                                value="{{ $item->kamar_mandi }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ruang Kesehatan</td>
+                                        <td class="text-center">
+                                            <input type="number" name="ruang_kesehatan" class="form-control"
+                                                value="{{ $item->ruang_kesehatan }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kamar Pengajar</td>
+                                        <td class="text-center">
+                                            <input type="number" name="kamar_pengajar" class="form-control"
+                                                value="{{ $item->kamar_pengajar }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lab Komputer</td>
+                                        <td class="text-center">
+                                            <input type="number" name="lab_komputer" class="form-control"
+                                                value="{{ $item->lab_komputer }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lapangan Pertanian</td>
+                                        <td class="text-center">
+                                            <input type="number" name="lapangan_pertanian" class="form-control"
+                                                value="{{ $item->lapangan_pertanian }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lapangan Pertenakan</td>
+                                        <td class="text-center">
+                                            <input type="number" name="lapangan_pertenakan" class="form-control"
+                                                value="{{ $item->lapangan_pertenakan }}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Laundry</td>
+                                        <td class="text-center">
+                                            <input type="number" name="laundry" class="form-control"
+                                                value="{{ $item->laundry }}">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <button type="submit" class="btn btn-success float-end">Perbaharui</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
+        </div>
         {{-- end  modal facility --}}
-
-
 
 
 
@@ -1153,7 +1230,8 @@
                                 data-bs-dismiss="modal">Batal</button>
 
                             <form id="delete-form"
-                                action="{{ route('admin_pesantren.activities_delete', ['id' => $item->id]) }}" method="POST">
+                                action="{{ route('admin_pesantren.activities_delete', ['id' => $item->id]) }}"
+                                method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>
@@ -1181,8 +1259,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('admin_pesantren.activities_update', ['id' => $item->id]) }}" method="post"
-                                class="w-100">
+                            <form action="{{ route('admin_pesantren.activities_update', ['id' => $item->id]) }}"
+                                method="post" class="w-100">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -1293,7 +1371,8 @@
                             <button class="btn btn-outline-secondary" type="button"
                                 data-bs-dismiss="modal">Batal</button>
 
-                            <form id="delete-form" action="{{ route('admin_pesantren.learning_delete', ['id' => $item->id]) }}"
+                            <form id="delete-form"
+                                action="{{ route('admin_pesantren.learning_delete', ['id' => $item->id]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -1322,8 +1401,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('admin_pesantren.learning_update', ['id' => $item->id]) }}" method="post"
-                                class="w-100">
+                            <form action="{{ route('admin_pesantren.learning_update', ['id' => $item->id]) }}"
+                                method="post" class="w-100">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -1476,12 +1555,19 @@
 
                                     <div class="col-12 mb-3">
                                         <label for="year">Tahun</label>
-                                        <input type="number" name="year"
-                                            class="form-control @error('year') is-invalid @enderror"
-                                            value="{{ $item->year }}" id="year">
+                                        <select name="year" id="year"
+                                            class="form-control @error('year') is-invalid @enderror">
+                                            @for ($tahun = date('Y'); $tahun >= 1900; $tahun--)
+                                                <option value="{{ $tahun }}"
+                                                    {{ $tahun == $item->year ? 'selected' : '' }}>
+                                                    {{ $tahun }}
+                                                </option>
+                                            @endfor
+                                        </select>
                                         @error('year')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+
                                     </div>
 
                                     <div class="col-12 mb-3">
@@ -1557,12 +1643,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Menambah Data Jumlah Santri</h5>
-                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin_pesantren.studentcount_create') }}" method="post" class="w-100">
+                        <form action="{{ route('admin_pesantren.studentcount_create') }}" method="post"
+                            class="w-100">
                             @csrf
                             @method('POST')
                             <div class="row">
@@ -1570,16 +1657,25 @@
                                 <input class="form-control" type="text" name="ponpes_id"
                                     value="{{ $ponpes->id }}" hidden>
 
+                                {{-- Year Selector --}}
                                 <div class="col-12 mb-3">
                                     <label for="year">Tahun</label>
-                                    <input type="number" name="year"
-                                        class="form-control @error('year') is-invalid @enderror"
-                                        value="{{ old('year') }}" id="year">
+                                    <select name="year" id="year"
+                                        class="form-control @error('year') is-invalid @enderror">
+                                        <option value="">Pilih Tahun</option>
+                                        @for ($tahun = date('Y'); $tahun >= 1900; $tahun--)
+                                            <option value="{{ $tahun }}"
+                                                {{ old('year') == $tahun ? 'selected' : '' }}>
+                                                {{ $tahun }}
+                                            </option>
+                                        @endfor
+                                    </select>
                                     @error('year')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
+                                {{-- Male Resident Count --}}
                                 <div class="col-12 mb-3">
                                     <label for="male_resident_count">Santri Mukim</label>
                                     <input type="number" name="male_resident_count"
@@ -1590,6 +1686,7 @@
                                     @enderror
                                 </div>
 
+                                {{-- Female Resident Count --}}
                                 <div class="col-12 mb-3">
                                     <label for="female_resident_count">Santriwati Mukim</label>
                                     <input type="number" name="female_resident_count"
@@ -1600,6 +1697,7 @@
                                     @enderror
                                 </div>
 
+                                {{-- Male Non-Resident Count --}}
                                 <div class="col-12 mb-3">
                                     <label for="male_non_resident_count">Santri Tidak Mukim</label>
                                     <input type="number" name="male_non_resident_count"
@@ -1610,6 +1708,7 @@
                                     @enderror
                                 </div>
 
+                                {{-- Female Non-Resident Count --}}
                                 <div class="col-12 mb-3">
                                     <label for="female_non_resident_count">Santriwati Tidak Mukim</label>
                                     <input type="number" name="female_non_resident_count"
@@ -1620,7 +1719,7 @@
                                     @enderror
                                 </div>
 
-
+                                {{-- Explanation --}}
                                 <div class="col-12 mb-2">
                                     <ul>
                                         <li><small>Mukim : Santri/Santriwati yang menetap di pondok pesantren</small></li>
@@ -1629,8 +1728,7 @@
                                     </ul>
                                 </div>
 
-
-
+                                {{-- Form Actions --}}
                                 <div class="col-12 mb-3 d-flex justify-content-end">
                                     <button class="btn btn-outline-secondary me-2" type="button"
                                         data-bs-dismiss="modal">Batal</button>
@@ -1639,11 +1737,77 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
+
         {{-- end modal StudentCount --}}
+
+
+        {{-- update school --}}
+
+        <div class="modal fade" id="updateSchoolModal{{ $ponpes->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            {{ 'Perbaharui Data Sekolah' }}
+                        </h5>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('admin_pesantren.school_update', ['id' => $school->id]) }}"
+                            method="post" class="w-100">
+                            @csrf
+                            @method('PUT')
+                            <div class="row">
+                                {{-- hidden input --}}
+                                <input type="text" name="ponpes_id" value="{{ $school->id }}" hidden>
+                                <table class="table table-bordered border-dark">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col" colspan="2" class="align-middle text-center">
+                                                {{ 'Sekolah Yang Dimiliki/Berelasi' }}
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($attributeTable as $table)
+                                            <tr>
+                                                <th scope="row" class="align-middle">
+                                                    {{ $attributeNames[$table] ?? '-' }}</th>
+                                                <td>
+                                                    <input type="text" name="{{ $table }}"
+                                                        class="form-control @error('{{ $table }}') is-invalid @enderror"
+                                                        value="{{ $school->$table }}" id="{{ $table }}">
+                                                    @error('{{ $table }}')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+
+
+                                <div class="col-12 mb-3 d-flex justify-content-end">
+                                    <button class="btn btn-outline-secondary me-2" type="button"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success">Perbaharui</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- end  modal school --}}
     @endsection
 
 

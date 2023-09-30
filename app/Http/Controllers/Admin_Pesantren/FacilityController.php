@@ -71,6 +71,6 @@ class FacilityController extends Controller
             'lapangan_pertenakan' => $request->input('lapangan_pertenakan'),
             'laundry' => $request->input('laundry'),
         ]);
-        return redirect()->back()->with('success', 'facility ' . $facility->name . ' Berhasil Diperbaharui');
+        return redirect()->back()->with('success', 'Fasilitas Berhasil Diperbaharui');
     }
 }

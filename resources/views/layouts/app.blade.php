@@ -133,11 +133,17 @@
                             <i class="bx bx-map-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                         </a>
+                        <a href="{{ route('pengunjung.maps_schools') }}"
+                        class="nav_link text-decoration-none {{ request()->is('pengunjung/maps_school*') ? 'active' : '' }}">
+                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <span class="nav_name">{{ 'Peta Sekolah' }}</span>
+                    </a>
+
 
                         <a href="{{ route('pengunjung.data_ponpes') }}"
                             class="nav_link text-decoration-none {{ request()->is('pengunjung/data_ponpes*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
                         </a>
 
 
@@ -184,7 +190,7 @@
                         <a href="{{ route('admin_kemenag.data_ponpes') }}"
                             class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_ponpes*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
                         </a>
 
 
@@ -238,7 +244,7 @@
                         <a href="{{ route('admin_pesantren.ponpes_view', ['id' => Auth::User()->id]) }}"
                             class="nav_link text-decoration-none {{ request()->is('admin pesantren/ponpes_view*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
                         </a>
 
                         <a href="/admin pesantren/panduan"
@@ -266,7 +272,7 @@
                         <a href="{{ route('pelapor.data_ponpes') }}"
                             class="nav_link text-decoration-none {{ request()->is('pelapor/data_ponpes*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Data Pesantren' }}</span>
+                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
                         </a>
 
 

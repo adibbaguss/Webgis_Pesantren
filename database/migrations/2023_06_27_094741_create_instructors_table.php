@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('ponpes_id');
             $table->string('nik', 20)->unique();
             $table->string('name', 100);
-            $table->char('gender', 10);
+            $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->string('expertise');
             $table->enum('status', ['active', 'non-active'])->default('active');
             $table->timestamps();

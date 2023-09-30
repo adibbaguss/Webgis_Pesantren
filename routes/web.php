@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin_Pesantren\InstructorsController;
 use App\Http\Controllers\Admin_Pesantren\LearningController;
 use App\Http\Controllers\Admin_Pesantren\PonpesViewController as U_PonpesViewController;
 use App\Http\Controllers\Admin_Pesantren\ProfileController as U_ProfileController;
+use App\Http\Controllers\Admin_Pesantren\SchoolController;
 use App\Http\Controllers\Admin_Pesantren\StudentCountController;
 use App\Http\Controllers\Admin_Pesantren\UpdatePonpesController as U_UpdatePonpesController;
 use App\Http\Controllers\Admin_Pesantren\UpdatePonpesEtcController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Admin_Pesantren\UpdateProfileController as U_UpdateProf
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MapsSchoolsController;
 use App\Http\Controllers\Pelapor\DataPonpesController as V_DataPonpesController;
 use App\Http\Controllers\Pelapor\DataReportController;
 use App\Http\Controllers\Pelapor\DataStatistikController as V_DataStatistikController;
@@ -70,6 +72,12 @@ Route::get('/pengunjung/ponpes_export_csv', [PengunjungController::class, 'expor
 
 Route::get('/pengunjung/ponpes_view/{id}', [PengunjungController::class, 'ponpesView'])->name('pengunjung.ponpes_view');
 Route::get('/pengunjung/data_statistik', [PengunjungController::class, 'ponpesStatistik'])->name('pengunjung.data_statistik');
+
+Route::get('/pengunjung/maps_schools', [MapsSchoolsController::class, 'index'])->name('pengunjung.maps_schools');
+Route::get('/pengunjung/maps_schools/search', [MapsSchoolsController::class, 'search'])->name('pengunjung.search_schools');
+Route::get('/pengunjung/sekolah_ponpes_export_xlsx', [MapsSchoolsController::class, 'exportXLSX']);
+Route::get('/pengunjung/sekolah_ponpes_export_csv', [MapsSchoolsController::class, 'exportCSV']);
+
 Route::get('/pengunjung/ponpes_report', function () {
     return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
 });
@@ -179,6 +187,8 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
     Route::post('/admin pesantren/ponpes_update_etc/image_ponpes/create/jumbotron', [ImagePonpesController::class, 'create_jumbotron'])->name('admin_pesantren.ponpes_image_create_jumbotron');
     Route::post('/admin pesantren/ponpes_update_etc/image_ponpes/create/reguler', [ImagePonpesController::class, 'create_reguler'])->name('admin_pesantren.ponpes_image_create_reguler');
     Route::delete('/admin pesantren/ponpes_update_etc/image/delete/{id}', [ImagePonpesController::class, 'deleteImage'])->name('admin_pesantren.image_delete');
+
+    Route::put('/admin pesantren/ponpes_update_etc/school/update/{id}', [SchoolController::class, 'updateSchool'])->name('admin_pesantren.school_update');
 
     Route::get('/admin pesantren/panduan', function () {
         return view('admin_pesantren.tutorial_view');
