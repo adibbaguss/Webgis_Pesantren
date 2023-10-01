@@ -174,24 +174,25 @@
                             <i class="bx bx-grid-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Dashboard' }}</span>
                         </a>
-
+                        
                         <a href="{{ route('admin_kemenag.map_view') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/map_view*') ? 'active' : '' }}">
-                            <i class="bx bx-map-alt nav_icon"></i>
-                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
-                        </a>
-
-                        <a href="{{ route('admin_kemenag.maps_facility') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/maps_facility*') ? 'active' : '' }}">
-                            <i class="bx bx-map-pin nav_icon"></i>
-                            <span class="nav_name">{{ 'Peta Fasilitas' }}</span>
-                        </a>
+                        class="nav_link text-decoration-none {{ request()->is('admin kemenag/maps_facility*') ? 'active' : (request()->is('admin kemenag/map_view*') ? 'active' : '') }}">
+                        <i class="bx bx-map-alt nav_icon"></i>
+                        <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                     </a>
+                     
 
                         <a href="{{ route('admin_kemenag.data_ponpes') }}"
                             class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_ponpes*') ? 'active' : '' }}">
                             <i class="bx bx-buildings nav_icon"></i>
                             <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
                         </a>
+
+                        <a href="{{ route('admin_kemenag.data_sdm_ponpes') }}"
+                        class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_sdm_ponpes*') ? 'active' : '' }}">
+                        <i class="fas fa-table nav_icon"></i>
+                        <span class="nav_name">{{ 'Data SDM Ponpes' }}</span>
+                    </a>
 
 
 

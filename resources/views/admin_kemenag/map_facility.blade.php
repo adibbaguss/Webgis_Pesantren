@@ -12,7 +12,12 @@
             </div>
         @endif
 
+           {{-- panggil map nav --}}
+           @include('layouts.map_nav')
+           {{-- end panggil map nav --}}
+           
         <div class="d-sm-flex align-items-center justify-content-between mb-5">
+           
             <h2 class="mb-0 text-secondary">Peta Fasilitas Pondok Pesantren di Kabupaten Batang</h2>
         </div>
 

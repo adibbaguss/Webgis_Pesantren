@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('nspp')->unique();
             $table->string('name');
             $table->string('category');
+            $table->enum('takhasus', ['yes', 'no'])->default('no');
             $table->string('phone_number')->unique(); // Unique phone number
             $table->string('website')->nullable();
             $table->string('email')->unique(); // Unique email address

@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="container-fluid mt-5 pt-5">
+
+        {{-- panggil map nav --}}
+        @include('layouts.map_nav')
+        {{-- end panggil map nav --}}
+        
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren di Kabupaten Batang</h2>
         </div>
