@@ -77,7 +77,7 @@
                             @if ($item->ponpes)
                                 <span>{{ $item->ponpes->name }}</span>
                             @else
-                                <span class="text-danger fw-bold">NULL</span>
+                                <span class="text-danger fw-bold text-center">-</span>
                             @endif
                         </td>
 
@@ -92,7 +92,14 @@
                         </td>
                         </td>
 
-                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                        <td>
+                            @if ($item->created_at !== null)
+                                {{ $item->created_at->format('d/m/Y') }}
+                            @else
+                                <span class="text-danger fw-bold text-center">-</span>
+                            @endif
+                        </td>
+                        
                         <td>
 
                             <div class="d-flex justify-content-between">

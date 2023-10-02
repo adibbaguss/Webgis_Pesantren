@@ -46,6 +46,7 @@ class UpdatePonpesController extends Controller
             'nspp' => ['required', 'numeric', 'digits_between:10,20', 'unique:ponpes,nspp,' . $id],
             'name' => ['required', 'string'],
             'category' => ['required', 'string'],
+            'takhasus' => ['required', 'string'],
             'phone_number' => ['required', 'string', 'unique:ponpes,phone_number,' . $id],
             'website' => ['nullable', 'string'],
             'email' => ['required', 'email', 'unique:ponpes,email,' . $id],
@@ -96,6 +97,7 @@ class UpdatePonpesController extends Controller
         $ponpes->nspp = $request->nspp;
         $ponpes->name = $request->name;
         $ponpes->category = $request->category;
+        $ponpes->takhasus = $request->takhasus;
         $ponpes->phone_number = $request->phone_number;
         $ponpes->website = $request->website;
         $ponpes->email = $request->email;

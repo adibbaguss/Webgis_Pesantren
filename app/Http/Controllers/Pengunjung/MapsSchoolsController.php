@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pengunjung;
 
 use App\Exports\SchoolExport;
 use App\Http\Controllers\Controller;

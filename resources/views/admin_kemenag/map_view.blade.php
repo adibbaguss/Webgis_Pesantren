@@ -10,7 +10,7 @@
         {{-- end panggil map nav --}}
         
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="mb-0 text-secondary">Peta Pondok Pesantren di Kabupaten Batang</h2>
+            <h2 class="mb-0 text-secondary">Peta Kategori Pondok Pesantren di Kabupaten Batang</h2>
         </div>
         <div class="map-view mb-3 bg-white p-2 rounded-3 shadow-sm">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>

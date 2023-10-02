@@ -81,6 +81,25 @@
                                     </div>
 
 
+                                    <div class="col-12 mb-4">
+                                        <label for="" class="small ms-2">{{ 'Pesantren Takhasus' }}</label>
+                                        <select class="form-select" aria-label="Default select example" name="takhasus">
+                                            
+                                            <option value="yes">Ya
+                                            </option>
+                                            <option value="no">Tidak
+                                            </option>
+                                        </select>
+
+                                        @error('takhasus')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+
+
 
                                     <div class="col-12 mb-4">
                                         <label for="" class="small ms-2">{{ 'Nomor Telepon' }}</label>
@@ -101,7 +120,7 @@
                                         <label for="" class="small ms-2">{{ 'Link Website' }}</label>
                                         <input id="website" type="text"
                                             class="form-control @error('website') is-invalid @enderror" name="website"
-                                            value="{{ old('website') }}" required autocomplete="website">
+                                            value="{{ old('website') }}" autocomplete="website">
 
                                         @error('website')
                                             <span class="invalid-feedback" role="alert">

@@ -50,17 +50,19 @@ class FacilityExport implements FromCollection, WithHeadings, WithMapping, WithS
 
     public function styles(Worksheet $sheet)
     {
-        // Define the border style for the headings
+        // Define the border style for the entire data range
         $styleArray = [
             'borders' => [
-                'outline' => [
-                    'borderStyle' => Border::BORDER_THIN,
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN, // Set the border style to thin
                 ],
             ],
         ];
 
-        // Apply the style to the entire heading row (row 1)
-        $sheet->getStyle('A1:S1')->applyFromArray($styleArray);
+        // Apply the style to the entire data range
+        $lastRow = $sheet->getHighestRow();
+        $lastColumn = $sheet->getHighestColumn();
+        $sheet->getStyle('A1:' . $lastColumn . $lastRow)->applyFromArray($styleArray);
 
         return [
             1 => ['font' => ['bold' => true]], // Make the heading row bold

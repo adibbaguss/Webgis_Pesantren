@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin_Kemenag\DataSdmController;
 use App\Http\Controllers\Admin_Kemenag\DataStatistikController;
 use App\Http\Controllers\Admin_Kemenag\MapsFacilityController;
 use App\Http\Controllers\Admin_Kemenag\MapsSchoolsController;
+use App\Http\Controllers\Admin_Kemenag\MapTakhasusController;
 use App\Http\Controllers\Admin_Kemenag\MapViewController;
 use App\Http\Controllers\Admin_Kemenag\PonpesViewController;
 use App\Http\Controllers\Admin_Kemenag\ProfileController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Admin_Pesantren\InstructorsController;
 use App\Http\Controllers\Admin_Pesantren\LearningController;
 use App\Http\Controllers\Admin_Pesantren\PonpesViewController as Admin_Pesantren_PonpesViewController;
 use App\Http\Controllers\Admin_Pesantren\ProfileController as Admin_Pesantren_ProfileController;
+use App\Http\Controllers\Admin_Pesantren\ProgramTakhasusController;
 use App\Http\Controllers\Admin_Pesantren\SchoolController;
 use App\Http\Controllers\Admin_Pesantren\StudentCountController;
 use App\Http\Controllers\Admin_Pesantren\UpdatePonpesController as Admin_Pesantren_UpdatePonpesController;
@@ -32,16 +34,24 @@ use App\Http\Controllers\Admin_Pesantren\UpdateProfileController as Admin_Pesant
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MapsSchoolsController as Pengunjung_MapsSchoolsController;
 use App\Http\Controllers\Pelapor\DataPonpesController as Pelapor_DataPonpesController;
 use App\Http\Controllers\Pelapor\DataReportController;
 use App\Http\Controllers\Pelapor\DataStatistikController as Pelapor_DataStatistikController;
+use App\Http\Controllers\Pelapor\MapFacilityController as Pelapor_MapFacilityController;
+use App\Http\Controllers\Pelapor\MapsSchoolsController as Pelapor_MapsSchoolsController;
+use App\Http\Controllers\Pelapor\MapTakhasusController as Pelapor_MapTakhasusController;
 use App\Http\Controllers\Pelapor\MapViewController as Pelapor_MapViewController;
 use App\Http\Controllers\Pelapor\PonpesReportController;
 use App\Http\Controllers\Pelapor\PonpesViewController as Pelapor_PonpesViewController;
 use App\Http\Controllers\Pelapor\ProfileController as Pelapor_ProfileController;
 use App\Http\Controllers\Pelapor\UpdateProfileController as Pelapor_UpdateProfileController;
-use App\Http\Controllers\PengunjungController;
+use App\Http\Controllers\Pengunjung\DataPonpesController as Pengunjung_DataPonpesController;
+use App\Http\Controllers\Pengunjung\DataStatistikController as Pengunjung_DataStatistikController;
+use App\Http\Controllers\Pengunjung\MapFacilityController;
+use App\Http\Controllers\Pengunjung\MapsSchoolsController as Pengunjung_MapsSchoolsController;
+use App\Http\Controllers\Pengunjung\MapTakhasusController as Pengunjung_MapTakhasusController;
+use App\Http\Controllers\Pengunjung\MapViewController as Pengunjung_MapViewController;
+use App\Http\Controllers\Pengunjung\PonpesViewController as Pengunjung_PonpesViewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,19 +76,27 @@ Route::redirect('/', '/pengunjung');
 // Route::redirect('/home', '/pengunjung');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::redirect('/pengunjung', '/pengunjung/map_view');
-Route::get('/pengunjung/map_view', [PengunjungController::class, 'index'])->name('pengunjung.map_view');
-Route::get('/pengunjung/data_ponpes', [PengunjungController::class, 'dataPonpes'])->name('pengunjung.data_ponpes');
-Route::get('/pengunjung/data_ponpes/search', [PengunjungController::class, 'ponpesSearch'])->name('pengunjung.ponpes_search');
-Route::get('/pengunjung/ponpes_export_xlsx', [PengunjungController::class, 'exportXLSX']);
-Route::get('/pengunjung/ponpes_export_csv', [PengunjungController::class, 'exportCSV']);
+Route::get('/pengunjung/map_view', [Pengunjung_MapViewController::class, 'index'])->name('pengunjung.map_view');
+Route::get('/pengunjung/data_ponpes', [Pengunjung_DataPonpesController::class, 'index'])->name('pengunjung.data_ponpes');
+Route::get('/pengunjung/data_ponpes/search', [Pengunjung_DataPonpesController::class, 'ponpesSearch'])->name('pengunjung.ponpes_search');
+Route::get('/pengunjung/ponpes_export_xlsx', [Pengunjung_DataPonpesController::class, 'exportXLSX']);
+Route::get('/pengunjung/ponpes_export_csv', [Pengunjung_DataPonpesController::class, 'exportCSV']);
 
-Route::get('/pengunjung/ponpes_view/{id}', [PengunjungController::class, 'ponpesView'])->name('pengunjung.ponpes_view');
-Route::get('/pengunjung/data_statistik', [PengunjungController::class, 'ponpesStatistik'])->name('pengunjung.data_statistik');
+Route::get('/pengunjung/ponpes_view/{id}', [Pengunjung_PonpesViewController::class, 'ponpesView'])->name('pengunjung.ponpes_view');
+
+Route::get('/pengunjung/data_statistik', [Pengunjung_DataStatistikController::class, 'index'])->name('pengunjung.data_statistik');
 
 Route::get('/pengunjung/maps_schools', [Pengunjung_MapsSchoolsController::class, 'index'])->name('pengunjung.maps_schools');
 Route::get('/pengunjung/maps_schools/search', [Pengunjung_MapsSchoolsController::class, 'search'])->name('pengunjung.search_schools');
 Route::get('/pengunjung/sekolah_ponpes_export_xlsx', [Pengunjung_MapsSchoolsController::class, 'exportXLSX']);
 Route::get('/pengunjung/sekolah_ponpes_export_csv', [Pengunjung_MapsSchoolsController::class, 'exportCSV']);
+
+Route::get('/pengunjung/map_takhasus', [Pengunjung_MapTakhasusController::class, 'index'])->name('pengunjung.map_takhasus');
+
+Route::get('/pengunjung/maps_facility', [MapFacilityController::class, 'index'])->name('pengunjung.maps_facility');
+Route::get('/pengunjung/maps_facility/search', [MapFacilityController::class, 'search'])->name('pengunjung.search_facility');
+Route::get('/pengunjung/fasilitas_ponpes_export_xlsx', [MapFacilityController::class, 'exportXLSX']);
+Route::get('/pengunjung/fasilitas_ponpes_export_csv', [MapFacilityController::class, 'exportCSV']);
 
 Route::get('/pengunjung/ponpes_report', function () {
     return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
@@ -102,8 +120,8 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 // Rute untuk admin
 Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
 
-    Route::redirect('/home', '/admin');
-    Route::redirect('/admin', '/admin kemenag/dashboard/');
+    Route::redirect('/home', '/admin kemenag');
+    Route::redirect('/admin kemenag', '/admin kemenag/dashboard/');
     Route::get('/admin kemenag/profile/{id}', [ProfileController::class, 'index'])->name('admin_kemenag.profile');
     Route::get('/admin kemenag/edit_profile/{id}', [UpdateProfileController::class, 'index'])->name('admin_kemenag.edit_profile');
     Route::put('/admin kemenag/update_profile/{id}', [UpdateProfileController::class, 'update'])->name('admin_kemenag.update_profile');
@@ -111,6 +129,8 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/dashboard', [DashboardController::class, 'index'])->name('admin_kemenag.dashboard');
 
     Route::get('/admin kemenag/map_view', [MapViewController::class, 'index'])->name('admin_kemenag.map_view');
+
+    Route::get('/admin kemenag/map_takhasus', [MapTakhasusController::class, 'index'])->name('admin_kemenag.map_takhasus');
 
     Route::get('/admin kemenag/maps_schools', [MapsSchoolsController::class, 'index'])->name('admin_kemenag.maps_schools');
     Route::get('/admin kemenag/maps_schools/search', [MapsSchoolsController::class, 'search'])->name('admin_kemenag.search_schools');
@@ -165,14 +185,14 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     // Route::post('/create_ponpes_langkah_2', [CreatePonpesController::class, 'stepTwo'])->name('create-ponpes-2');
 
 });
-// // Rute untuk updater
+// // Rute untuk admin_pesantren
 Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
     Route::get('/admin pesantren/dashboard/{id}', [Admin_Pesantren_DashboardController::class, 'index'])->name('admin_pesantren.dashboard');
     Route::get('/admin pesantren/profile/{id}', [Admin_Pesantren_ProfileController::class, 'index'])->name('admin_pesantren.profile');
     Route::get('/admin pesantren/edit_profile/{id}', [Admin_Pesantren_UpdateProfileController::class, 'index'])->name('admin_pesantren.profile_edit');
     Route::put('/admin pesantren/update_profile/{id}', [Admin_Pesantren_UpdateProfileController::class, 'update'])->name('admin_pesantren.profile_update');
     Route::put('/admin pesantren/update_password/{id}', [Admin_Pesantren_UpdateProfileController::class, 'update_password'])->name('admin_pesantren.password_update');
-    Route::get('/admin pesantren/ponpes_view/user_updater={id}', [Admin_Pesantren_PonpesViewController::class, 'view'])->name('admin_pesantren.ponpes_view');
+    Route::get('/admin pesantren/ponpes_view/user_admin_pesantren={id}', [Admin_Pesantren_PonpesViewController::class, 'view'])->name('admin_pesantren.ponpes_view');
     Route::get('/admin pesantren/update_ponpes/ponpes={id}', [Admin_Pesantren_UpdatePonpesController::class, 'index'])->name('admin_pesantren.ponpes_edit');
     Route::put('/admin pesantren/update_ponpes/ponpes={id}', [Admin_Pesantren_UpdatePonpesController::class, 'update'])->name('admin_pesantren.ponpes_update');
     Route::get('/admin pesantren/ponpes_update_etc/ponpes={id}', [UpdatePonpesEtcController::class, 'index'])->name('admin_pesantren.ponpes_edit_etc');
@@ -204,16 +224,33 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
 
     Route::put('/admin pesantren/ponpes_update_etc/school/update/{id}', [SchoolController::class, 'updateSchool'])->name('admin_pesantren.school_update');
 
+    Route::post('/admin pesantren/ponpes_update_etc/program_takhasus/create', [ProgramTakhasusController::class, 'createTakhasus'])->name('admin_pesantren.program_takhasus_create');
+    Route::delete('/admin pesantren/ponpes_update_etc/program_takhasus/delete/{id}', [ProgramTakhasusController::class, 'destroyTakhasus'])->name('admin_pesantren.program_takhasus_delete');
+    Route::put('/admin pesantren/ponpes_update_etc/program_takhasus/update/{id}', [ProgramTakhasusController::class, 'updateTakhasus'])->name('admin_pesantren.program_takhasus_update');
+
     Route::get('/admin pesantren/panduan', function () {
         return view('admin_pesantren.tutorial_view');
     });
 });
 
-// // Rute untuk viewer
+// // Rute untuk pelapor
 Route::middleware(['auth', 'role:pelapor'])->group(function () {
-    //Route::get('/pelapor/dashboard', [ViewerController::class, 'dashboard'])->name('pelapor.dashboard');
-    Route::redirect('/viewer', '/pelapor/map_view');
+    //Route::get('/pelapor/dashboard', [pelaporController::class, 'dashboard'])->name('pelapor.dashboard');
+    Route::redirect('/pelapor', '/pelapor/map_view');
     Route::get('/pelapor/map_view', [Pelapor_MapViewController::class, 'index'])->name('pelapor.map_view');
+
+    Route::get('/pelapor/maps_schools', [Pelapor_MapsSchoolsController::class, 'index'])->name('pelapor.maps_schools');
+    Route::get('/pelapor/maps_schools/search', [Pelapor_MapsSchoolsController::class, 'search'])->name('pelapor.search_schools');
+    Route::get('/pelapor/sekolah_ponpes_export_xlsx', [Pelapor_MapsSchoolsController::class, 'exportXLSX']);
+    Route::get('/pelapor/sekolah_ponpes_export_csv', [Pelapor_MapsSchoolsController::class, 'exportCSV']);
+
+    Route::get('/pelapor/map_takhasus', [Pelapor_MapTakhasusController::class, 'index'])->name('pelapor.map_takhasus');
+
+    Route::get('/pelapor/maps_facility', [Pelapor_MapFacilityController::class, 'index'])->name('pelapor.maps_facility');
+    Route::get('/pelapor/maps_facility/search', [Pelapor_MapFacilityController::class, 'search'])->name('pelapor.search_facility');
+    Route::get('/pelapor/fasilitas_ponpes_export_xlsx', [Pelapor_MapFacilityController::class, 'exportXLSX']);
+    Route::get('/pelapor/fasilitas_ponpes_export_csv', [Pelapor_MapFacilityController::class, 'exportCSV']);
+
     Route::get('/pelapor/data_ponpes', [Pelapor_DataPonpesController::class, 'index'])->name('pelapor.data_ponpes');
     Route::get('/pelapor/data_ponpes/search', [Pelapor_DataPonpesController::class, 'ponpesSearch'])->name('pelapor.ponpes_search');
     Route::get('/pelapor/ponpes_export_xlsx', [Pelapor_DataPonpesController::class, 'exportXLSX']);

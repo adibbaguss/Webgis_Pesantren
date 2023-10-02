@@ -13,7 +13,7 @@ class DataPonpesController extends Controller
 {
     public function index()
     {
-        $ponpes = Ponpes::all();
+        $ponpes = Ponpes::orderBy('name')->get();
 
         return view('admin_kemenag.data_ponpes', compact('ponpes'));
 
@@ -27,6 +27,7 @@ class DataPonpesController extends Controller
             ->orWhere('city', 'like', '%' . $query . '%')
             ->orWhere('subdistrict', 'like', '%' . $query . '%')
             ->orWhere('category', 'like', '%' . $query . '%')
+            ->orderBy('name')
             ->get();
 
         return view('admin_kemenag.data_ponpes', compact('ponpes'));

@@ -10,10 +10,26 @@ use Illuminate\Support\Facades\Auth;
 
 class PonpesViewController extends Controller
 {
+
+    private $attributeNames = [
+        'sd' => 'SD/MI',
+        'smp' => 'SMP/MTs',
+        'sma' => 'SMA/MA',
+        'smk' => 'SMK',
+        'pt' => 'Perguruan Tinggi',
+    ];
+
+    private $attributeTable = [
+        'sd', 'smp', 'sma', 'smk', 'pt',
+    ];
+
     public function index($id)
     {
+
+        $attributeNames = $this->attributeNames;
+        $attributeTable = $this->attributeTable;
         // Mengambil data ponpes berdasarkan ID
-        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount')
+        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount', 'school', 'ProgramTakhasus')
             ->find($id);
         // $user = User::all();
 
@@ -25,8 +41,9 @@ class PonpesViewController extends Controller
             $learning = $ponpes->learning;
             $instructors = $ponpes->instructors;
             $image = $ponpes->images;
+            $school = $ponpes->school;
             $studentCount = $ponpes->studentCount->sortBy('year');
-
+            $takhasus = $ponpes->programTakhasus;
             $pelapor = Auth::User();
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
@@ -35,7 +52,7 @@ class PonpesViewController extends Controller
 
             // Mengirim data ponpes ke halaman view_ponpes.blade.php
             // dd($studentCount);
-            return view('pelapor.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages', 'pelapor', 'category_report'));
+            return view('pelapor.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages', 'pelapor', 'category_report', 'school', 'attributeTable', 'attributeNames', 'takhasus'));
 
         } else {
             abort(404);

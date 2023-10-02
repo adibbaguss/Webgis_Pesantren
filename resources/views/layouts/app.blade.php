@@ -125,19 +125,21 @@
                 <div>
                     <a href="" class="nav_logo text-decoration-none">
                         <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px">
-                        <span class="nav_logo-name text-capitalize">Guest</span>
+                        <span class="nav_logo-name text-capitalize">Pengujung</span>
                     </a>
                     <div class="nav_list">
                         <a href="{{ route('pengunjung.map_view') }}"
-                            class="nav_link text-decoration-none {{ request()->is('pengunjung/map_view*') ? 'active' : '' }}">
+                            class="nav_link text-decoration-none
+                        {{ request()->is('pengunjung/map_view*') ||
+                        request()->is('pengunjung/maps_facility*') ||
+                        request()->is('pengunjung/maps_schools*') ||
+                        request()->is('pengunjung/map_takhasus*')
+                            ? 'active'
+                            : '' }}">
                             <i class="bx bx-map-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                         </a>
-                        <a href="{{ route('pengunjung.maps_schools') }}"
-                        class="nav_link text-decoration-none {{ request()->is('pengunjung/maps_school*') ? 'active' : '' }}">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
-                        <span class="nav_name">{{ 'Peta Sekolah' }}</span>
-                    </a>
+
 
 
                         <a href="{{ route('pengunjung.data_ponpes') }}"
@@ -174,130 +176,143 @@
                             <i class="bx bx-grid-alt nav_icon"></i>
                             <span class="nav_name">{{ 'Dashboard' }}</span>
                         </a>
-                        
-                        <a href="{{ route('admin_kemenag.map_view') }}"
-                        class="nav_link text-decoration-none {{ request()->is('admin kemenag/maps_facility*') ? 'active' : (request()->is('admin kemenag/map_view*') ? 'active' : '') }}">
-                        <i class="bx bx-map-alt nav_icon"></i>
-                        <span class="nav_name">{{ 'Peta Pesantren' }}</span>
-                     </a>
-                     
 
-                        <a href="{{ route('admin_kemenag.data_ponpes') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_ponpes*') ? 'active' : '' }}">
-                            <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
-                        </a>
-
-                        <a href="{{ route('admin_kemenag.data_sdm_ponpes') }}"
-                        class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_sdm_ponpes*') ? 'active' : '' }}">
-                        <i class="fas fa-table nav_icon"></i>
-                        <span class="nav_name">{{ 'Data SDM Ponpes' }}</span>
-                    </a>
+                        <div class="nav_list">
+                            <a href="{{ route('admin_kemenag.map_view') }}"
+                                class="nav_link text-decoration-none
+                            {{ request()->is('admin kemenag/map_view*') ||
+                            request()->is('admin kemenag/maps_facility*') ||
+                            request()->is('admin kemenag/maps_schools*') ||
+                            request()->is('admin kemenag/map_takhasus*')
+                                ? 'active'
+                                : '' }}">
+                                <i class="bx bx-map-alt nav_icon"></i>
+                                <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                            </a>
 
 
+                            <a href="{{ route('admin_kemenag.data_ponpes') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_ponpes*') ? 'active' : '' }}">
+                                <i class="bx bx-buildings nav_icon"></i>
+                                <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
+                            </a>
 
-                        <a href="{{ route('admin_kemenag.data_admin_pesantren') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_admin_pesantren*') ? 'active' : '' }}">
-                            <i class="bx bxs-user-account nav_icon"></i>
-                            <span class="nav_name">{{ 'Akun Admin Ponpes' }}</span>
-                        </a>
+                            <a href="{{ route('admin_kemenag.data_sdm_ponpes') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_sdm_ponpes*') ? 'active' : '' }}">
+                                <i class="fas fa-table nav_icon"></i>
+                                <span class="nav_name">{{ 'Data SDM Ponpes' }}</span>
+                            </a>
 
-                        <a href="{{ route('admin_kemenag.data_pelapor') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_pelapor*') ? 'active' : '' }}">
-                            <i class="bx bx-user-pin nav_icon"></i>
-                            <span class="nav_name">{{ 'Akun Pelapor' }}</span>
-                        </a>
 
-                        <a href="{{ route('admin_kemenag.data_statistik') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_statistik*') ? 'active' : '' }}">
-                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
-                        </a>
 
-                        <a href="{{ route('admin_kemenag.data_report') }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_report*') ? 'active' : '' }}">
-                            <i class="bx bxs-report nav_icon"></i>
-                            <span class="nav_name">{{ 'Pelaporan' }}</span>
-                        </a>
+                            <a href="{{ route('admin_kemenag.data_admin_pesantren') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_admin_pesantren*') ? 'active' : '' }}">
+                                <i class="bx bxs-user-account nav_icon"></i>
+                                <span class="nav_name">{{ 'Akun Admin Ponpes' }}</span>
+                            </a>
 
-                        <a href="/admin kemenag/panduan"
-                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/panduan*') ? 'active' : '' }}">
-                            <i class='bx bx-info-circle nav_icon'></i>
-                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
-                        </a>
+                            <a href="{{ route('admin_kemenag.data_pelapor') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_pelapor*') ? 'active' : '' }}">
+                                <i class="bx bx-user-pin nav_icon"></i>
+                                <span class="nav_name">{{ 'Akun Pelapor' }}</span>
+                            </a>
 
+                            <a href="{{ route('admin_kemenag.data_statistik') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_statistik*') ? 'active' : '' }}">
+                                <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                                <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                            </a>
+
+                            <a href="{{ route('admin_kemenag.data_report') }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_report*') ? 'active' : '' }}">
+                                <i class="bx bxs-report nav_icon"></i>
+                                <span class="nav_name">{{ 'Pelaporan' }}</span>
+                            </a>
+
+                            <a href="/admin kemenag/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/panduan*') ? 'active' : '' }}">
+                                <i class='bx bx-info-circle nav_icon'></i>
+                                <span class="nav_name">{{ 'Panduan Sistem' }}</span>
+                            </a>
+
+                        </div>
                     </div>
-                </div>
-            @elseif(Auth::User()->user_role == 'admin pesantren')
-                <div>
-                    <a href="{{ route('admin_pesantren.dashboard', ['id' => Auth::User()->id]) }}"
-                        class="nav_logo text-decoration-none">
-                        <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
-                            style="width: 25px">
-                        <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
-                    </a>
-                    <div class="nav_list">
+                @elseif(Auth::User()->user_role == 'admin pesantren')
+                    <div>
                         <a href="{{ route('admin_pesantren.dashboard', ['id' => Auth::User()->id]) }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin pesantren/dashboard*') ? 'active' : '' }}">
-                            <i class="bx bx-grid-alt nav_icon"></i>
-                            <span class="nav_name">{{ 'Dashboard' }}</span>
+                            class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
+                                style="width: 25px">
+                            <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
                         </a>
-                        <a href="{{ route('admin_pesantren.ponpes_view', ['id' => Auth::User()->id]) }}"
-                            class="nav_link text-decoration-none {{ request()->is('admin pesantren/ponpes_view*') ? 'active' : '' }}">
-                            <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
-                        </a>
+                        <div class="nav_list">
+                            <a href="{{ route('admin_pesantren.dashboard', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin pesantren/dashboard*') ? 'active' : '' }}">
+                                <i class="bx bx-grid-alt nav_icon"></i>
+                                <span class="nav_name">{{ 'Dashboard' }}</span>
+                            </a>
+                            <a href="{{ route('admin_pesantren.ponpes_view', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin pesantren/ponpes_view*') ? 'active' : '' }}">
+                                <i class="bx bx-buildings nav_icon"></i>
+                                <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
+                            </a>
 
-                        <a href="/admin pesantren/panduan"
-                            class="nav_link text-decoration-none {{ request()->is('admin pesantren/panduan*') ? 'active' : '' }}">
-                            <i class='bx bx-info-circle nav_icon'></i>
-                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
-                        </a>
+                            <a href="/admin pesantren/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('admin pesantren/panduan*') ? 'active' : '' }}">
+                                <i class='bx bx-info-circle nav_icon'></i>
+                                <span class="nav_name">{{ 'Panduan Sistem' }}</span>
+                            </a>
 
+                        </div>
                     </div>
-                </div>
-            @elseif(Auth::User()->user_role == 'pelapor')
-                <div>
-                    <a href="" class="nav_logo text-decoration-none">
-                        <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
-                            style="width: 25px">
-                        <span class="nav_logo-name text-capitalize">pelapor</span>
-                    </a>
-                    <div class="nav_list">
-                        <a href="{{ route('pelapor.map_view') }}"
-                            class="nav_link text-decoration-none {{ request()->is('pelapor/map_view*') ? 'active' : '' }}">
-                            <i class="bx bx-map-alt nav_icon"></i>
-                            <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                @elseif(Auth::User()->user_role == 'pelapor')
+                    <div>
+                        <a href="" class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
+                                style="width: 25px">
+                            <span class="nav_logo-name text-capitalize">pelapor</span>
                         </a>
+                        <div class="nav_list">
+                            <a href="{{ route('pelapor.map_view') }}"
+                                class="nav_link text-decoration-none
+                                {{ request()->is('pelapor/map_view*') ||
+                                request()->is('pelapor/maps_facility*') ||
+                                request()->is('pelapor/maps_schools*') ||
+                                request()->is('pelapor/map_takhasus*')
+                                    ? 'active'
+                                    : '' }}">
+                                <i class="bx bx-map-alt nav_icon"></i>
+                                <span class="nav_name">{{ 'Peta Pesantren' }}</span>
+                            </a>
 
-                        <a href="{{ route('pelapor.data_ponpes') }}"
-                            class="nav_link text-decoration-none {{ request()->is('pelapor/data_ponpes*') ? 'active' : '' }}">
-                            <i class="bx bx-buildings nav_icon"></i>
-                            <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
-                        </a>
-
-
-                        <a href="{{ route('pelapor.data_statistik') }}"
-                            class="nav_link text-decoration-none {{ request()->is('pelapor/data_statistik*') ? 'active' : '' }}"">
-                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
-                        </a>
-
-                        <a href="{{ route('pelapor.data_report', ['id' => Auth::User()->id]) }}"
-                            class="nav_link text-decoration-none {{ request()->is('pelapor/data_report*') ? 'active' : '' }}"">
-                            <i class="bx bxs-report nav_icon"></i>
-                            <span class="nav_name">{{ 'Riwayat Laporan' }}</span>
-                        </a>
-
-                        <a href="/pelapor/panduan"
-                            class="nav_link text-decoration-none {{ request()->is('pelapor/panduan*') ? 'active' : '' }}"">
-                            <i class='bx bx-info-circle nav_icon'></i>
-                            <span class="nav_name">{{ 'Panduan Sistem' }}</span>
-                        </a>
+                            <a href="{{ route('pelapor.data_ponpes') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/data_ponpes*') ? 'active' : '' }}">
+                                <i class="bx bx-buildings nav_icon"></i>
+                                <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
+                            </a>
 
 
+                            <a href="{{ route('pelapor.data_statistik') }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/data_statistik*') ? 'active' : '' }}"">
+                                <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                                <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                            </a>
+
+                            <a href="{{ route('pelapor.data_report', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/data_report*') ? 'active' : '' }}"">
+                                <i class="bx bxs-report nav_icon"></i>
+                                <span class="nav_name">{{ 'Riwayat Laporan' }}</span>
+                            </a>
+
+                            <a href="/pelapor/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('pelapor/panduan*') ? 'active' : '' }}"">
+                                <i class='bx bx-info-circle nav_icon'></i>
+                                <span class="nav_name">{{ 'Panduan Sistem' }}</span>
+                            </a>
+
+
+                        </div>
                     </div>
-                </div>
             @endif
         </nav>
     </div>

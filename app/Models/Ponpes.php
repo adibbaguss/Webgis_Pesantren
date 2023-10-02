@@ -9,6 +9,7 @@ use App\Models\Instructor;
 use App\Models\Learning;
 use App\Models\School;
 use App\Models\StudentCount;
+use App\Models\Takhasus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,7 @@ class Ponpes extends Model
         'nspp',
         'name',
         'category',
+        'takhasus',
         'phone_number',
         'website',
         'email',
@@ -79,6 +81,11 @@ class Ponpes extends Model
     public function school()
     {
         return $this->hasOne(School::class); // Assuming it's a one-to-one relationship
+    }
+
+    public function programTakhasus()
+    {
+        return $this->hasMany(Takhasus::class);
     }
 
 }

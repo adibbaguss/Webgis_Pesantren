@@ -12,13 +12,18 @@
             </div>
         @endif
 
+           {{-- panggil map nav --}}
+           @include('layouts.map_nav')
+           {{-- end panggil map nav --}}
+           
         <div class="d-sm-flex align-items-center justify-content-between mb-5">
+           
             <h2 class="mb-0 text-secondary">Peta Fasilitas Pondok Pesantren di Kabupaten Batang</h2>
         </div>
 
 
         <div class="form mb-2">
-            <form action="{{ route('search.facility') }}" method="GET" class="d-flex justify-content-end">
+            <form action="{{ route('pengunjung.search_facility') }}" method="GET" class="d-flex justify-content-end">
                 <div class="form-group">
                     <select class="form-control" id="attribute" name="attribute">
                         <option value="">-- Tampilkan Semua --</option>
@@ -102,36 +107,38 @@
 
                 </tbody>
             </table>
-    </div>
-@else
-    <div class="d-flex justify-content-center">
-        <table class="table table-striped" id="tablefacility" style="width: 100%">
-            <thead>
-                <tr class="text-center">
-                    <th class="align-middle">NO</th>
-                    <th class="align-middle">NAMA PESANTREN</th>
-                    @if (isset($attribute))
-                        <th class="align-middle text-uppercase">Jumlah
-                            {{ $attributeNames[$attribute] ?? 'Nama Fasilitas Tidak Diketahui' }}</th>
-                    @else
-                        <th class="align-middle">FASILITAS</th>
-                    @endif
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($facilities as $facility)
-                    <tr>
-                        <th scope="row" class="text-center align-middle">{{ $loop->iteration }}</th>
-                        <td>{{ $facility->ponpes->name ?? 'Nama Ponpes Tidak Diketahui' }}</td>
-                        <td class="text-center">{{ isset($attribute) ? $facility->{$attribute} : '-' }}</td>
 
+            <div class="d-flex justify-content-end mt-3">
+                <a href="/pengunjung/fasilitas_ponpes_export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
+                <a href="/pengunjung/fasilitas_ponpes_export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
+            </div>
+        @else
+            <table class="table table-striped" id="tablefacility" class="display" style="width:100%">
+                <thead>
+                    <tr class="text-center">
+                        <th class="align-middle ">NO</th>
+                        <th class="align-middle">NAMA PESANTREN</th>
+                        @if (isset($attribute))
+                            <th class="align-middle text-uppercase">Jumlah
+                                {{ $attributeNames[$attribute] ?? 'Nama Fasilitas Tidak Diketahui' }}</th>
+                        @else
+                            <th class="align-middle">FASILITAS</th>
+                        @endif
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    @endif
+                </thead>
+                <tbody>
+                    @foreach ($facilities as $facility)
+                        <tr>
+                            <th scope="row" class="text-center align-middle">{{ $loop->iteration }}</th>
+                            <td>{{ $facility->ponpes->name ?? 'Nama Ponpes Tidak Diketahui' }}</td>
+                            <td class="text-center">{{ isset($attribute) ? $facility->{$attribute} : '-' }}</td>
 
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
 @endsection
 
 @push('javascript')

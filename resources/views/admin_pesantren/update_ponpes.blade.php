@@ -12,19 +12,7 @@
 
 
                         <div class="row ">
-                            {{-- <div class="col-12 mb-4">
-                            <label for=""
-                                class="small ms-2">{{ 'Updater/Operator : ' . $ponpes->user_id }}</label>
-                            <select class="form-select" aria-label="Default select example" name="user_id">
-                                @foreach ($user as $item)
-                                    @if ($item->user_role == 'updater')
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->id . ' - ' . $item->name . ' (' . $item->username . ')' }}</option>
-                                    @endif
-                                @endforeach
-
-                            </select>
-                        </div> --}}
+        
 
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
@@ -53,6 +41,8 @@
 
                                 </div>
                             </div>
+
+                        
 
                             <div class="col-12 mb-4">
                                 <label for=""
@@ -86,9 +76,11 @@
                                 <label for="" class="small ms-2">{{ 'Kategori Pesantren' }}</label>
                                 <select class="form-select" aria-label="Default select example" name="category">
                                     <option value="{{ $ponpes->category }}">{{ $ponpes->category }}</option>
-                                    <option value="{{ 'Pesantren Salafiyah (Tradisional)' }}">{{ 'Pesantren Salafiyah (Tradisional)' }}
+                                    <option value="{{ 'Pesantren Salafiyah (Tradisional)' }}">
+                                        {{ 'Pesantren Salafiyah (Tradisional)' }}
                                     </option>
-                                    <option value="{{ 'Pesantren Khalafiyah (Modern)' }}">{{ 'Pesantren Khalafiyah (Modern)' }}
+                                    <option value="{{ 'Pesantren Khalafiyah (Modern)' }}">
+                                        {{ 'Pesantren Khalafiyah (Modern)' }}
                                     </option>
                                     <option value="{{ 'Pesantren Kombinasi' }}">{{ 'Pesantren Kombinasi' }}
                                     </option>
@@ -102,13 +94,29 @@
                             </div>
 
 
+                            <div class="col-12 mb-4">
+                                <label for="" class="small ms-2">{{ 'Pesantren Takhasus' }}</label>
+                                <select class="form-select" aria-label="Default select example" name="takhasus">
+                                    <option value="yes" @if ($ponpes->takhasus == 'yes') selected @endif>Ya</option>
+                                    <option value="no" @if ($ponpes->takhasus == 'no') selected @endif>Tidak
+                                    </option>
+
+                                </select>
+
+                                @error('takhasus')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
 
                             <div class="col-12 mb-4">
                                 <label for="" class="small ms-2">{{ 'Nomor Telepon' }}</label>
                                 <input id="phone_number" type="tel"
-                                    class="form-control @error('phone_number') is-invalid @enderror"
-                                    name="phone_number" value="{{ $ponpes->phone_number }}" required
-                                    autocomplete="phone_number">
+                                    class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
+                                    value="{{ $ponpes->phone_number }}" required autocomplete="phone_number">
 
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
@@ -162,8 +170,7 @@
 
 
                             <div class="col-12 mb-4">
-                                <label for=""
-                                    class="small ms-2">{{ 'Pimpinan/Pengasuh Pesantren' }}</label>
+                                <label for="" class="small ms-2">{{ 'Pimpinan/Pengasuh Pesantren' }}</label>
                                 <input id="pimpinan" type="text"
                                     class="form-control @error('pimpinan') is-invalid @enderror" name="pimpinan"
                                     value="{{ $ponpes->pimpinan }}" required autocomplete="pimpinan">
@@ -218,16 +225,15 @@
 
                             <div class="col-12 mb-4">
                                 <label for="" class="small ms-2">{{ 'Kecamatan' }}</label>
-                                <select class="form-select" aria-label="Default select example"
-                                    name="subdistrict">
-                                    <option value="{{ $ponpes->subdistrict }}">{{ $ponpes->subdistrict }}
-                                    </option>
+                                <select class="form-select" aria-label="Default select example" name="subdistrict">
                                     @foreach ($kecamatanOptions as $kecamatan)
-                                        <option value="{{ $kecamatan }}">{{ $kecamatan }}</option>
+                                        <option value="{{ $kecamatan }}"
+                                            @if (old('subdistrict', $ponpes->subdistrict) === $kecamatan) selected @endif>{{ $kecamatan }}
+                                        </option>
                                     @endforeach
                                 </select>
 
-                                @error('status')
+                                @error('subdistrict')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -263,11 +269,11 @@
 
                             <div class="col-12 mb-4">
                                 <label for=""
-                                    class="small ms-2">{{ 'Status : (' . $ponpes->status . ')' }}</label>
-                                <select class="form-select" aria-label="Default select example" name="status">
-                                    <option value="active">Active</option>
-                                    <option value="non-acitive">Non-Active</option>
-                                </select>
+                                    class="small ms-2">{{ 'Status' }}</label>
+                                    <select class="form-select" aria-label="Pilih status" name="status">
+                                        <option value="active" @if(old('status') == 'active') selected @endif>Aktif</option>
+                                        <option value="non-active" @if(old('status') == 'non-active') selected @endif>Tidak Aktif</option>
+                                    </select>                                        
 
                                 @error('status')
                                     <span class="invalid-feedback" role="alert">
@@ -280,9 +286,9 @@
                                 <div class="inputan me-1 w-100">
                                     <label for="" class="small ms-2">{{ 'Latitude' }}</label>
                                     <input id="latitude" type="text"
-                                        class="form-control @error('latitude') is-invalid @enderror"
-                                        name="latitude" value="{{ $ponpes->latitude }}" required
-                                        autocomplete="latitude">
+                                        class="form-control @error('latitude') is-invalid @enderror" name="latitude"
+                                        value="{{ $ponpes->latitude }}" required autocomplete="latitude">
+                                    <small>Latitude Sebelumnya : {{ $ponpes->latitude }}</small>
 
                                     @error('latitude')
                                         <span class="invalid-feedback" role="alert">
@@ -297,6 +303,7 @@
                                         class="form-control @error('longitude') is-invalid @enderror"
                                         name="longitude" value="{{ $ponpes->longitude }}" required
                                         autocomplete="longitude">
+                                    <small>Longitude Sebelumnya : {{ $ponpes->longitude }}</small>
 
                                     @error('longitude')
                                         <span class="invalid-feedback" role="alert">

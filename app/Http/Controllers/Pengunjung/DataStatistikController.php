@@ -1,95 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pengunjung;
 
-use App\Exports\PonpesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
 use App\Models\StudentCount;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
-class PengunjungController extends Controller
+class DataStatistikController extends Controller
 {
-    // map view
-    public function index()
-    {
-        $ponpes = Ponpes::all();
-
-        $ponpes2 = Ponpes::all();
-        $data = Ponpes::select('subdistrict')
-            ->selectRaw('SUM(CASE WHEN category = "Pesantren Salafiyah (Tradisional)" THEN 1 ELSE 0 END) as salafiyah_count')
-            ->selectRaw('SUM(CASE WHEN category = "Pesantren Khalafiyah (Modern)" THEN 1 ELSE 0 END) as khalafiyah_count')
-            ->selectRaw('SUM(CASE WHEN category = "Pesantren Kombinasi" THEN 1 ELSE 0 END) as kombinasi_count')
-            ->selectRaw('SUM(CASE WHEN category IN ("Pesantren Salafiyah (Tradisional)", "Pesantren Khalafiyah (Modern)", "Pesantren Kombinasi") THEN 1 ELSE 0 END) as Total')
-            ->groupBy('subdistrict')
-            ->get();
-
-        return view('pengunjung.map_view', compact('ponpes', 'ponpes2', 'data'));
-    }
-
-    // data ponpes
-    public function dataPonpes()
-    {
-        $ponpes = Ponpes::all();
-
-        return view('pengunjung.data_ponpes', compact('ponpes'));
-
-    }
-
-    public function ponpesSearch(Request $request)
-    {
-        $query = $request->input('query');
-
-        $ponpes = Ponpes::where('name', 'like', '%' . $query . '%')
-            ->orWhere('city', 'like', '%' . $query . '%')
-            ->orWhere('subdistrict', 'like', '%' . $query . '%')
-            ->orWhere('category', 'like', '%' . $query . '%')
-            ->get();
-
-        return view('pengunjung.data_ponpes', compact('ponpes'));
-    }
-
-    public function ponpesView($id)
-    {
-        // Mengambil data ponpes berdasarkan ID
-        $ponpes = Ponpes::with('activities', 'facility', 'learning', 'instructors', 'images', 'studentCount', )
-            ->find($id);
-        // $user = User::all();
-
-        if ($ponpes) {
-            $activities = $ponpes->activities;
-            $facility = $ponpes->facility;
-            $learning = $ponpes->learning;
-            $instructors = $ponpes->instructors;
-            $image = $ponpes->images;
-            $studentCount = $ponpes->studentCount->sortBy('year');
-
-            $jumbotronImage = $image->where('type', 'jumbotron')->first();
-            $regulerImages = $image->where('type', 'reguler');
-
-            // Mengirim data ponpes ke halaman view_ponpes.blade.php
-            // dd($studentCount);
-            return view('pengunjung.ponpes_view', compact('ponpes', 'activities', 'facility', 'learning', 'instructors', 'image', 'studentCount', 'jumbotronImage', 'regulerImages'));
-
-        } else {
-            abort(404);
-        }
-    }
-
-    public function exportXLSX()
-    {
-        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xlsx');
-    }
-
-    public function exportCSV()
-    {
-        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.csv');
-    }
-
     // statitik data
-    public function ponpesStatistik()
+    public function index()
     {
         $ponpes = Ponpes::all();
 
@@ -181,10 +101,4 @@ class PengunjungController extends Controller
         return $chartDataStudent;
     }
 
-    // ponpes report pengunjung
-
-    // private function ponpesReport()
-    // {
-    //     return Redirect::route('login')->with('error', 'Anda Harus Login Terlebih Dahulu');
-    // }
 }

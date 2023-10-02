@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
-
-
 @section('content')
     <div class="container-fluid mt-5 pt-5">
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @elseif(session('errorss'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
         @endif
+
+        {{-- panggil map nav --}}
+        @include('layouts.map_nav')
+        {{-- end panggil map nav --}}
+
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="mb-0 text-secondary">Peta Pondok Pesantren di Kabupaten Batang</h2>
         </div>
@@ -44,12 +47,14 @@
             </tbody>
 
         </table>
-        <table class="table table-bordered table-hover text-center shadow" id="example" class="display" style="width:100%">
+
+        <table class="table table-bordered table-hover text-center shadow" id="example" class="display"
+            style="width:100%">
             <thead>
                 <tr>
-                    <th colspan="6"class="text-center" >DATA JENIS PESANTREN</th>
+                    <th colspan="6"class="text-center">DATA JENIS PESANTREN</th>
                 </tr>
-                <tr >
+                <tr>
                     <th scope="col" class="text-center">NO</th>
                     <th scope="col" class="text-center">KECAMATAN</th>
                     <th scope="col" class="text-center">SALAFIYAH (TRADISIONAL)</th>
@@ -267,7 +272,3 @@
         // maps ke-dua
     </script>
 @endpush
-
-
-
-
