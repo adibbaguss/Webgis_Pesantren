@@ -28,11 +28,21 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'username' => 'updater22',
+                'username' => 'admin pesantren',
                 'password' => bcrypt('123456'),
                 'email' => 'updater2@gmail.com',
                 'name' => 'admin pesantren',
                 'user_role' => 'admin pesantren',
+                'status' => 'active',
+
+            ],
+
+            [
+                'username' => 'admin madin',
+                'password' => bcrypt('123456'),
+                'email' => 'madin2@gmail.com',
+                'name' => 'admin madin',
+                'user_role' => 'admin madin',
                 'status' => 'active',
 
             ],
@@ -48,7 +58,7 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'username' => 'viewe2r',
+                'username' => 'pelapor2',
                 'password' => bcrypt('123456'),
                 'email' => 'pelapor2@gmail.com',
                 'name' => 'pelapor2',

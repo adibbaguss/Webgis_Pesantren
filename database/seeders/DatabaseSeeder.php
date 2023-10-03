@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\CategoryReportMadinSeeder;
 use Database\Seeders\CategoryReportSeeder;
+use Database\Seeders\FacilityMadinSeeder;
 use Database\Seeders\FacilitySeeder;
+use Database\Seeders\MadinSeeder;
 use Database\Seeders\PonpesSeeder;
 use Database\Seeders\ReportHistorySeeder;
 use Database\Seeders\ReportSeeder;
@@ -28,6 +31,10 @@ class DatabaseSeeder extends Seeder
             ReportHistorySeeder::class,
             FacilitySeeder::class,
             SchoolSeeder::class,
+
+            MadinSeeder::class,
+            CategoryReportMadinSeeder::class,
+            FacilityMadinSeeder::class,
             // ActivitySeeder::class,
             // InstructorSeeder::class,
             // ImagePonpesSeeder::class,
