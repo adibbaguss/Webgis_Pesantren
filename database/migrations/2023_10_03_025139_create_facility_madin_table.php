@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('kelas_pengajaran')->default(0);
             $table->integer('perpustakaan')->default(0);
             $table->integer('ruang_guru')->default(0);
-            $table->integer('lapangan')->default(0);
             $table->integer('fasilitas_audio_visual')->default(0);
             $table->integer('kamar_mandi')->default(0);
             $table->integer('ruangan_administrasi')->default(0);

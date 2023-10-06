@@ -23,7 +23,6 @@ class FacilityMadinSeeder extends Seeder
                 'kelas_pengajaran' => 0,
                 'perpustakaan' => 0,
                 'ruang_guru' => 0,
-                'lapangan' => 0,
                 'fasilitas_audio_visual' => 0,
                 'kamar_mandi' => 0,
                 'ruangan_administrasi' => 0,

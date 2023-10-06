@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin_Kemenag\DataPelaporController;
 use App\Http\Controllers\Admin_Kemenag\DataPonpesController;
 use App\Http\Controllers\Admin_Kemenag\DataSdmController;
 use App\Http\Controllers\Admin_Kemenag\DataStatistikController;
+use App\Http\Controllers\Admin_Kemenag\Madin\MadinViewController;
+use App\Http\Controllers\Admin_Kemenag\Madin\MapFacilityController as AK_Madin_MapFacilityController;
+use App\Http\Controllers\Admin_Kemenag\Madin\MapViewController as AK_Madin_MapviewController;
+use App\Http\Controllers\Admin_Kemenag\MapCategoryController;
 use App\Http\Controllers\Admin_Kemenag\MapsFacilityController;
 use App\Http\Controllers\Admin_Kemenag\MapsSchoolsController;
 use App\Http\Controllers\Admin_Kemenag\MapTakhasusController;
@@ -47,6 +51,9 @@ use App\Http\Controllers\Pelapor\ProfileController as Pelapor_ProfileController;
 use App\Http\Controllers\Pelapor\UpdateProfileController as Pelapor_UpdateProfileController;
 use App\Http\Controllers\Pengunjung\DataPonpesController as Pengunjung_DataPonpesController;
 use App\Http\Controllers\Pengunjung\DataStatistikController as Pengunjung_DataStatistikController;
+use App\Http\Controllers\Pengunjung\Madin\MadinViewController as Pengunjung_MadinViewController;
+use App\Http\Controllers\Pengunjung\Madin\MapFacilityController as Pengunjung_Madin_MapFaciltiyController;
+use App\Http\Controllers\Pengunjung\Madin\MapViewController as Pengunjung_Madin_MapViewController;
 use App\Http\Controllers\Pengunjung\MapFacilityController;
 use App\Http\Controllers\Pengunjung\MapsSchoolsController as Pengunjung_MapsSchoolsController;
 use App\Http\Controllers\Pengunjung\MapTakhasusController as Pengunjung_MapTakhasusController;
@@ -102,6 +109,17 @@ Route::get('/pengunjung/ponpes_report', function () {
     return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
 });
 
+// madin
+Route::get('/pengunjung/madin/map_view', [Pengunjung_Madin_MapViewController::class, 'index'])->name('pengunjung.madin.map_view');
+
+Route::get('/pengunjung/madin/map_facility', [Pengunjung_Madin_MapFaciltiyController::class, 'index'])->name('pengunjung.madin.map_facility');
+Route::get('/pengunjung/madin/map_facility/search', [Pengunjung_Madin_MapFaciltiyController::class, 'search'])->name('pengunjung.madin.search_facility');
+
+Route::get('/pengunjung/madin/madin_view/{id}', [Pengunjung_MadinViewController::class, 'index'])->name('pengunjung.madin.madin_view');
+
+Route::get('/pengunjung/madin/madin_report', function () {
+    return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
+});
 // percobaan maps
 // Route::get('/pengunjung/maps_facility', [MapsFacilityController::class, 'index'])->name('maps.facility');
 // Route::get('/pengunjung/maps_facility/search', [MapsFacilityController::class, 'search'])->name('search.facility');
@@ -129,6 +147,10 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/dashboard', [DashboardController::class, 'index'])->name('admin_kemenag.dashboard');
 
     Route::get('/admin kemenag/map_view', [MapViewController::class, 'index'])->name('admin_kemenag.map_view');
+    Route::get('/admin kemenag/map_view/export_xlsx', [MapViewController::class, 'exportXLSX']);
+    Route::get('/admin kemenag/map_view/export_csv', [MapViewController::class, 'exportCSV']);
+
+    Route::get('/admin kemenag/map_category', [MapCategoryController::class, 'index'])->name('admin_kemenag.map_category');
 
     Route::get('/admin kemenag/map_takhasus', [MapTakhasusController::class, 'index'])->name('admin_kemenag.map_takhasus');
 
@@ -137,9 +159,10 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/sekolah_ponpes_export_xlsx', [MapsSchoolsController::class, 'exportXLSX']);
     Route::get('/admin kemenag/sekolah_ponpes_export_csv', [MapsSchoolsController::class, 'exportCSV']);
 
-    Route::get('/admin kemenag/data_ponpes', [DataPonpesController::class, 'index'])->name('admin_kemenag.data_ponpes');
     Route::get('/admin kemenag/ponpes_view/{id}', [PonpesViewController::class, 'view'])->name('admin_kemenag.ponpes_view');
     Route::delete('/admin kemenag/ponpes/{id}', [PonpesViewController::class, 'destroy'])->name('admin_kemenag.ponpes_delete');
+
+    Route::get('/admin kemenag/data_ponpes', [DataPonpesController::class, 'index'])->name('admin_kemenag.data_ponpes');
     Route::get('/admin kemenag/ponpes_export_xlsx', [DataPonpesController::class, 'exportXLSX']);
     Route::get('/admin kemenag/ponpes_export_csv', [DataPonpesController::class, 'exportCSV']);
     Route::get('/admin kemenag/data_ponpes/search', [DataPonpesController::class, 'search'])->name('admin_kemenag.ponpes_search');
@@ -177,6 +200,20 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/maps_facility/search', [MapsFacilityController::class, 'search'])->name('admin_kemenag.search_facility');
     Route::get('/admin kemenag/fasilitas_ponpes_export_xlsx', [MapsFacilityController::class, 'exportXLSX']);
     Route::get('/admin kemenag/fasilitas_ponpes_export_csv', [MapsFacilityController::class, 'exportCSV']);
+
+    // madin and tpq
+
+    Route::get('/admin kemenag/madin/map_view', [AK_Madin_MapviewController::class, 'index'])->name('admin_kemenag.madin.map_view');
+    Route::get('/admin kemenag/madin/map_view/export_xlsx', [AK_Madin_MapviewController::class, 'exportXLSX']);
+    Route::get('/admin kemenag/madin/map_view/export_csv', [AK_Madin_MapviewController::class, 'exportCSV']);
+
+    Route::get('/admin kemenag/madin/maps_facility', [AK_Madin_MapFacilityController::class, 'index'])->name('admin_kemenag.madin.maps_facility');
+    Route::get('/admin kemenag/madin/maps_facility/search', [AK_Madin_MapFacilityController::class, 'search'])->name('admin_kemenag.madin.search_facility');
+    Route::get('/admin kemenag/madin/fasilitas/export_xlsx', [AK_Madin_MapFacilityController::class, 'exportXLSX']);
+    Route::get('/admin kemenag/madin/fasilitas/export_csv', [AK_Madin_MapFacilityController::class, 'exportCSV']);
+
+    Route::get('/admin kemenag/madin/madin_view/{id}', [MadinViewController::class, 'index'])->name('admin_kemenag.madin.madin_view');
+    // Route::delete('/admin kemenag/ponpes/{id}', [PonpesViewController::class, 'destroy'])->name('admin_kemenag.ponpes_delete');
 
     Route::get('/admin kemenag/panduan', function () {
         return view('admin_kemenag.tutorial_view');

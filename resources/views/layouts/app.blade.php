@@ -140,6 +140,16 @@
                             <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                         </a>
 
+                        <a href="{{ route('pengunjung.madin.map_view') }}"
+                        class="nav_link text-decoration-none
+                    {{ request()->is('pengunjung/madin/map_view*') ||
+                    request()->is('pengunjung/madin/maps_facility*')
+                        ? 'active'
+                        : '' }}">
+                        <i class="bx bxs-map-alt nav_icon"></i>
+                        <span class="nav_name">{{ 'Peta Madin & TPQ' }}</span>
+                    </a>
+
 
 
                         <a href="{{ route('pengunjung.data_ponpes') }}"
@@ -181,6 +191,7 @@
                             <a href="{{ route('admin_kemenag.map_view') }}"
                                 class="nav_link text-decoration-none
                             {{ request()->is('admin kemenag/map_view*') ||
+                            request()->is('admin kemenag/map_category*') ||
                             request()->is('admin kemenag/maps_facility*') ||
                             request()->is('admin kemenag/maps_schools*') ||
                             request()->is('admin kemenag/map_takhasus*')
@@ -189,6 +200,19 @@
                                 <i class="bx bx-map-alt nav_icon"></i>
                                 <span class="nav_name">{{ 'Peta Pesantren' }}</span>
                             </a>
+
+
+                          
+                                <a href="{{ route('admin_kemenag.madin.map_view') }}"
+                                    class="nav_link text-decoration-none
+                                {{ request()->is('admin kemenag/madin/map_view*') ||
+                                request()->is('admin kemenag/madin/maps_facility*')
+                                    ? 'active'
+                                    : '' }}">
+                                    <i class="bx bxs-map-alt nav_icon"></i>
+                                    <span class="nav_name">{{ 'Peta Madin & TPQ' }}</span>
+                                </a>
+
 
 
                             <a href="{{ route('admin_kemenag.data_ponpes') }}"

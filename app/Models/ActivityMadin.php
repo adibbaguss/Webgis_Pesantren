@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class ActivityMadin extends Model
 {
     use HasFactory;
+    protected $table = 'activities_madin';
 
     protected $fillable = [
         'madin_id',

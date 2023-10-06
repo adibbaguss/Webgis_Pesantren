@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Pengunjung;
+namespace App\Http\Controllers\Admin_Kemenag;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
 
-class MapViewController extends Controller
+class MapCategoryController extends Controller
 {
-    // map view
     public function index()
     {
         $ponpes = Ponpes::all();
@@ -21,16 +20,6 @@ class MapViewController extends Controller
             ->groupBy('subdistrict')
             ->get();
 
-        return view('pengunjung.map_view', compact('ponpes', 'ponpes2', 'data'));
-    }
-
-    public function exportXLSX()
-    {
-        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xlsx');
-    }
-
-    public function exportCSV()
-    {
-        return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.csv');
+        return view('admin_kemenag.map_category', compact('ponpes', 'ponpes2', 'data'));
     }
 }

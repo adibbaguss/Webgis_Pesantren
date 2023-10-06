@@ -10,7 +10,7 @@ class StudentCountMadin extends Model
 {
     use HasFactory;
 
-    protected $table = 'student_count';
+    protected $table = 'student_count_madin';
 
     protected $fillable = [
         'madin_id',

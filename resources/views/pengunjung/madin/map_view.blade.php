@@ -6,11 +6,11 @@
     <div class="container-fluid mt-5 pt-5">
 
         {{-- panggil map nav --}}
-        @include('layouts.map_nav')
+        @include('layouts.map_nav_madin')
         {{-- end panggil map nav --}}
         
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="mb-0 text-secondary">Peta Pondok Pesantren di Kabupaten Batang</h2>
+            <h2 class="mb-0 text-secondary">Peta Madrasah Diniyah dan TPQ di Kabupaten Batang</h2>
         </div>
         <div class="map-view mb-5 bg-white p-2 rounded-3 shadow-sm">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
@@ -23,7 +23,7 @@
                 </tr>
                 <tr >
                     <th scope="col" class="text-center">NO</th>
-                    <th scope="col" class="text-center">NSPP</th>
+                    <th scope="col" class="text-center">NSDT</th>
                     <th scope="col" class="text-center">NAMA</th>
                     <th scope="col" class="text-center">NO TELEPON</th>
                     <th scope="col" class="text-center">EMAIL</th>
@@ -46,10 +46,10 @@
             <tbody>
 
 
-                @foreach ($ponpes as $item)
+                @foreach ($madin as $item)
                     <tr>
                         <td class="text-center fw-bold">{{ $loop->iteration }}</td>
-                        <td>{{ $item->nspp }}</td>
+                        <td>{{ $item->nsdt }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->phone_number }}</td>
                         <td>{{ $item->email }}</td>
@@ -70,10 +70,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="d-flex justify-content-end mt-3">
-            <a href="/admin kemenag/map_view/export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
-            <a href="/admin kemenag/map_view/export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
-        </div>
     </div>
 @endsection
 
@@ -130,7 +126,7 @@
             }
         });
 
-        const ponpesIcon = new LeafIcon({
+        const madinIcon = new LeafIcon({
             iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_1.png') }}',
         });
     
@@ -155,7 +151,7 @@
         @endphp
 
         // Buat asosiatif array dan masukkan ke array sebelumnya
-        @foreach ($ponpes as $item)
+        @foreach ($madin as $item)
             @php
                 $db_data = [
                     'loc' => [$item->latitude, $item->longitude],
@@ -170,10 +166,10 @@
         var data = @json($data_pencarian);
         var i = 0
 
-        @foreach ($ponpes as $item)
+        @foreach ($madin as $item)
             @php
                 $subdistrict = $item->subdistrict;
-                $markerIcon = 'ponpesIcon';
+                $markerIcon = 'madinIcon';
 
             @endphp
 
@@ -198,7 +194,7 @@
                     </div>
                     <div class="col-9 py-0 pe-0 my-auto">
                         <div class="title-map m-0">
-                            <a href="{{ route('admin_kemenag.ponpes_view', ['id' => $item->id]) }}">
+                            <a href="{{ route('pengunjung.madin.madin_view', ['id' => $item->id]) }}">
                                 <span class="fw-bold">{{ $item->name }}</span>    
                             </a>
                         </div>
@@ -239,7 +235,7 @@
         };
 
         const overlayLayers = {
-            @foreach ($ponpes->groupBy('subdistrict') as $subdistrict => $ponpes)
+            @foreach ($madin->groupBy('subdistrict') as $subdistrict => $madin)
                 '{{ $subdistrict }}': subdistrictLayers['{{ $subdistrict }}'],
             @endforeach
         };
