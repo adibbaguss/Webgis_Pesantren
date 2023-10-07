@@ -52,4 +52,9 @@ class User extends Authenticatable
         return $this->hasOne(Ponpes::class);
     }
 
+    public function madin()
+    {
+        return $this->hasOne(Madin::class);
+    }
+
 }

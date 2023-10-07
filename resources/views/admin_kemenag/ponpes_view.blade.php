@@ -179,7 +179,7 @@
 
 
                     <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Operator/Updater' }}</label>
+                        <label class="fs-6 fw-bold text-secondary">{{ 'Admin Pesantren' }}</label>
                         @if ($ponpes->user_id)
                             <table class="w-50">
                                 <tr>

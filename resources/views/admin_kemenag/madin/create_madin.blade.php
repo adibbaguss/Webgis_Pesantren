@@ -2,15 +2,13 @@
 
 @section('content')
     <div class="container-fluid pt-5 mt-5">
-           <h2 class="mb-0 text-secondary ">{{ 'Formulir Pembuatan Data Pondok Pesantren' }}</h2>
+        <h2 class="mb-0 text-secondary ">{{ 'Formulir Pembuatan Data Madrasah Diniyah & TPQ' }}</h2>
         <div class="container d-grid mb-5 mt-5">
-            
             <div class="mx-md-5 px-md-5">
-             
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-10 bg-white shadow p-md-5">
                         <div class=" pt-4">
-                            <form method="POST" action="{{ route('admin_kemenag.create_ponpes') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin_kemenag.create_madin') }}" enctype="multipart/form-data">
                                 @csrf
                                 {{-- photo profile --}}
                                 <div class="avatar-upload">
@@ -38,12 +36,12 @@
                                 <div class="row ">
                                     <div class="col-12 mb-4">
                                         <label for=""
-                                            class="small ms-2">{{ 'Nomor Statistik Pondok Pesantren' }}</label>
-                                        <input id="nspp" type="number"
-                                            class="form-control @error('nspp') is-invalid @enderror" name="nspp"
-                                            value="{{ old('nspp') }}" required autocomplete="nspp">
+                                            class="small ms-2">{{ 'Nomor Statistik Diniyah Takmiliyah' }}</label>
+                                        <input id="nsdt" type="number"
+                                            class="form-control @error('nsdt') is-invalid @enderror" name="nsdt"
+                                            value="{{ old('nsdt') }}" required autocomplete="nsdt">
 
-                                        @error('nspp')
+                                        @error('nsdt')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -52,7 +50,7 @@
 
 
                                     <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Nama Pesantren' }}</label>
+                                        <label for="" class="small ms-2">{{ 'Nama Madrasah Diniyah/TPQ' }}</label>
                                         <input id="name" type="text"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
                                             value="{{ old('name') }}" required autocomplete="name">
@@ -63,45 +61,6 @@
                                             </span>
                                         @enderror
                                     </div>
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Kategori Pesantren' }}</label>
-                                        <select class="form-select" aria-label="Default select example" name="category">
-                                            <option selected>Pilih Kategori</option>
-                                            <option value="{{ 'Pesantren Salafiyah (Tradisional)' }}">{{ 'Pesantren Salafiyah (Tradisional)' }}
-                                            </option>
-                                            <option value="{{ 'Pesantren Khalafiyah (Modern)' }}">{{ 'Pesantren Khalafiyah (Modern)' }}
-                                            </option>
-                                            <option value="{{ 'Pesantren Kombinasi' }}">{{ 'Pesantren Kombinasi' }}
-                                            </option>
-                                        </select>
-
-                                        @error('category')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="col-12 mb-4">
-                                        <label for="" class="small ms-2">{{ 'Pesantren Takhasus' }}</label>
-                                        <select class="form-select" aria-label="Default select example" name="takhasus">
-                                            
-                                            <option value="yes">Ya
-                                            </option>
-                                            <option value="no">Tidak
-                                            </option>
-                                        </select>
-
-                                        @error('takhasus')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-
 
 
                                     <div class="col-12 mb-4">
@@ -164,7 +123,7 @@
 
                                     <div class="col-12 mb-4">
                                         <label for=""
-                                            class="small ms-2">{{ 'Pimpinan/Pengasuh Pesantren' }}</label>
+                                            class="small ms-2">{{ 'Pimpinan  Madrasah Diniyah/TPQ' }}</label>
                                         <input id="pimpinan" type="text"
                                             class="form-control @error('pimpinan') is-invalid @enderror" name="pimpinan"
                                             value="{{ old('pimpinan') }}" required autocomplete="pimpinan">

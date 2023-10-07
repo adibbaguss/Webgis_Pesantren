@@ -19,7 +19,7 @@
 
 
         <div class="d-flex mb-3">
-            <h2 class="mb-0 text-secondary ">{{ 'Daftar Akun Admin Pesantren' }}</h2>
+            <h2 class="mb-0 text-secondary ">{{ 'Daftar Akun Admin Madrasah Diniyah & TPQ' }}</h2>
             <div class="dropdown me-0 ms-auto">
                 <button class="btn btn-outline-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/admin kemenag/account_admin_pesantren_export" class="dropdown-item">
+                        <a href="/admin kemenag/account_admin_madin_export" class="dropdown-item">
                             <i class="fas fa-print"></i>
                             {{ 'Cetak' }}
                         </a>
@@ -50,7 +50,7 @@
                     <th scope="col">USERNAME</th>
                     <th scope="col">EMAIL</th>
                     <th scope="col">NO TELPON</th>
-                    <th scope="col">PESANTREN</th>
+                    <th scope="col">MADIN/TPQ</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">DIBUAT</th>
                     <th scope="col">OPSI</th>
@@ -78,8 +78,8 @@
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->phone_number }}</td>
                         <td>
-                            @if ($item->ponpes)
-                                <span>{{ $item->ponpes->name }}</span>
+                            @if ($item->madin)
+                                <span>{{ $item->madin->name }}</span>
                             @else
                                 <span class="text-danger fw-bold text-center">-</span>
                             @endif
@@ -144,7 +144,7 @@
                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Batal</button>
 
                         <form id="delete-form"
-                            action="{{ route('admin_kemenag.account_admin_pesantren_delete', ['id' => $item->id]) }}"
+                            action="{{ route('admin_kemenag.account_admin_madin_delete', ['id' => $item->id]) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
@@ -171,7 +171,7 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST"
-                            action="{{ route('admin_kemenag.account_admin_pesantren_update', $item->id) }}">
+                            action="{{ route('admin_kemenag.account_admin_madin_update', $item->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -247,13 +247,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ 'Tambah Akun Admin Pesantren' }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ 'Tambah Akun Admin Madrasah Diniyah/TPQ' }}</h5>
                     <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('admin_kemenag.account_admin_pesantren_create') }}">
+                    <form method="POST" action="{{ route('admin_kemenag.account_admin_madin_create') }}">
                         @csrf
                         @method('POST')
                         <div class="mb-3">
@@ -307,7 +307,7 @@
                             @enderror
                         </div>
                         <div>
-                            <input type="text" name="user_role" id="user_role" value="admin pesantren" hidden>
+                            <input type="text" name="user_role" id="user_role" value="admin madin" hidden>
                         </div>
 
                         <div class="mb-3">

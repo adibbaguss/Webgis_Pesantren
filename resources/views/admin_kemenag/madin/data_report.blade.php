@@ -11,13 +11,12 @@
                 {{ session('error') }}
             </div>
         @endif
-
-          {{-- panggil nav --}}
-          @include('layouts.nav_report')
-          {{-- end panggil nav --}}
+        {{-- panggil nav --}}
+        @include('layouts.nav_report')
+        {{-- end panggil nav --}}
 
         <div class="d-flex mb-3">
-            <h2 class="mb-0 text-secondary ">{{  'Daftar Pelaporan Pondok Pesantren di Kabupaten Batang'  }}</h2>
+            <h2 class="mb-0 text-secondary ">{{ 'Daftar Pelaporan Madrasah Diniyah & TPQ di Kabupaten Batang' }}</h2>
             <div class="dropdown me-0 ms-auto">
                 <button class="btn btn-outline-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -25,13 +24,13 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/admin kemenag/report_export" class="dropdown-item">
+                        <a href="/admin kemenag/madin/report_export" class="dropdown-item">
                             <i class="fas fa-print"></i>
                             {{ 'Cetak' }}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin_kemenag.category_report') }}" class="dropdown-item">
+                        <a href="{{ route('admin_kemenag.madin.category_report') }}" class="dropdown-item">
                             <i class="fas fa-edit"></i>
                             {{ 'Edit Kategori Laporan' }}
                         </a>
@@ -39,57 +38,7 @@
                 </ul>
             </div>
         </div>
-        {{-- <table class="table table-bordered table-hover text-center" id="example" class="display" style="width:100%">
-            <thead>
-                <tr class="text-center align-middle">
-                    <th scope="col">NO</th>
-                    <th scope="col">TANGGAL MASUK</th>
-                    <th scope="col">KATEGORI</th>
-                    <th scope="col">PESANTREN</th>
-                    <th scope="col">PELAPOR</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">OPSI</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($reports as $item)
-                    <tr class="text-start">
-                        <th scope="row" class="text-center align-middle">{{ $loop->iteration }}</th>
-                        <td class="align-middle">{{ $item->reporting_date }}</td>
-                        <td class="align-middle">{{ $item->category_name }}</td>
-                        <td class="align-middle">{{ $item->ponpes_name }}</td>
-                        <td class="align-middle">{{ $item->user_name }}</td>
 
-                        @if ($item->status == 'baru')
-                            <td class="align-middle text-center fw-bold text-danger">{{ $item->status }}</td>
-                        @elseif($item->status == 'dalam proses')
-                            <td class="align-middle text-center fw-bold text-warning">{{ $item->status }}</td>
-                        @elseif($item->status == 'selesai')
-                            <td class="align-middle text-center fw-bold text-success">{{ $item->status }}</td>
-                        @else
-                            <td class="align-middle text-center fw-bold text-secondary">{{ $item->status }}</td>
-                        @endif
-
-                        <td class="text-center align-middle">
-
-                            <div class="d-flex justify-content-between">
-                                <a class="text-secondary fs-5" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#infoModal{{ $item->id }}">
-                                    <i class="fas fa-info-circle"></i>
-                                </a>
-
-                                <a class="text-secondary fs-5" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#updateStatusModal{{ $item->id }}">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </div>
-
-                        </td>
-                    </tr>
-                @endforeach
-
-            </tbody>
-        </table> --}}
 
         <table class="table table-bordered table-hover text-center" id="example" class="display" style="width:100%">
             <thead>
@@ -98,7 +47,7 @@
                     <th scope="col">KODE LAPORAN</th>
                     <th scope="col">TANGGAL MASUK</th>
                     <th scope="col">KATEGORI</th>
-                    <th scope="col">PESANTREN</th>
+                    <th scope="col">MADIN/TPQ</th>
                     <th scope="col">PELAPOR</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">OPSI</th>
@@ -106,7 +55,7 @@
             </thead>
             <tbody>
                 @php
-                    $sortedReports = $reports->sortBy('reportHistories.0.date'); // Mengurutkan berdasarkan tanggal ascending
+                    $sortedReports = $reports->sortBy('reportHistoriesMadin.0.date'); // Mengurutkan berdasarkan tanggal ascending
                 @endphp
 
                 @foreach ($sortedReports as $item)
@@ -116,7 +65,7 @@
                         <td class="align-middle">{{ $item->reporting_code }}</td>
                         <td class="align-middle">
                             @php $found = false; @endphp
-                            @foreach ($item->reportHistories as $data)
+                            @foreach ($item->reportHistoriesMadin as $data)
                                 @if ($data->status === 'baru')
                                     {{ $data->date }}
                                     @php
@@ -131,10 +80,10 @@
                         </td>
 
                         <td class="align-middle">{{ $item->category_name }}</td>
-                        <td class="align-middle">{{ $item->ponpes_name }}</td>
+                        <td class="align-middle">{{ $item->madin_name }}</td>
                         <td class="align-middle">{{ $item->user_name }}</td>
-                        
-                        @php $latestHistory = $item->reportHistories->sortByDesc('created_at')->first(); @endphp
+
+                        @php $latestHistory = $item->reportHistoriesMadin->sortByDesc('created_at')->first(); @endphp
 
                         @if ($latestHistory->status == 'baru')
                             <td class="align-middle text-center fw-bold text-danger">{{ $latestHistory->status }}</td>
@@ -192,9 +141,9 @@
 
                                 <div class="col-md-12">
                                     <label for="" class="fw-bold">
-                                        Pesantren
+                                        Madin/TPQ
                                     </label>
-                                    <p>{{ $item->ponpes_name }}</p>
+                                    <p>{{ $item->madin_name }}</p>
                                 </div>
 
                                 <div class="col-md-12">
@@ -229,7 +178,7 @@
 
                                         </thead>
                                         <tbody>
-                                            @foreach ($item->reportHistories as $data)
+                                            @foreach ($item->reportHistoriesMadin as $data)
                                                 @if ($data->report_id == $item->id)
                                                     <tr>
                                                         <td>{{ $data->date }}</td>
@@ -270,25 +219,26 @@
                                     Status Sekarang :
                                 </label>
                                 @php
-                                $latestStatus = $item->reportHistories->sortByDesc('created_at')->first();
-                            @endphp
-                    
-                            @if ($latestStatus)
-                                @if ($latestStatus->status == 'baru')
-                                    <p class="btn btn-danger">{{ $latestStatus->status }}</p>
-                                @elseif($latestStatus->status == 'dalam proses')
-                                    <p class="btn btn-warning">{{ $latestStatus->status }}</p>
-                                @elseif($latestStatus->status == 'selesai')
-                                    <p class="btn btn-success">{{ $latestStatus->status }}</p>
+                                    $latestStatus = $item->reportHistoriesMadin->sortByDesc('created_at')->first();
+                                @endphp
+
+                                @if ($latestStatus)
+                                    @if ($latestStatus->status == 'baru')
+                                        <p class="btn btn-danger">{{ $latestStatus->status }}</p>
+                                    @elseif($latestStatus->status == 'dalam proses')
+                                        <p class="btn btn-warning">{{ $latestStatus->status }}</p>
+                                    @elseif($latestStatus->status == 'selesai')
+                                        <p class="btn btn-success">{{ $latestStatus->status }}</p>
+                                    @else
+                                        <p class="btn btn-secondary">{{ $latestStatus->status }}</p>
+                                    @endif
                                 @else
-                                    <p class="btn btn-secondary">{{ $latestStatus->status }}</p>
+                                    <p class="btn btn-secondary">Tidak Ada Status</p>
                                 @endif
-                            @else
-                                <p class="btn btn-secondary">Tidak Ada Status</p>
-                            @endif
 
                             </div>
-                            <form method="POST" action="{{ route('admin_kemenag.report_status_update', $item->id) }}">
+                            <form method="POST"
+                                action="{{ route('admin_kemenag.madin.report_status_update', $item->id) }}">
                                 @csrf
                                 @method('POST')
 

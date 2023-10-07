@@ -14,7 +14,7 @@
 
         <div class="container mx-md-5 px-md-5">
             <div class="d-flex justify-content-between mb-3">
-                <h2 class="mb-0 text-secondary ">{{ 'Kategori Laporan Pondok Pesantren' }}</h2>
+                <h2 class="mb-0 text-secondary ">{{ 'Kategori Laporan Madrasah Diniyah & TPQ' }}</h2>
                 <a type="button" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-success">
                     <i class="fas fa-plus"></i>
                 </a>
@@ -66,7 +66,7 @@
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Kategori</h1>
             </div>
-            <form action="{{ route('admin_kemenag.category_report_create') }}" method="POST">
+            <form action="{{ route('admin_kemenag.madin.category_report_create') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="modal-body">
@@ -102,7 +102,7 @@
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Perbaharui Kategori</h1>
             </div>
-            <form action="{{ route('admin_kemenag.category_report_update', ['id'=>$item->id]) }}" method="POST">
+            <form action="{{ route('admin_kemenag.madin.category_report_update', ['id'=>$item->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -136,7 +136,7 @@
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Kategori</h1>
             </div>
-            <form action="{{ route('admin_kemenag.category_report_delete', ['id'=>$item->id]) }}" method="POST">
+            <form action="{{ route('admin_kemenag.madin.category_report_delete', ['id'=>$item->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">

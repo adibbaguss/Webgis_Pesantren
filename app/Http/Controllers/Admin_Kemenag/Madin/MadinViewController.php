@@ -37,26 +37,26 @@ class MadinViewController extends Controller
         }
     }
 
-    // public function destroy($id)
-    // {
+    public function destroy($id)
+    {
 
-    //     $madin = Madin::findOrFail($id);
+        $madin = Madin::findOrFail($id);
 
-    //     if (!$madin) {
+        if (!$madin) {
 
-    //         // return redirect()->route('admin_kemenag.madin.data_madin')->with('error', 'madin not found.');
-    //     }
+            // return redirect()->route('admin_kemenag.madin.data_madin')->with('error', 'madin not found.');
+        }
 
-    //     if ($madin->photo_profil) {
-    //         if (file_exists(public_path('images/ponpes/profile/' . $madin->photo_profil))) {
-    //             unlink(public_path('images/ponpes/profile/' . $madin->photo_profil));
-    //         } else {
-    //             dd('File does not exists.');
-    //         }
-    //     }
-    //     $madin->delete();
+        if ($madin->photo_profil) {
+            if (file_exists(public_path('images/ponpes/profile/' . $madin->photo_profil))) {
+                unlink(public_path('images/ponpes/profile/' . $madin->photo_profil));
+            } else {
+                dd('File does not exists.');
+            }
+        }
+        $madin->delete();
 
-    //     return redirect()->route('admin_kemenag.madin.data_madin')->with('success', 'Madin deleted successfully.');
-    // }
+        return redirect()->route('admin_kemenag.data_madin')->with('success', 'Madin deleted successfully.');
+    }
 
 }

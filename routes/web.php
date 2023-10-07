@@ -8,9 +8,16 @@ use App\Http\Controllers\Admin_Kemenag\DataPelaporController;
 use App\Http\Controllers\Admin_Kemenag\DataPonpesController;
 use App\Http\Controllers\Admin_Kemenag\DataSdmController;
 use App\Http\Controllers\Admin_Kemenag\DataStatistikController;
+use App\Http\Controllers\Admin_Kemenag\Madin\CategoryReportController as AK_Madin_CategoryReportController;
+use App\Http\Controllers\Admin_Kemenag\Madin\CreateMadinController;
+use App\Http\Controllers\Admin_Kemenag\Madin\DataAdminMadinController;
+use App\Http\Controllers\Admin_Kemenag\Madin\DataMadinController;
+use App\Http\Controllers\Admin_Kemenag\Madin\DataSdmController as AK_Madin_DataSdmController;
 use App\Http\Controllers\Admin_Kemenag\Madin\MadinViewController;
 use App\Http\Controllers\Admin_Kemenag\Madin\MapFacilityController as AK_Madin_MapFacilityController;
 use App\Http\Controllers\Admin_Kemenag\Madin\MapViewController as AK_Madin_MapviewController;
+use App\Http\Controllers\Admin_Kemenag\Madin\ReportController as AK_Madin_ReportController;
+use App\Http\Controllers\Admin_Kemenag\Madin\UpdateMadinController;
 use App\Http\Controllers\Admin_Kemenag\MapCategoryController;
 use App\Http\Controllers\Admin_Kemenag\MapsFacilityController;
 use App\Http\Controllers\Admin_Kemenag\MapsSchoolsController;
@@ -169,7 +176,7 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/create_ponpes', [CreatePonpesController::class, 'index']);
     Route::post('/admin kemenag/create_ponpes', [CreatePonpesController::class, 'create'])->name('admin_kemenag.create_ponpes');
 
-    Route::get('/admin kemenag/data_sdm_pesantren', [DataSdmController::class, 'index'])->name('admin_kemenag.data_sdm_ponpes');
+    Route::get('/admin kemenag/ponpes/data_sdm', [DataSdmController::class, 'index'])->name('admin_kemenag.data_sdm_ponpes');
     Route::get('/admin kemenag/sdm_ponpes_export_xlsx', [DataSdmController::class, 'exportXLSX']);
     Route::get('/admin kemenag/sdm_ponpes_export_csv', [DataSdmController::class, 'exportCSV']);
 
@@ -185,8 +192,10 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/account_pelapor_export', [DataPelaporController::class, 'export']);
 
     Route::get('/admin kemenag/data_statistik', [DataStatistikController::class, 'index'])->name('admin_kemenag.data_statistik');
+
     Route::get('/admin kemenag/update_ponpes/{id}', [UpdatePonpesController::class, 'index'])->name('admin_kemenag.ponpes_edit');
     Route::put('/admin kemenag/update_ponpes/{id}', [UpdatePonpesController::class, 'update'])->name('admin_kemenag.ponpes_update');
+
     Route::get('/admin kemenag/data_report', [ReportController::class, 'index'])->name('admin_kemenag.data_report');
     Route::post('/admin kemenag/status/{id}', [ReportController::class, 'update_status'])->name('admin_kemenag.report_status_update');
     Route::get('/admin kemenag/report_export', [ReportController::class, 'export']);
@@ -213,7 +222,37 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     Route::get('/admin kemenag/madin/fasilitas/export_csv', [AK_Madin_MapFacilityController::class, 'exportCSV']);
 
     Route::get('/admin kemenag/madin/madin_view/{id}', [MadinViewController::class, 'index'])->name('admin_kemenag.madin.madin_view');
-    // Route::delete('/admin kemenag/ponpes/{id}', [PonpesViewController::class, 'destroy'])->name('admin_kemenag.ponpes_delete');
+    Route::delete('/admin kemenag/madin/delete/{id}', [MadinViewController::class, 'destroy'])->name('admin_kemenag.madin_delete');
+
+    Route::get('/admin kemenag/data_madin', [DataMadinController::class, 'index'])->name('admin_kemenag.data_madin');
+    Route::get('/admin kemenag/madin_export_xlsx', [DataMadinController::class, 'exportXLSX']);
+    Route::get('/admin kemenag/madin_export_csv', [DataMadinController::class, 'exportCSV']);
+    Route::get('/admin kemenag/data_madin/search', [DataMadinController::class, 'search'])->name('admin_kemenag.madin_search');
+
+    Route::get('/admin kemenag/create_madin', [CreateMadinController::class, 'index']);
+    Route::post('/admin kemenag/create_madin', [CreateMadinController::class, 'create'])->name('admin_kemenag.create_madin');
+
+    Route::get('/admin kemenag/update_madin/{id}', [UpdateMadinController::class, 'index'])->name('admin_kemenag.madin_edit');
+    Route::put('/admin kemenag/update_madin/{id}', [UpdateMadinController::class, 'update'])->name('admin_kemenag.madin_update');
+
+    Route::get('/admin kemenag/madin/data_sdm', [AK_Madin_DataSdmController::class, 'index'])->name('admin_kemenag.data_sdm_madin');
+    Route::get('/admin kemenag/sdm_madin_export_xlsx', [AK_Madin_DataSdmController::class, 'exportXLSX']);
+    Route::get('/admin kemenag/sdm_madin_export_csv', [AK_Madin_DataSdmController::class, 'exportCSV']);
+
+    Route::get('/admin kemenag/madin/data_admin_madin', [DataAdminMadinController::class, 'index'])->name('admin_kemenag.data_admin_madin');
+    Route::post('/admin kemenag/madin/account_admin_madin', [DataAdminMadinController::class, 'create'])->name('admin_kemenag.account_admin_madin_create');
+    Route::delete('/admin kemenag/madin/account_admin_madin/{id}', [DataAdminMadinController::class, 'destroy'])->name('admin_kemenag.account_admin_madin_delete');
+    Route::put('/admin kemenag/madin/account_admin_madin/{id}', [DataAdminMadinController::class, 'update'])->name('admin_kemenag.account_admin_madin_update');
+    Route::get('/admin kemenag/madin/account_admin_madin_export', [DataAdminMadinController::class, 'export']);
+
+    Route::get('/admin kemenag/madin/data_report', [AK_Madin_ReportController::class, 'index'])->name('admin_kemenag.madin.data_report');
+    Route::post('/admin kemenag/madin/status/{id}', [AK_Madin_ReportController::class, 'update_status'])->name('admin_kemenag.madin.report_status_update');
+    Route::get('/admin kemenag/madin/report_export', [AK_Madin_ReportController::class, 'export']);
+
+    Route::get('/admin kemenag/madin/category_report', [AK_Madin_CategoryReportController::class, 'index'])->name('admin_kemenag.madin.category_report');
+    Route::post('/admin kemenag/madin/category_report/create', [AK_Madin_CategoryReportController::class, 'create'])->name('admin_kemenag.madin.category_report_create');
+    Route::put('/admin kemenag/madin/category_report/update/{id}', [AK_Madin_CategoryReportController::class, 'update'])->name('admin_kemenag.madin.category_report_update');
+    Route::delete('/admin kemenag/madin/category_report/delete/{id}', [AK_Madin_CategoryReportController::class, 'delete'])->name('admin_kemenag.madin.category_report_delete');
 
     Route::get('/admin kemenag/panduan', function () {
         return view('admin_kemenag.tutorial_view');
@@ -230,6 +269,7 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
     Route::put('/admin pesantren/update_profile/{id}', [Admin_Pesantren_UpdateProfileController::class, 'update'])->name('admin_pesantren.profile_update');
     Route::put('/admin pesantren/update_password/{id}', [Admin_Pesantren_UpdateProfileController::class, 'update_password'])->name('admin_pesantren.password_update');
     Route::get('/admin pesantren/ponpes_view/user_admin_pesantren={id}', [Admin_Pesantren_PonpesViewController::class, 'view'])->name('admin_pesantren.ponpes_view');
+
     Route::get('/admin pesantren/update_ponpes/ponpes={id}', [Admin_Pesantren_UpdatePonpesController::class, 'index'])->name('admin_pesantren.ponpes_edit');
     Route::put('/admin pesantren/update_ponpes/ponpes={id}', [Admin_Pesantren_UpdatePonpesController::class, 'update'])->name('admin_pesantren.ponpes_update');
     Route::get('/admin pesantren/ponpes_update_etc/ponpes={id}', [UpdatePonpesEtcController::class, 'index'])->name('admin_pesantren.ponpes_edit_etc');

@@ -141,14 +141,13 @@
                         </a>
 
                         <a href="{{ route('pengunjung.madin.map_view') }}"
-                        class="nav_link text-decoration-none
-                    {{ request()->is('pengunjung/madin/map_view*') ||
-                    request()->is('pengunjung/madin/maps_facility*')
+                            class="nav_link text-decoration-none
+                    {{ request()->is('pengunjung/madin/map_view*') || request()->is('pengunjung/madin/maps_facility*')
                         ? 'active'
                         : '' }}">
-                        <i class="bx bxs-map-alt nav_icon"></i>
-                        <span class="nav_name">{{ 'Peta Madin & TPQ' }}</span>
-                    </a>
+                            <i class="bx bxs-map-alt nav_icon"></i>
+                            <span class="nav_name">{{ 'Peta Madin & TPQ' }}</span>
+                        </a>
 
 
 
@@ -177,7 +176,8 @@
             @elseif(Auth::User()->user_role == 'admin kemenag')
                 <div>
                     <a href="{{ route('admin_kemenag.dashboard') }}" class="nav_logo text-decoration-none">
-                        <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag" style="width: 25px">
+                        <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
+                            style="width: 25px">
                         <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
                     </a>
                     <div class="nav_list">
@@ -202,45 +202,40 @@
                             </a>
 
 
-                          
-                                <a href="{{ route('admin_kemenag.madin.map_view') }}"
-                                    class="nav_link text-decoration-none
-                                {{ request()->is('admin kemenag/madin/map_view*') ||
-                                request()->is('admin kemenag/madin/maps_facility*')
+                            <a href="{{ route('admin_kemenag.madin.map_view') }}"
+                                class="nav_link text-decoration-none
+                                {{ request()->is('admin kemenag/madin/map_view*') || request()->is('admin kemenag/madin/maps_facility*')
                                     ? 'active'
                                     : '' }}">
-                                    <i class="bx bxs-map-alt nav_icon"></i>
-                                    <span class="nav_name">{{ 'Peta Madin & TPQ' }}</span>
-                                </a>
+                                <i class="bx bxs-map-alt nav_icon"></i>
+                                <span class="nav_name">{{ 'Peta Madin & TPQ' }}</span>
+                            </a>
 
 
 
                             <a href="{{ route('admin_kemenag.data_ponpes') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_ponpes*') ? 'active' : '' }}">
+                                class="nav_link text-decoration-none
+                            {{ request()->is('admin kemenag/data_ponpes*') || request()->is('admin kemenag/data_madin*') ? 'active' : '' }}">
                                 <i class="bx bx-buildings nav_icon"></i>
-                                <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
+                                <span class="nav_name">{{ 'Ponpes & Madin' }}</span>
                             </a>
 
+
                             <a href="{{ route('admin_kemenag.data_sdm_ponpes') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_sdm_ponpes*') ? 'active' : '' }}">
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/ponpes/data_sdm*')|| request()->is('admin kemenag/madin/data_sdm*') ? 'active' : '' }}">
                                 <i class="fas fa-table nav_icon"></i>
-                                <span class="nav_name">{{ 'Data SDM Ponpes' }}</span>
+                                <span class="nav_name">{{ 'Data SDM' }}</span>
                             </a>
 
 
 
                             <a href="{{ route('admin_kemenag.data_admin_pesantren') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_admin_pesantren*') ? 'active' : '' }}">
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_admin_pesantren*') ||  request()->is('admin kemenag/madin/data_admin_madin*') || request()->is('admin kemenag/data_pelapor*') ? 'active' : '' }}">
                                 <i class="bx bxs-user-account nav_icon"></i>
-                                <span class="nav_name">{{ 'Akun Admin Ponpes' }}</span>
+                                <span class="nav_name">{{ 'Data Akun' }}</span>
                             </a>
 
-                            <a href="{{ route('admin_kemenag.data_pelapor') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_pelapor*') ? 'active' : '' }}">
-                                <i class="bx bx-user-pin nav_icon"></i>
-                                <span class="nav_name">{{ 'Akun Pelapor' }}</span>
-                            </a>
-
+             
                             <a href="{{ route('admin_kemenag.data_statistik') }}"
                                 class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_statistik*') ? 'active' : '' }}">
                                 <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
@@ -248,7 +243,7 @@
                             </a>
 
                             <a href="{{ route('admin_kemenag.data_report') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_report*') ? 'active' : '' }}">
+                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_report*') || request()->is('admin kemenag/madin/data_report*') ? 'active' : '' }}">
                                 <i class="bx bxs-report nav_icon"></i>
                                 <span class="nav_name">{{ 'Pelaporan' }}</span>
                             </a>
@@ -341,7 +336,7 @@
         </nav>
     </div>
 
-    <div class="section">
+    <div class="section" style="min-height: 570px">
         @yield('content')
     </div>
 

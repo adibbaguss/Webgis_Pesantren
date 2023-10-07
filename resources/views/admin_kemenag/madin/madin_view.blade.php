@@ -61,10 +61,10 @@
                             </a>
                         </li>
                         <li>
-                            {{-- <a href="{{ route('admin_kemenag.ponpes_edit', ['id' => $ponpes->id]) }}" class="dropdown-item">
+                            <a href="{{ route('admin_kemenag.madin_edit', ['id' => $madin->id]) }}" class="dropdown-item">
                                 <i class="fas fa-edit"></i>
                                 Perbaharui
-                            </a> --}}
+                            </a>
                         </li>
                         <li>
                             <a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -174,7 +174,7 @@
 
 
                     <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Operator/Updater' }}</label>
+                        <label class="fs-6 fw-bold text-secondary">{{ 'Admin Madin/TPQ' }}</label>
                         @if ($madin->user_id)
                             <table class="w-50">
                                 <tr>
@@ -251,12 +251,12 @@
 
         {{-- modal delete --}}
 
-        {{-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Pondok</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Madrasah Diniyah/TPQ</h5>
                         <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fas fa-times"></i>
                         </button>
@@ -269,12 +269,12 @@
                             action="{{ route('admin_kemenag.madin_delete', ['id' => $madin->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus madin</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
     @endsection
 
 

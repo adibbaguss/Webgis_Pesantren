@@ -13,6 +13,9 @@
             </div>
         @endif
 
+        {{-- panggil nav --}}
+        @include('layouts.nav_account')
+        {{-- end panggil nav --}}
 
         <div class="d-flex mb-3">
             <h2 class="mb-0 text-secondary ">{{ 'Daftar Akun Pelapor' }}</h2>

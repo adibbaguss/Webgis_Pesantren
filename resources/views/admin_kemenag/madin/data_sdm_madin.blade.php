@@ -18,9 +18,10 @@
         {{-- end panggil nav --}}
 
 
+
         <div class="d-flex mb-3">
-            <h2 class="mb-0 text-secondary ">{{ 'Data Sumber Daya Manusia Pesantren Kabupaten Batang Tahun ' . $currentYear }}
-            </h2>
+            <h2 class="mb-0 text-secondary ">
+                {{ 'Data Sumber Daya Manusia Madrasah Diniyah & TPQ Kabupaten Batang Tahun ' . $currentYear }}</h2>
             <div class="dropdown me-0 ms-auto">
                 <button class="btn btn-outline-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -89,12 +90,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
-                                    {{ 'Total Santri Mukim' }}
+                                    {{ 'Total Murid Laki-Laki' }}
                                 </div>
                             </div>
                             <div class="col me-2">
                                 <div class="fs-4 me-auto fw-bold text-secondary">
-                                    {{ $totalMaleResidents }} <!-- Menampilkan total Ustadz Laki-laki -->
+                                    {{ $totalMaleStudent }} <!-- Menampilkan total Ustadz Laki-laki -->
                                 </div>
                             </div>
                             <div class="col-auto my-auto">
@@ -111,12 +112,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
-                                    {{ 'Total Santriwati Mukim ' }}
+                                    {{ 'Total Murid Perempuan' }}
                                 </div>
                             </div>
                             <div class="col me-2">
                                 <div class="fs-4 me-auto fw-bold text-secondary">
-                                    {{ $totalFemaleResidents }} <!-- Menampilkan total Ustadz Laki-laki -->
+                                    {{ $totalFemaleStudent }} <!-- Menampilkan total Ustadz Laki-laki -->
                                 </div>
                             </div>
                             <div class="col-auto my-auto">
@@ -127,49 +128,6 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-md-6 col-sm-6 mb-4">
-                <div class="card ps-1 bg-success my-2  border-0 shadow" style="user-select: none;">
-                    <div class="card-body bg-light">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
-                                    {{ 'Total Santri Tidak Mukim' }}
-                                </div>
-                            </div>
-                            <div class="col me-2">
-                                <div class="fs-4 me-auto fw-bold text-secondary">
-                                    {{ $totalMaleNonResidents }} <!-- Menampilkan total Ustadz Laki-laki -->
-                                </div>
-                            </div>
-                            <div class="col-auto my-auto">
-                                {{-- <i class="fas fa-school fs-1 text-secondary"></i> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-md-6 col-sm-6 mb-4">
-                <div class="card ps-1 bg-success my-2  border-0 shadow" style="user-select: none;">
-                    <div class="card-body bg-light">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="fw-bold text-success text-uppercase mb-1" style="font-size:11px">
-                                    {{ 'Total Santriwati Tidak Mukim' }}
-                                </div>
-                            </div>
-                            <div class="col me-2">
-                                <div class="fs-4 me-auto fw-bold text-secondary">
-                                    {{ $totalFemaleNonResidents }} <!-- Menampilkan total Ustadz Laki-laki -->
-                                </div>
-                            </div>
-                            <div class="col-auto my-auto">
-                                {{-- <i class="fas fa-school fs-1 text-secondary"></i> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
 
@@ -178,45 +136,39 @@
             <thead class="table-success">
                 <tr class="align-middle">
                     <th scope="col" rowspan="2" class="text-center">NO</th>
-                    <th scope="col" rowspan="2" class="text-center">NSPP</th>
+                    <th scope="col" rowspan="2" class="text-center">NSDT</th>
                     <th scope="col" rowspan="2" class="text-center">NAMA PESANTREN</th>
                     <th scope="col" rowspan="2" class="text-center">KECAMATAN</th>
-                    <th scope="col" colspan="6" class="text-center">JUMLAH SUMBER DAYA MANUSIA</th>
+                    <th scope="col" colspan="4" class="text-center">JUMLAH SUMBER DAYA MANUSIA</th>
                     <th scope="col" rowspan="2" class="text-center">TOTAL PENGAJAR</th>
-                    <th scope="col" rowspan="2" class="text-center">TOTAL SANTRI/WATI MUKIM</th>
-                    <th scope="col" rowspan="2" class="text-center">TOTAL SANTRI/WATI TIDAK MUKIM</th>
+                    <th scope="col" rowspan="2" class="text-center">TOTAL MURID</th>
                 </tr>
                 <tr class="text-center align-middle">
                     <th class="text-center">USTADZ</th>
                     <th class="text-center">USTADZAH</th>
-                    <th class="text-center">SANTRI MUKIM</th>
-                    <th class="text-center">SANTRIWATI MUKIM</th>
-                    <th class="text-center">SANTRI TIDAK MUKIM</th>
-                    <th class="text-center">SANTRIWATI TIDAK MUKIM</th>
+                    <th class="text-center">MURID (LK)</th>
+                    <th class="text-center">MURID (PR)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($ponpes as $data)
+                @foreach ($madin as $data)
                     <tr class="align-middle">
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $data->nspp }}</td>
+                        <td>{{ $data->nsdt }}</td>
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->subdistrict }}</td>
                         <td class="text-center ">
-                            {{ count($data->instructors->where('gender', 'Laki-laki')->where('status', 'active')) }}</td>
-                        <td class="text-center ">
-                            {{ count($data->instructors->where('gender', 'Perempuan')->where('status', 'active')) }}</td>
-                        <td class="text-center ">{{ $data->studentCount->sum('male_resident_count') }}</td>
-                        <td class="text-center ">{{ $data->studentCount->sum('female_resident_count') }}</td>
-                        <td class="text-center ">{{ $data->studentCount->sum('male_non_resident_count') }}</td>
-                        <td class="text-center ">{{ $data->studentCount->sum('female_non_resident_count') }}</td>
-                        <td class="text-center ">{{ $data->instructors->where('status', 'active')->count() }}</td>
-                        <td class="text-center ">
-                            {{ $data->studentCount->sum('male_resident_count') + $data->studentCount->sum('female_resident_count') }}
+                            {{ count($data->instructors_madin->where('gender', 'Laki-laki')->where('status', 'active')) }}
                         </td>
                         <td class="text-center ">
-                            {{ $data->studentCount->sum('male_non_resident_count') + $data->studentCount->sum('female_non_resident_count') }}
+                            {{ count($data->instructors_madin->where('gender', 'Perempuan')->where('status', 'active')) }}
                         </td>
+                        <td class="text-center ">{{ $data->studentCount_madin->sum('male') }}</td>
+                        <td class="text-center ">{{ $data->studentCount_madin->sum('female') }}</td>
+                        <td class="text-center ">{{ $data->instructors_madin->where('status', 'active')->count() }}</td>
+                        <td class="text-center ">
+                            {{ $data->studentCount_madin->sum('female') + $data->studentCount_madin->sum('male') }}</td>
+
                     </tr>
                 @endforeach
 
@@ -235,13 +187,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <a href="/admin kemenag/sdm_ponpes_export_xlsx"
+                    <a href="/admin kemenag/sdm_madin_export_xlsx"
                         class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-excel fs-1"></i>
                         {{ 'Cetak Excel' }}
                     </a>
 
-                    <a href="/admin kemenag/sdm_ponpes_export_csv"
+                    <a href="/admin kemenag/sdm_madin_export_csv"
                         class="text-deocartion-none btn btn-outline-success p-3">
                         <i class="fas fa-file-csv fs-1"></i>
                         {{ 'Cetak CSV' }}
