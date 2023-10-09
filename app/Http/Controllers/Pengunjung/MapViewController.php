@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Pengunjung;
 
+use App\Exports\PonpesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MapViewController extends Controller
 {
@@ -12,16 +15,7 @@ class MapViewController extends Controller
     {
         $ponpes = Ponpes::all();
 
-        $ponpes2 = Ponpes::all();
-        $data = Ponpes::select('subdistrict')
-            ->selectRaw('SUM(CASE WHEN category = "Pesantren Salafiyah (Tradisional)" THEN 1 ELSE 0 END) as salafiyah_count')
-            ->selectRaw('SUM(CASE WHEN category = "Pesantren Khalafiyah (Modern)" THEN 1 ELSE 0 END) as khalafiyah_count')
-            ->selectRaw('SUM(CASE WHEN category = "Pesantren Kombinasi" THEN 1 ELSE 0 END) as kombinasi_count')
-            ->selectRaw('SUM(CASE WHEN category IN ("Pesantren Salafiyah (Tradisional)", "Pesantren Khalafiyah (Modern)", "Pesantren Kombinasi") THEN 1 ELSE 0 END) as Total')
-            ->groupBy('subdistrict')
-            ->get();
-
-        return view('pengunjung.map_view', compact('ponpes', 'ponpes2', 'data'));
+        return view('pengunjung.map_view', compact('ponpes'));
     }
 
     public function exportXLSX()

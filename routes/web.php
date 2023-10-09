@@ -61,6 +61,7 @@ use App\Http\Controllers\Pengunjung\DataStatistikController as Pengunjung_DataSt
 use App\Http\Controllers\Pengunjung\Madin\MadinViewController as Pengunjung_MadinViewController;
 use App\Http\Controllers\Pengunjung\Madin\MapFacilityController as Pengunjung_Madin_MapFaciltiyController;
 use App\Http\Controllers\Pengunjung\Madin\MapViewController as Pengunjung_Madin_MapViewController;
+use App\Http\Controllers\Pengunjung\MapCategoryController as Pengunjung_MapCategoryController;
 use App\Http\Controllers\Pengunjung\MapFacilityController;
 use App\Http\Controllers\Pengunjung\MapsSchoolsController as Pengunjung_MapsSchoolsController;
 use App\Http\Controllers\Pengunjung\MapTakhasusController as Pengunjung_MapTakhasusController;
@@ -91,6 +92,11 @@ Route::redirect('/', '/pengunjung');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::redirect('/pengunjung', '/pengunjung/map_view');
 Route::get('/pengunjung/map_view', [Pengunjung_MapViewController::class, 'index'])->name('pengunjung.map_view');
+Route::get('/pengujung/map_view/export_xlsx', [Pengunjung_MapViewController::class, 'exportXLSX']);
+Route::get('/pengunjung/map_view/ponpes_export_csv', [Pengunjung_MapViewController::class, 'exportCSV']);
+
+Route::get('/pengunjung/map_category', [Pengunjung_MapCategoryController::class, 'index'])->name('pengunjung.map_category');
+
 Route::get('/pengunjung/data_ponpes', [Pengunjung_DataPonpesController::class, 'index'])->name('pengunjung.data_ponpes');
 Route::get('/pengunjung/data_ponpes/search', [Pengunjung_DataPonpesController::class, 'ponpesSearch'])->name('pengunjung.ponpes_search');
 Route::get('/pengunjung/ponpes_export_xlsx', [Pengunjung_DataPonpesController::class, 'exportXLSX']);
@@ -118,6 +124,8 @@ Route::get('/pengunjung/ponpes_report', function () {
 
 // madin
 Route::get('/pengunjung/madin/map_view', [Pengunjung_Madin_MapViewController::class, 'index'])->name('pengunjung.madin.map_view');
+Route::get('/pengunjung/madin/map_view/export_xlsx', [Pengunjung_Madin_MapViewController::class, 'exportXLSX']);
+Route::get('/pengunjung/madin/map_view/export_csv', [Pengunjung_Madin_MapViewController::class, 'exportCSV']);
 
 Route::get('/pengunjung/madin/map_facility', [Pengunjung_Madin_MapFaciltiyController::class, 'index'])->name('pengunjung.madin.map_facility');
 Route::get('/pengunjung/madin/map_facility/search', [Pengunjung_Madin_MapFaciltiyController::class, 'search'])->name('pengunjung.madin.search_facility');

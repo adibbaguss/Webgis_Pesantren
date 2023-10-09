@@ -109,8 +109,8 @@
             </table>
 
             <div class="d-flex justify-content-end mt-3">
-                <a href="/pengunjung/fasilitas_madin_export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
-                <a href="/pengunjung/fasilitas_madin_export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
+                <a href="/pengunjung/madin/fasilitas/export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
+                <a href="/pengunjung/madin/fasilitas/export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
             </div>
         @else
             <table class="table table-striped w-100" id="tablefacility" class="display">

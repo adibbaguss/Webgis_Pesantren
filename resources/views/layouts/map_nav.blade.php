@@ -25,8 +25,14 @@
 </style>
 @if (!Auth::User())
     <div class="scrollable-buttons  justify-content-md-center mb-2">
+
         <a href="{{ route('pengunjung.map_view') }}"
-            class="btn btn-{{ request()->is('pengunjung/map_view*') ? 'success' : 'outline-success' }}">
+        class="btn btn-{{ request()->is('pengunjung/map_view*') ? 'success' : 'outline-success' }}">
+        <i class="fas fa-map-marked-alt"></i> Umum
+    </a>
+
+        <a href="{{ route('pengunjung.map_category') }}"
+            class="btn btn-{{ request()->is('pengunjung/map_category*') ? 'success' : 'outline-success' }}">
             <i class="fas fa-map-marked-alt"></i> Kategori
         </a>
 
@@ -49,9 +55,9 @@
     <div class="scrollable-buttons  justify-content-md-center mb-2">
 
         <a href="{{ route('admin_kemenag.map_view') }}"
-        class="btn btn-{{ request()->is('admin kemenag/map_view*') ? 'success' : 'outline-success' }}">
-        <i class="fas fa-map-marked-alt"></i> Umum
-    </a>
+            class="btn btn-{{ request()->is('admin kemenag/map_view*') ? 'success' : 'outline-success' }}">
+            <i class="fas fa-map-marked-alt"></i> Umum
+        </a>
 
         <a href="{{ route('admin_kemenag.map_category') }}"
             class="btn btn-{{ request()->is('admin kemenag/map_category*') ? 'success' : 'outline-success' }}">

@@ -70,6 +70,10 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-end mt-3">
+            <a href="/pengunjung/madin/map_view/export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
+            <a href="/pengunjung/madin/map_view/export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
+        </div>
     </div>
 @endsection
 
