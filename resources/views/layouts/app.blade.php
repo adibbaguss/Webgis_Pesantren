@@ -236,17 +236,19 @@
                             </a>
 
              
-                            <a href="{{ route('admin_kemenag.data_statistik') }}"
-                                class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_statistik*') ? 'active' : '' }}">
-                                <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                                <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
-                            </a>
+                       
 
                             <a href="{{ route('admin_kemenag.data_report') }}"
                                 class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_report*') || request()->is('admin kemenag/madin/data_report*') ? 'active' : '' }}">
                                 <i class="bx bxs-report nav_icon"></i>
                                 <span class="nav_name">{{ 'Pelaporan' }}</span>
                             </a>
+
+                            <a href="{{ route('admin_kemenag.data_statistik') }}"
+                            class="nav_link text-decoration-none {{ request()->is('admin kemenag/data_statistik*') ? 'active' : '' }}">
+                            <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
+                            <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                        </a>
 
                             <a href="/admin kemenag/panduan"
                                 class="nav_link text-decoration-none {{ request()->is('admin kemenag/panduan*') ? 'active' : '' }}">
@@ -314,7 +316,7 @@
                             <a href="{{ route('pelapor.data_statistik') }}"
                                 class="nav_link text-decoration-none {{ request()->is('pelapor/data_statistik*') ? 'active' : '' }}"">
                                 <i class="bx bx-bar-chart-alt-2 nav_icon"></i>
-                                <span class="nav_name">{{ 'Statistik Pesantren' }}</span>
+                                <span class="nav_name">{{ 'Statistik' }}</span>
                             </a>
 
                             <a href="{{ route('pelapor.data_report', ['id' => Auth::User()->id]) }}"

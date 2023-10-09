@@ -43,17 +43,21 @@
         <table class="table table-bordered table-hover text-center" id="example" class="display" style="width:100%">
             <thead>
                 <tr class="text-center">
-                    <th scope="col">NO</th>
-                    <th scope="col">FOTO</th>
-                    <th scope="col">NAMA</th>
-                    <th scope="col">USERNAME</th>
-                    <th scope="col">EMAIL</th>
-                    <th scope="col">NO TELPON</th>
-                    <th scope="col">KTP</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">RIWAYAT PELAPORAN</th>
-                    <th scope="col">DIBUAT</th>
-                    <th scope="col">OPSI</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">NO</th>
+                    <th scope="col" rowspan="2"  class="align-middle text-center">FOTO</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">NAMA</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">USERNAME</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">EMAIL</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">NO TELPON</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">KTP</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">STATUS</th>
+                    <th scope="col" colspan="2" class="align-middle text-center">RIWAYAT LAPORAN</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">DIBUAT</th>
+                    <th scope="col" rowspan="2" class="align-middle text-center">OPSI</th>
+                </tr>
+                <tr>
+                    <th scope="col">PONPES</th>
+                    <th scope="col">MADIN/TPQ</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,6 +102,9 @@
 
                         <td><a class="text-secondary text-decoration-underline" type="button" data-bs-toggle="modal"
                                 data-bs-target="#viewReportModal{{ $item->id }}">Lihat</a></td>
+
+                                <td><a class="text-secondary text-decoration-underline" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#viewReportMadinModal{{ $item->id }}">Lihat</a></td>     
 
 
                         <td>{{ $item->created_at->format('d/m/Y') }}</td>
@@ -238,101 +245,7 @@
         </div>
     @endforeach
 
-    {{-- create --}}
-    {{-- <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ 'Tambah Akun Admin Pesantren' }}</h5>
-                    <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('admin_kemenag.account_pelapor_create') }}">
-                        @csrf
-                        @method('POST')
-                        <div class="mb-3">
-                            <label for="name" class="form-label small">Nama</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                name="name" value="{{ old('name') }}" required autocomplete="name">
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label small">Alamat Email</label>
-                            <input id="email" type="text"
-                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                value="{{ old('email') }}" required autocomplete="email">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="username" class="form-label small">Username</label>
-                            <input id="username" type="text"
-                                class="form-control @error('username') is-invalid @enderror" name="username"
-                                value="{{ old('username') }}" required autocomplete="username">
-                            @error('username')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label small">Password</label>
-                            <div class="d-flex">
-                                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" required
-                                    autocomplete="current-password">
-                                <span class="input-group-text" onclick="new_password_show_hide();">
-                                    <i class="fas fa-eye" id="show_eye_1"></i>
-                                    <i class="fas fa-eye-slash d-none" id="hide_eye_1"></i>
-                                </span>
-                            </div>
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone_number" class="form-label small">No Telepon</label>
-                            <input id="phone_number" type="number"
-                                class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                value="{{ old('phone_number') }}" autocomplete="phone_number">
-                            @error('phone_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div>
-                            <input type="text" name="user_role" id="user_role" value="admin pesantren" hidden>
-                        </div>
 
-                        <div class="mb-3">
-                            <label for="status" class="form-label small">Status</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="not confirmed">Belum dikonfirmasi</option>
-                                <option value="active">Aktif</option>
-                                <option value="blocked">Blokir</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-
-                        <div class="d-flex">
-                            <div class="me-0 ms-auto">
-                                <button class="btn btn-outline-secondary" type="button"
-                                    data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-success">Tambah</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
 
 
@@ -383,7 +296,6 @@
 
     {{-- view riwayat laporan --}}
 
-
     @foreach ($account as $item)
         <div class="modal fade" id="viewReportModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -401,6 +313,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                      
                         <table class="table" id="reports" class="display" style="width:100%">
                             <thead>
                                 <tr>
@@ -433,6 +346,86 @@
                                             <td>{{ $itemReport->reporting_code }}</td>
                                             <td>{{ $itemReport->ponpes->name }}</td>
                                             @php $latestHistory = $itemReport->reportHistories->sortByDesc('created_at')->first(); @endphp
+
+                                            @if ($latestHistory->status == 'baru')
+                                                <td class="align-middle text-center fw-bold text-danger">
+                                                    {{ $latestHistory->status }}</td>
+                                            @elseif($latestHistory->status == 'dalam proses')
+                                                <td class="align-middle text-center fw-bold text-warning">
+                                                    {{ $latestHistory->status }}</td>
+                                            @elseif($latestHistory->status == 'selesai')
+                                                <td class="align-middle text-center fw-bold text-success">
+                                                    {{ $latestHistory->status }}</td>
+                                            @else
+                                                <td class="align-middle text-center fw-bold text-secondary">
+                                                    {{ $latestHistory->status }}
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endif
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+        {{-- view riwayat laporan --}}
+
+        @foreach ($account as $item)
+        <div class="modal fade" id="viewReportMadinModal{{ $item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="d-grid">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ 'Riwayat Laporan' }}
+                            </h5>
+                            <small>{{ $item->name }}</small>
+                            <small>{{ $item->email }}</small>
+                        </div>
+                        <button class="btn" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      
+                        <table class="table" id="reports" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal Masuk</th>
+                                    <th scope="col">Kode Laporan</th>
+                                    <th scope="col">Madin/TPQ</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($reportMadin as $itemReport)
+                                    @if ($itemReport->user_id == $item->id)
+                                        <tr>
+                                            <td>
+                                                @php $found = false; @endphp
+                                                @foreach ($itemReport->reportHistoriesMadin as $data)
+                                                    @if ($data->status === 'baru')
+                                                        {{ $data->date }}
+                                                        @php
+                                                            $found = true;
+                                                            break;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                                @if (!$found)
+                                                    NULL
+                                                @endif
+                                            </td>
+                                            <td>{{ $itemReport->reporting_code }}</td>
+                                            <td>{{ $itemReport->madin->name }}</td>
+                                            @php $latestHistory = $itemReport->reportHistoriesMadin->sortByDesc('created_at')->first(); @endphp
 
                                             @if ($latestHistory->status == 'baru')
                                                 <td class="align-middle text-center fw-bold text-danger">

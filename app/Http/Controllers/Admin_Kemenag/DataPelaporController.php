@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin_Kemenag;
 use App\Exports\PelaporExport;
 use App\Http\Controllers\Controller;
 use App\Models\Report;
+use App\Models\ReportMadin;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,7 +35,11 @@ class DataPelaporController extends Controller
         $report = Report::with('ponpes')
             ->with('reportHistories')
             ->get();
-        return view('admin_kemenag.data_pelapor', compact('account', 'report'));
+
+        $reportMadin = ReportMadin::with('madin')
+            ->with('reportHistoriesMadin')
+            ->get();
+        return view('admin_kemenag.data_pelapor', compact('account', 'report', 'reportMadin'));
     }
     public function destroy($id)
     {
@@ -95,38 +100,4 @@ class DataPelaporController extends Controller
         return Excel::download(new PelaporExport, 'Data Akun Pelapor-' . Carbon::now()->timestamp . '.xlsx');
     }
 
-    // public function create(Request $request)
-    // {
-
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email|unique:users,email',
-    //         'username' => 'required|string|max:255|unique:users,username',
-    //         'phone_number' => 'nullable|string|min:11|max:15',
-    //         'user_role' => 'required|string|in:pelapor',
-    //         'password' => 'required|string|min:8',
-    //         'status' => 'required|string|in:not confirmed,active,blocked',
-    //     ]);
-
-    //     // Check if validation fails
-    //     if ($validator->fails()) {
-    //         return redirect()->back()
-    //             ->withErrors($validator)
-    //             ->withInput()
-    //             ->with('error', 'Terjadi kesalahan validasi menambah akun. Periksa kembali isian Anda.');
-    //     }
-
-    //     $user = User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'username' => $request->username,
-    //         'phone_number' => $request->phone_number,
-    //         'user_role' => $request->user_role,
-    //         'password' => Hash::make($request->password),
-    //         'status' => $request->status,
-    //     ]);
-
-    //     // Tindakan setelah berhasil menyimpan data
-    //     return redirect()->route('admin_kemenag.data_pelapor')->with('success', 'Data pengguna berhasil ditambahkan.');
-    // }
 }

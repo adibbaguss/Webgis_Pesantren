@@ -23,7 +23,7 @@ class ReportMadinFactory extends Factory
         $faker = faker::create();
         return [
             'madin_id' => 1,
-            'user_id' => 3,
+            'user_id' => $faker->numberBetween(4, 5),
             'category_id' => $faker->numberBetween(1, 5),
             'reporting_code' => RandomIdGenerator::generateUniqueId(),
             'title' => $faker->sentence(2),
