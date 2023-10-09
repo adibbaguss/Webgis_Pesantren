@@ -6,7 +6,7 @@
     <div class="container-fluid mt-5 pt-5">
 
         {{-- panggil map nav --}}
-        @include('layouts.map_nav_madin')
+        @include('layouts.madin.map_nav_madin')
         {{-- end panggil map nav --}}
         
         <div class="d-sm-flex align-items-center justify-content-between mb-4">

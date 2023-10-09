@@ -118,7 +118,7 @@
                 {{-- dropdown info desktop --}}
                 <div class="row d-md-block d-none">
                     {{-- informasi lainnya dari ponpes --}}
-                    @include('layouts.ponpes_info_etc')           
+                    @include('layouts.ponpes.ponpes_info_etc')           
                 </div>
                 {{-- end dropdown info --}}
 
@@ -223,7 +223,7 @@
             {{-- dropdown info desktop --}}
             <div class="row d-md-none d-block">
                 {{-- informasi lainnya dari ponpes --}}
-                 @include('layouts.ponpes_info_etc')             
+                 @include('layouts.ponpes.ponpes_info_etc')             
             </div>
             {{-- end dropdown info --}}
 

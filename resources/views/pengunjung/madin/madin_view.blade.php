@@ -114,7 +114,7 @@
                 {{-- dropdown info desktop --}}
                 <div class="row d-md-block d-none">
                     {{-- informasi lainnya dari madin --}}
-                    @include('layouts.madin_info_etc')           
+                    @include('layouts.madin.madin_info_etc')           
                 </div>
                 {{-- end dropdown info --}}
 
@@ -214,7 +214,7 @@
             {{-- dropdown info desktop --}}
             <div class="row d-md-none d-block">
                 {{-- informasi lainnya dari madin --}}
-                 @include('layouts.madin_info_etc')             
+                 @include('layouts.madin.madin_info_etc')             
             </div>
             {{-- end dropdown info --}}
 
