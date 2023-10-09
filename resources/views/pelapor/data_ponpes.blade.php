@@ -5,20 +5,25 @@
 
     <div class="container-fluid mt-5 pt-5">
         {{-- notif penambahan data --}}
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @elseif(session('errorss'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
         @endif
+
+        {{-- panggil nav --}}
+        @include('layouts.nav_data_ponpes_tpq')
+        {{-- end panggil nav --}}
 
         <h5 class="mb-0 text-secondary d-md-none d-block mb-5">{{ 'Daftar Pondok Pesantren di Kabupaten Batang' }}</h5>
         <div class="d-flex align-items-center justify-content-between mb-5">
             <h2 class="mb-0 text-secondary d-md-block d-none">{{ 'Daftar Pondok Pesantren di Kabupaten Batang' }}</h2>
-            <form class="d-flex me-2 ms-auto " role="search" action="{{ route('pelapor.ponpes_search') }}" method="GET">
+            <form class="d-flex me-2 ms-auto " role="search" action="{{ route('pelapor.ponpes_search') }}"
+                method="GET">
                 @csrf
                 <input class="form-control me-2" type="search" placeholder="Search" name="query" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

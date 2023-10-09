@@ -48,6 +48,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Pelapor\DataPonpesController as Pelapor_DataPonpesController;
 use App\Http\Controllers\Pelapor\DataReportController;
 use App\Http\Controllers\Pelapor\DataStatistikController as Pelapor_DataStatistikController;
+use App\Http\Controllers\Pelapor\Madin\DataMadinController as Pelapor_DataMadinController;
+use App\Http\Controllers\Pelapor\Madin\DataReportController as Pelapor_Madin_DataReportController;
+use App\Http\Controllers\Pelapor\Madin\MadinReportController;
+use App\Http\Controllers\Pelapor\Madin\MadinViewController as Pelapor_MadinViewController;
+use App\Http\Controllers\Pelapor\Madin\MapViewController as Pelapor_Madin_MapViewController;
+use App\Http\Controllers\Pelapor\MapCategoryController as pelapor_MapCategoryController;
 use App\Http\Controllers\Pelapor\MapFacilityController as Pelapor_MapFacilityController;
 use App\Http\Controllers\Pelapor\MapsSchoolsController as Pelapor_MapsSchoolsController;
 use App\Http\Controllers\Pelapor\MapTakhasusController as Pelapor_MapTakhasusController;
@@ -58,7 +64,9 @@ use App\Http\Controllers\Pelapor\ProfileController as Pelapor_ProfileController;
 use App\Http\Controllers\Pelapor\UpdateProfileController as Pelapor_UpdateProfileController;
 use App\Http\Controllers\Pengunjung\DataPonpesController as Pengunjung_DataPonpesController;
 use App\Http\Controllers\Pengunjung\DataStatistikController as Pengunjung_DataStatistikController;
+use App\Http\Controllers\Pengunjung\Madin\DataMadinController as Pengunjung_DataMadinController;
 use App\Http\Controllers\Pengunjung\Madin\MadinViewController as Pengunjung_MadinViewController;
+use App\Http\Controllers\Pengunjung\Madin\MapFacilityController as Pelapor_Madin_MapFacilityController;
 use App\Http\Controllers\Pengunjung\Madin\MapFacilityController as Pengunjung_Madin_MapFaciltiyController;
 use App\Http\Controllers\Pengunjung\Madin\MapViewController as Pengunjung_Madin_MapViewController;
 use App\Http\Controllers\Pengunjung\MapCategoryController as Pengunjung_MapCategoryController;
@@ -131,6 +139,11 @@ Route::get('/pengunjung/madin/map_facility', [Pengunjung_Madin_MapFaciltiyContro
 Route::get('/pengunjung/madin/map_facility/search', [Pengunjung_Madin_MapFaciltiyController::class, 'search'])->name('pengunjung.madin.search_facility');
 
 Route::get('/pengunjung/madin/madin_view/{id}', [Pengunjung_MadinViewController::class, 'index'])->name('pengunjung.madin.madin_view');
+
+Route::get('/pengunjung/data_madin', [Pengunjung_DataMadinController::class, 'index'])->name('pengunjung.data_madin');
+Route::get('/pengunjung/madin_export_xlsx', [Pengunjung_DataMadinController::class, 'exportXLSX']);
+Route::get('/pengunjung/madin_export_csv', [Pengunjung_DataMadinController::class, 'exportCSV']);
+Route::get('/pengunjung/data_madin/search', [Pengunjung_DataMadinController::class, 'search'])->name('pengunjung.madin_search');
 
 Route::get('/pengunjung/madin/madin_report', function () {
     return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu untuk mengakses halaman ini.');
@@ -322,7 +335,12 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
 Route::middleware(['auth', 'role:pelapor'])->group(function () {
     //Route::get('/pelapor/dashboard', [pelaporController::class, 'dashboard'])->name('pelapor.dashboard');
     Route::redirect('/pelapor', '/pelapor/map_view');
-    Route::get('/pelapor/map_view', [Pelapor_MapViewController::class, 'index'])->name('pelapor.map_view');
+
+    Route::get('/pelapor/map_view', [pelapor_MapViewController::class, 'index'])->name('pelapor.map_view');
+    Route::get('/pelapor/map_view/export_xlsx', [pelapor_MapViewController::class, 'exportXLSX']);
+    Route::get('/pelapor/map_view/export_csv', [pelapor_MapViewController::class, 'exportCSV']);
+
+    Route::get('/pelapor/map_category', [pelapor_MapCategoryController::class, 'index'])->name('pelapor.map_category');
 
     Route::get('/pelapor/maps_schools', [Pelapor_MapsSchoolsController::class, 'index'])->name('pelapor.maps_schools');
     Route::get('/pelapor/maps_schools/search', [Pelapor_MapsSchoolsController::class, 'search'])->name('pelapor.search_schools');
@@ -351,8 +369,28 @@ Route::middleware(['auth', 'role:pelapor'])->group(function () {
 
     Route::post('/pelapor/ponpes_view/report/{id}', [PonpesReportController::class, 'report'])->name('pelapor.ponpes_report');
 
-    Route::get('/pelapor/data_report/{id}', [DataReportController::class, 'index'])->name('pelapor.data_report');
-    Route::delete('/pelapor/data_report/delete/{id}', [DataReportController::class, 'delete'])->name('pelapor.report_delete');
+    Route::get('/pelapor/ponpes/data_report/{id}', [DataReportController::class, 'index'])->name('pelapor.ponpes.data_report');
+    Route::delete('/pelapor/ponpes/data_report/delete/{id}', [DataReportController::class, 'delete'])->name('pelapor.ponpes.report_delete');
+
+    // madin
+    Route::get('/pelapor/madin/map_view', [Pelapor_Madin_MapViewController::class, 'index'])->name('pelapor.madin.map_view');
+    Route::get('/pelapor/madin/map_view/export_xlsx', [Pelapor_Madin_MapViewController::class, 'exportXLSX']);
+    Route::get('/pelapor/madin/map_view/export_csv', [Pelapor_Madin_MapViewController::class, 'exportCSV']);
+
+    Route::get('/pelapor/madin/map_facility', [Pelapor_Madin_MapFacilityController::class, 'index'])->name('pelapor.madin.map_facility');
+    Route::get('/pelapor/madin/map_facility/search', [Pelapor_Madin_MapFacilityController::class, 'search'])->name('pelapor.madin.search_facility');
+
+    Route::get('/pelapor/madin/madin_view/{id}', [Pelapor_MadinViewController::class, 'index'])->name('pelapor.madin.madin_view');
+
+    Route::post('/pelapor/madin/madin_view/report/{id}', [MadinReportController::class, 'report'])->name('pelapor.madin_report');
+
+    Route::get('/pelapor/data_madin', [Pelapor_DataMadinController::class, 'index'])->name('pelapor.data_madin');
+    Route::get('/pelapor/madin_export_xlsx', [Pelapor_DataMadinController::class, 'exportXLSX']);
+    Route::get('/pelapor/madin_export_csv', [Pelapor_DataMadinController::class, 'exportCSV']);
+    Route::get('/pelapor/data_madin/search', [Pelapor_DataMadinController::class, 'search'])->name('pelapor.madin_search');
+
+    Route::get('/pelapor/madin/data_report/{id}', [Pelapor_Madin_DataReportController::class, 'index'])->name('pelapor.madin.data_report');
+    Route::delete('/pelapor/madin/data_report/delete/{id}', [Pelapor_Madin_DataReportController::class, 'delete'])->name('pelapor.madin.report_delete');
 
     Route::get('/pelapor/panduan', function () {
         return view('pelapor.tutorial_view');

@@ -13,17 +13,17 @@
         @endif
 
            {{-- panggil map nav --}}
-           @include('layouts.ponpes.map_nav')
+           @include('layouts.madin.map_nav_madin')
            {{-- end panggil map nav --}}
            
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
            
-            <h2 class="mb-0 text-secondary">Peta Fasilitas Pondok Pesantren di Kabupaten Batang</h2>
+            <h2 class="mb-0 text-secondary">Peta Fasilitas Madrasah Diniyah dan TPQ di Kabupaten Batang</h2>
         </div>
 
 
         <div class="form mb-2">
-            <form action="{{ route('pelapor.search_facility') }}" method="GET" class="d-flex justify-content-end">
+            <form action="{{ route('pengunjung.madin.search_facility') }}" method="GET" class="d-flex justify-content-end">
                 <div class="form-group">
                     <select class="form-control" id="attribute" name="attribute">
                         <option value="">-- Tampilkan Semua --</option>
@@ -84,7 +84,7 @@
                     <tr>
 
                         <th class="align-middle">NO</th>
-                        <th class="align-middle">NAMA PESANTREN</th>
+                        <th class="align-middle">NAMA MADIN dan TPQ</th>
                         @foreach ($attributeNames as $item)
                             <th class="text-uppercase align-middle">{{ $item }}</th>
                         @endforeach
@@ -96,7 +96,7 @@
                     @foreach ($facilities as $facility)
                         <tr>
                             <th scope="row" class="text-center align-middle">{{ $loop->iteration }}</th>
-                            <td>{{ $facility->ponpes->name ?? 'Nama Ponpes Tidak Diketahui' }}</td>
+                            <td>{{ $facility->madin->name ?? 'Nama Ponpes Tidak Diketahui' }}</td>
                             @foreach ($attributeTable as $item)
                                 <td class="text-center align-middle">{{ $facility->$item }}</td>
                             @endforeach
@@ -109,17 +109,17 @@
             </table>
 
             <div class="d-flex justify-content-end mt-3">
-                <a href="/pelapor/fasilitas_ponpes_export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
-                <a href="/pelapor/fasilitas_ponpes_export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
+                <a href="/pengunjung/madin/fasilitas/export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
+                <a href="/pengunjung/madin/fasilitas/export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
             </div>
         @else
-            <table class="table table-striped" id="tablefacility" class="display" style="width:100%">
+            <table class="table table-striped w-100" id="tablefacility" class="display">
                 <thead>
-                    <tr class="text-center">
-                        <th class="align-middle ">NO</th>
-                        <th class="align-middle">NAMA PESANTREN</th>
+                    <tr class="w-100">
+                        <th class="align-middle text-center">NO</th>
+                        <th class="align-middle text-center">NAMA MADIN dan TPQ</th>
                         @if (isset($attribute))
-                            <th class="align-middle text-uppercase">Jumlah
+                            <th class="align-middle text-uppercase text-center">Jumlah
                                 {{ $attributeNames[$attribute] ?? 'Nama Fasilitas Tidak Diketahui' }}</th>
                         @else
                             <th class="align-middle">FASILITAS</th>
@@ -130,9 +130,8 @@
                     @foreach ($facilities as $facility)
                         <tr>
                             <th scope="row" class="text-center align-middle">{{ $loop->iteration }}</th>
-                            <td>{{ $facility->ponpes->name ?? 'Nama Ponpes Tidak Diketahui' }}</td>
+                            <td>{{ $facility->madin->name ?? 'Nama Madrasah Diniyah / TPQ Tidak Diketahui' }}</td>
                             <td class="text-center">{{ isset($attribute) ? $facility->{$attribute} : '-' }}</td>
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -221,8 +220,8 @@
         @foreach ($facilities as $facility)
             @php
                 $db_data = [
-                    'loc' => [$facility->ponpes->latitude, $facility->ponpes->longitude],
-                    'title' => $facility->ponpes->name,
+                    'loc' => [$facility->madin->latitude, $facility->madin->longitude],
+                    'title' => $facility->madin->name,
                 ];
                 
                 $data_pencarian[] = $db_data;
@@ -236,7 +235,7 @@
         @foreach ($facilities as $facility)
             @php
                 $ponpes = $facility->ponpes;
-                $subdistrict = $facility->ponpes->subdistrict;
+                $subdistrict = $facility->madin->subdistrict;
                 $markerIcon = null;
                 
                 if (!isset($attribute)) {
@@ -268,21 +267,21 @@
             marker.bindPopup(`
                 <div class="row custom-popup ">
                     <div class="col-3 p-0 my-auto">
-                        @if (!$facility->ponpes->photo_profil)
+                        @if (!$facility->madin->photo_profil)
                             <img class="w-100" src="{{ asset('/images/ponpes/profile/logo_ponpes_default.jpg') }}" alt="profil Default">
                         @else
-                            <img src="{{ asset('/images/ponpes/profile/' . $facility->ponpes->photo_profil) }}" alt="Profil Pesantren">
+                            <img src="{{ asset('/images/ponpes/profile/' . $facility->madin->photo_profil) }}" alt="Profil Madin">
                         @endif
                     </div>
                     <div class="col-9 py-0 pe-0 my-auto">
                         <div class="title-map m-0">
-                            <a href="{{ route('pelapor.ponpes_view', ['id' => $facility->ponpes->id]) }}">
-                                <span class="fw-bold">{{ $facility->ponpes->name }}</span>    
+                            <a href="{{ route('pengunjung.madin.madin_view', ['id' => $facility->madin->id]) }}">
+                                <span class="fw-bold">{{ $facility->madin->name }}</span>    
                             </a>
                         </div>
 
-                        <span class="text-secondary">{{ $facility->ponpes->subdistrict }}, </span>
-                        <span class="text-secondary">{{ $facility->ponpes->city }} </span>
+                        <span class="text-secondary">{{ $facility->madin->subdistrict }}, </span>
+                        <span class="text-secondary">{{ $facility->madin->city }} </span>
                         <br>
                         @if (isset($attribute))
                             <span class="text-secondary" style="font-size:12px">Jumlah : {{ isset($attribute) ? $facility->{$attribute} : '-' }} </span>
@@ -319,7 +318,7 @@
         };
 
         const overlayLayers = {
-            @foreach ($facilities->groupBy('ponpes.subdistrict') as $subdistrict => $facilitiesGroup)
+            @foreach ($facilities->groupBy('madin.subdistrict') as $subdistrict => $facilitiesGroup)
                 '{{ $subdistrict }}': subdistrictLayers['{{ $subdistrict }}'],
             @endforeach
         };

@@ -114,7 +114,7 @@
                 {{-- dropdown info --}}
                 <div class="row d-md-block d-none">
                     {{-- informasi lainnya dari ponpes --}}
-                    @include('layouts.ponpes_info_etc')
+                    @include('layouts.ponpes.ponpes_info_etc')
                 </div>
 
                 {{-- end dropdown info --}}
@@ -192,7 +192,7 @@
 
             <div class="row d-md-none d-block">
                 {{-- informasi lainnya dari ponpes --}}
-                @include('layouts.ponpes_info_etc')
+                @include('layouts.ponpes.ponpes_info_etc')
             </div>
 
             {{-- end dropdwon info --}}
@@ -287,7 +287,7 @@
                                     <small class="fw-bold">Deskripsi</small>
                                     <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
                                         maxlength="254" oninput="updateCharacterCount(this)">{{ old('description') }}</textarea>
-                                    <small>Karakter Tesisa : </small><small id="characterCount">254</small>
+                                    <small>Karakter Tersisa : </small><small id="characterCount">254</small>
 
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>

@@ -1,4 +1,4 @@
-@extends('layouts.ponpes.app')
+@extends('layouts.app')
 
 
 

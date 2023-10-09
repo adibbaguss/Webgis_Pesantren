@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pengunjung;
+namespace App\Http\Controllers\Pelapor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ponpes;
@@ -21,16 +21,7 @@ class MapCategoryController extends Controller
             ->groupBy('subdistrict')
             ->get();
 
-        return view('pengunjung.map_category', compact('ponpes', 'ponpes2', 'data'));
+        return view('pelapor.map_category', compact('ponpes', 'ponpes2', 'data'));
     }
 
-    // public function exportXLSX()
-    // {
-    //     return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.xlsx');
-    // }
-
-    // public function exportCSV()
-    // {
-    //     return Excel::download(new PonpesExport, 'Data Ponpes Kab.Batang-' . Carbon::now()->timestamp . '.csv');
-    // }
 }

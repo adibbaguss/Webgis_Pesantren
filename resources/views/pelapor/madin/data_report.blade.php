@@ -12,10 +12,11 @@
             </div>
         @endif
 
+        
         @include('layouts.nav_report_pelapor')
 
         <div class="d-flex mb-3">
-            <h2 class="mb-0 text-secondary ">{{ 'Riwayat Laporan Pondok Pesantren di Kabupaten Batang' }}</h2>
+            <h2 class="mb-0 text-secondary ">{{ 'Riwayat Laporan Madrasah Diniyah & TPQ di Kabupaten Batang' }}</h2>
         </div>
         <table class="table table-bordered table-hover text-center" id="example" class="display" style="width:100%">
             <thead>
@@ -23,14 +24,14 @@
                     <th scope="col">NO</th>
                     <th scope="col">TANGGAL MASUK</th>
                     <th scope="col">KATEGORI</th>
-                    <th scope="col">PESANTREN</th>
+                    <th scope="col">MADIN/TPQ</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">OPSI</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $sortedReports = $reports->sortBy('reportHistories.0.date'); 
+                    $sortedReports = $reports->sortBy('reportHistoriesMadin.0.date'); 
                 @endphp
                 @if ($user_id == Auth::user()->id)
                     @foreach ($sortedReports as $item)
@@ -38,7 +39,7 @@
                             <th scope="row" class="text-center align-middle">{{ $loop->iteration }}</th>
                             <td class="align-middle">
                                 @php $found = false; @endphp
-                                @foreach ($item->reportHistories as $data)
+                                @foreach ($item->reportHistoriesMadin as $data)
                                     @if ($data->status === 'baru')
                                         {{ $data->date }}
                                         @php
@@ -52,10 +53,10 @@
                                 @endif
                             </td>
                             <td class="align-middle">{{ $item->category_name }}</td>
-                            <td class="align-middle">{{ $item->ponpes_name }}</td>
+                            <td class="align-middle">{{ $item->madin_name }}</td>
 
 
-                            @php $latestHistory = $item->reportHistories->sortByDesc('created_at')->first(); @endphp
+                            @php $latestHistory = $item->reportHistoriesMadin->sortByDesc('created_at')->first(); @endphp
 
                             @if ($latestHistory->status == 'baru')
                                 <td class="align-middle text-center fw-bold text-danger">{{ $latestHistory->status }}</td>
@@ -76,7 +77,7 @@
                                         <i class="fas fa-info-circle"></i>
                                     </a>
 
-                                    @php $latestHistory = $item->reportHistories->sortByDesc('created_at')->first(); @endphp
+                                    @php $latestHistory = $item->reportHistoriesMadin->sortByDesc('created_at')->first(); @endphp
 
                                     @if ($latestHistory->status == 'baru')
                                         <a class="text-danger fs-5" type="button" data-bs-toggle="modal"
@@ -128,9 +129,9 @@
 
                                 <div class="col-md-12">
                                     <label for="" class="fw-bold">
-                                        Pesantren
+                                        Madin/TPQ
                                     </label>
-                                    <p>{{ $item->ponpes_name }}</p>
+                                    <p>{{ $item->madin_name }}</p>
                                 </div>
 
                                 <div class="col-md-12">
@@ -165,7 +166,7 @@
 
                                         </thead>
                                         <tbody>
-                                            @foreach ($item->reportHistories as $data)
+                                            @foreach ($item->reportHistoriesMadin as $data)
                                                 @if ($data->report_id == $item->id)
                                                     <tr>
                                                         <td>{{ $data->date }}</td>
@@ -210,9 +211,9 @@
                                     <td class="fw-bold">{{ $item->reporting_code }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Pesantren</td>
+                                    <td>Madin/TPQ</td>
                                     <td> : </td>
-                                    <td class="fw-bold">{{ $item->ponpes_name }}</td>
+                                    <td class="fw-bold">{{ $item->madin_name }}</td>
                                 </tr>
                             </table>
 
@@ -221,7 +222,7 @@
                             <button type="button" class="btn btn-outline-secondary"
                                 data-bs-dismiss="modal">Batal</button>
 
-                            <form action="{{ route('pelapor.ponpes.report_delete', ['id' => $item->id]) }}" method="POST">
+                            <form action="{{ route('pelapor.madin.report_delete', ['id' => $item->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Ya, Hapus</button>
@@ -273,7 +274,7 @@
         $(document).ready(function() {
             new DataTable('#example', {
                 scrollCollapse: true,
-                scrollX: true,
+                scrollX: true
 
             });
 

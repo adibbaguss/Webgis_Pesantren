@@ -6,36 +6,74 @@
     <div class="container-fluid mt-5 pt-5">
 
         {{-- panggil map nav --}}
-        @include('layouts.ponpes.map_nav')
+        @include('layouts.madin.map_nav_madin')
         {{-- end panggil map nav --}}
         
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="mb-0 text-secondary">Peta Program Takhasus Pondok Pesantren di Kabupaten Batang</h2>
+            <h2 class="mb-0 text-secondary">Peta Madrasah Diniyah dan TPQ di Kabupaten Batang</h2>
         </div>
-        <div class="map-view mb-3 bg-white p-2 rounded-3 shadow-sm">
+        <div class="map-view mb-5 bg-white p-2 rounded-3 shadow-sm">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
         </div>
-        <table class="table table-bordered table-hover text-center shadow-sm ms-auto me-0 mb-5" style="max-width: 400px">
+        
+        <table class="table table-responsive table-bordered table-hover shadow" id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th colspan="2">PENJELASAN</th>
+                    <th colspan="17"class="text-center" >DATA MADRASAH DINIYAH dan TPQ</th>
+                </tr>
+                <tr >
+                    <th scope="col" class="text-center">NO</th>
+                    <th scope="col" class="text-center">NSDT</th>
+                    <th scope="col" class="text-center">NAMA</th>
+                    <th scope="col" class="text-center">NO TELEPON</th>
+                    <th scope="col" class="text-center">EMAIL</th>
+                    <th scope="col" class="text-center">WEBSITE</th>
+                    
+                    <th scope="col" class="text-center">TAHUN BERDIRI</th>
+                    <th scope="col" class="text-center">PIMPINAN</th>
+                    <th scope="col" class="text-center">LUAS WILAYAH</th>
+                    <th scope="col" class="text-center">LUAS BANGUNAN</th>
+                    <th scope="col" class="text-center">ALAMAT</th>
+                    <th scope="col" class="text-center">KECAMATAN</th>
+                    <th scope="col" class="text-center">KOTA/KABUPATEN</th>
+                    <th scope="col" class="text-center">KODE POS</th>
+                    <th scope="col" class="text-center">LATITUDE</th>
+                    <th scope="col" class="text-center">LONGITUDE</th>
+                    <th scope="col" class="text-center">STATUS</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_4.png') }}" alt=""
-                            style="max-width: 30px"></td>
-                    <td class="text-start">Memiliki Program Takhasus</td>
-                </tr>
-                <tr>
-                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_5.png') }}" alt=""
-                            style="max-width: 30px"></td>
-                    <td class="text-start">Tidak Memiliki Program Takhasus
-                    </td>
-                </tr>
-            </tbody>
 
+
+                @foreach ($madin as $item)
+                    <tr>
+                        <td class="text-center fw-bold">{{ $loop->iteration }}</td>
+                        <td>{{ $item->nsdt }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->phone_number }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->website }}</td>
+                        <td>{{ $item->standing_date }}</td>
+                        <td>{{ $item->pimpinan }}</td>
+                        <td>{{ $item->surface_area }}</td>
+                        <td>{{ $item->building_area }}</td>
+                        <td>{{ $item->address }}</td>
+                        <td>{{ $item->subdistrict }}</td>
+                        <td>{{ $item->city }}</td>
+                        <td>{{ $item->postal_code }}</td>
+                        <td>{{ $item->latitude }}</td>
+                        <td>{{ $item->longitude }}</td>
+                        <td>{{ $item->status == 'active' ? 'Aktif' : ($item->status == 'non-active' ? 'Tidak Aktif' : 'status tidak valid') }}</td>
+
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
+        <div class="d-flex justify-content-end mt-3">
+            <a href="/pengunjung/madin/map_view/export_xlsx" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
+            <a href="/pengunjung/madin/map_view/export_csv" class="btn btn-outline-success ms-2"><i class="fas fa-file-csv"></i></a>
+        </div>
     </div>
 @endsection
 
@@ -92,12 +130,10 @@
             }
         });
 
-        const ponpesIcon1 = new LeafIcon({
-            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_4.png') }}',
+        const madinIcon = new LeafIcon({
+            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_1.png') }}',
         });
-        const ponpesIcon2 = new LeafIcon({
-            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_5.png') }}',
-        });
+    
 
 
         var markersLayer = new L.LayerGroup();
@@ -119,11 +155,11 @@
         @endphp
 
         // Buat asosiatif array dan masukkan ke array sebelumnya
-        @foreach ($ponpes as $ponpe)
+        @foreach ($madin as $item)
             @php
                 $db_data = [
-                    'loc' => [$ponpe->latitude, $ponpe->longitude],
-                    'title' => $ponpe->name,
+                    'loc' => [$item->latitude, $item->longitude],
+                    'title' => $item->name,
                 ];
                 
                 $data_pencarian[] = $db_data;
@@ -134,16 +170,11 @@
         var data = @json($data_pencarian);
         var i = 0
 
-        @foreach ($ponpes as $ponpe)
+        @foreach ($madin as $item)
             @php
-                $subdistrict = $ponpe->subdistrict;
-                $markerIcon = null;
-                
-                if ($ponpe->takhasus == 'yes') {
-                    $markerIcon = 'ponpesIcon1';
-                } else {
-                    $markerIcon = 'ponpesIcon2';
-                }
+                $subdistrict = $item->subdistrict;
+                $markerIcon = 'madinIcon';
+
             @endphp
 
             // Membuat layer berdasarkan subdistrict jika belum ada
@@ -159,23 +190,22 @@
             marker.bindPopup(`
                 <div class="row custom-popup ">
                     <div class="col-3 p-0 my-auto">
-                        @if (!$ponpe->photo_profil)
+                        @if (!$item->photo_profil)
                             <img class="w-100" src="{{ asset('/images/ponpes/profile/logo_ponpes_default.jpg') }}" alt="profil Default">
                         @else
-                            <img src="{{ asset('/images/ponpes/profile/' . $ponpe->photo_profil) }}" alt="Profil Pesatren">
+                            <img src="{{ asset('/images/ponpes/profile/' . $item->photo_profil) }}" alt="Profil Pesatren">
                         @endif
                     </div>
                     <div class="col-9 py-0 pe-0 my-auto">
                         <div class="title-map m-0">
-                            <a href="{{ route('pelapor.ponpes_view', ['id' => $ponpe->id]) }}">
-                                <span class="fw-bold">{{ $ponpe->name }}</span>    
+                            <a href="{{ route('pengunjung.madin.madin_view', ['id' => $item->id]) }}">
+                                <span class="fw-bold">{{ $item->name }}</span>    
                             </a>
                         </div>
 
-                        <span class="text-secondary">{{ $ponpe->subdistrict }}, </span>
-                        <span class="text-secondary">{{ $ponpe->city }} </span>
-                        <br>
-                        <span class="text-secondary" style="font-size:12px">{{ $ponpe->category }} </span>
+                        <span class="text-secondary">{{ $item->subdistrict }}, </span>
+                        <span class="text-secondary">{{ $item->city }} </span>
+                        
                     </div>
                 </div>
             `)
@@ -209,7 +239,7 @@
         };
 
         const overlayLayers = {
-            @foreach ($ponpes->groupBy('subdistrict') as $subdistrict => $ponpes)
+            @foreach ($madin->groupBy('subdistrict') as $subdistrict => $madin)
                 '{{ $subdistrict }}': subdistrictLayers['{{ $subdistrict }}'],
             @endforeach
         };

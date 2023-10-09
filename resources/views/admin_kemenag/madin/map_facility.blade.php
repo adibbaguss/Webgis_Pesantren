@@ -1,4 +1,4 @@
-@extends('layouts.madin.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="container-fluid mt-5 pt-5">

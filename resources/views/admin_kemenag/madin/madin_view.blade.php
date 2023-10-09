@@ -174,7 +174,7 @@
 
 
                     <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Admin Madin/TPQ' }}</label>
+                        <label class="fs-6 fw-bold text-secondary">{{ 'Akun Admin Madin/TPQ' }}</label>
                         @if ($madin->user_id)
                             <table class="w-50">
                                 <tr>
@@ -194,7 +194,7 @@
                                 </tr>
                             </table>
                         @else
-                            <span>Belum Dibuat</span>
+                            <span class="text-danger">Belum Dibuat</span>
                         @endif
                     </div>
 

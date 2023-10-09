@@ -13,7 +13,7 @@
         @endif
 
         {{-- panggil map nav --}}
-        @include('layouts.map_nav')
+        @include('layouts.ponpes.map_nav')
         {{-- end panggil map nav --}}
 
         <div class="d-sm-flex align-items-center justify-content-between mb-4">

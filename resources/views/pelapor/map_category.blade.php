@@ -1,16 +1,23 @@
 @extends('layouts.app')
 
-
-
 @section('content')
     <div class="container-fluid mt-5 pt-5">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif(session('errorss'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         {{-- panggil map nav --}}
         @include('layouts.ponpes.map_nav')
         {{-- end panggil map nav --}}
-        
+
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="mb-0 text-secondary">Peta Program Takhasus Pondok Pesantren di Kabupaten Batang</h2>
+            <h2 class="mb-0 text-secondary">Peta Kategori Pondok Pesantren di Kabupaten Batang</h2>
         </div>
         <div class="map-view mb-3 bg-white p-2 rounded-3 shadow-sm">
             <div id="map" class="rounded-3" style="min-height:500px;max-height:900px"></div>
@@ -23,18 +30,55 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_4.png') }}" alt=""
+                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_1.png') }}" alt=""
                             style="max-width: 30px"></td>
-                    <td class="text-start">Memiliki Program Takhasus</td>
+                    <td class="text-start">Pesantren Salafiyah (Tradisional)</td>
                 </tr>
                 <tr>
-                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_5.png') }}" alt=""
+                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_2.png') }}" alt=""
                             style="max-width: 30px"></td>
-                    <td class="text-start">Tidak Memiliki Program Takhasus
-                    </td>
+                    <td class="text-start">Pesantren Khalafiyah (Modern)</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ asset('/images/ponpes/maps/icon_marker_3.png') }}" alt=""
+                            style="max-width: 30px"></td>
+                    <td class="text-start">Pesantren Kombinasi</td>
                 </tr>
             </tbody>
 
+        </table>
+
+        <table class="table table-bordered table-hover text-center shadow" id="example" class="display"
+            style="width:100%">
+            <thead>
+                <tr>
+                    <th colspan="6"class="text-center">DATA JENIS PESANTREN</th>
+                </tr>
+                <tr>
+                    <th scope="col" class="text-center">NO</th>
+                    <th scope="col" class="text-center">KECAMATAN</th>
+                    <th scope="col" class="text-center">SALAFIYAH (TRADISIONAL)</th>
+                    <th scope="col" class="text-center">KHALAFIYAH (MODERN)</th>
+                    <th scope="col" class="text-center">KOMBINASI</th>
+                    <th scope="col" class="text-center">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $no = 1;
+                @endphp
+
+                @foreach ($data as $item)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td class="text-start">{{ $item->subdistrict }}</td>
+                        <td>{{ $item->salafiyah_count }}</td>
+                        <td>{{ $item->khalafiyah_count }}</td>
+                        <td>{{ $item->kombinasi_count }}</td>
+                        <td>{{ $item->Total }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 @endsection
@@ -93,10 +137,13 @@
         });
 
         const ponpesIcon1 = new LeafIcon({
-            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_4.png') }}',
+            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_1.png') }}',
         });
         const ponpesIcon2 = new LeafIcon({
-            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_5.png') }}',
+            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_2.png') }}',
+        });
+        const ponpesIcon3 = new LeafIcon({
+            iconUrl: '{{ asset('/images/ponpes/maps/icon_marker_3.png') }}',
         });
 
 
@@ -139,10 +186,12 @@
                 $subdistrict = $ponpe->subdistrict;
                 $markerIcon = null;
                 
-                if ($ponpe->takhasus == 'yes') {
+                if ($ponpe->category == 'Pesantren Salafiyah (Tradisional)') {
                     $markerIcon = 'ponpesIcon1';
-                } else {
+                } elseif ($ponpe->category == 'Pesantren Khalafiyah (Modern)') {
                     $markerIcon = 'ponpesIcon2';
+                } else {
+                    $markerIcon = 'ponpesIcon3';
                 }
             @endphp
 
@@ -220,9 +269,6 @@
             controlSearch.searchText(e.target.value);
         })
 
+        // maps ke-dua
     </script>
 @endpush
-
-
-
-

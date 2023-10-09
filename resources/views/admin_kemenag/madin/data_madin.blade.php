@@ -16,7 +16,7 @@
         @endif
 
         {{-- panggil nav --}}
-        @include('layouts.madin.nav_data_ponpes_tpq')
+        @include('layouts.nav_data_ponpes_tpq')
         {{-- end panggil nav --}}
  
         <h5 class="mb-0 text-secondary d-md-none d-block mb-5">{{ 'Daftar Madrasah Diniyah dan TPQ di Kabupaten Batang' }}</h5>

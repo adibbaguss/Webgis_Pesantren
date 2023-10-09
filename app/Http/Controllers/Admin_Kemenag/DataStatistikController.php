@@ -102,7 +102,7 @@ class DataStatistikController extends Controller
         return $chartDataStudent;
     }
 
-// madin
+    // madin
 
     private function getChartDataMadin()
     {
