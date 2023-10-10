@@ -103,6 +103,11 @@
                             <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
                             {{ 'Profil' }}
                         </a>
+                        @elseif(Auth::User()->user_role == 'admin madin')
+                        <a class="dropdown-item" href="{{ route('admin_madin.profile', ['id' => Auth::user()->id]) }}">
+                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                            {{ 'Profil' }}
+                        </a>
                     @elseif(Auth::User()->user_role == 'pelapor')
                         <a class="dropdown-item" href="{{ route('pelapor.profile', ['id' => Auth::user()->id]) }}">
                             <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
@@ -280,11 +285,39 @@
                             <a href="{{ route('admin_pesantren.ponpes_view', ['id' => Auth::User()->id]) }}"
                                 class="nav_link text-decoration-none {{ request()->is('admin pesantren/ponpes_view*') ? 'active' : '' }}">
                                 <i class="bx bx-buildings nav_icon"></i>
-                                <span class="nav_name">{{ 'Daftar Pesantren' }}</span>
+                                <span class="nav_name">{{ 'Pesantren' }}</span>
                             </a>
 
                             <a href="/admin pesantren/panduan"
                                 class="nav_link text-decoration-none {{ request()->is('admin pesantren/panduan*') ? 'active' : '' }}">
+                                <i class='bx bx-info-circle nav_icon'></i>
+                                <span class="nav_name">{{ 'Panduan Sistem' }}</span>
+                            </a>
+
+                        </div>
+                    </div>
+                @elseif(Auth::User()->user_role == 'admin madin')
+                    <div>
+                        <a href="{{ route('admin_madin.dashboard', ['id' => Auth::User()->id]) }}"
+                            class="nav_logo text-decoration-none">
+                            <img src="{{ asset('images/asset/logo_kemenag.png') }}" alt="logo kemanag"
+                                style="width: 25px">
+                            <span class="nav_logo-name text-capitalize">{{ Auth::User()->user_role }}</span>
+                        </a>
+                        <div class="nav_list">
+                            <a href="{{ route('admin_madin.dashboard', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin madin/dashboard*') ? 'active' : '' }}">
+                                <i class="bx bx-grid-alt nav_icon"></i>
+                                <span class="nav_name">{{ 'Dashboard' }}</span>
+                            </a>
+                            <a href="{{ route('admin_madin.madin_view', ['id' => Auth::User()->id]) }}"
+                                class="nav_link text-decoration-none {{ request()->is('admin madin/madin_view*') ? 'active' : '' }}">
+                                <i class="bx bx-buildings nav_icon"></i>
+                                <span class="nav_name">{{ 'Madin/TPQ' }}</span>
+                            </a>
+
+                            <a href="/admin madin/panduan"
+                                class="nav_link text-decoration-none {{ request()->is('admin madin/panduan*') ? 'active' : '' }}">
                                 <i class='bx bx-info-circle nav_icon'></i>
                                 <span class="nav_name">{{ 'Panduan Sistem' }}</span>
                             </a>

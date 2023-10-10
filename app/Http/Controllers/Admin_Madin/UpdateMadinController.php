@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin_Pesantren;
+namespace App\Http\Controllers\Admin_Madin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ponpes;
+use App\Models\Madin;
 use Illuminate\Http\Request;
 
-class UpdatePonpesController extends Controller
+class UpdateMadinController extends Controller
 {
     public function index($id)
     {
-        $ponpes = Ponpes::all()
+        $madin = Madin::all()
             ->find($id);
 
         $kecamatanOptions = [
@@ -33,7 +33,7 @@ class UpdatePonpesController extends Controller
 
         // $user = User::all();
 
-        return view('admin_pesantren.update_ponpes', compact('ponpes', 'kecamatanOptions'));
+        return view('admin_madin.update_madin', compact('madin', 'kecamatanOptions'));
 
     }
 
@@ -43,13 +43,11 @@ class UpdatePonpesController extends Controller
 
         $request->validate([
             'photo_profil' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'nspp' => ['required', 'numeric', 'digits_between:10,20', 'unique:ponpes,nspp,' . $id],
+            'nsdt' => ['required', 'numeric', 'digits_between:10,20', 'unique:madin,nsdt,' . $id],
             'name' => ['required', 'string'],
-            'category' => ['required', 'string'],
-            'takhasus' => ['required', 'string'],
-            'phone_number' => ['required', 'string', 'unique:ponpes,phone_number,' . $id],
+            'phone_number' => ['required', 'string', 'unique:madin,phone_number,' . $id],
             'website' => ['nullable', 'string'],
-            'email' => ['required', 'email', 'unique:ponpes,email,' . $id],
+            'email' => ['required', 'email', 'unique:madin,email,' . $id],
             'standing_date' => ['required', 'date'],
             'pimpinan' => ['required', 'string'],
             'surface_area' => ['required', 'integer'],
@@ -85,34 +83,32 @@ class UpdatePonpesController extends Controller
             }
         }
 
-        // Find the ponpes data
-        $ponpes = Ponpes::find($id);
+        // Find the madin data
+        $madin = Madin::find($id);
 
-        // Update the ponpes data directly using the update method
-        $ponpes->update($request->all());
+        // Update the madin data directly using the update method
+        $madin->update($request->all());
 
         // Update the user data
-        $ponpes->photo_profil = $avatarPath ?? $ponpes->photo_profil;
-        $ponpes->nspp = $request->nspp;
-        $ponpes->name = $request->name;
-        $ponpes->category = $request->category;
-        $ponpes->takhasus = $request->takhasus;
-        $ponpes->phone_number = $request->phone_number;
-        $ponpes->website = $request->website;
-        $ponpes->email = $request->email;
-        $ponpes->standing_date = $request->standing_date;
-        $ponpes->pimpinan = $request->pimpinan;
-        $ponpes->surface_area = $request->surface_area;
-        $ponpes->building_area = $request->building_area;
-        $ponpes->city = $request->city;
-        $ponpes->subdistrict = $request->subdistrict;
-        $ponpes->postal_code = $request->postal_code;
-        $ponpes->address = $request->address;
-        $ponpes->latitude = $request->latitude;
-        $ponpes->longitude = $request->longitude;
+        $madin->photo_profil = $avatarPath ?? $madin->photo_profil;
+        $madin->nsdt = $request->nsdt;
+        $madin->name = $request->name;
+        $madin->phone_number = $request->phone_number;
+        $madin->website = $request->website;
+        $madin->email = $request->email;
+        $madin->standing_date = $request->standing_date;
+        $madin->pimpinan = $request->pimpinan;
+        $madin->surface_area = $request->surface_area;
+        $madin->building_area = $request->building_area;
+        $madin->city = $request->city;
+        $madin->subdistrict = $request->subdistrict;
+        $madin->postal_code = $request->postal_code;
+        $madin->address = $request->address;
+        $madin->latitude = $request->latitude;
+        $madin->longitude = $request->longitude;
 
-        $ponpes->save();
+        $madin->save();
 
-        return redirect()->route('admin_pesantren.ponpes_view', ['id' => $ponpes->user_id])->with('success', 'Pondok Pesantren updated successfully!');
+        return redirect()->route('admin_madin.madin_view', ['id' => $madin->user_id])->with('success', 'Pondok madin updated successfully!');
     }
 }

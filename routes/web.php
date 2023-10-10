@@ -28,6 +28,18 @@ use App\Http\Controllers\Admin_Kemenag\ProfileController;
 use App\Http\Controllers\Admin_Kemenag\ReportController;
 use App\Http\Controllers\Admin_Kemenag\UpdatePonpesController;
 use App\Http\Controllers\Admin_Kemenag\UpdateProfileController;
+use App\Http\Controllers\Admin_Madin\ActivityController as Madin_ActivityController;
+use App\Http\Controllers\Admin_Madin\DashboardController as Admin_madin_DashboardController;
+use App\Http\Controllers\Admin_Madin\FacilityController as Madin_FacilityController;
+use App\Http\Controllers\Admin_Madin\ImageMadinController;
+use App\Http\Controllers\Admin_Madin\InstructorsController as Madin_InstructorsController;
+use App\Http\Controllers\Admin_Madin\LearningController as Madin_LearningController;
+use App\Http\Controllers\Admin_Madin\MadinViewController as Admin_madin_MadinViewController;
+use App\Http\Controllers\Admin_Madin\ProfileController as Admin_madin_ProfileController;
+use App\Http\Controllers\Admin_Madin\StudentCountController as Madin_StudentCountController;
+use App\Http\Controllers\Admin_Madin\UpdateMadinController as Admin_madin_UpdateMadinController;
+use App\Http\Controllers\Admin_Madin\UpdateMadinEtcController;
+use App\Http\Controllers\Admin_Madin\UpdateProfileController as Admin_madin_UpdateProfileController;
 use App\Http\Controllers\Admin_Pesantren\ActivityController;
 use App\Http\Controllers\Admin_Pesantren\DashboardController as Admin_Pesantren_DashboardController;
 use App\Http\Controllers\Admin_Pesantren\FacilityController;
@@ -330,6 +342,51 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
 
     Route::get('/admin pesantren/panduan', function () {
         return view('admin_pesantren.tutorial_view');
+    });
+});
+
+// // Rute untuk admin_madin
+Route::middleware(['auth', 'role:admin madin'])->group(function () {
+    Route::get('/admin madin/dashboard/{id}', [Admin_madin_DashboardController::class, 'index'])->name('admin_madin.dashboard');
+    Route::get('/admin madin/profile/{id}', [Admin_madin_ProfileController::class, 'index'])->name('admin_madin.profile');
+    Route::get('/admin madin/edit_profile/{id}', [Admin_madin_UpdateProfileController::class, 'index'])->name('admin_madin.profile_edit');
+    Route::put('/admin madin/update_profile/{id}', [Admin_madin_UpdateProfileController::class, 'update'])->name('admin_madin.profile_update');
+    Route::put('/admin madin/update_password/{id}', [Admin_madin_UpdateProfileController::class, 'update_password'])->name('admin_madin.password_update');
+
+    Route::get('/admin madin/madin_view/user_admin_madin={id}', [Admin_madin_MadinViewController::class, 'view'])->name('admin_madin.madin_view');
+
+    Route::get('/admin madin/update_madin/madin={id}', [Admin_madin_UpdateMadinController::class, 'index'])->name('admin_madin.madin_edit');
+    Route::put('/admin madin/update_madin/madin={id}', [Admin_madin_UpdateMadinController::class, 'update'])->name('admin_madin.madin_update');
+
+    Route::get('/admin madin/madin_update_etc/madin={id}', [UpdateMadinEtcController::class, 'index'])->name('admin_madin.madin_edit_etc');
+
+    Route::post('/admin madin/madin_update_etc/instructors/create', [Madin_InstructorsController::class, 'createInstructors'])->name('admin_madin.instructors_create');
+    Route::delete('/admin madin/madin_update_etc/instructors/delete/{id}', [Madin_InstructorsController::class, 'destroyInstructors'])->name('admin_madin.instructors_delete');
+    Route::put('/admin madin/madin_update_etc/instructors/update/{id}', [Madin_InstructorsController::class, 'updateInstructors'])->name('admin_madin.instructors_update');
+
+    Route::post('/admin madin/madin_update_etc/facility/create', [Madin_FacilityController::class, 'createFacility'])->name('admin_madin.facility_create');
+    Route::delete('/admin madin/madin_update_etc/facility/delete/{id}', [Madin_FacilityController::class, 'destroyFacility'])->name('admin_madin.facility_delete');
+    Route::put('/admin madin/madin_update_etc/facility/update/{id}', [Madin_FacilityController::class, 'updateFacility'])->name('admin_madin.facility_update');
+
+    Route::post('/admin madin/madin_update_etc/activities/create', [Madin_ActivityController::class, 'createActivities'])->name('admin_madin.activities_create');
+    Route::delete('/admin madin/madin_update_etc/activities/delete/{id}', [Madin_ActivityController::class, 'destroyActivities'])->name('admin_madin.activities_delete');
+    Route::put('/admin madin/madin_update_etc/activities/update/{id}', [Madin_ActivityController::class, 'updateActivities'])->name('admin_madin.activities_update');
+
+    Route::post('/admin madin/madin_update_etc/learning/create', [Madin_LearningController::class, 'createLearning'])->name('admin_madin.learning_create');
+    Route::delete('/admin madin/madin_update_etc/learning/delete/{id}', [Madin_LearningController::class, 'destroyLearning'])->name('admin_madin.learning_delete');
+    Route::put('/admin madin/madin_update_etc/learning/update/{id}', [Madin_LearningController::class, 'updateLearning'])->name('admin_madin.learning_update');
+
+    Route::post('/admin madin/madin_update_etc/studentcount/create', [Madin_StudentCountController::class, 'createStudentCount'])->name('admin_madin.studentcount_create');
+    Route::delete('/admin madin/madin_update_etc/studentcount/delete/{id}', [Madin_StudentCountController::class, 'destroyStudentCount'])->name('admin_madin.studentcount_delete');
+    Route::put('/admin madin/madin_update_etc/studentcount/update/{id}', [Madin_StudentCountController::class, 'updateStudentCount'])->name('admin_madin.studentcount_update');
+
+    Route::get('/admin madin/madin_update_etc/image_madin/create/{id}', [ImageMadinController::class, 'index'])->name('admin_madin.madin_image_create_view');
+    Route::post('/admin madin/madin_update_etc/image_madin/create/jumbotron', [ImageMadinController::class, 'create_jumbotron'])->name('admin_madin.madin_image_create_jumbotron');
+    Route::post('/admin madin/madin_update_etc/image_madin/create/reguler', [ImageMadinController::class, 'create_reguler'])->name('admin_madin.madin_image_create_reguler');
+    Route::delete('/admin madin/madin_update_etc/image/delete/{id}', [ImageMadinController::class, 'deleteImage'])->name('admin_madin.image_delete');
+
+    Route::get('/admin madin/panduan', function () {
+        return view('admin_madin.tutorial_view');
     });
 });
 

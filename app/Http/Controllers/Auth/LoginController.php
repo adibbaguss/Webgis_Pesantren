@@ -60,6 +60,8 @@ class LoginController extends Controller
                 return redirect()->route('admin_kemenag.dashboard')->with('success', 'Selamat anda berhasil login');
             } elseif ($user->user_role === 'admin pesantren') {
                 return redirect()->route('admin_pesantren.dashboard', ['id' => $user->id])->with('success', 'Selamat anda berhasil login');
+            } elseif ($user->user_role === 'admin madin') {
+                return redirect()->route('admin_madin.dashboard', ['id' => $user->id])->with('success', 'Selamat anda berhasil login');
             } elseif ($user->user_role === 'pelapor') {
                 return redirect()->route('pelapor.map_view', ['id' => $user->id])->with('success', 'Selamat anda berhasil login');
             } else {
