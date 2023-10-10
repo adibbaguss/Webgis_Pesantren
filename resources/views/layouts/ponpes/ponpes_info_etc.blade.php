@@ -237,7 +237,7 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @forelse ($activities as $item)
+                                @forelse ($learning as $item)
                                     <tr>
                                         <th class="text-center" scope="row">{{ $no++ }}
                                         </th>

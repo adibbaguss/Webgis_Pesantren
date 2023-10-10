@@ -166,7 +166,7 @@ class DataStatistikController extends Controller
         $chartDataStudentMadin = [
             'labels' => $data->pluck('year'),
             'male' => $data->pluck('male'),
-            'male' => $data->pluck('female'),
+            'female' => $data->pluck('female'),
             'total' => $data->pluck('total'),
         ];
 
