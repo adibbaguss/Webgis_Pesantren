@@ -14,11 +14,19 @@ class DashboardController extends Controller
 {
     public function index($id)
     {
+        // Find the admin_pesantren user by ID or throw a 404 error if not found
         $admin_pesantren = User::findOrFail($id);
+
+        // Get the admin_pesantren's ID
         $admin_pesantren_id = $admin_pesantren->id;
 
-        // Mengambil data Ponpes
-        $ponpes = Ponpes::all()->where('user_id', $admin_pesantren_id)->first();
+        // Find the associated Ponpes by user_id
+        $ponpes = Ponpes::where('user_id', $admin_pesantren_id)->first();
+
+        // Check if $ponpes is null and handle it gracefully (e.g., redirect or display an error)
+        if (!$ponpes) {
+            return redirect()->route('belum.direlasikan'); // Replace with your error handling logic
+        }
 
         // Get chart data
         $chartData = $this->getChartStudent($admin_pesantren_id);
@@ -29,20 +37,22 @@ class DashboardController extends Controller
     public function getChartStudent($admin_pesantren_id)
     {
         // Mengambil data Ponpes
-        $ponpes = Ponpes::all()->where('user_id', $admin_pesantren_id)->first();
+        $ponpes = Ponpes::where('user_id', $admin_pesantren_id)->first();
+
+        if (!$ponpes) {
+            return null; // Handle the case where no Ponpes is found for the given user_id
+        }
 
         // Retrieve data from the database based on the given ponpes_id
         $studentCounts = StudentCount::where('ponpes_id', $ponpes->id)
             ->where('year', Carbon::now()->year)
+            ->groupBy('year')
             ->selectRaw('year,
-            SUM(male_resident_count) as male_resident_count,
-            SUM(female_resident_count) as female_resident_count,
-            SUM(male_non_resident_count) as male_non_resident_count,
-            SUM(female_non_resident_count) as female_non_resident_count')
-            ->groupBy('year') // Add the GROUP BY clause here
+                SUM(male_resident_count) as male_resident_count,
+                SUM(female_resident_count) as female_resident_count,
+                SUM(male_non_resident_count) as male_non_resident_count,
+                SUM(female_non_resident_count) as female_non_resident_count')
             ->get();
-
-        // dd($studentCounts);
 
         $chartStudent = [
             'labels' => $studentCounts->pluck('year'),
@@ -54,4 +64,5 @@ class DashboardController extends Controller
 
         return $chartStudent;
     }
+
 }

@@ -44,6 +44,7 @@ use App\Http\Controllers\Admin_Pesantren\UpdatePonpesEtcController;
 use App\Http\Controllers\Admin_Pesantren\UpdateProfileController as Admin_Pesantren_UpdateProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BelumBerelasiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Pelapor\DataPonpesController as Pelapor_DataPonpesController;
 use App\Http\Controllers\Pelapor\DataReportController;
@@ -282,6 +283,7 @@ Route::middleware(['auth', 'role:admin kemenag'])->group(function () {
     // Route::post('/create_ponpes_langkah_2', [CreatePonpesController::class, 'stepTwo'])->name('create-ponpes-2');
 
 });
+
 // // Rute untuk admin_pesantren
 Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
     Route::get('/admin pesantren/dashboard/{id}', [Admin_Pesantren_DashboardController::class, 'index'])->name('admin_pesantren.dashboard');
@@ -400,6 +402,8 @@ Route::middleware(['auth', 'role:pelapor'])->group(function () {
 // rute untuk register
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
+
+Route::get('/belum direlasikan', [BelumBerelasiController::class, 'index'])->name('belum.direlasikan');
 
 // // Verifikasi email
 // Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])

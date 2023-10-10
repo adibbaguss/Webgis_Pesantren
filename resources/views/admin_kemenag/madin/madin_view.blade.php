@@ -118,107 +118,23 @@
                 {{-- dropdown info desktop --}}
                 <div class="row d-md-block d-none">
                     {{-- informasi lainnya dari madin --}}
-                    @include('layouts.madin.madin.madin_info_etc')           
+                    @include('layouts.madin.madin_info_etc')
                 </div>
                 {{-- end dropdown info --}}
 
             </div>
 
-            <div class="col-md-5">
-                <div class="row ">
+            {{-- mamanggil info utama madin --}}
+            @include('layouts.madin.madin_info')
+            {{-- end memamanggil info utama madin --}}
 
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Nomor Statistik Diniyah Takmiliyah' }}</label>
-                        <span>{{ $madin->nsdt }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Pengasuh' }}</label>
-                        <span>{{ $madin->pimpinan }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Nomor Telepon' }}</label>
-                        <span>{{ $madin->phone_number }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Alamat' }}</label>
-                        <span>{{ $madin->address . ', ' . $madin->subdistrict . ', ' . $madin->city . ', ' . $madin->postal_code }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Alamat Email' }}</label>
-                        <span>{{ $madin->email }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Website' }}</label>
-                        <a href="{{ 'https://' . $madin->website }}">{{ $madin->website }}</a>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Tanggal Berdiri' }}</label>
-                        <span>{{ \Carbon\Carbon::parse($madin->standing_date)->format('d F Y') }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Luas Tanah' }}</label>
-                        <span>{{ $madin->surface_area }} M<sup>2</sup></span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Luas Bangunan' }}</label>
-                        <span>{{ $madin->building_area }} M<sup>2</sup></span>
-                    </div>
-
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Akun Admin Madin/TPQ' }}</label>
-                        @if ($madin->user_id)
-                            <table class="w-50">
-                                <tr>
-                                    <td>ID</td>
-                                    <td>:</td>
-                                    <td>{{ $madin->user->id }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Username</td>
-                                    <td>:</td>
-                                    <td>{{ $madin->user->username }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Nama</td>
-                                    <td>:</td>
-                                    <td>{{ $madin->user->name }}</td>
-                                </tr>
-                            </table>
-                        @else
-                            <span class="text-danger">Belum Dibuat</span>
-                        @endif
-                    </div>
-
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Status' }}</label>
-                        @if ($madin->status == 'active')
-                            <span class="btn btn-success" style="width:fit-content">{{ 'Aktif' }}</span>
-                        @else
-                            <span class="btn btn-danger" style="width:fit-content">{{ 'Tidak Aktif' }}</span>
-                        @endif
-                    </div>
-
-
-
-                </div>
-            </div>
 
             {{-- drop down info  --}}
 
             {{-- dropdown info desktop --}}
             <div class="row d-md-none d-block">
                 {{-- informasi lainnya dari madin --}}
-                 @include('layouts.madin.madin_info_etc')             
+                @include('layouts.madin.madin_info_etc')
             </div>
             {{-- end dropdown info --}}
 
@@ -232,14 +148,13 @@
                 <div class="modal-dialog px-0">
                     <div class="modal-content bg-none">
                         <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             {{-- <img src="{{ asset('images/ponpes/default-image.png') }}" alt=""
                                 style="width: 100%"> --}}
-                            <img src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}"
-                                alt="Image Madin" style="width: 100%">
+                            <img src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}" alt="Image Madin"
+                                style="width: 100%">
                         </div>
                     </div>
                 </div>
@@ -265,8 +180,8 @@
                     <div class="modal-footer">
                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Batal</button>
 
-                        <form id="delete-form"
-                            action="{{ route('admin_kemenag.madin_delete', ['id' => $madin->id]) }}" method="POST">
+                        <form id="delete-form" action="{{ route('admin_kemenag.madin_delete', ['id' => $madin->id]) }}"
+                            method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Hapus</button>

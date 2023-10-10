@@ -67,7 +67,7 @@
                                 Laporkan
                             </a>
                         </li>
-   
+
                     </ul>
                 </div>
 
@@ -114,83 +114,25 @@
                 {{-- dropdown info desktop --}}
                 <div class="row d-md-block d-none">
                     {{-- informasi lainnya dari madin --}}
-                    @include('layouts.madin.madin_info_etc')           
+                    @include('layouts.madin.madin_info_etc')
                 </div>
                 {{-- end dropdown info --}}
 
             </div>
 
-            <div class="col-md-5">
-                <div class="row ">
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Nomor Statistik Diniyah Takmiliyah' }}</label>
-                        <span>{{ $madin->nsdt }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Pengasuh' }}</label>
-                        <span>{{ $madin->pimpinan }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Nomor Telepon' }}</label>
-                        <span>{{ $madin->phone_number }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Alamat' }}</label>
-                        <span>{{ $madin->address . ', ' . $madin->subdistrict . ', ' . $madin->city . ', ' . $madin->postal_code }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Alamat Email' }}</label>
-                        <span>{{ $madin->email }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Website' }}</label>
-                        <a href="{{ 'https://' . $madin->website }}">{{ $madin->website }}</a>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Tanggal Berdiri' }}</label>
-                        <span>{{ \Carbon\Carbon::parse($madin->standing_date)->format('d F Y') }}</span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Luas Tanah' }}</label>
-                        <span>{{ $madin->surface_area }} M<sup>2</sup></span>
-                    </div>
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Luas Bangunan' }}</label>
-                        <span>{{ $madin->building_area }} M<sup>2</sup></span>
-                    </div>
+            {{-- mamanggil info utama madin --}}
+            @include('layouts.madin.madin_info')
+            {{-- end memamanggil info utama madin --}}
 
 
 
-
-                    <div class="col-12 mb-4 d-grid">
-                        <label class="fs-6 fw-bold text-secondary">{{ 'Status' }}</label>
-                        @if ($madin->status == 'active')
-                            <span class="btn btn-success" style="width:fit-content">{{ 'Aktif' }}</span>
-                        @else
-                            <span class="btn btn-danger" style="width:fit-content">{{ 'Tidak Aktif' }}</span>
-                        @endif
-                    </div>
-
-
-
-                </div>
-            </div>
 
             {{-- drop down info  --}}
 
             {{-- dropdown info desktop --}}
             <div class="row d-md-none d-block">
                 {{-- informasi lainnya dari madin --}}
-                 @include('layouts.madin.madin_info_etc')             
+                @include('layouts.madin.madin_info_etc')
             </div>
             {{-- end dropdown info --}}
 
@@ -204,14 +146,13 @@
                 <div class="modal-dialog px-0">
                     <div class="modal-content bg-none">
                         <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             {{-- <img src="{{ asset('images/ponpes/default-image.png') }}" alt=""
                                 style="width: 100%"> --}}
-                            <img src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}"
-                                alt="Image Madin" style="width: 100%">
+                            <img src="{{ asset('images/ponpes/image/' . $regulerImage->image_name) }}" alt="Image Madin"
+                                style="width: 100%">
                         </div>
                     </div>
                 </div>
@@ -219,90 +160,90 @@
         @endforeach
 
         <div class="modal fade" id="KonfirmasiReportModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Madrasah Diniyah/TPQ</h1>
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Madrasah Diniyah/TPQ</h1>
 
-                </div>
-                <div class="modal-body">
-                    <span>Apakah Anda Yakin Melaporkan </span>
-                    <span class="fw-bold">{{ $madin->name }}</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tidak</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#reportModal">Ya, Saya Yakin</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- modal report --}}
-
-    <!-- Modal -->
-    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Madrasah Diniyah / TPQ</h1>
-
-                </div>
-                <form action="{{ route('pelapor.madin_report', ['id' => $madin->id]) }}" method="POST">
-                    @csrf
-                    @method('POST')
+                    </div>
                     <div class="modal-body">
-
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <small class="fw-bold">Pelapor</small><br>
-                                <span>{{ $pelapor->name }}</span>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <small class="fw-bold">Nama Madin/TPQ</small><br>
-                                <span>{{ $madin->name }}</span>
-                                <input type="text" name="madin_id" value="{{ $madin->id }}" hidden>
-                                <input type="text" name="user_id" value="{{ $pelapor->id }}" hidden>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <small class="fw-bold">Kategori Laporan</small>
-                                <select class="form-control" name="category_id" id="category_id">
-                                    @foreach ($category_report as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-md-12 mb-3">
-                                <small class="fw-bold">Judul Laporan</small>
-                                <input type="text" name="title" class="form-control">
-                            </div>
-
-                            <div class="col-12 mb-3">
-                                <small class="fw-bold">Deskripsi</small>
-                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
-                                    maxlength="254" oninput="updateCharacterCount(this)">{{ old('description') }}</textarea>
-                                <small>Karakter Tersisa : </small><small id="characterCount">254</small>
-
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-
-                        </div>
-
+                        <span>Apakah Anda Yakin Melaporkan </span>
+                        <span class="fw-bold">{{ $madin->name }}</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary"
-                            data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger">Kirim</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#reportModal">Ya, Saya Yakin</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+
+        {{-- modal report --}}
+
+        <!-- Modal -->
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pelaporan Madrasah Diniyah / TPQ</h1>
+
+                    </div>
+                    <form action="{{ route('pelapor.madin_report', ['id' => $madin->id]) }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Pelapor</small><br>
+                                    <span>{{ $pelapor->name }}</span>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Nama Madin/TPQ</small><br>
+                                    <span>{{ $madin->name }}</span>
+                                    <input type="text" name="madin_id" value="{{ $madin->id }}" hidden>
+                                    <input type="text" name="user_id" value="{{ $pelapor->id }}" hidden>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Kategori Laporan</small>
+                                    <select class="form-control" name="category_id" id="category_id">
+                                        @foreach ($category_report as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <small class="fw-bold">Judul Laporan</small>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <small class="fw-bold">Deskripsi</small>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4"
+                                        maxlength="254" oninput="updateCharacterCount(this)">{{ old('description') }}</textarea>
+                                    <small>Karakter Tersisa : </small><small id="characterCount">254</small>
+
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Kirim</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     @endsection
 
 
@@ -344,16 +285,16 @@
 
             });
         </script>
-                {{-- textarea for report form --}}
+        {{-- textarea for report form --}}
 
-                <script>
-                    function updateCharacterCount(textarea) {
-                        const maxLength = parseInt(textarea.getAttribute('maxlength'));
-                        const currentLength = textarea.value.length;
-                        const remaining = maxLength - currentLength;
-        
-                        const characterCountElement = document.getElementById('characterCount');
-                        characterCountElement.textContent = remaining;
-                    }
-                </script>
+        <script>
+            function updateCharacterCount(textarea) {
+                const maxLength = parseInt(textarea.getAttribute('maxlength'));
+                const currentLength = textarea.value.length;
+                const remaining = maxLength - currentLength;
+
+                const characterCountElement = document.getElementById('characterCount');
+                characterCountElement.textContent = remaining;
+            }
+        </script>
     @endpush
