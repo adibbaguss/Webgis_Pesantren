@@ -24,7 +24,7 @@
                             aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body pt-3 px-1 pb-1">
                                 <div id="pdf-container">
-                                    <iframe id="pdf-iframe" src="{{ asset('pdf/panduan/panduan admin_kemenag.pdf') }}"
+                                    <iframe id="pdf-iframe" src="{{ asset('pdf/panduan/panduan akun admin kemenag.pdf') }}"
                                         frameborder="0"></iframe>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                             aria-labelledby="panelsStayOpen-headingTwo">
                             <div class="accordion-body pt-3 px-1 pb-1">
                                 <div id="pdf-container">
-                                    <iframe id="pdf-iframe" src="{{ asset('pdf/panduan/panduan Two.pdf') }}"
+                                    <iframe id="pdf-iframe" src="{{ asset('pdf/panduan/panduan akun admin pesantren, madin dan TPQ.pdf') }}"
                                         frameborder="0"></iframe>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                         aria-labelledby="panelsStayOpen-headingThree">
                         <div class="accordion-body pt-3 px-1 pb-1">
                             <div id="pdf-container">
-                                <iframe id="pdf-iframe" src="{{ asset('pdf/panduan/panduan Viewer.pdf') }}"
+                                <iframe id="pdf-iframe" src="{{ asset('pdf/panduan/panduan akun pelapor.pdf') }}"
                                     frameborder="0"></iframe>
                             </div>
                         </div>
