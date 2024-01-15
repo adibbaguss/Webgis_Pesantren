@@ -137,7 +137,7 @@
                 <tr class="align-middle">
                     <th scope="col" rowspan="2" class="text-center">NO</th>
                     <th scope="col" rowspan="2" class="text-center">NSDT</th>
-                    <th scope="col" rowspan="2" class="text-center">NAMA PESANTREN</th>
+                    <th scope="col" rowspan="2" class="text-center">NAMA MADIN/TPQ</th>
                     <th scope="col" rowspan="2" class="text-center">KECAMATAN</th>
                     <th scope="col" colspan="4" class="text-center">JUMLAH SUMBER DAYA MANUSIA</th>
                     <th scope="col" rowspan="2" class="text-center">TOTAL PENGAJAR</th>

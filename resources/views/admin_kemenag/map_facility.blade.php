@@ -23,7 +23,7 @@
 
 
         <div class="form mb-2">
-            <form action="{{ route('admin_kemenag.madin.search_facility') }}" method="GET" class="d-flex justify-content-end">
+            <form action="{{ route('admin_kemenag.ponpes.search_facility') }}" method="GET" class="d-flex justify-content-end">
                 <div class="form-group">
                     <select class="form-control" id="attribute" name="attribute">
                         <option value="">-- Tampilkan Semua --</option>

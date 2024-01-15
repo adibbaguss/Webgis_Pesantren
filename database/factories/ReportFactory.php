@@ -4,9 +4,8 @@ namespace Database\Factories;
 
 use App\Helpers\RandomIdGenerator;
 use App\Models\Report;
-use Faker\Factory as faker;
+use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class ReportFactory extends Factory
 {
@@ -24,10 +23,11 @@ class ReportFactory extends Factory
      */
     public function definition()
     {
-        $faker = faker::create();
+        $faker = Faker::create();
+
         return [
-            'ponpes_id' => $faker->numberBetween(1, 3),
-            'user_id' => $faker->numberBetween(4, 5),
+            'ponpes_id' => 1,
+            'user_id' => 3,
             'category_id' => $faker->numberBetween(1, 5),
             'reporting_code' => RandomIdGenerator::generateUniqueId(),
             'title' => $faker->sentence(2),

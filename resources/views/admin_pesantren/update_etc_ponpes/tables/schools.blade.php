@@ -13,10 +13,33 @@
                                     aria-labelledby="panelsStayOpen-headingSix">
                                     <div class="accordion-body pt-3 px-1 pb-1">
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
-                                                data-bs-target="#updateSchoolModal{{ $ponpes->id }}">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
+                                            @if (empty($ponpes->school))
+                                                <!-- Tampilkan tombol "Tambah" jika objek $ponpes ada tetapi tidak memiliki relasi 'school' -->
+                                                <button class="btn btn-outline-success mb-2" data-bs-toggle="modal"
+                                                    data-bs-target="#createSchoolModal">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            @endif
+
+
+
+                                            @if ($ponpes->school)
+                                                <!-- Tampilkan tombol "Edit" jika relasi 'school' ada dan tidak null -->
+                                                @if ($ponpes->school->count() > 0)
+                                            
+                                                    <button class="btn btn-outline-secondary mb-2 me-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#updateSchoolModal{{ $ponpes->id }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-outline-danger mb-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteSchoolModal{{ $ponpes->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                                @endif
+                                            @endif
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-bordered border-dark">

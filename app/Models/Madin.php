@@ -9,10 +9,12 @@ use App\Models\InstructorMadin;
 use App\Models\LearningMadin;
 use App\Models\StudentCountMadin;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Madin extends Model
 {
+    use HasFactory;
     protected $table = 'madin';
     protected $primaryKey = 'id';
 

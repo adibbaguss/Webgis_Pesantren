@@ -8,10 +8,6 @@ use Database\Seeders\FacilityMadinSeeder;
 use Database\Seeders\FacilitySeeder;
 use Database\Seeders\MadinSeeder;
 use Database\Seeders\PonpesSeeder;
-use Database\Seeders\ReportHistoryMadinSeeder;
-use Database\Seeders\ReportHistorySeeder;
-use Database\Seeders\ReportMadinSeeder;
-use Database\Seeders\ReportSeeder;
 use Database\Seeders\SchoolSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
@@ -29,15 +25,15 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PonpesSeeder::class,
             CategoryReportSeeder::class,
-            ReportSeeder::class,
-            ReportHistorySeeder::class,
+            // ReportSeeder::class,
+            // ReportHistorySeeder::class,
             FacilitySeeder::class,
             SchoolSeeder::class,
             MadinSeeder::class,
             CategoryReportMadinSeeder::class,
             FacilityMadinSeeder::class,
-            ReportMadinSeeder::class,
-            ReportHistoryMadinSeeder::class,
+            //ReportMadinSeeder::class,
+            //ReportHistoryMadinSeeder::class,
             // ActivitySeeder::class,
             // InstructorSeeder::class,
             // ImagePonpesSeeder::class,

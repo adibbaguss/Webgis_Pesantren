@@ -334,7 +334,9 @@ Route::middleware(['auth', 'role:admin pesantren'])->group(function () {
     Route::post('/admin pesantren/ponpes_update_etc/image_ponpes/create/reguler', [ImagePonpesController::class, 'create_reguler'])->name('admin_pesantren.ponpes_image_create_reguler');
     Route::delete('/admin pesantren/ponpes_update_etc/image/delete/{id}', [ImagePonpesController::class, 'deleteImage'])->name('admin_pesantren.image_delete');
 
+    Route::post('/admin pesantren/ponpes_update_etc/school/create', [SchoolController::class, 'createSchool'])->name('admin_pesantren.school_create');
     Route::put('/admin pesantren/ponpes_update_etc/school/update/{id}', [SchoolController::class, 'updateSchool'])->name('admin_pesantren.school_update');
+    Route::delete('/admin pesantren/ponpes_update_etc/school/delete/{id}', [SchoolController::class, 'deleteSchool'])->name('admin_pesantren.school_delete');
 
     Route::post('/admin pesantren/ponpes_update_etc/program_takhasus/create', [ProgramTakhasusController::class, 'createTakhasus'])->name('admin_pesantren.program_takhasus_create');
     Route::delete('/admin pesantren/ponpes_update_etc/program_takhasus/delete/{id}', [ProgramTakhasusController::class, 'destroyTakhasus'])->name('admin_pesantren.program_takhasus_delete');

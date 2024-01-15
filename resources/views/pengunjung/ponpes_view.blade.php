@@ -126,7 +126,7 @@
 
             {{-- drop dropdown info  --}}
 
-            <div class="row d-md-none d-block">
+            <div class="d-md-none d-block">
                 {{-- informasi lainnya dari ponpes --}}
                  @include('layouts.ponpes.ponpes_info_etc')  
                 </div>
